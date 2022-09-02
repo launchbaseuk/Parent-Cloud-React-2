@@ -26,6 +26,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import DusanScreen from './src/screens/DusanScreen';
 import MariosScreen from './src/screens/MariosScreen';
 
 const Section: React.FC<
@@ -93,6 +94,7 @@ const App = () => {
         </View>
       </ScrollView> */}
       <MariosScreen />
+      <DusanScreen />
     </SafeAreaView>
   );
 };

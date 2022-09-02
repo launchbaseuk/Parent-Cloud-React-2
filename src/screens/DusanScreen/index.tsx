@@ -1,12 +1,11 @@
 import React from 'react';
 import {View} from 'react-native';
-
-import Button from '../../components/shared/PrimaryButton';
+import InfoScreen from '../../components/shared/InfoScreen';
 
 const DusanScreen = () => {
   return (
     <View>
-      <Button />
+      <InfoScreen />
     </View>
   );
 };
