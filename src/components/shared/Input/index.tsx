@@ -17,12 +17,13 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: width - 70,
         height: 44,
-        paddingLeft: 16
+        paddingLeft: 16,
+        fontFamily: "Montserrat-Italic"
     },
     text: {
         fontSize: 13,
         color: "#11535C",
-        fontWeight: "400",
+        fontFamily: "Montserrat-Regular",
         lineHeight: 19
     }
 });

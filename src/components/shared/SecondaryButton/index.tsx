@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     secondaryText: {
         color: "#11535C",
-        fontWeight: "bold",
+        fontFamily: "SofiaProBlack",
         fontSize: 20,
     }
 });

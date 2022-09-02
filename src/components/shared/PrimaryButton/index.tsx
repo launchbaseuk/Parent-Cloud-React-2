@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   primaryText: {
     color: "#FFFAC5",
-    fontWeight: "bold",
+    fontFamily: "SofiaProBlack",
     fontSize: 20
   }
 });

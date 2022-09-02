@@ -22,24 +22,43 @@ import Support from "../../icons/Support.png";
 import SupportSelected from "../../icons/SupportSelected.png";
 
 const {width, height} = Dimensions.get('window');
-export default function TabBar() {
+export default function TabBar(props: any) {
   const routes = [{name: 'Home', key: 'home', icon: Home, iconSelected: HomeSelected},
                   {name: 'Media', key: 'media', icon: Media, iconSelected: MediaSelected},
                   {name: 'Mind', key: 'mind', icon: Mind, iconSelected: MindSelected},
                   {name: 'Support', key: 'support', icon: Support, iconSelected: SupportSelected},
                   {name: 'More', key: 'more', icon: More, iconSelected: MoreSelected}
                 ];
-  const [selected, setSelected] = useState<string>("home");
-
+  const [selected, setSelected] = useState<string>("Home");
+  
   return (
     <View style={styles.tabBarContainer}>
-        {routes.map((route: any, index: number) => {
+        {props.state.routes.map((route: any, index: number) => {
+            const isFocused = props.state.index == index;
+            
+            const onPress = () => {
+                const event = props.navigation.emit({
+                    type: 'tabPress',
+                    target: route.key,
+                });
+
+        
+                if (!isFocused && !event.defaultPrevented) {
+                    props.navigation.navigate(route.name);
+                }
+                setSelected(route.name)
+            }
+
             return (
-                <TouchableOpacity key={index} style={styles.tabBarItem} onPress={() => setSelected(route.key)}>
-                    {selected == route.key ? (
-                        <Image source={route.iconSelected} style={styles.tabBarIcon} />
-                    ) : (
-                        <Image source={route.icon} style={styles.tabBarIcon} />
+                <TouchableOpacity key={index} style={styles.tabBarItem} onPress={onPress}>
+                    {selected == route.name ? 
+                        routes.map((r: any) =>
+                            r.name == route.name && <Image source={r.iconSelected} style={styles.tabBarIcon} />
+                        )
+                     : (
+                        routes.map((r: any) =>
+                            r.name == route.name && <Image source={r.icon} style={styles.tabBarIcon} />
+                        )
                     )}
                 </TouchableOpacity>
             )
