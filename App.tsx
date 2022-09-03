@@ -19,9 +19,25 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBar from './src/components/TabBar';
 import DusanScreen from './src/screens/DusanScreen';
+import OnetooneSessions from './src/screens/OnetooneSessions';
+import PocketCBT from './src/screens/PocketCBT';
+import DynamicOne from './src/screens/DynamicOne';
+import DynamicTwo from './src/screens/DynamicTwo';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const TabNav = () => {
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props) => <TabBar {...props} />}>
+      <Tab.Screen name="Home" component={Homepage} />
+      <Tab.Screen name="Support"  component={Homepage} />
+      <Tab.Screen name="Mind" component={Homepage} />
+      <Tab.Screen name="Media" component={Homepage} />
+      <Tab.Screen name="More" component={Homepage} />
+    </Tab.Navigator>
+  );
+};
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState<boolean>(true);
@@ -38,13 +54,13 @@ const App = () => {
           <Stack.Screen name="Login" component={MariosScreen} />
         </Stack.Navigator>
       ) : (
-        <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props) => <TabBar {...props} />}>
-          <Tab.Screen name="Home" component={Homepage} />
-          <Tab.Screen name="Support"  component={Homepage} />
-          <Tab.Screen name="Mind" component={Homepage} />
-          <Tab.Screen name="Media" component={Homepage} />
-          <Tab.Screen name="More" component={Homepage} />
-        </Tab.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="TabNav">
+          <Stack.Screen name="TabNav" component={TabNav} />
+          <Stack.Screen name="OneToOne" component={OnetooneSessions} />
+          <Stack.Screen name="PocketCBT" component={PocketCBT} />
+          <Stack.Screen name="DynamicOne" component={DynamicOne} />
+          <Stack.Screen name="DynamicTwo" component={DynamicTwo} />
+        </Stack.Navigator>
       )}
     </NavigationContainer>
   );

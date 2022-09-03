@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Dimensions, Image } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get("window");
-export default function ContentCard({ image, text }: any) {
+export default function ContentCard({ image, text, route }: any) {
+    const navigation = useNavigation();
     return (
-        <TouchableOpacity style={styles.contentCardContainer}>
-            <Image source={image} />
+        <TouchableOpacity style={styles.contentCardContainer} onPress={() => navigation.navigate(route)}>
+            <Image source={image} style={{ width: 60, height: 60 }} />
             <Text style={styles.contentCardText}>{text}</Text>
         </TouchableOpacity>
     );
@@ -14,13 +16,14 @@ export default function ContentCard({ image, text }: any) {
 const styles = StyleSheet.create({
     contentCardContainer: {
         width: width - 40,
-        height: 120,
+        height: 80,
         borderRadius: 5,
         backgroundColor: "#F2F2F280",
         alignSelf: "center",
-        justifyContent: "center",
+        paddingLeft: 32,
         alignItems: "center",
-        flexDirection: "row"
+        flexDirection: "row",
+        marginTop: 8
     },
     contentCardText: {
         color: "#11535C",
