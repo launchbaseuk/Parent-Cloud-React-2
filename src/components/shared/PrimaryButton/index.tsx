@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const PrimaryButton = ({size, text}: any) => {
+const PrimaryButton = ({size, text, onPress}: any) => {
   return (
     <TouchableOpacity style={
       size == "small" ? [styles.primaryBtnContainer, {width: 164}] 
       : size == "mini" ? [styles.primaryBtnContainer, {width: 104, height: 44}]
-      : styles.primaryBtnContainer}>
+      : styles.primaryBtnContainer} onPress={onPress}>
       <Text style={
       size == "small" ? [styles.primaryText, {fontSize: 16}] 
       : size == "mini" ? [styles.primaryText, {fontSize: 16}]
