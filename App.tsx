@@ -27,12 +27,20 @@ import SuccessApricity from "./src/screens/SuccessApricity";
 import Guides from "./src/screens/Guides";
 import PDFViewer from './src/screens/PDFViewer';
 import ClassDetails from "./src/screens/ClassDetails";
+import MoreScreen from "./src/screens/More";
+import LiveTalks from './src/screens/LiveTalks';
+import MyAccount from './src/screens/MyAccount';
+import PersonalDetails from "./src/screens/PersonalDetails";
+import Membership from "./src/screens/Membership";
+import SupportSettings from './src/screens/SupportSettings';
+import SavedContent from './src/screens/SavedContent';
+import HRManagerResources from './src/screens/HRManagerResources';
+import Mind from "./src/screens/MindHub";
 
 // Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import LiveTalks from './src/screens/LiveTalks';
 
 
 const Stack = createNativeStackNavigator();
@@ -43,9 +51,9 @@ const TabNav = () => {
     <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props) => <TabBar {...props} />}>
       <Tab.Screen name="Home" component={Homepage} />
       <Tab.Screen name="Support"  component={Support} />
-      <Tab.Screen name="Mind" component={Homepage} />
+      <Tab.Screen name="Mind" component={Mind} />
       <Tab.Screen name="Media" component={Homepage} />
-      <Tab.Screen name="More" component={Homepage} />
+      <Tab.Screen name="More" component={MoreScreen} />
     </Tab.Navigator>
   );
 };
@@ -80,6 +88,12 @@ const App = () => {
           <Stack.Screen name="PDFViewer" component={PDFViewer} />
           <Stack.Screen name="ClassDetails" component={ClassDetails} />
           <Stack.Screen name="SuccessApricity" component={SuccessApricity} />
+          <Stack.Screen name="MyAccount" component={MyAccount} />
+          <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
+          <Stack.Screen name="Membership" component={Membership} />
+          <Stack.Screen name="SupportSettings" component={SupportSettings} />
+          <Stack.Screen name="SavedContent" component={SavedContent} />
+          <Stack.Screen name="HRManagement" component={HRManagerResources} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
