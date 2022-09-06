@@ -17,7 +17,7 @@ export default function PocketCBT() {
 
             <View style={{ height: 32 }} />
 
-            <PocketCBTCard text="Check-in" image={checkin} route="CheckIn" />
+            <PocketCBTCard text="Check-in" image={checkin} route="FeelingsCBT" />
             <PocketCBTCard text="Learn" image={learn} route="Entries" />
             <PocketCBTCard text="Gratitude Diary" image={gratitude} route="Gratitude" />
             <PocketCBTCard text="Entries Log" image={entries} route="Learn" />

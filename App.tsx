@@ -36,6 +36,8 @@ import SupportSettings from './src/screens/SupportSettings';
 import SavedContent from './src/screens/SavedContent';
 import HRManagerResources from './src/screens/HRManagerResources';
 import Mind from "./src/screens/MindHub";
+import PocketCBTIntro from './src/screens/PocketCBTIntro';
+import FeelingsCBT from './src/screens/FeelingsCBT';
 
 // Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -60,7 +62,7 @@ const TabNav = () => {
 };
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [loggedIn, setLoggedIn] = useState<boolean>(true);
 
   return (
     // <SafeAreaView style={backgroundStyle}>
@@ -86,10 +88,7 @@ const App = () => {
           <Stack.Screen name="Antenatal" component={Antenatal} />
           <Stack.Screen name="BabyClasses" component={BabyClasses} />
           <Stack.Screen name="Fertility" component={Fertility} />
-          <Stack.Screen
-            name="ApricityConsultation"
-            component={ApricityConsultation}
-          />
+          <Stack.Screen name="ApricityConsultation" component={ApricityConsultation} />
           <Stack.Screen name="Guides" component={Guides} />
           <Stack.Screen name="PDFViewer" component={PDFViewer} />
           <Stack.Screen name="ClassDetails" component={ClassDetails} />
@@ -100,6 +99,8 @@ const App = () => {
           <Stack.Screen name="SupportSettings" component={SupportSettings} />
           <Stack.Screen name="SavedContent" component={SavedContent} />
           <Stack.Screen name="HRManagement" component={HRManagerResources} />
+          <Stack.Screen name="PocketCBTIntro" component={PocketCBTIntro} />
+          <Stack.Screen name="FeelingsCBT" component={FeelingsCBT} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
