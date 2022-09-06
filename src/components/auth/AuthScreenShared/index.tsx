@@ -8,7 +8,7 @@ const {width, height} = Dimensions.get('window');
 
 const AuthSharedScreen = ({children}: any) => {
   return (
-    <View>
+    <View style={styles.wrapper}>
       <ScrollView contentContainerStyle={{flexDirection: 'column'}}>
         {children}
       </ScrollView>
