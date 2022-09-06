@@ -4,24 +4,25 @@ import {View, StyleSheet, Text} from 'react-native';
 import Input from '../../shared/Input';
 import AuthSharedScreen from '../AuthScreenShared';
 
-const Signup = () => {
+const ForgotPassword = () => {
   return (
     <View style={styles.wrapper}>
-      <AuthSharedScreen
-        middleText={'Already have an account with us?'}
-        buttonTextTop={'Signup'}
-        buttonTextBottom={'Login'}>
+      <AuthSharedScreen buttonTextTop={'Submit'} buttonTextBottom={'Cancel'}>
         <View>
           <View>
-            <Text style={styles.title}>Signup</Text>
+            <Text style={styles.title}>Forgot your password</Text>
             <Text style={styles.content}>
-              Create a new Wellness Cloud account.
+              Give us your details below and we'll email you a link to create a
+              new password
             </Text>
           </View>
-          <View style={{height: '100%', justifyContent: 'center'}}>
+          <View
+            style={{
+              height: '100%',
+              justifyContent: 'center',
+              paddingBottom: 160,
+            }}>
             <Input label="Email Address" placeholder="example@gmail.com" />
-            <Input label="Password" placeholder="Minimum 6 characters" />
-            <Input label="Repeat Password" placeholder="Must match the above" />
           </View>
         </View>
       </AuthSharedScreen>
@@ -29,7 +30,7 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default ForgotPassword;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontFamily: 'Montserrat-Regular',
     color: '#150E00',
-    maxWidth: 200,
+    maxWidth: 250,
     textAlign: 'center',
     alignSelf: 'center',
   },
