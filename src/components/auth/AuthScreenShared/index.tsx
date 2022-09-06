@@ -8,7 +8,7 @@ const {width, height} = Dimensions.get('window');
 
 type Props = {
   children: React.ReactNode;
-  middleText: string;
+  middleText?: string;
   buttonTextTop: string;
   buttonTextBottom: string;
 };
@@ -27,9 +27,11 @@ const AuthSharedScreen = ({
 
       <View style={{flex: 1}}>
         <PrimaryButton text={buttonTextTop} />
-        <View style={{paddingTop: 16, paddingBottom: 16}}>
-          <Text style={styles.text}>{middleText}</Text>
-        </View>
+        {middleText && (
+          <View style={{paddingTop: 16, paddingBottom: 16}}>
+            <Text style={styles.text}>{middleText}</Text>
+          </View>
+        )}
         <View style={{height: 8}} />
         <SecondaryButton text={buttonTextBottom} />
       </View>
