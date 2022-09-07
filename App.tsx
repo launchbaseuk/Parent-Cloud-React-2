@@ -26,23 +26,23 @@ import ApricityConsultation from './src/screens/ApricityConsultation';
 import SuccessApricity from './src/screens/SuccessApricity';
 import Guides from './src/screens/Guides';
 import PDFViewer from './src/screens/PDFViewer';
-import ClassDetails from "./src/screens/ClassDetails";
-import MoreScreen from "./src/screens/More";
+import ClassDetails from './src/screens/ClassDetails';
+import MoreScreen from './src/screens/More';
 import LiveTalks from './src/screens/LiveTalks';
 import MyAccount from './src/screens/MyAccount';
-import PersonalDetails from "./src/screens/PersonalDetails";
-import Membership from "./src/screens/Membership";
+import PersonalDetails from './src/screens/PersonalDetails';
+import Membership from './src/screens/Membership';
 import SupportSettings from './src/screens/SupportSettings';
 import SavedContent from './src/screens/SavedContent';
 import HRManagerResources from './src/screens/HRManagerResources';
-import Mind from "./src/screens/MindHub";
+import Mind from './src/screens/MindHub';
 import PocketCBTIntro from './src/screens/PocketCBTIntro';
 import FeelingsCBT from './src/screens/FeelingsCBT';
 
 // Navigation
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,7 +53,7 @@ const TabNav = () => {
       screenOptions={{headerShown: false}}
       tabBar={props => <TabBar {...props} />}>
       <Tab.Screen name="Home" component={Homepage} />
-      <Tab.Screen name="Support"  component={Support} />
+      <Tab.Screen name="Support" component={Support} />
       <Tab.Screen name="Mind" component={Mind} />
       <Tab.Screen name="Media" component={Homepage} />
       <Tab.Screen name="More" component={MoreScreen} />
@@ -62,7 +62,7 @@ const TabNav = () => {
 };
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(true);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   return (
     // <SafeAreaView style={backgroundStyle}>
@@ -88,7 +88,10 @@ const App = () => {
           <Stack.Screen name="Antenatal" component={Antenatal} />
           <Stack.Screen name="BabyClasses" component={BabyClasses} />
           <Stack.Screen name="Fertility" component={Fertility} />
-          <Stack.Screen name="ApricityConsultation" component={ApricityConsultation} />
+          <Stack.Screen
+            name="ApricityConsultation"
+            component={ApricityConsultation}
+          />
           <Stack.Screen name="Guides" component={Guides} />
           <Stack.Screen name="PDFViewer" component={PDFViewer} />
           <Stack.Screen name="ClassDetails" component={ClassDetails} />
