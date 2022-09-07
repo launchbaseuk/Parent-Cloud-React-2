@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Dimensions, ScrollView} from 'react-native';
 import BackButton from '../../components/BackButton';
@@ -8,6 +9,7 @@ import Selection from '../../components/shared/Selection';
 
 const {width, height} = Dimensions.get('window');
 export default function OnetooneSessions() {
+  const navigation = useNavigation();
   const talkAboutOptions = [
     {key: 'relationshipCounceling', text: 'Relationship Counceling'},
     {key: 'divorceCoaching', text: 'Divorce Coaching'},

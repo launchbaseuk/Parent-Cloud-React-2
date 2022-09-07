@@ -38,6 +38,9 @@ import HRManagerResources from './src/screens/HRManagerResources';
 import Mind from './src/screens/MindHub';
 import PocketCBTIntro from './src/screens/PocketCBTIntro';
 import FeelingsCBT from './src/screens/FeelingsCBT';
+import Feelings from './src/screens/Feelings';
+import Activities from './src/screens/Activities';
+import Thoughts from './src/screens/Thoughts';
 
 // Navigation
 import {NavigationContainer} from '@react-navigation/native';
@@ -62,7 +65,7 @@ const TabNav = () => {
 };
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [loggedIn, setLoggedIn] = useState<boolean>(true);
 
   return (
     // <SafeAreaView style={backgroundStyle}>
@@ -104,6 +107,9 @@ const App = () => {
           <Stack.Screen name="HRManagement" component={HRManagerResources} />
           <Stack.Screen name="PocketCBTIntro" component={PocketCBTIntro} />
           <Stack.Screen name="FeelingsCBT" component={FeelingsCBT} />
+          <Stack.Screen name="Feelings" component={Feelings} />
+          <Stack.Screen name="Activities" component={Activities} />
+          <Stack.Screen name="Thoughts" component={Thoughts} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

@@ -29,7 +29,7 @@ export default function FeelingsCBT() {
             <Text style={{ color: "#150E00", fontFamily: "SofiaProBlack", fontSize: 25, width: width - 120, alignSelf: "center", textAlign: "center", marginTop: 64 }}>What are your feelings in this moment?</Text>
             <View style={{ flexDirection: "row", width: width - 40, alignSelf: "center", justifyContent: "space-between", marginBottom: 142, marginTop: 32 }}>
                 <FeelingsCard text="Awful" icon={depressed} iconSelected={depressedSelected} itemKey="awful" selected={selected} setSelected={setSelected} />
-                <FeelingsCard text="Not good" icon={notgood} iconSelected={notgoodSelected} itemKey="good" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Not good" icon={notgood} iconSelected={notgoodSelected} itemKey="notgood" selected={selected} setSelected={setSelected} />
                 <FeelingsCard text="Ok" icon={happy} iconSelected={happySelected} itemKey="ok" selected={selected} setSelected={setSelected} />
                 <FeelingsCard text="Great" icon={good} iconSelected={goodSelected} itemKey="great" selected={selected} setSelected={setSelected} />
             </View>
