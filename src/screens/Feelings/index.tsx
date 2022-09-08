@@ -129,7 +129,7 @@ export default function Feelings({ navigation, route }: any) {
 
             <View style={{ flexDirection: "row", width: width - 40, justifyContent: "space-between", alignItems: "center", alignSelf: "center", marginTop: 45 }}>
                 <SecondaryButton size="small" text="Back" onPress={() => navigation.goBack()} />
-                <PrimaryButton size="small" text="Continue" onPress={() => navigation.navigate("Activities", { feeling: selected })} />
+                <PrimaryButton size="small" text="Continue" onPress={() => navigation.navigate("Activities", { feelings: feeling, otherFeeling: selected })} />
             </View>
         </View>
     );

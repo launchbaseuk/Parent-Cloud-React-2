@@ -32,12 +32,21 @@ import friendSelected from "../../icons/Friend-1.png";
 
 const { width, height } = Dimensions.get("window");
 export default function Activities({ navigation, route }: any) {
-    const feeling = route.params.feeling;
+    const feeling = route.params.feelings;
+    const otherFeeling = route.params.otherFeeling;
     const [selected, setSelected] = useState<string>("");
+
+    const handlePress = () => {
+        if(feeling == "ok" || feeling == "great") {
+            navigation.navigate("SuccessApricity", { pageFrom: "mindhub" });
+        } else {
+            navigation.navigate("Thoughts", { feeling: feeling, otherFeeling: otherFeeling, activity: selected });
+        }
+    }
 
     return (
         <View>
-            <Text style={{ fontFamily: "SofiaProBlack", fontSize: 25, color: "#11535C", marginTop: 70, alignSelf: "center", marginBottom: 32 }}>How do you feel?</Text>
+            <Text style={{ fontFamily: "SofiaProBlack", fontSize: 25, color: "#11535C", marginTop: 70, alignSelf: "center", marginBottom: 32 }}>What have you been doing?</Text>
             <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center" }}>
                 <FeelingsCard text="Family" icon={family} iconSelected={familySelected} itemKey="family" selected={selected} setSelected={setSelected} />
                 <View style={{ width: 16 }} />
@@ -69,7 +78,7 @@ export default function Activities({ navigation, route }: any) {
 
             <View style={{ flexDirection: "row", width: width - 40, justifyContent: "space-between", alignItems: "center", alignSelf: "center", marginTop: 45 }}>
                 <SecondaryButton size="small" text="Back" onPress={() => navigation.goBack()} />
-                <PrimaryButton size="small" text="Continue" onPress={() => navigation.navigate("Thoughts", { feeling: selected })} />
+                <PrimaryButton size="small" text="Continue" onPress={handlePress} />
             </View>
         </View>
     );

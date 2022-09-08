@@ -5,10 +5,12 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import Selection from "../../components/shared/Selection";
 import PrimaryButton from "../../components/shared/PrimaryButton";
 import SecondaryButton from "../../components/shared/SecondaryButton";
+import Questions from "./Questions";
 
 const { width, height } = Dimensions.get("window");
 export default function Thoughts({ navigation, route }: any) {
     const [selected, setSelected] = useState<string>("");
+    const [confirmed, setConfirmed] = useState<boolean>(false);
     const options = [
         {text: "All or nothing thinking", key: "allOrNothing"},
         {text: "Overgeneralisation", key: "overgeneralisation"},
@@ -22,22 +24,43 @@ export default function Thoughts({ navigation, route }: any) {
 
     return (
         <View>
-            <Text style={styles.headerText}>Which cognitive distortions does this thought have?</Text>
+            {confirmed ? (
+                <Questions />
+            ) : (
+                <>
+                    <Text style={styles.headerText}>Which cognitive distortions does this thought have?</Text>
 
-            {options.map((option: any, index: number) => {
-                return (
-                    <Selection key={index} text={option.text} itemKey={option.key} selected={selected} setSelected={setSelected} />
-                )
-            })}
+                    <View style={{ width: width, justifyContent: "center", marginTop: 32 }}>
+                        {options.map((option: any, index: number) => {
+                            return (
+                                <Selection key={index} text={option.text} itemKey={option.key} selected={selected} setSelected={setSelected} />
+                            )
+                        })}
+                    </View>
 
-            <View style={styles.buttonContainer}>
-                <SecondaryButton size="small" text="Back" onPress={() => navigation.goBack()} />
-                <PrimaryButton size="small" text="Confirm" />
-            </View>
+                    <View style={styles.buttonContainer}>
+                        <SecondaryButton size="small" text="Back" onPress={() => {setConfirmed(false); navigation.goBack();}} />
+                        <PrimaryButton size="small" text="Confirm" onPress={() => setConfirmed(true)} />
+                    </View>
+                </>
+            )}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-
+    headerText: {
+        fontFamily: "SofiaProBlack",
+        color: "#11535C",
+        fontSize: 20,
+        paddingLeft: 16,
+        marginTop: 70
+    },
+    buttonContainer: {
+        marginTop: 32,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: width - 40,
+        alignSelf: "center"
+    }
 });

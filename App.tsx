@@ -41,6 +41,11 @@ import FeelingsCBT from './src/screens/FeelingsCBT';
 import Feelings from './src/screens/Feelings';
 import Activities from './src/screens/Activities';
 import Thoughts from './src/screens/Thoughts';
+import Learn from './src/screens/Learn';
+import Gratitude from './src/screens/Gratitude';
+import SleepStories from './src/screens/SleepStories';
+import GuidedMeditation from './src/screens/GuidedMeditation';
+import MediaDetails from './src/screens/MediaDetails';
 
 // Navigation
 import {NavigationContainer} from '@react-navigation/native';
@@ -65,7 +70,7 @@ const TabNav = () => {
 };
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [loggedIn, setLoggedIn] = useState<boolean>(true);
 
   return (
     // <SafeAreaView style={backgroundStyle}>
@@ -110,6 +115,11 @@ const App = () => {
           <Stack.Screen name="Feelings" component={Feelings} />
           <Stack.Screen name="Activities" component={Activities} />
           <Stack.Screen name="Thoughts" component={Thoughts} />
+          <Stack.Screen name="Learn" component={Learn} />
+          <Stack.Screen name="Gratitude" component={Gratitude} />
+          <Stack.Screen name="SleepStories" component={SleepStories} />
+          <Stack.Screen name="GuidedMeditation" component={GuidedMeditation} />
+          <Stack.Screen name="MediaDetails" component={MediaDetails} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

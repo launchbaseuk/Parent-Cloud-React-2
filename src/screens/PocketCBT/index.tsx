@@ -18,7 +18,7 @@ export default function PocketCBT() {
             <View style={{ height: 32 }} />
 
             <PocketCBTCard text="Check-in" image={checkin} route="FeelingsCBT" />
-            <PocketCBTCard text="Learn" image={learn} route="Entries" />
+            <PocketCBTCard text="Learn" image={learn} route="Learn" />
             <PocketCBTCard text="Gratitude Diary" image={gratitude} route="Gratitude" />
             <PocketCBTCard text="Entries Log" image={entries} route="Learn" />
         </View>
@@ -26,5 +26,5 @@ export default function PocketCBT() {
 };
 
 const styles = StyleSheet.create({
-
+    
 });
