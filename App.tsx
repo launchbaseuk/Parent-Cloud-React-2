@@ -65,7 +65,7 @@ const TabNav = () => {
 };
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(true);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   return (
     // <SafeAreaView style={backgroundStyle}>

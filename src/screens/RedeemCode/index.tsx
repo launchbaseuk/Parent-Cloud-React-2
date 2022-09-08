@@ -15,27 +15,32 @@ const {width, height} = Dimensions.get('window');
 
 export default function RedeemCode() {
   return (
-    <View>
-      <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
+      <View style={{flex: 4}}>
         <BackButton text={'1-2-1 Sessions'} />
 
         <Text style={[styles.sectionTitle, {marginBottom: 16}]}>
-          Service purchased name...
+          Redeem Coupon
         </Text>
 
         <View style={styles.content}>
-          <View>
-            <Text style={{paddingBottom: 32}}>
+          {/* <Text style={{paddingBottom: 32}}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-            </Text>
-            <Text style={{paddingBottom: 80}}>
-              You will be redirected to our website to complete this payment.
-            </Text>
-          </View>
-          <SecondaryButton size="small" text="Pay £ 49.00" />
+            </Text> */}
+          <Text style={{paddingBottom: 80}}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+          </Text>
         </View>
-      </SafeAreaView>
-    </View>
+        <View style={styles.centerCodeText}>
+          <Text style={styles.codeText}>Code 123</Text>
+        </View>
+      </View>
+
+      <View style={styles.actionsContainer}>
+        <SecondaryButton size="small" text="Cancel" />
+        <PrimaryButton size="small" text="Redeem" />
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -50,19 +55,28 @@ const styles = StyleSheet.create({
     marginTop: 41,
   },
   actionsContainer: {
+    flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     width: width - 40,
     alignSelf: 'center',
     flexDirection: 'row',
-    paddingBottom: 73,
-    paddingTop: 32,
   },
   content: {
     fontFamily: 'Montserrat',
     fontSize: 16,
     maxWidth: 350,
-    alignItems: 'center',
     paddingLeft: 20,
+  },
+  centerCodeText: {
+    height: '50%',
+    justifyContent: 'center',
+  },
+  codeText: {
+    color: '#11535C',
+    fontFamily: 'SofiaProBlack',
+    fontSize: 39,
+    alignSelf: 'center',
+    opacity: 0.5,
   },
 });
