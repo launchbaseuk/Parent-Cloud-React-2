@@ -7,7 +7,11 @@ import AuthSharedScreen from '../AuthScreenShared';
 const ForgotPassword = () => {
   return (
     <View style={styles.wrapper}>
-      <AuthSharedScreen buttonTextTop={'Submit'} buttonTextBottom={'Cancel'}>
+      <AuthSharedScreen
+        buttonTextTop={'Submit'}
+        buttonTextBottom={'Cancel'}
+        routeTop={'EmailSent'}
+        routeBot={'Login'}>
         <View>
           <View>
             <Text style={styles.title}>Forgot your password</Text>

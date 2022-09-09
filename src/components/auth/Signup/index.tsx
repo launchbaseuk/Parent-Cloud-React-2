@@ -10,7 +10,9 @@ const Signup = () => {
       <AuthSharedScreen
         middleText={'Already have an account with us?'}
         buttonTextTop={'Signup'}
-        buttonTextBottom={'Login'}>
+        buttonTextBottom={'Login'}
+        routeTop={'Login'}
+        routeBot={'Login'}>
         <View>
           <View>
             <Text style={styles.title}>Signup</Text>

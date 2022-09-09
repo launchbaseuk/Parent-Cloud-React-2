@@ -9,6 +9,7 @@ const EmailSent = () => {
         'Please check your inbox and follow the link to reset your password'
       }
       buttonText={'Open email'}
+      route={'Success'}
     />
   );
 };

@@ -51,6 +51,11 @@ import MediaDetails from './src/screens/MediaDetails';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Success from './src/components/auth/Success';
+import ForgotPassword from './src/components/auth/ForgotPassword';
+import Login from './src/components/auth/Login';
+import Signup from './src/components/auth/Signup';
+import EmailSent from './src/components/auth/EmailSent';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,12 +86,20 @@ const App = () => {
     <NavigationContainer>
       {!loggedIn ? (
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Login" component={DusanScreen} />
+          {/* <Stack.Screen name="Login" component={DusanScreen} /> */}
+          <Stack.Screen name="Signup" component={Signup} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator
           screenOptions={{headerShown: false}}
-          initialRouteName="TabNav">
+          initialRouteName="Signup">
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="EmailSent" component={EmailSent} />
+          {/* <Stack.Screen name="ResetPassword" component={ResetPassword} /> */}
+          <Stack.Screen name="Success" component={Success} />
+
           <Stack.Screen name="TabNav" component={TabNav} />
           <Stack.Screen name="OneToOne" component={OnetooneSessions} />
           <Stack.Screen name="PocketCBT" component={PocketCBT} />

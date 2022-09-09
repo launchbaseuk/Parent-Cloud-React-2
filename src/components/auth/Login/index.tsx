@@ -1,16 +1,22 @@
 import React from 'react';
 
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
 import Input from '../../shared/Input';
 import AuthSharedScreen from '../AuthScreenShared';
 
 const Login = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.wrapper}>
       <AuthSharedScreen
         middleText={'New to WellnessCloud?'}
         buttonTextTop={'Login'}
-        buttonTextBottom={'Register'}>
+        buttonTextBottom={'Register'}
+        routeTop={'ForgotPassword'}
+        routeBot={'Signup'}>
         <View>
           <View>
             <Text style={styles.title}>Login</Text>
@@ -21,7 +27,10 @@ const Login = () => {
           <View style={{height: '100%', justifyContent: 'center'}}>
             <Input label="Email Address" placeholder="example@gmail.com" />
             <Input label="Password" placeholder="Minimum 6 characters" />
-            <Text style={styles.forgotPassword}>Forgot Password?</Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ForgotPassword')}>
+              <Text style={styles.forgotPassword}>Forgot Password?</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </AuthSharedScreen>

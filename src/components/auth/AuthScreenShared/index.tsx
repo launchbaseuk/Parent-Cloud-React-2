@@ -3,6 +3,7 @@ import React from 'react';
 import {View, ScrollView, Dimensions, Text, StyleSheet} from 'react-native';
 import PrimaryButton from '../../shared/PrimaryButton';
 import SecondaryButton from '../../shared/SecondaryButton';
+import {useNavigation} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 
@@ -11,6 +12,8 @@ type Props = {
   middleText?: string;
   buttonTextTop: string;
   buttonTextBottom: string;
+  routeTop: never | string;
+  routeBot: never | string;
 };
 
 const AuthSharedScreen = ({
@@ -18,7 +21,11 @@ const AuthSharedScreen = ({
   middleText,
   buttonTextTop,
   buttonTextBottom,
+  routeTop,
+  routeBot,
 }: Props) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.wrapper}>
       <ScrollView contentContainerStyle={{flexDirection: 'column'}}>
@@ -26,14 +33,20 @@ const AuthSharedScreen = ({
       </ScrollView>
 
       <View style={{flex: 1}}>
-        <PrimaryButton text={buttonTextTop} />
+        <PrimaryButton
+          text={buttonTextTop}
+          onPress={() => navigation.navigate(routeTop)}
+        />
         {middleText && (
           <View style={{paddingTop: 16, paddingBottom: 16}}>
             <Text style={styles.text}>{middleText}</Text>
           </View>
         )}
         <View style={{height: 8}} />
-        <SecondaryButton text={buttonTextBottom} />
+        <SecondaryButton
+          text={buttonTextBottom}
+          onPress={() => navigation.navigate(routeBot)}
+        />
       </View>
     </View>
   );

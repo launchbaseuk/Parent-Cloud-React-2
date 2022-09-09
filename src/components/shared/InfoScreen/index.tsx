@@ -8,6 +8,7 @@ import {
   Image,
   SafeAreaView,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 // Components
 import PrimaryButton from '../../../components/shared/PrimaryButton';
@@ -19,10 +20,13 @@ type Props = {
   title: string;
   content: string;
   buttonText: string;
+  route: never | string;
 };
 
 const {width, height} = Dimensions.get('window');
-export default function InfoScreen({title, content, buttonText}: Props) {
+export default function InfoScreen({title, content, buttonText, route}: Props) {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.successContainer}>
       <Image
@@ -51,7 +55,10 @@ export default function InfoScreen({title, content, buttonText}: Props) {
         {content}
       </Text>
 
-      <PrimaryButton text={buttonText} />
+      <PrimaryButton
+        text={buttonText}
+        onPress={() => navigation.navigate(route)}
+      />
     </SafeAreaView>
   );
 }
