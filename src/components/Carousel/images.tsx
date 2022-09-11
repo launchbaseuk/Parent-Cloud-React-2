@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 // Images
-import livetalks from "../../images/livetalks.png";
-import mindhub from "../../images/mindhub.png";
-import onetoone from "../../images/onetoone.png";
+import LiveTalksImage from "../../images/svg/LiveTalksImage";
+import MindHubImage from "../../images/svg/MindHubImage";
+import OneToOneImage from "../../images/svg/OneToOneImage";
 
 export default function Images({ imageNumber }: any) {
     return imageNumber === 0 ?
-        <Image source={livetalks} />
+        <LiveTalksImage width={185} height={185} />
     : imageNumber === 1 ?
-        <Image source={mindhub} />
+        <MindHubImage />
     :
-        <Image source={onetoone} />
+        <OneToOneImage width={210} height={210} />
 };

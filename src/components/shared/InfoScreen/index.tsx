@@ -14,7 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 import PrimaryButton from '../../../components/shared/PrimaryButton';
 
 // Images
-import successapricityimage from '../../../images/SuccessApricityImage.png';
+import SuccessApricityImage from "../../../images/svg/SuccessApricityImage";
 
 type Props = {
   title: string;
@@ -29,10 +29,9 @@ export default function InfoScreen({title, content, buttonText, route}: Props) {
 
   return (
     <SafeAreaView style={styles.successContainer}>
-      <Image
-        source={successapricityimage}
-        style={{marginTop: 37, marginBottom: 32}}
-      />
+      <View style={{ height: 37 }} />
+      <SuccessApricityImage />
+      <View style={{ height: 32 }} />
 
       <Text
         style={{

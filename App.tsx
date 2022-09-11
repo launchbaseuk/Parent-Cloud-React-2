@@ -8,6 +8,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Screens
 import Homepage from './src/screens/Homepage';
@@ -46,16 +47,17 @@ import Gratitude from './src/screens/Gratitude';
 import SleepStories from './src/screens/SleepStories';
 import GuidedMeditation from './src/screens/GuidedMeditation';
 import MediaDetails from './src/screens/MediaDetails';
-
-// Navigation
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Success from './src/components/auth/Success';
 import ForgotPassword from './src/components/auth/ForgotPassword';
 import Login from './src/components/auth/Login';
 import Signup from './src/components/auth/Signup';
 import EmailSent from './src/components/auth/EmailSent';
+import Onboarding from './src/screens/Onboarding';
+
+// Navigation
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -75,31 +77,36 @@ const TabNav = () => {
 };
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(true);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [onboarded, setOnboarded] = useState<boolean>(false);
+
+  // useEffect(() => {
+  //   (async() => {
+  //     await AsyncStorage.setItem('onboarded', "false");
+  //     const onboarded = await AsyncStorage.getItem('onboarded');
+  //     if (onboarded == "true") {
+  //       setOnboarded(true);
+  //     } else {
+  //       setOnboarded(false);
+  //     }
+  //   })();
+  // }, []);
 
   return (
-    // <SafeAreaView style={backgroundStyle}>
-    //   {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
-    //   {/* <MariosScreen /> */}
-    //   <Homepage />
-    // </SafeAreaView>
     <NavigationContainer>
       {!loggedIn ? (
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          {/* <Stack.Screen name="Login" component={DusanScreen} /> */}
+        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Onboarding">
+          <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Onboarding" component={Onboarding} />
+          <Stack.Screen name="Success" component={Success} />
+          <Stack.Screen name="EmailSent" component={EmailSent} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator
           screenOptions={{headerShown: false}}
-          initialRouteName="Signup">
-          {/* <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-          <Stack.Screen name="EmailSent" component={EmailSent} />
-          {/* <Stack.Screen name="ResetPassword" component={ResetPassword} /> */}
-          {/* <Stack.Screen name="Success" component={Success} /> */}
-
+          initialRouteName="TabNav">
           <Stack.Screen name="TabNav" component={TabNav} />
           <Stack.Screen name="OneToOne" component={OnetooneSessions} />
           <Stack.Screen name="PocketCBT" component={PocketCBT} />
