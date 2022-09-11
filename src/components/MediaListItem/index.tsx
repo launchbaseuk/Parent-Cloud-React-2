@@ -11,7 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 
 // Images
 import headphones from '../../icons/headphones.png';
-import PlayIcon from '../../icons/PlayIcon.png';
+import PlayIconSmall from '../../icons/svg/PlayIconSmall';
 
 const {width, height} = Dimensions.get('window');
 export default function MediaListItem({text, description, image}: any) {
@@ -49,7 +49,7 @@ export default function MediaListItem({text, description, image}: any) {
       <TouchableOpacity
         style={{alignSelf: 'center'}}
         onPress={() => navigation.navigate('MediaDetails')}>
-        <Image source={PlayIcon} />
+        <PlayIconSmall />
       </TouchableOpacity>
     </View>
   );

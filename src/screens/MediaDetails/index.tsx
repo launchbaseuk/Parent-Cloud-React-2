@@ -7,11 +7,11 @@ import BackButton from "../../components/BackButton";
 // Images
 import headphones from "../../icons/headphones.png";
 import placeholderImage from "../../images/PlaceholderImage.png";
-import replay from "../../icons/Replay.png";
-import backwards from "../../icons/Backwards.png";
-import forwards from "../../icons/Forwards.png";
-import play from "../../icons/PlayIcon.png";
-import queue from "../../icons/Queue.png";
+import Replay from "../../icons/svg/Replay";
+import Backwards from "../../icons/svg/Backwards";
+import Forwards from "../../icons/svg/Forwards";
+import PlayIconBig from "../../icons/svg/PlayIconBig";
+import Queue from "../../icons/svg/Queue";
 
 const { width, height } = Dimensions.get("window");
 export default function MediaDetails({ navigation, route }) {
@@ -43,15 +43,17 @@ export default function MediaDetails({ navigation, route }) {
             </View>
 
             <View style={{ flexDirection: "row", marginTop: 32, backgroundColor: "#f2f2f280", alignSelf: "center", width: width - 40, height: 100, borderRadius: 5, paddingLeft: 20, paddingRight: 20, justifyContent: "space-between", alignItems: "center" }}>
-                <Image source={replay} />
+                <Replay />
 
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Image source={backwards} style={{ marginRight: 21 }} />
-                    <Image source={play} style={{ width: 50, height: 50 }} />
-                    <Image source={forwards} style={{ marginLeft: 21 }} />
+                    <Backwards />
+                    <View style={{ width: 21 }} />
+                    <PlayIconBig />
+                    <View style={{ width: 21 }} />
+                    <Forwards />
                 </View>
 
-                <Image source={queue} />
+                <Queue />
             </View>
         </View>
     );

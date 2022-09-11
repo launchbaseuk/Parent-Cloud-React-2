@@ -5,8 +5,8 @@ import { View, StyleSheet, Text, Image, Dimensions, TouchableOpacity } from "rea
 import BackButton from "../../components/BackButton";
 
 // Images
-import email from "../../icons/EmailIcon.png";
-import phone from "../../icons/PhoneIcon.png";
+import MailIcon from "../../icons/svg/MailIcon";
+import PhoneIcon from "../../icons/svg/PhoneIcon";
 
 const { width, height } = Dimensions.get("window");
 export default function SupportSettings() {
@@ -22,11 +22,11 @@ export default function SupportSettings() {
             </View>
 
             <TouchableOpacity style={{ width: width - 40, height: 44, backgroundColor: "#F2F2F280", alignItems: "center", flexDirection: "row", paddingLeft: 16, borderRadius: 5, alignSelf: "center" }}>
-                <Image source={email} />
+                <MailIcon />
                 <Text style={{ fontFamily: "Montserrat-Regular", color: "#150E00", fontSize: 16, marginLeft: 8 }}>info@parentcloud.com</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{ width: width - 40, height: 44, backgroundColor: "#F2F2F280", alignItems: "center", flexDirection: "row", paddingLeft: 16, borderRadius: 5, marginTop: 16, alignSelf: "center" }}>
-                <Image source={phone} />
+                <PhoneIcon />
                 <Text style={{ fontFamily: "Montserrat-Regular", color: "#150E00", fontSize: 16, marginLeft: 8 }}>+44 (0) 1234 / 567 890</Text>
             </TouchableOpacity>
         </View>

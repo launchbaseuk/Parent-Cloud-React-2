@@ -6,9 +6,9 @@ export default function FeelingsCard({ text, icon, iconSelected, selected, setSe
     return (
         <TouchableOpacity style={{ width: 80, height: 80, borderRadius: 5, backgroundColor: "#F2F2F280", justifyContent: "center", alignItems: "center"}} onPress={() => setSelected(itemKey)}>
             {selected === itemKey ? (
-                <Image source={iconSelected} />
+                <>{iconSelected}</>
             ) : (
-                <Image source={icon} />
+                <>{icon}</>
             )}
             <Text style={{ fontFamily: "Montserrat-Regular", fontSize: 11, marginTop: 8, color: "#150E00" }}>{text}</Text>
         </TouchableOpacity>

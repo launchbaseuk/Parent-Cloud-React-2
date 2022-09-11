@@ -8,14 +8,14 @@ import PrimaryButton from "../../components/shared/PrimaryButton";
 import SecondaryButton from "../../components/shared/SecondaryButton";
 
 // Images
-import good from "../../icons/playful.png";
-import goodSelected from "../../icons/playful-1.png";
-import notgood from "../../icons/anxious.png";
-import notgoodSelected from "../../icons/anxious-1.png";
-import happy from "../../icons/happy.png";
-import happySelected from "../../icons/happy-1.png";
-import depressed from "../../icons/depressed.png";
-import depressedSelected from "../../icons/depressed-1.png";
+import Playful from "../../icons/svg/Playful";
+import PlayfulSelected from "../../icons/svg/PlayfulSelected";
+import Anxious from "../../icons/svg/Anxious";
+import AnxiousSelected from "../../icons/svg/AnxiousSelected";
+import Happy from "../../icons/svg/Happy";
+import HappySelected from "../../icons/svg/HappySelected";
+import Depressed from "../../icons/svg/Depressed";
+import DepressedSelected from "../../icons/svg/DepressedSelected";
 
 const { width, height } = Dimensions.get("window");
 export default function FeelingsCBT() {
@@ -28,10 +28,10 @@ export default function FeelingsCBT() {
 
             <Text style={{ color: "#150E00", fontFamily: "SofiaProBlack", fontSize: 25, width: width - 120, alignSelf: "center", textAlign: "center", marginTop: 64 }}>What are your feelings in this moment?</Text>
             <View style={{ flexDirection: "row", width: width - 40, alignSelf: "center", justifyContent: "space-between", marginBottom: 142, marginTop: 32 }}>
-                <FeelingsCard text="Awful" icon={depressed} iconSelected={depressedSelected} itemKey="awful" selected={selected} setSelected={setSelected} />
-                <FeelingsCard text="Not good" icon={notgood} iconSelected={notgoodSelected} itemKey="notgood" selected={selected} setSelected={setSelected} />
-                <FeelingsCard text="Ok" icon={happy} iconSelected={happySelected} itemKey="ok" selected={selected} setSelected={setSelected} />
-                <FeelingsCard text="Great" icon={good} iconSelected={goodSelected} itemKey="great" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Awful" icon={<Depressed />} iconSelected={<DepressedSelected />} itemKey="awful" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Not good" icon={<Anxious />} iconSelected={<AnxiousSelected />} itemKey="notgood" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Ok" icon={<Happy />} iconSelected={<HappySelected />} itemKey="ok" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Great" icon={<Playful />} iconSelected={<PlayfulSelected />} itemKey="great" selected={selected} setSelected={setSelected} />
             </View>
 
             <View style={{ flexDirection: "row", width: width - 40, justifyContent: "space-between", alignItems: "center", alignSelf: "center" }}>

@@ -6,8 +6,8 @@ import BackButton from "../../components/BackButton";
 import TagFilter from "../../components/TagFilter";
 
 // Images
-import file from "../../icons/FileIcon.png";
-import link from "../../icons/LinkIcon.png";
+import FileIcon from "../../icons/svg/FileIcon";
+import LinkIcon from "../../icons/svg/LinkIcon";
 
 const { width, height } = Dimensions.get("window");
 export default function SavedContent() {
@@ -21,7 +21,7 @@ export default function SavedContent() {
             {Array.from({ length: 7 }).map((_, index) => {
                 return (
                     <View style={{ marginTop: 4, width: width - 40, height: 44, borderRadius: 5, backgroundColor: "#F2F2F280", alignSelf: "center", paddingLeft: 16, alignItems: "center", flexDirection: "row" }}>
-                        <Image source={file} />
+                        <FileIcon />
                         <Text style={{ fontFamily: "Montserrat-Regular", color: "#150E00", fontSize: 16, marginLeft: 10 }}>PDF Title...</Text>
                     </View>
                 )
@@ -30,7 +30,7 @@ export default function SavedContent() {
             {Array.from({ length: 3 }).map((_, index) => {
                 return (
                     <View style={{ marginTop: 4, width: width - 40, height: 44, borderRadius: 5, backgroundColor: "#F2F2F280", alignSelf: "center", paddingLeft: 16, alignItems: "center", flexDirection: "row" }}>
-                        <Image source={link} />
+                        <LinkIcon />
                         <Text style={{ fontFamily: "Montserrat-Regular", color: "#150E00", fontSize: 16, marginLeft: 10 }}>01/02/1234 - 12:34</Text>
                     </View>
                 )

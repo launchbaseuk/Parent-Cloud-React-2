@@ -5,30 +5,30 @@ import PrimaryButton from "../../components/shared/PrimaryButton";
 import SecondaryButton from "../../components/shared/SecondaryButton";
 
 // Images
-import family from "../../icons/family.png";
-import familySelected from "../../icons/family-1.png";
-import chores from "../../icons/chores.png";
-import choresSelected from "../../icons/chores-1.png";
-import working from "../../icons/working.png";
-import workingSelected from "../../icons/working-1.png";
-import studying from "../../icons/studying.png";
-import studyingSelected from "../../icons/studying-1.png";
-import relax from "../../icons/relax.png";
-import relaxSelected from "../../icons/relax-1.png";
-import sleep from "../../icons/sleep.png";
-import sleepSelected from "../../icons/sleep-1.png";
-import traveling from "../../icons/traveling.png";
-import travelingSelected from "../../icons/traveling-1.png";
-import food from "../../icons/eating.png";
-import foodSelected from "../../icons/eating-1.png";
-import love from "../../icons/love.png";
-import loveSelected from "../../icons/love-1.png";
-import shopping from "../../icons/shopping.png";
-import shoppingSelected from "../../icons/shopping-1.png";
-import reading from "../../icons/reading.png";
-import readingSelected from "../../icons/reading-1.png";
-import friend from "../../icons/Friend.png";
-import friendSelected from "../../icons/Friend-1.png";
+import Family from "../../icons/svg/Family";
+import FamilySelected from "../../icons/svg/FamilySelected";
+import Chores from "../../icons/svg/Chores";
+import ChoresSelected from "../../icons/svg/ChoresSelected";
+import Working from "../../icons/svg/Working";
+import WorkingSelected from "../../icons/svg/WorkingSelected";
+import Studying from "../../icons/svg/Studying";
+import StudyingSelected from "../../icons/svg/StudyingSelected";
+import Relax from "../../icons/svg/Relax";
+import RelaxSelected from "../../icons/svg/RelaxSelected";
+import Sleep from "../../icons/svg/Sleep";
+import SleepSelected from "../../icons/svg/SleepSelected";
+import Traveling from "../../icons/svg/Traveling";
+import TravelingSelected from "../../icons/svg/TravelingSelected";
+import Eating from "../../icons/svg/Eating";
+import EatingSelected from "../../icons/svg/EatingSelected";
+import Love from "../../icons/svg/Love";
+import LoveSelected from "../../icons/svg/LoveSelected";
+import Shopping from "../../icons/svg/Shopping";
+import ShoppingSelected from "../../icons/svg/ShoppingSelected";
+import Reading from "../../icons/svg/Reading";
+import ReadingSelected from "../../icons/svg/ReadingSelected";
+import Friend from "../../icons/svg/Friend";
+import FriendSelected from "../../icons/svg/FriendSelected";
 
 const { width, height } = Dimensions.get("window");
 export default function Activities({ navigation, route }: any) {
@@ -48,32 +48,32 @@ export default function Activities({ navigation, route }: any) {
         <View>
             <Text style={{ fontFamily: "SofiaProBlack", fontSize: 25, color: "#11535C", marginTop: 70, alignSelf: "center", marginBottom: 32 }}>What have you been doing?</Text>
             <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center" }}>
-                <FeelingsCard text="Family" icon={family} iconSelected={familySelected} itemKey="family" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Family" icon={<Family />} iconSelected={<FamilySelected />} itemKey="family" selected={selected} setSelected={setSelected} />
                 <View style={{ width: 16 }} />
-                <FeelingsCard text="Chores" icon={chores} iconSelected={choresSelected} itemKey="chores" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Chores" icon={<Chores />} iconSelected={<ChoresSelected />} itemKey="chores" selected={selected} setSelected={setSelected} />
                 <View style={{ width: 16 }} />
-                <FeelingsCard text="Working" icon={working} iconSelected={workingSelected} itemKey="working" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Working" icon={<Working />} iconSelected={<WorkingSelected />} itemKey="working" selected={selected} setSelected={setSelected} />
             </View>
             <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center" }}>
-                <FeelingsCard text="Studying" icon={studying} iconSelected={studyingSelected} itemKey="studying" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Studying" icon={<Studying />} iconSelected={<StudyingSelected />} itemKey="studying" selected={selected} setSelected={setSelected} />
                 <View style={{ width: 16 }} />
-                <FeelingsCard text="Relax" icon={relax} iconSelected={relaxSelected} itemKey="relax" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Relax" icon={<Relax />} iconSelected={<RelaxSelected />} itemKey="relax" selected={selected} setSelected={setSelected} />
                 <View style={{ width: 16 }} />
-                <FeelingsCard text="Sleep" icon={sleep} iconSelected={sleepSelected} itemKey="sleep" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Sleep" icon={<Sleep />} iconSelected={<SleepSelected />} itemKey="sleep" selected={selected} setSelected={setSelected} />
             </View>
             <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center" }}>
-                <FeelingsCard text="Traveling" icon={traveling} iconSelected={travelingSelected} itemKey="traveling" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Traveling" icon={<Traveling />} iconSelected={<TravelingSelected />} itemKey="traveling" selected={selected} setSelected={setSelected} />
                 <View style={{ width: 16 }} />
-                <FeelingsCard text="Food" icon={food} iconSelected={foodSelected} itemKey="food" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Food" icon={<Eating />} iconSelected={<EatingSelected />} itemKey="food" selected={selected} setSelected={setSelected} />
                 <View style={{ width: 16 }} />
-                <FeelingsCard text="Love" icon={love} iconSelected={loveSelected} itemKey="love" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Love" icon={<Love />} iconSelected={<LoveSelected />} itemKey="love" selected={selected} setSelected={setSelected} />
             </View>
             <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center" }}>
-                <FeelingsCard text="Shopping" icon={shopping} iconSelected={shoppingSelected} itemKey="shopping" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Shopping" icon={<Shopping />} iconSelected={<ShoppingSelected />} itemKey="shopping" selected={selected} setSelected={setSelected} />
                 <View style={{ width: 16 }} />
-                <FeelingsCard text="Reading" icon={reading} iconSelected={readingSelected} itemKey="reading" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Reading" icon={<Reading />} iconSelected={<ReadingSelected />} itemKey="reading" selected={selected} setSelected={setSelected} />
                 <View style={{ width: 16 }} />
-                <FeelingsCard text="Friends" icon={friend} iconSelected={friendSelected} itemKey="friends" selected={selected} setSelected={setSelected} />
+                <FeelingsCard text="Friends" icon={<Friend />} iconSelected={<FriendSelected />} itemKey="friends" selected={selected} setSelected={setSelected} />
             </View>
 
             <View style={{ flexDirection: "row", width: width - 40, justifyContent: "space-between", alignItems: "center", alignSelf: "center", marginTop: 45 }}>

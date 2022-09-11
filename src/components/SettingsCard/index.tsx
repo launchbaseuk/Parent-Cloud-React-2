@@ -8,7 +8,7 @@ export default function SettingsCard({ text, icon, route }: any) {
 
     return (
         <TouchableOpacity style={styles.settingsCard} onPress={() => navigation.navigate(route)}>
-            <Image source={icon} style={styles.icon} />
+            {icon}
             <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
     );

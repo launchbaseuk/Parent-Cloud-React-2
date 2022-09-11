@@ -6,20 +6,20 @@ import BackButton from "../../components/BackButton";
 import SettingsCard from "../../components/SettingsCard";
 
 // Images
-import personalDetails from "../../icons/PersonalDetails.png";
-import membership from "../../icons/Membership.png";
-import savedContent from "../../icons/SavedContent.png";
-import support from "../../icons/SupportSettings.png";
-import logout from "../../icons/Logout.png";
+import PersonalDetailsIcon from "../../icons/svg/PersonalDetailsIcon";
+import MembershipIcon from "../../icons/svg/MembershipIcon";
+import SavedContentIcon from "../../icons/svg/SavedContentIcon";
+import SupportIcon from "../../icons/svg/SupportIcon";
+import SignOutIcon from "../../icons/svg/SignOutIcon";
 
 const { width, height } = Dimensions.get("window");
 export default function MyAccount() {
     const options = [
-        {text: "Personal Details", icon: personalDetails, route: "PersonalDetails"},
-        {text: "Membership", icon: membership, route: "Membership"},
-        {text: "Saved Content", icon: savedContent, route: "SavedContent"},
-        {text: "Support", icon: support, route: "SupportSettings"},
-        {text: "Logout", icon: logout, route: "Logout"}
+        {text: "Personal Details", icon: <PersonalDetailsIcon />, route: "PersonalDetails"},
+        {text: "Membership", icon: <MembershipIcon />, route: "Membership"},
+        {text: "Saved Content", icon: <SavedContentIcon />, route: "SavedContent"},
+        {text: "Support", icon: <SupportIcon />, route: "SupportSettings"},
+        {text: "Logout", icon: <SignOutIcon />, route: "Logout"}
     ];
 
     return (

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import backarrow from "../../icons/backarrow.png";
+import BackArrow from "../../icons/svg/BackArrow";
 
 export default function BackButton({ text }: any) {
     const navigation = useNavigation();
 
     return (
         <TouchableOpacity style={styles.backButtonContainer} onPress={() => navigation.goBack()}>
-            <Image source={backarrow} style={styles.backButtonIcon} />
+            <BackArrow />
             <Text style={styles.backButtonText}>{text}</Text>
         </TouchableOpacity>
     );

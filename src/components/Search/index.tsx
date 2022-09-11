@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Dimensions, Image, TextInput } from "react-native";
-import search from "../../icons/Search.png";
+import SearchIcon from "../../icons/svg/Search";
 
 const { width, height } = Dimensions.get("window");
 export default function Search() {
     return (
         <View style={styles.searchContainer}>
-            <Image source={search} style={styles.searchIcon} />
+            <SearchIcon />
             <TextInput style={styles.searchInput} placeholder="Search..." placeholderTextColor="#00084B" />
         </View>
     );

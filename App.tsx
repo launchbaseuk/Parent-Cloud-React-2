@@ -93,12 +93,12 @@ const App = () => {
         <Stack.Navigator
           screenOptions={{headerShown: false}}
           initialRouteName="Signup">
-          <Stack.Screen name="Signup" component={Signup} />
+          {/* <Stack.Screen name="Signup" component={Signup} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
           <Stack.Screen name="EmailSent" component={EmailSent} />
           {/* <Stack.Screen name="ResetPassword" component={ResetPassword} /> */}
-          <Stack.Screen name="Success" component={Success} />
+          {/* <Stack.Screen name="Success" component={Success} /> */}
 
           <Stack.Screen name="TabNav" component={TabNav} />
           <Stack.Screen name="OneToOne" component={OnetooneSessions} />

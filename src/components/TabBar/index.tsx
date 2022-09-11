@@ -9,26 +9,26 @@ import {
   Image
 } from 'react-native';
 
-// Icons
-import Home from "../../icons/Home.png";
-import HomeSelected from "../../icons/HomeSelected.png";
-import Media from "../../icons/Media.png";
-import MediaSelected from "../../icons/MediaSelected.png";
-import Mind from "../../icons/Mind.png";
-import MindSelected from "../../icons/MindSelected.png";
-import More from "../../icons/More.png";
-import MoreSelected from "../../icons/MoreSelected.png";
-import Support from "../../icons/Support.png";
-import SupportSelected from "../../icons/SupportSelected.png";
+// Icons SVG
+import Home from '../../icons/svg/Home';
+import HomeSelected from '../../icons/svg/HomeSelected';
+import Media from '../../icons/svg/Media';
+import MediaSelected from '../../icons/svg/MediaSelected'
+import Mind from '../../icons/svg/Mind';
+import MindSelected from '../../icons/svg/MindSelected';
+import Support from '../../icons/svg/Support';
+import SupportSelected from '../../icons/svg/SupportSelected';
+import More from '../../icons/svg/More';
+import MoreSelected from '../../icons/svg/MoreSelected';
 
 const {width, height} = Dimensions.get('window');
 export default function TabBar(props: any) {
-  const routes = [{name: 'Home', key: 'home', icon: Home, iconSelected: HomeSelected},
-                  {name: 'Media', key: 'media', icon: Media, iconSelected: MediaSelected},
-                  {name: 'Mind', key: 'mind', icon: Mind, iconSelected: MindSelected},
-                  {name: 'Support', key: 'support', icon: Support, iconSelected: SupportSelected},
-                  {name: 'More', key: 'more', icon: More, iconSelected: MoreSelected}
-                ];
+  const routes = [{name: 'Home', key: 'home', icon: <Home />, iconSelected: <HomeSelected />},
+        {name: 'Media', key: 'media', icon: <Media />, iconSelected: <MediaSelected />},
+        {name: 'Mind', key: 'mind', icon: <Mind />, iconSelected: <MindSelected />},
+        {name: 'Support', key: 'support', icon: <Support />, iconSelected: <SupportSelected />},
+        {name: 'More', key: 'more', icon: <More />, iconSelected: <MoreSelected />}
+    ];
   const [selected, setSelected] = useState<string>("Home");
   
   return (
@@ -52,13 +52,17 @@ export default function TabBar(props: any) {
             return (
                 <TouchableOpacity key={index} style={styles.tabBarItem} onPress={onPress}>
                     {selected == route.name ? 
-                        routes.map((r: any) =>
-                            r.name == route.name && <Image source={r.iconSelected} style={styles.tabBarIcon} />
-                        )
+                        routes.map((r: any) => {
+                            if(r.name == route.name) {
+                                return r.iconSelected
+                            }
+                        })
                      : (
-                        routes.map((r: any) =>
-                            r.name == route.name && <Image source={r.icon} style={styles.tabBarIcon} />
-                        )
+                        routes.map((r: any) => {
+                            if(r.name == route.name) {
+                                return r.icon
+                            }
+                        })
                     )}
                 </TouchableOpacity>
             )
