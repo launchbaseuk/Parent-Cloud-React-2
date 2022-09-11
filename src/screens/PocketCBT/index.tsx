@@ -5,10 +5,10 @@ import BackButton from "../../components/BackButton";
 import PocketCBTCard from "../../components/PocketCBTCard";
 
 // Images
-import checkin from "../../images/CheckIn.png";
-import entries from "../../images/Entries.png";
-import gratitude from "../../images/Gratitude.png";
-import learn from "../../images/Learn.png";
+import CheckInImage from "../../images/svg/CheckInImage";
+import EntriesImage from "../../images/svg/EntriesImage";
+import GratitudeImage from "../../images/svg/GratitudeImage";
+import LearnImage from "../../images/svg/LearnImage";
 
 export default function PocketCBT() {
     return (
@@ -17,10 +17,10 @@ export default function PocketCBT() {
 
             <View style={{ height: 32 }} />
 
-            <PocketCBTCard text="Check-in" image={checkin} route="FeelingsCBT" />
-            <PocketCBTCard text="Learn" image={learn} route="Learn" />
-            <PocketCBTCard text="Gratitude Diary" image={gratitude} route="Gratitude" />
-            <PocketCBTCard text="Entries Log" image={entries} route="Learn" />
+            <PocketCBTCard text="Check-in" image={<CheckInImage />} route="FeelingsCBT" />
+            <PocketCBTCard text="Learn" image={<LearnImage />} route="Learn" />
+            <PocketCBTCard text="Gratitude Diary" image={<GratitudeImage />} route="Gratitude" />
+            <PocketCBTCard text="Entries Log" image={<EntriesImage />} route="Learn" />
         </View>
     );
 };

@@ -7,19 +7,19 @@ import LiveSupport from '../../components/shared/ScreenHeaders/LiveSupport';
 import ContentCard from '../../components/shared/ContentCard';
 
 // Images
-import onetoone from '../../images/onetoone.png';
-import livetalks from '../../images/livetalkssupport.png';
-import antenatalcourses from '../../images/antenatalcourses.png';
-import babyclasses from '../../images/babyclasses.png';
-import fertility from '../../images/fertility.png';
+import OneToOneImage from "../../images/svg/OneToOneImage";
+import LiveTalksImage from '../../images/svg/LiveTalksImage';
+import AntenatalCoursesImage from '../../images/svg/AntenatalCoursesImage';
+import BabyClassesImage from '../../images/svg/BabyClassesImage';
+import FertilityImage from '../../images/svg/FertilityImage';
 
 export default function Support() {
   const constantOptions = [
-    {text: 'One-to-one Sessions', image: onetoone, screen: 'OneToOne'},
-    {text: 'Live Talks', image: livetalks, screen: 'LiveTalks'},
-    {text: 'Antenatal Classes', image: antenatalcourses, screen: 'Antenatal'},
-    {text: 'Baby Classes', image: babyclasses, screen: 'BabyClasses'},
-    {text: 'Fertility', image: fertility, screen: 'Fertility'},
+    {text: 'One-to-one Sessions', image: <OneToOneImage />, screen: 'OneToOne'},
+    {text: 'Live Talks', image: <LiveTalksImage />, screen: 'LiveTalks'},
+    {text: 'Antenatal Classes', image: <AntenatalCoursesImage />, screen: 'Antenatal'},
+    {text: 'Baby Classes', image: <BabyClassesImage />, screen: 'BabyClasses'},
+    {text: 'Fertility', image: <FertilityImage />, screen: 'Fertility'},
   ];
 
   return (

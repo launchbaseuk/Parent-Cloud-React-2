@@ -5,7 +5,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Dimensions, Image } from "rea
 import PrimaryButton from "../../components/shared/PrimaryButton";
 
 // Images
-import successapricityimage from "../../images/SuccessApricityImage.png";
+import SuccessApricityImage from "../../images/svg/SuccessApricityImage";
 
 const { width, height } = Dimensions.get("window");
 export default function SuccessApricity({ navigation, route }: any) {
@@ -17,7 +17,9 @@ export default function SuccessApricity({ navigation, route }: any) {
 
     return (
         <View style={styles.successContainer}>
-            <Image source={successapricityimage} style={{ marginTop: 37, marginBottom: 32 }} />
+            <View style={{ height: 37 }} />
+            <SuccessApricityImage />
+            <View style={{ height: 32 }} />
 
             <Text style={{ fontFamily: "SofiaProBlack", fontSize: 25, color: "#11535C", marginBottom: 8 }}>{route.params.pageFrom == "mindhub" ? "Thanks for checking in!" : "Successful Outcome!"}</Text>
             <Text style={{ fontFamily: "Montserrat-Regular", fontSize: 16, color: "#11535C", marginBottom: 64, width: 311, textAlign: "center" }}>{route.params.pageFrom == "mindhub" ? "Keep checking in each day to get a better picture of how your moods change throughout the month" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}</Text>

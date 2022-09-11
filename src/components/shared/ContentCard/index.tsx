@@ -20,7 +20,8 @@ export default function ContentCard({ image, text, route }: any) {
     const navigation = useNavigation();
     return (
         <TouchableOpacity style={styles.contentCardContainer} onPress={onPress}>
-            <Image source={image} style={{ width: 60, height: 60 }} />
+            {/* <Image source={image} style={{ width: 60, height: 60 }} /> */}
+            {image}
             <Text style={styles.contentCardText}>{text}</Text>
         </TouchableOpacity>
     );

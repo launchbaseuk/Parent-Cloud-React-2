@@ -12,8 +12,8 @@ import ContentCard from '../../components/shared/ContentCard';
 import More from '../../components/shared/ScreenHeaders/More';
 
 // Images
-import myaccount from '../../images/myaccount.png';
-import hrmanagertool from '../../images/hrmanagertool.png';
+import MyAccountImage from "../../images/svg/MyAccountImage";
+import HRManagerImage from '../../images/svg/HRManagerImage';
 
 export default function MoreScreen() {
   return (
@@ -21,9 +21,9 @@ export default function MoreScreen() {
       <More />
       <View style={{height: 15}} />
 
-      <ContentCard image={myaccount} text="My Account" route="MyAccount" />
+      <ContentCard image={<MyAccountImage />} text="My Account" route="MyAccount" />
       <ContentCard
-        image={hrmanagertool}
+        image={<HRManagerImage />}
         text="HR & Manager Resources"
         route="HRManagement"
       />
