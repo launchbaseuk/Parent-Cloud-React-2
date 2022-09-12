@@ -14,6 +14,7 @@ type Props = {
   buttonTextBottom: string;
   routeTop: never | string;
   routeBot: never | string;
+  loginFunc?: () => void;
 };
 
 const AuthSharedScreen = ({
@@ -23,19 +24,20 @@ const AuthSharedScreen = ({
   buttonTextBottom,
   routeTop,
   routeBot,
+  loginFunc
 }: Props) => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.wrapper}>
-      <ScrollView contentContainerStyle={{flexDirection: 'column'}}>
+      {/* <ScrollView contentContainerStyle={{flexDirection: 'column'}}> */}
         {children}
-      </ScrollView>
+      {/* </ScrollView> */}
 
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, justifyContent: 'center'}}>
         <PrimaryButton
           text={buttonTextTop}
-          onPress={() => navigation.navigate(routeTop)}
+          onPress={() => { if(loginFunc) { loginFunc() } else { navigation.navigate(routeTop) }}}
         />
         {middleText && (
           <View style={{paddingTop: 16, paddingBottom: 16}}>

@@ -6,7 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import Input from '../../shared/Input';
 import AuthSharedScreen from '../AuthScreenShared';
 
-const Login = () => {
+const Login = ({ setLoggedIn }: any) => {
   const navigation = useNavigation();
 
   return (
@@ -16,15 +16,16 @@ const Login = () => {
         buttonTextTop={'Login'}
         buttonTextBottom={'Register'}
         routeTop={'ForgotPassword'}
-        routeBot={'Signup'}>
-        <View>
+        routeBot={'Signup'}
+        loginFunc={() => setLoggedIn(true)}>
+        <View style={{ width: "100%", justifyContent: "center", alignItems: "center" }}>
           <View>
             <Text style={styles.title}>Login</Text>
             <Text style={styles.content}>
               Login to your Wellness Cloud account
             </Text>
           </View>
-          <View style={{height: '100%', justifyContent: 'center'}}>
+          <View style={{ marginBottom: 100, marginTop: 32, justifyContent: 'center' }}>
             <Input label="Email Address" placeholder="example@gmail.com" />
             <Input label="Password" placeholder="Minimum 6 characters" />
             <TouchableOpacity

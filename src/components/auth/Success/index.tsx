@@ -7,7 +7,7 @@ const Success = () => {
       title={'Well done!'}
       content={'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}
       buttonText={'Done'}
-      route={'TabNav'}
+      route={'Login'}
     />
   );
 };

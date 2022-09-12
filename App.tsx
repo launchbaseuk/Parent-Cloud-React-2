@@ -102,7 +102,9 @@ const App = () => {
     <NavigationContainer>
       {!loggedIn ? (
         <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Onboarding">
-          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Login">
+            {(props) => <Login setLoggedIn={setLoggedIn} />}
+          </Stack.Screen>
           <Stack.Screen name="Signup" component={Signup} />
           <Stack.Screen name="Onboarding" component={Onboarding} />
           <Stack.Screen name="Success" component={Success} />

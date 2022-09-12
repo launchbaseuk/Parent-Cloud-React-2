@@ -22,7 +22,7 @@ const ForgotPassword = () => {
           </View>
           <View
             style={{
-              height: '100%',
+              marginTop: 32,
               justifyContent: 'center',
               paddingBottom: 160,
             }}>

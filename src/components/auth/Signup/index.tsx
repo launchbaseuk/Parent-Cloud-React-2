@@ -20,7 +20,7 @@ const Signup = () => {
               Create a new Wellness Cloud account.
             </Text>
           </View>
-          <View style={{height: '100%', justifyContent: 'center'}}>
+          <View style={{ marginTop: 32, marginBottom: 50, justifyContent: 'center'}}>
             <Input label="Email Address" placeholder="example@gmail.com" />
             <Input label="Password" placeholder="Minimum 6 characters" />
             <Input label="Repeat Password" placeholder="Must match the above" />
