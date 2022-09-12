@@ -7,29 +7,20 @@ import {
   Text,
   Dimensions,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 // Images
-import headphones from '../../icons/headphones.png';
-import PlayIconSmall from '../../icons/svg/PlayIconSmall';
+import playiconyellow from "../../icons/PlayIconYellow.png";
 
 const {width, height} = Dimensions.get('window');
-export default function MediaListItem({text, description, image, onPress}: any) {
+export default function VideoListItem({text, description, image}: any) {
   const navigation = useNavigation();
 
-  const handlePress = () => {
-    if(onPress) {
-      onPress();
-    } else {
-      navigation.navigate('MediaDetails');
-    }
-  }
-
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("VideoDetails")}>
       <View style={{flexDirection: 'row'}}>
         <View style={styles.imageContainer}>
-          <Image source={headphones} style={styles.image} />
+          <Image source={playiconyellow} style={styles.image} />
         </View>
 
         <View style={styles.textContainer}>
@@ -53,13 +44,7 @@ export default function MediaListItem({text, description, image, onPress}: any) 
           </Text>
         </View>
       </View>
-
-      <TouchableOpacity
-        style={{alignSelf: 'center'}}
-        onPress={handlePress}>
-        <PlayIconSmall />
-      </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 }
 

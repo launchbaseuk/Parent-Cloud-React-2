@@ -53,6 +53,12 @@ import Login from './src/components/auth/Login';
 import Signup from './src/components/auth/Signup';
 import EmailSent from './src/components/auth/EmailSent';
 import Onboarding from './src/screens/Onboarding';
+import MediaScreen from './src/screens/MediaScreen';
+import GuidesMedia from './src/screens/GuidesMedia';
+import Videos from './src/screens/Videos';
+import Podcasts from './src/screens/Podcasts';
+import VideoDetails from './src/screens/VideoDetails';
+import PodcastDetails from './src/screens/PodcastDetails';
 
 // Navigation
 import {NavigationContainer} from '@react-navigation/native';
@@ -70,14 +76,14 @@ const TabNav = () => {
       <Tab.Screen name="Home" component={Homepage} />
       <Tab.Screen name="Support" component={Support} />
       <Tab.Screen name="Mind" component={Mind} />
-      <Tab.Screen name="Media" component={Homepage} />
+      <Tab.Screen name="Media" component={MediaScreen} />
       <Tab.Screen name="More" component={MoreScreen} />
     </Tab.Navigator>
   );
 };
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [loggedIn, setLoggedIn] = useState<boolean>(true);
   const [onboarded, setOnboarded] = useState<boolean>(false);
 
   // useEffect(() => {
@@ -140,6 +146,11 @@ const App = () => {
           <Stack.Screen name="SleepStories" component={SleepStories} />
           <Stack.Screen name="GuidedMeditation" component={GuidedMeditation} />
           <Stack.Screen name="MediaDetails" component={MediaDetails} />
+          <Stack.Screen name="GuidesMedia" component={GuidesMedia} />
+          <Stack.Screen name="Videos" component={Videos} />
+          <Stack.Screen name="Podcasts" component={Podcasts} />
+          <Stack.Screen name="VideoDetails" component={VideoDetails} />
+          <Stack.Screen name="PodcastDetails" component={PodcastDetails} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
