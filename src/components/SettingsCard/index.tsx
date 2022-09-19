@@ -3,11 +3,11 @@ import { Text, TouchableOpacity, StyleSheet, Dimensions, Image } from "react-nat
 import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
-export default function SettingsCard({ text, icon, route }: any) {
+export default function SettingsCard({ text, icon, route, logout }: any) {
     const navigation = useNavigation();
 
     return (
-        <TouchableOpacity style={styles.settingsCard} onPress={() => navigation.navigate(route)}>
+        <TouchableOpacity style={styles.settingsCard} onPress={() => {if(logout) { logout() } else { navigation.navigate(route) }}}>
             {icon}
             <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>

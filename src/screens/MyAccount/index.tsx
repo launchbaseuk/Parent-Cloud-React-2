@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
+import { useAuth } from "../../contexts/auth-context";
 
 // Components
 import BackButton from "../../components/BackButton";
@@ -14,6 +15,7 @@ import SignOutIcon from "../../icons/svg/SignOutIcon";
 
 const { width, height } = Dimensions.get("window");
 export default function MyAccount() {
+    const { logout } = useAuth();
     const options = [
         {text: "Personal Details", icon: <PersonalDetailsIcon />, route: "PersonalDetails"},
         {text: "Membership", icon: <MembershipIcon />, route: "Membership"},
@@ -29,7 +31,7 @@ export default function MyAccount() {
 
             {options.map((option: any, index: number) => {
                 return (
-                    <SettingsCard text={option.text} icon={option.icon} route={option.route} key={index} />
+                    <SettingsCard text={option.text} icon={option.icon} route={option.route} key={index} logout={option.text == "Logout" && logout} />
                 )
             })}
         </View>

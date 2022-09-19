@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet, Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("window");
-export default function Input({ label, placeholder }: any) {
+export default function Input({ label, placeholder, value, onChangeText, secureTextEntry }: any) {
     return (
         <View>
             <Text style={styles.text}>{label}</Text>
-            <TextInput placeholder={placeholder} style={styles.input} />
+            <TextInput placeholder={placeholder} placeholderTextColor="#150E00" style={styles.input} value={value} onChangeText={onChangeText} secureTextEntry={secureTextEntry} />
         </View>
     );
 };

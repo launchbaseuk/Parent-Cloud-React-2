@@ -5,7 +5,6 @@ const AuthContext = createContext({});
 
 const AuthProvider = (props: any) => {
 	const [loggedIn, setLoggedIn] = useState(false);
-	const [error, setError] = useState("");
 
 	useEffect(() => {
 		// Pull saved state
@@ -15,25 +14,23 @@ const AuthProvider = (props: any) => {
     
                 (async () => {
                     const check = await fetch(
-                        `http://parentcloud.borne.io/`
+                        `https://parentcloud.borne.io/wp-json/jwt-auth/v1/token/validate`, {
+							method: "POST",
+							headers: {
+								Authorization: `Bearer ${token}`,
+							}
+						}
                     );
                     const response = await check.json();
-    
-                    if (response.status === 200) {
-                        if (response.details.role === "revoked") {
-                            setLoggedIn(false);
-                        } else {
-                            setLoggedIn(response.token);
-                            setError("");
-                        }
+					console.log(response)
+                    if (response.data.status === 200) {
+                        setLoggedIn(true);
                     } else {
                         setLoggedIn(false);
-                        setError("");
                     }
                 })();
             } else {
                 setLoggedIn(false);
-                setError("");
             }
         })();
 	}, []);
@@ -42,7 +39,7 @@ const AuthProvider = (props: any) => {
 		(async () => {
 			if (username && password) {
 				const login = await fetch(
-					"http://parentcloud.borne.io/",
+					"https://parentcloud.borne.io/wp-json/jwt-auth/v1/token",
 					{
 						method: "POST",
 						headers: {
@@ -50,44 +47,41 @@ const AuthProvider = (props: any) => {
 							Accept: "application/json",
 						},
 						body: JSON.stringify({
+							"jwt_auth_expire": 123908425893047,
 							username: username,
 							password: password,
 						}),
 					}
 				);
 				const response = await login.json();
+				console.log(response);
+
 				if (response.token) {
-					if (response.details.role === "revoked") {
-						setLoggedIn(false);
-					} else {
-						// localStorage.setItem(
-						// 	"details",
-						// 	JSON.stringify(response.details)
-						// );
-						// localStorage.setItem("token", response.token);
-						setLoggedIn(response.token);
-						setError("");
-					}
+					await AsyncStorage.setItem("token", response.token);
+					await AsyncStorage.setItem("user_email", response.user_email);
+					await AsyncStorage.setItem("user_nicename", response.user_nicename);
+					console.log('done')
+					setLoggedIn(true);
 				} else {
 					setLoggedIn(false);
-					setError(response.error);
 				}
 			} else {
 				setLoggedIn(false);
 			}
 		})();
 	};
-	const logout = () => {
-		// localStorage.removeItem("token");
+	const logout = async () => {
+		console.log('nice')
+		await AsyncStorage.removeItem("token");
+		await AsyncStorage.removeItem("user_email");
+		await AsyncStorage.removeItem("user_nicename");
 		setLoggedIn(false);
 	};
 
 	const authContextValue = {
 		login,
 		logout,
-		loggedIn,
-		error,
-		setError
+		loggedIn
 	};
 
 	return <AuthContext.Provider value={authContextValue} {...props} />;
