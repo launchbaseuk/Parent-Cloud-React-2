@@ -12,7 +12,6 @@ const { width, height } = Dimensions.get("window");
 function Carousel({ navigation }: any) {
     const [current, setCurrent] = useState<number>(1);
     // const scrollRef = React.useRef<any>(null);
-
     
     const handleSwipe = (e: any) => {
         if(e.nativeEvent.contentOffset.x == 0) {

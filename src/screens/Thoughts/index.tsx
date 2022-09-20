@@ -40,7 +40,7 @@ export default function Thoughts({ navigation, route }: any) {
 
                     <View style={styles.buttonContainer}>
                         <SecondaryButton size="small" text="Back" onPress={() => {setConfirmed(false); navigation.goBack();}} />
-                        <PrimaryButton size="small" text="Confirm" onPress={() => setConfirmed(true)} />
+                        <PrimaryButton size="small" text="Confirm" onPress={() => setConfirmed(true)} disabled={selected != "" ? false : true} />
                     </View>
                 </>
             )}

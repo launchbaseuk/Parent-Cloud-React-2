@@ -31,7 +31,7 @@ export default function Questions() {
 
             <View style={styles.buttonContainer}>
                 <SecondaryButton size="small" text="Back" onPress={() => navigation.goBack()} />
-                <PrimaryButton size="small" text="Confirm" onPress={() => navigation.navigate("SuccessApricity", { pageFrom: "mindhub" })} />
+                <PrimaryButton size="small" text="Confirm" onPress={() => navigation.navigate("SuccessApricity", { pageFrom: "mindhub" })} disabled={selected != "" ? false : true} />
             </View>
         </ScrollView>
     );

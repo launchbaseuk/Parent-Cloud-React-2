@@ -78,7 +78,7 @@ export default function Activities({ navigation, route }: any) {
 
             <View style={{ flexDirection: "row", width: width - 40, justifyContent: "space-between", alignItems: "center", alignSelf: "center", marginTop: 45 }}>
                 <SecondaryButton size="small" text="Back" onPress={() => navigation.goBack()} />
-                <PrimaryButton size="small" text="Continue" onPress={handlePress} />
+                <PrimaryButton size="small" text="Continue" onPress={handlePress} disabled={selected != "" ? false : true} />
             </View>
         </View>
     );

@@ -87,7 +87,7 @@ const App = () => {
   const { loggedIn }: any = useAuth();
   // const [loggedIn, setLoggedIn] = useState<boolean>(true);
   const [onboarded, setOnboarded] = useState<boolean>(false);
-  console.log(loggedIn)
+
   // useEffect(() => {
   //   (async() => {
   //     await AsyncStorage.setItem('onboarded', "false");

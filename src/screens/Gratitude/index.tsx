@@ -22,7 +22,7 @@ export default function Gratitude({ navigation }) {
 
             <View style={{ width: width - 40, justifyContent: "space-between", flexDirection: "row", marginTop: 32, alignSelf: "center" }}>
                 <SecondaryButton size="small" text="Back" onPress={() => navigation.goBack()} />
-                <PrimaryButton size="small" text="Confirm" onPress={() => navigation.navigate("SuccessApricity", { pageFrom: "" })} />
+                <PrimaryButton size="small" text="Confirm" onPress={() => navigation.navigate("SuccessApricity", { pageFrom: "Gratitude" })} disabled={selected != "" ? false : true} />
             </View>
         </View>
     );

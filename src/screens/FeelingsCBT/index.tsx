@@ -36,7 +36,7 @@ export default function FeelingsCBT() {
 
             <View style={{ flexDirection: "row", width: width - 40, justifyContent: "space-between", alignItems: "center", alignSelf: "center" }}>
                 <SecondaryButton size="small" text="Back" onPress={() => navigation.goBack()} />
-                <PrimaryButton size="small" text="Continue" onPress={() => navigation.navigate("Feelings", { feeling: selected })} />
+                <PrimaryButton size="small" text="Continue" onPress={() => navigation.navigate("Feelings", { feeling: selected })} disabled={selected != "" ? false : true} />
             </View>
         </View>
     );

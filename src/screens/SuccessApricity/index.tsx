@@ -21,10 +21,10 @@ export default function SuccessApricity({ navigation, route }: any) {
             <SuccessApricityImage />
             <View style={{ height: 32 }} />
 
-            <Text style={{ fontFamily: "SofiaProBlack", fontSize: 25, color: "#11535C", marginBottom: 8 }}>{route.params.pageFrom == "mindhub" ? "Thanks for checking in!" : "Successful Outcome!"}</Text>
-            <Text style={{ fontFamily: "Montserrat-Regular", fontSize: 16, color: "#11535C", marginBottom: 64, width: 311, textAlign: "center" }}>{route.params.pageFrom == "mindhub" ? "Keep checking in each day to get a better picture of how your moods change throughout the month" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}</Text>
+            <Text style={{ fontFamily: "SofiaProBlack", fontSize: 25, color: "#11535C", marginBottom: 8 }}>{route.params.pageFrom == "mindhub" ? "Thanks for checking in!" : route.params.pageFrom == "Gratitude" ? "Well Done!" : "Successful Outcome!"}</Text>
+            <Text style={{ fontFamily: "Montserrat-Regular", fontSize: 16, color: "#11535C", marginBottom: 64, width: 311, textAlign: "center" }}>{route.params.pageFrom == "mindhub" ? "Keep checking in each day to get a better picture of how your moods change throughout the month" : route.params.pageFrom == "Gratitude" ? "Your entry is now saved!" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}</Text>
 
-            <PrimaryButton text={route.params.pageFrom == "mindhub" ? "Done" : "Primary Action"} onPress={handlePress} />
+            <PrimaryButton text={route.params.pageFrom == "mindhub" || route.params.pageFrom == "Gratitude" ? "Done" : "Primary Action"} onPress={handlePress} />
         </View>
     );
 };
