@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View, Dimensions, TouchableOpacity } from "react-native";
 import BackButton from "../../components/BackButton";
@@ -5,6 +7,29 @@ import { GuideCardSmall } from "../../components/GuideCard";
 
 const { width, height } = Dimensions.get("window");
 export default function GuidesMedia({ navigation, route }: any) {
+    async function requests() {
+        let email = await AsyncStorage.getItem("user_email");
+
+        // Get User ID
+        let responseID: any = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/getUserID/${email}`);
+        responseID = await responseID.json();
+        responseID = responseID[0].ID;
+
+        // Get membership
+        // let responseMembership: any = await fetch(`https://parentcloud.borne.io/wp-json/mp/v1/subscriptions/${responseID}`, {
+        //     headers: {
+        //         "MEMBERPRESS-API-KEY": "8T5AkgBptM"
+        //     }
+        // });
+        // responseMembership = await responseMembership.json();
+        
+    }
+    useFocusEffect(
+        React.useCallback(() => {
+            requests();
+        }, [])
+    );
+    
     return (
         <View>
             <ScrollView contentContainerStyle={{ paddingBottom: 10 }}>

@@ -6,6 +6,7 @@ import BackButton from "../../components/BackButton";
 import { GuideCardBig } from "../../components/GuideCard";
 
 export default function Guides() {
+
     return (
         <View>
             <BackButton text="Guides" />

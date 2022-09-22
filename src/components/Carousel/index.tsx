@@ -46,7 +46,7 @@ function Carousel({ navigation }: any) {
 
     return (
       <View style={{ width: width, height: height, justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-        <View style={{ justifyContent: "center", alignItems: "center", height: "50%" }}>
+        <View style={{ justifyContent: "center", alignItems: "center", height: "50%", marginTop: 40 }}>
             <ScrollView onScroll={handleSwipe} horizontal showsHorizontalScrollIndicator={false} scrollEventThrottle={200} decelerationRate="fast" snapToStart pagingEnabled contentContainerStyle={{ width: `${100 * 3}%` }}>
                 <View style={{ alignItems: "center", marginTop: 64, width: width }}>
                     <Images imageNumber={0} />
@@ -67,7 +67,7 @@ function Carousel({ navigation }: any) {
             <Dots number={current} setCurrent={setCurrent} />
         </View>
 
-        <View style={{ flex: 1, justifyContent: "flex-end", marginBottom: 70 }}>
+        <View style={{ flex: 1, justifyContent: "flex-end", marginBottom: 80 }}>
             <PrimaryButton text="Signup" onPress={() => navigation.navigate("Signup")} />
             <View style={{ height: 8 }} />
             <SecondaryButton text="Login" onPress={handleLogin} />
