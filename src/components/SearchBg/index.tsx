@@ -10,7 +10,7 @@ import {
 import SearchIcon from '../../icons/svg/Search';
 
 const {width, height} = Dimensions.get('window');
-export default function Search() {
+export default function SearchBg() {
   return (
     <View style={styles.searchContainer}>
       <SearchIcon style={styles.searchIcon} />
@@ -25,18 +25,19 @@ export default function Search() {
 
 const styles = StyleSheet.create({
   searchContainer: {
-    marginTop: 15,
+    marginTop: 44,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F2F2F280',
+    backgroundColor: '#e6e6e6',
     width: width - 40,
     height: 44,
     borderRadius: 5,
-    paddingLeft: 16,
+    // paddingLeft: 16,
     alignSelf: 'center',
   },
   searchIcon: {
     marginRight: 12,
+    marginLeft: 15,
   },
   searchInput: {
     fontFamily: 'Montserrat-Regular',
