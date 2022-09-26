@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Dimensions, ScrollView} from 'react-native';
 import BackButton from '../../components/BackButton';
@@ -107,24 +107,3 @@ export default function OnetooneSessions() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionTitle: {
-    fontFamily: 'SofiaProBlack',
-    fontSize: 20,
-    color: '#11535C',
-    width: width - 40,
-    alignSelf: 'center',
-    textAlign: 'left',
-    marginTop: 41,
-  },
-  actionsContainer: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: width - 40,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    paddingBottom: 73,
-    paddingTop: 32,
-  },
-});
