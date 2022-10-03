@@ -1,4 +1,4 @@
-package com.parentcloud.newarchitecture.components;
+package com.wellnessCloud.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

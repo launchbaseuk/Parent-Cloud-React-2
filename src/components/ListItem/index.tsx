@@ -27,12 +27,14 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
+        textAlign: "center",
         marginTop: 8
     },
     title: {
         fontSize: 15,
         color: "#11535C",
-        fontFamily: "Montserrat-Bold"
+        fontFamily: "Montserrat-Bold",
+        width: 260
     },
     description: {
         width: 245,
