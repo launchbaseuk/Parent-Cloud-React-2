@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useAuth } from "./src/contexts/auth-context";
+import {useAuth} from './src/contexts/auth-context';
 
 // Screens
 import Homepage from './src/screens/Homepage';
@@ -84,7 +84,7 @@ const TabNav = () => {
 };
 
 const App = () => {
-  const { loggedIn }: any = useAuth();
+  const {loggedIn}: any = useAuth();
   // const [loggedIn, setLoggedIn] = useState<boolean>(true);
   const [onboarded, setOnboarded] = useState<boolean>(false);
 
@@ -101,61 +101,63 @@ const App = () => {
   // }, []);
 
   return (
-      <NavigationContainer>
-        {!loggedIn ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Onboarding">
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Signup" component={Signup} />
-            <Stack.Screen name="Onboarding" component={Onboarding} />
-            <Stack.Screen name="Success" component={Success} />
-            <Stack.Screen name="EmailSent" component={EmailSent} />
-            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-          </Stack.Navigator>
-        ) : (
-          <Stack.Navigator
-            screenOptions={{headerShown: false}}
-            initialRouteName="TabNav">
-            <Stack.Screen name="TabNav" component={TabNav} />
-            <Stack.Screen name="OneToOne" component={OnetooneSessions} />
-            <Stack.Screen name="PocketCBT" component={PocketCBT} />
-            <Stack.Screen name="DynamicOne" component={DynamicOne} />
-            <Stack.Screen name="DynamicTwo" component={DynamicTwo} />
-            <Stack.Screen name="LiveTalks" component={LiveTalks} />
-            <Stack.Screen name="Antenatal" component={Antenatal} />
-            <Stack.Screen name="BabyClasses" component={BabyClasses} />
-            <Stack.Screen name="Fertility" component={Fertility} />
-            <Stack.Screen
-              name="ApricityConsultation"
-              component={ApricityConsultation}
-            />
-            <Stack.Screen name="Guides" component={Guides} />
-            <Stack.Screen name="PDFViewer" component={PDFViewer} />
-            <Stack.Screen name="ClassDetails" component={ClassDetails} />
-            <Stack.Screen name="SuccessApricity" component={SuccessApricity} />
-            <Stack.Screen name="MyAccount" component={MyAccount} />
-            <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
-            <Stack.Screen name="Membership" component={Membership} />
-            <Stack.Screen name="SupportSettings" component={SupportSettings} />
-            <Stack.Screen name="SavedContent" component={SavedContent} />
-            <Stack.Screen name="HRManagement" component={HRManagerResources} />
-            <Stack.Screen name="PocketCBTIntro" component={PocketCBTIntro} />
-            <Stack.Screen name="FeelingsCBT" component={FeelingsCBT} />
-            <Stack.Screen name="Feelings" component={Feelings} />
-            <Stack.Screen name="Activities" component={Activities} />
-            <Stack.Screen name="Thoughts" component={Thoughts} />
-            <Stack.Screen name="Learn" component={Learn} />
-            <Stack.Screen name="Gratitude" component={Gratitude} />
-            <Stack.Screen name="SleepStories" component={SleepStories} />
-            <Stack.Screen name="GuidedMeditation" component={GuidedMeditation} />
-            <Stack.Screen name="MediaDetails" component={MediaDetails} />
-            <Stack.Screen name="GuidesMedia" component={GuidesMedia} />
-            <Stack.Screen name="Videos" component={Videos} />
-            <Stack.Screen name="Podcasts" component={Podcasts} />
-            <Stack.Screen name="VideoDetails" component={VideoDetails} />
-            <Stack.Screen name="PodcastDetails" component={PodcastDetails} />
-          </Stack.Navigator>
-        )}
-      </NavigationContainer>
+    <NavigationContainer>
+      {!loggedIn ? (
+        <Stack.Navigator
+          screenOptions={{headerShown: false}}
+          initialRouteName="Onboarding">
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Onboarding" component={Onboarding} />
+          <Stack.Screen name="Success" component={Success} />
+          <Stack.Screen name="EmailSent" component={EmailSent} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        </Stack.Navigator>
+      ) : (
+        <Stack.Navigator
+          screenOptions={{headerShown: false}}
+          initialRouteName="TabNav">
+          <Stack.Screen name="TabNav" component={TabNav} />
+          <Stack.Screen name="OneToOne" component={OnetooneSessions} />
+          <Stack.Screen name="PocketCBT" component={PocketCBT} />
+          <Stack.Screen name="DynamicOne" component={DynamicOne} />
+          <Stack.Screen name="DynamicTwo" component={DynamicTwo} />
+          <Stack.Screen name="LiveTalks" component={LiveTalks} />
+          <Stack.Screen name="Antenatal" component={Antenatal} />
+          <Stack.Screen name="BabyClasses" component={BabyClasses} />
+          <Stack.Screen name="Fertility" component={Fertility} />
+          <Stack.Screen
+            name="ApricityConsultation"
+            component={ApricityConsultation}
+          />
+          <Stack.Screen name="Guides" component={Guides} />
+          <Stack.Screen name="PDFViewer" component={PDFViewer} />
+          <Stack.Screen name="ClassDetails" component={ClassDetails} />
+          <Stack.Screen name="SuccessApricity" component={SuccessApricity} />
+          <Stack.Screen name="MyAccount" component={MyAccount} />
+          <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
+          <Stack.Screen name="Membership" component={Membership} />
+          <Stack.Screen name="SupportSettings" component={SupportSettings} />
+          <Stack.Screen name="SavedContent" component={SavedContent} />
+          <Stack.Screen name="HRManagement" component={HRManagerResources} />
+          <Stack.Screen name="PocketCBTIntro" component={PocketCBTIntro} />
+          <Stack.Screen name="FeelingsCBT" component={FeelingsCBT} />
+          <Stack.Screen name="Feelings" component={Feelings} />
+          <Stack.Screen name="Activities" component={Activities} />
+          <Stack.Screen name="Thoughts" component={Thoughts} />
+          <Stack.Screen name="Learn" component={Learn} />
+          <Stack.Screen name="Gratitude" component={Gratitude} />
+          <Stack.Screen name="SleepStories" component={SleepStories} />
+          <Stack.Screen name="GuidedMeditation" component={GuidedMeditation} />
+          <Stack.Screen name="MediaDetails" component={MediaDetails} />
+          <Stack.Screen name="GuidesMedia" component={GuidesMedia} />
+          <Stack.Screen name="Videos" component={Videos} />
+          <Stack.Screen name="Podcasts" component={Podcasts} />
+          <Stack.Screen name="VideoDetails" component={VideoDetails} />
+          <Stack.Screen name="PodcastDetails" component={PodcastDetails} />
+        </Stack.Navigator>
+      )}
+    </NavigationContainer>
   );
 };
 
