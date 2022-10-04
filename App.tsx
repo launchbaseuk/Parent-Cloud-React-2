@@ -70,6 +70,7 @@ import PlayerScreen from 'react-native-sound-playerview';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import VideoPlayer from './src/components/shared/VideoPlayer';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -119,6 +120,8 @@ const App = () => {
             <Stack.Screen name="MediaDetails" component={MediaDetails} />
             <Stack.Screen name="player" component={PlayerScreen} />
             <Stack.Screen name="AudioPlayer" component={AudioPlayer} />
+            <Stack.Screen name="VideoPlayer" component={VideoPlayer} />
+
             {/* PlayerScreen */}
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
