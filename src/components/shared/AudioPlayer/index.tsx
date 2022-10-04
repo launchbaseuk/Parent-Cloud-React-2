@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -18,13 +18,23 @@ import Forwards from '../../../icons/svg/Forwards';
 import PlayIconBig from '../../../icons/svg/PlayIconBig';
 import Queue from '../../../icons/svg/Queue';
 import eclipse from '../../../images/EclipsePlayer.png';
+
 // import PlaylistPlayer from '../../images/svg/PlaylistPlayer.svg';
 // import {Sound} from 'react-native-sound';
+
+import VideoPlayer from 'react-native-video-controls';
+import {useNavigation} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 
 const AudioPlayer = () => {
   const [value, setValue] = useState(0);
+  const [video, setVideo] = useState({
+    thumbnailUrl: '',
+    videoUrl: '',
+    video: '',
+  });
+  const navigation = useNavigation();
 
   // const Feature = ({title, onPress, buttonLabel = 'PLAY', status}) => (
   //   <View style={styles.feature}>
@@ -36,12 +46,35 @@ const AudioPlayer = () => {
   //   </View>
   // );
 
+  useEffect(() => {
+    const VIMEO_ID = '108986967';
+    fetch(`https://player.vimeo.com/video/${VIMEO_ID}/config`)
+      .then(res => res.json())
+      .then(res =>
+        setVideo({
+          thumbnailUrl: res.video.thumbs['640'],
+          videoUrl:
+            res.request.files.hls.cdns[res.request.files.hls.default_cdn].url,
+          video: res.video,
+        }),
+      );
+  }, []);
+
   return (
     <SafeAreaView style={styles.wrapper}>
+      <VideoPlayer
+        ref={ref => {
+          this.player = ref;
+        }}
+        source={{uri: video.videoUrl}}
+        navigator={navigation}
+        fullscreen={true}
+        resizeMode={'cover'}
+      />
       {/* <Search /> */}
       {/* <LiveTalks /> */}
       {/* <Player /> */}
-      <Text style={styles.title}>Meditation</Text>
+      {/* <Text style={styles.title}>Meditation</Text>
       <Text style={styles.desc}>Lorem ipsum...</Text>
 
       <Switch style={{marginTop: 30, marginBottom: 30}} />
@@ -91,7 +124,7 @@ const AudioPlayer = () => {
           <Replay />
           <Replay />
         </View>
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };
