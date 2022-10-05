@@ -19,6 +19,7 @@
     "@rneui/themed": "^4.0.0-rc.6",
     "formik": "^2.2.9",
     "react": "18.0.0",
+    "react-jinke-music-player": "^4.24.2",
     "react-native": "0.69.5",
     "react-native-calendars": "^1.1288.3",
     "react-native-safe-area-context": "^4.3.3",

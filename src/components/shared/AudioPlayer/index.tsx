@@ -1,258 +1,155 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
-  Image,
   Text,
-  Slider,
+  StyleSheet,
   TouchableOpacity,
-  Platform,
-  Alert,
+  Dimensions,
+  Image,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {Slider, Text as TextStyled, Icon} from '@rneui/themed';
 
-import Sound from 'react-native-sound';
+import {Switch} from '@rneui/themed';
 
-const img_speaker = require('./resources/ui_speaker.png');
-const img_pause = require('./resources/ui_pause.png');
-const img_play = require('./resources/ui_play.png');
-const img_playjumpleft = require('./resources/ui_playjumpleft.png');
-const img_playjumpright = require('./resources/ui_playjumpright.png');
+import Replay from '../../../icons/svg/Replay';
+import Backwards from '../../../icons/svg/Backwards';
+import Forwards from '../../../icons/svg/Forwards';
+import PlayIconBig from '../../../icons/svg/PlayIconBig';
+import Queue from '../../../icons/svg/Queue';
+import eclipse from '../../../images/EclipsePlayer.png';
+// import PlaylistPlayer from '../../images/svg/PlaylistPlayer.svg';
+// import {Sound} from 'react-native-sound';
 
-const sound2 = new Sound('./advertising.mp3');
-export default class AudioPlayer extends React.Component {
-  sound = new Sound('./advertising.mp3');
+const {width, height} = Dimensions.get('window');
 
-  static navigationOptions = props => ({
-    title: props.navigation.state.params.title,
-  });
+const AudioPlayer = () => {
+  const [value, setValue] = useState(0);
 
-  constructor() {
-    super();
-    this.state = {
-      playState: 'paused', //playing, paused
-      playSeconds: 0,
-      duration: 0,
-    };
-    this.sliderEditing = false;
-  }
+  // const Feature = ({title, onPress, buttonLabel = 'PLAY', status}) => (
+  //   <View style={styles.feature}>
+  //     <Header style={{flex: 1}}>{title}</Header>
+  //     {status ? (
+  //       <Text style={{padding: 5}}>{resultIcons[status] || ''}</Text>
+  //     ) : null}
+  //     <Button title={buttonLabel} onPress={onPress} />
+  //   </View>
+  // );
 
-  componentDidMount() {
-    this.play();
+  return (
+    <SafeAreaView style={styles.wrapper}>
+      {/* <Search /> */}
+      {/* <LiveTalks /> */}
+      {/* <Player /> */}
+      <Text style={styles.title}>Meditation</Text>
+      <Text style={styles.desc}>Lorem ipsum...</Text>
 
-    this.timeout = setInterval(() => {
-      if (
-        sound2 &&
-        sound2.isLoaded() &&
-        this.state.playState == 'playing' &&
-        !this.sliderEditing
-      ) {
-        sound2.getCurrentTime((seconds, isPlaying) => {
-          this.setState({playSeconds: seconds});
-        });
-      }
-    }, 100);
-  }
-  componentWillUnmount() {
-    if (sound2) {
-      sound2.release();
-      sound2 = null;
-    }
-    if (this.timeout) {
-      clearInterval(this.timeout);
-    }
-  }
-
-  onSliderEditStart = () => {
-    this.sliderEditing = true;
-  };
-  onSliderEditEnd = () => {
-    this.sliderEditing = false;
-  };
-  onSliderEditing = value => {
-    if (sound2) {
-      sound2.setCurrentTime(value);
-      this.setState({playSeconds: value});
-    }
-  };
-
-  play = async () => {
-    if (sound2) {
-      sound2.play(this.playComplete);
-      this.setState({playState: 'playing'});
-    } else {
-      const filepath = './advertising.mp3';
-      var dirpath = './advertising.mp3';
-      if (this.props.navigation.state.params.dirpath) {
-        dirpath = this.props.navigation.state.params.dirpath;
-      }
-      console.log('[Play]', filepath);
-
-      this.sound = new Sound(filepath, dirpath, error => {
-        if (error) {
-          console.log('failed to load the sound', error);
-          Alert.alert('Notice', 'audio file error. (Error code : 1)');
-          this.setState({playState: 'paused'});
-        } else {
-          this.setState({
-            playState: 'playing',
-            duration: this.sound.getDuration(),
-          });
-          this.sound.play(this.playComplete);
-        }
-      });
-    }
-  };
-  playComplete = success => {
-    if (this.sound) {
-      if (success) {
-        console.log('successfully finished playing');
-      } else {
-        console.log('playback failed due to audio decoding errors');
-        Alert.alert('Notice', 'audio file error. (Error code : 2)');
-      }
-      this.setState({playState: 'paused', playSeconds: 0});
-      this.sound.setCurrentTime(0);
-    }
-  };
-
-  pause = () => {
-    if (this.sound) {
-      this.sound.pause();
-    }
-
-    this.setState({playState: 'paused'});
-  };
-
-  jumpPrev15Seconds = () => {
-    this.jumpSeconds(-15);
-  };
-  jumpNext15Seconds = () => {
-    this.jumpSeconds(15);
-  };
-  jumpSeconds = secsDelta => {
-    if (this.sound) {
-      this.sound.getCurrentTime((secs, isPlaying) => {
-        let nextSecs = secs + secsDelta;
-        if (nextSecs < 0) nextSecs = 0;
-        else if (nextSecs > this.state.duration) nextSecs = this.state.duration;
-        this.sound.setCurrentTime(nextSecs);
-        this.setState({playSeconds: nextSecs});
-      });
-    }
-  };
-
-  getAudioTimeString(seconds) {
-    const h = parseInt(seconds / (60 * 60));
-    const m = parseInt((seconds % (60 * 60)) / 60);
-    const s = parseInt(seconds % 60);
-
-    return (
-      (h < 10 ? '0' + h : h) +
-      ':' +
-      (m < 10 ? '0' + m : m) +
-      ':' +
-      (s < 10 ? '0' + s : s)
-    );
-  }
-
-  render() {
-    const currentTimeString = this.getAudioTimeString(this.state.playSeconds);
-    const durationString = this.getAudioTimeString(this.state.duration);
-
-    return (
-      <View
-        style={{flex: 1, justifyContent: 'center', backgroundColor: 'black'}}>
-        <Image
-          source={img_speaker}
-          style={{
-            width: 150,
-            height: 150,
-            marginBottom: 15,
-            alignSelf: 'center',
-          }}
-        />
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginVertical: 15,
-          }}>
-          <TouchableOpacity
-            onPress={this.jumpPrev15Seconds}
-            style={{justifyContent: 'center'}}>
-            <Image source={img_playjumpleft} style={{width: 30, height: 30}} />
-            <Text
-              style={{
-                position: 'absolute',
-                alignSelf: 'center',
-                marginTop: 1,
-                color: 'white',
-                fontSize: 12,
-              }}>
-              15
-            </Text>
-          </TouchableOpacity>
-          {this.state.playState == 'playing' && (
-            <TouchableOpacity
-              onPress={this.pause}
-              style={{marginHorizontal: 20}}>
-              <Image source={img_pause} style={{width: 30, height: 30}} />
-            </TouchableOpacity>
-          )}
-          {this.state.playState == 'paused' && (
-            <TouchableOpacity
-              onPress={this.play}
-              style={{marginHorizontal: 20}}>
-              <Image source={img_play} style={{width: 30, height: 30}} />
-            </TouchableOpacity>
-          )}
-          <TouchableOpacity
-            onPress={this.jumpNext15Seconds}
-            style={{justifyContent: 'center'}}>
-            <Image source={img_playjumpright} style={{width: 30, height: 30}} />
-            <Text
-              style={{
-                position: 'absolute',
-                alignSelf: 'center',
-                marginTop: 1,
-                color: 'white',
-                fontSize: 12,
-              }}>
-              15
-            </Text>
-          </TouchableOpacity>
+      <Switch style={{marginTop: 30, marginBottom: 30}} />
+      <View style={[styles.contentView]}>
+        <View style={{alignSelf: 'center'}}>
+          <Image source={eclipse} />
         </View>
-        <View
-          style={{
-            marginVertical: 15,
-            marginHorizontal: 15,
-            flexDirection: 'row',
-          }}>
-          <Text style={{color: 'white', alignSelf: 'center'}}>
-            {currentTimeString}
-          </Text>
-          <Slider
-            onTouchStart={this.onSliderEditStart}
-            // onTouchMove={() => console.log('onTouchMove')}
-            onTouchEnd={this.onSliderEditEnd}
-            // onTouchEndCapture={() => console.log('onTouchEndCapture')}
-            // onTouchCancel={() => console.log('onTouchCancel')}
-            onValueChange={this.onSliderEditing}
-            value={this.state.playSeconds}
-            maximumValue={this.state.duration}
-            maximumTrackTintColor="gray"
-            minimumTrackTintColor="white"
-            thumbTintColor="white"
-            style={{
-              flex: 1,
-              alignSelf: 'center',
-              marginHorizontal: Platform.select({ios: 5}),
-            }}
-          />
-          <Text style={{color: 'white', alignSelf: 'center'}}>
-            {durationString}
-          </Text>
+
+        <View style={styles.progressBar}>
+          <Text>00:00</Text>
+          <View style={{width: width - 150}}>
+            <Slider
+              value={value}
+              onValueChange={setValue}
+              maximumValue={10000}
+              minimumValue={0}
+              step={1}
+              allowTouchTrack
+              trackStyle={{height: 5, backgroundColor: 'transparent'}}
+              thumbStyle={{
+                height: 20,
+                width: 20,
+                backgroundColor: 'transparent',
+              }}
+              thumbProps={{}}
+            />
+          </View>
+
+          <Text>04:41</Text>
+        </View>
+
+        <View style={styles.playDashboard}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Backwards />
+            <View style={{width: 21}} />
+            <TouchableOpacity onPress={() => console.log()}>
+              <PlayIconBig />
+            </TouchableOpacity>
+            <View style={{width: 21}} />
+            <Forwards />
+          </View>
         </View>
       </View>
-    );
-  }
-}
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 25,
+    marginTop: 22,
+    marginBottom: 8,
+  },
+  desc: {
+    fontSize: 16,
+  },
+  progressBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: width - 40,
+    marginTop: 20,
+    justifyContent: 'space-between',
+  },
+  playDashboard: {
+    flexDirection: 'row',
+    // marginTop: 32,
+    backgroundColor: '#f2f2f280',
+    alignSelf: 'center',
+    width: width - 40,
+    height: 100,
+    borderRadius: 5,
+    paddingLeft: 20,
+    paddingRight: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bottomDashboard: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: width - 100,
+    alignSelf: 'center',
+    marginTop: 30,
+  },
+  contentView: {
+    padding: 20,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
+  verticalContent: {
+    padding: 20,
+    flex: 1,
+    flexDirection: 'row',
+    height: 500,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
+  subHeader: {
+    backgroundColor: '#2089dc',
+    color: 'white',
+    textAlign: 'center',
+    paddingVertical: 5,
+    marginBottom: 10,
+  },
+});
+
+export default AudioPlayer;
