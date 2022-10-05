@@ -61,12 +61,17 @@ import Videos from './src/screens/Videos';
 import Podcasts from './src/screens/Podcasts';
 import VideoDetails from './src/screens/VideoDetails';
 import PodcastDetails from './src/screens/PodcastDetails';
-import VideoPlayer from './src/components/shared/VideoPlayer';
+import AudioPlayer from './src/components/shared/AudioPlayer';
+
+// @ts-expect-error
+import PlayerScreen from 'react-native-sound-playerview';
 
 // Navigation
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import VideoPlayerShared from './src/components/shared/VideoPlayer';
+import Custom from './src/components/shared/Custom';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -108,10 +113,21 @@ const App = () => {
         {!loggedIn ? (
           <Stack.Navigator
             screenOptions={{headerShown: false}}
-            initialRouteName="Onboarding">
+            initialRouteName="GuidedMeditation">
+            <Stack.Screen
+              name="GuidedMeditation"
+              component={GuidedMeditation}
+            />
+            <Stack.Screen name="MediaDetails" component={MediaDetails} />
+            <Stack.Screen name="player" component={PlayerScreen} />
+            <Stack.Screen name="AudioPlayer" component={AudioPlayer} />
+            {/* PlayerScreen */}
+            <Stack.Screen name="VideoPlayer" component={VideoPlayerShared} />
+            <Stack.Screen name="Custom" component={Custom} />
+
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
-            <Stack.Screen name="Onboarding" component={Onboarding} />
+            <Stack.Screen name="Onboarding" component={DusanScreen} />
             <Stack.Screen name="Success" component={Success} />
             <Stack.Screen name="EmailSent" component={EmailSent} />
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
@@ -151,17 +167,12 @@ const App = () => {
             <Stack.Screen name="Learn" component={Learn} />
             <Stack.Screen name="Gratitude" component={Gratitude} />
             <Stack.Screen name="SleepStories" component={SleepStories} />
-            <Stack.Screen
-              name="GuidedMeditation"
-              component={GuidedMeditation}
-            />
-            <Stack.Screen name="MediaDetails" component={MediaDetails} />
+
             <Stack.Screen name="GuidesMedia" component={GuidesMedia} />
             <Stack.Screen name="Videos" component={Videos} />
             <Stack.Screen name="Podcasts" component={Podcasts} />
             <Stack.Screen name="VideoDetails" component={VideoDetails} />
             <Stack.Screen name="PodcastDetails" component={PodcastDetails} />
-            <Stack.Screen name="VideoPlayer" component={VideoPlayer} />
           </Stack.Navigator>
         )}
       </NavigationContainer>

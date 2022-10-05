@@ -107,9 +107,9 @@ export default function MediaDetails({navigation, route}) {
           <View style={{width: 21}} />
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('VideoPlayer', {
+              navigation.navigate('Custom', {
                 title: '',
-                filepath: '../../../sounds/advertising.mp3',
+                filepath: './advertising.mp3',
               })
             }>
             <PlayIconBig />
