@@ -1,4 +1,4 @@
-package com.parentcloud.newarchitecture;
+package com.wellnessCloud.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.parentcloud.BuildConfig;
-import com.parentcloud.newarchitecture.components.MainComponentsRegistry;
-import com.parentcloud.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.wellnessCloud.BuildConfig;
+import com.wellnessCloud.newarchitecture.components.MainComponentsRegistry;
+import com.wellnessCloud.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

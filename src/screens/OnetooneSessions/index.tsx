@@ -6,6 +6,7 @@ import Calendar from '../../components/Calendar';
 import PrimaryButton from '../../components/shared/PrimaryButton';
 import SecondaryButton from '../../components/shared/SecondaryButton';
 import Selection from '../../components/shared/Selection';
+import { WebView } from 'react-native-webview';
 
 const {width, height} = Dimensions.get('window');
 export default function OnetooneSessions() {
@@ -46,9 +47,8 @@ export default function OnetooneSessions() {
     specialistsOptions[0].key,
   );
 
-  return (
-    <View style={styles.onetoonecontainer}>
-      <ScrollView>
+  // <View style={styles.onetoonecontainer}>
+      {/* <ScrollView>
         <BackButton text={'1-2-1 Sessions'} />
 
         <Text style={[styles.sectionTitle, {marginBottom: 16}]}>
@@ -103,7 +103,42 @@ export default function OnetooneSessions() {
           <SecondaryButton size="small" text="Redeem coupon" />
           <PrimaryButton size="small" text="Pay Now" />
         </View>
-      </ScrollView>
+      </ScrollView> */}
+    {/* </View> */}
+
+  return (
+    <View style={{ flex: 1, paddingBottom: 20 }}>
+      <BackButton text={'1-2-1 Sessions'} />
+
+      <WebView
+          scalesPageToFit={true}
+          bounces={false}
+          javaScriptEnabled
+          style={{ width: width, flex: 1 }}
+          source={{ uri: "https://parentcloudandwellnesscloud.as.me/" }}
+          automaticallyAdjustContentInsets={false}
+        />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  sectionTitle: {
+    fontFamily: 'SofiaProBlack',
+    fontSize: 20,
+    color: '#11535C',
+    width: width - 40,
+    alignSelf: 'center',
+    textAlign: 'left',
+    marginTop: 41,
+  },
+  actionsContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: width - 40,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    paddingBottom: 73,
+    paddingTop: 32,
+  },
+});

@@ -11,9 +11,9 @@ export default function GuidesMedia({ navigation, route }: any) {
         let email = await AsyncStorage.getItem("user_email");
 
         // Get User ID
-        let responseID: any = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/getUserID/${email}`);
-        responseID = await responseID.json();
-        responseID = responseID[0].ID;
+        // let responseID: any = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/getUserID/${email}`);
+        // responseID = await responseID.json();
+        // responseID = responseID[0].ID;
 
         // Get membership
         // let responseMembership: any = await fetch(`https://parentcloud.borne.io/wp-json/mp/v1/subscriptions/${responseID}`, {
