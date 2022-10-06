@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import Sound from 'react-native-sound';
+import PrimaryButton from '../PrimaryButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -195,10 +196,16 @@ class Player extends Component {
           contentContainerStyle={styles.scrollContainer}>
           {audioTests.map(testInfo => {
             return (
-              <Feature
-                status={this.state.tests[testInfo.title]}
-                key={testInfo.title}
-                title={testInfo.title}
+              // <Feature
+              //   status={this.state.tests[testInfo.title]}
+              //   key={testInfo.title}
+              //   title={testInfo.title}
+              //   onPress={() => {
+              //     return playSound(testInfo, this);
+              //   }}
+              // />
+              <PrimaryButton
+                text="play"
                 onPress={() => {
                   return playSound(testInfo, this);
                 }}
