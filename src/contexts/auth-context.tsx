@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import getSubscriptions from "../functions/getSubscriptions";
 
 const AuthContext = createContext({});
 
@@ -24,6 +25,7 @@ const AuthProvider = (props: any) => {
                     const response = await check.json();
 					console.log(response)
                     if (response.data.status === 200) {
+						getSubscriptions(await AsyncStorage.getItem("user_email"));
                         setLoggedIn(true);
                     } else {
                         setLoggedIn(false);
@@ -60,7 +62,9 @@ const AuthProvider = (props: any) => {
 					await AsyncStorage.setItem("token", response.token);
 					await AsyncStorage.setItem("user_email", response.user_email);
 					await AsyncStorage.setItem("user_nicename", response.user_nicename);
-					console.log('done')
+
+					getSubscriptions(response.user_email);
+
 					setLoggedIn(true);
 				} else {
 					setLoggedIn(false);
