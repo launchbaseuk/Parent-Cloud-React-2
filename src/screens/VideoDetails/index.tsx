@@ -100,10 +100,19 @@ export default function VideoDetails({navigation, route}) {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        <Replay />
+        {/* <Replay /> */}
 
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Backwards />
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: '#c2c6c8',
+            borderRadius: 10,
+            width: '100%',
+            paddingTop: 10,
+            paddingBottom: 10,
+          }}>
+          {/* <Backwards /> */}
           <View style={{width: 21}} />
           <TouchableOpacity
             onPress={() =>
@@ -115,10 +124,11 @@ export default function VideoDetails({navigation, route}) {
             <PlayIconBig />
           </TouchableOpacity>
           <View style={{width: 21}} />
-          <Forwards />
+          <Text style={styles.backButtonText}>Play Video</Text>
+          {/* <Forwards /> */}
         </View>
 
-        <Queue />
+        {/* <Queue /> */}
       </View>
     </View>
   );
@@ -143,5 +153,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#11535C',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backButtonText: {
+    marginLeft: 15,
+    fontFamily: 'SofiaProBold',
+    color: '#11535C',
+    fontSize: 25,
   },
 });
