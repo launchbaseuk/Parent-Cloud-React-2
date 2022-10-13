@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import {Slider} from '@rneui/themed';
+
 // Components
 import BackButton from '../../components/BackButton';
 
@@ -19,9 +21,14 @@ import Backwards from '../../icons/svg/Backwards';
 import Forwards from '../../icons/svg/Forwards';
 import PlayIconBig from '../../icons/svg/PlayIconBig';
 import Queue from '../../icons/svg/Queue';
+import forward from '../../images/forward.png';
+import replay from '../../images/replay.png';
+import bookmark from '../../images/bookmark.png';
 
 const {width, height} = Dimensions.get('window');
 export default function MediaDetails({navigation, route}) {
+  const [value, setValue] = useState(0);
+
   return (
     <View>
       <BackButton text="Details" />
@@ -103,22 +110,44 @@ export default function MediaDetails({navigation, route}) {
         <Replay />
 
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Backwards />
+          <TouchableOpacity onPress={() => console.log('clicked')}>
+            <Image source={replay} style={styles.icon} />
+          </TouchableOpacity>
           <View style={{width: 21}} />
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('AudioPlayer', {
-                title: '',
-                filepath: './advertising.mp3',
-              })
-            }>
+          <TouchableOpacity onPress={() => console.log('clicked')}>
             <PlayIconBig />
           </TouchableOpacity>
           <View style={{width: 21}} />
-          <Forwards />
+          <TouchableOpacity onPress={() => console.log('clicked')}>
+            <Image source={forward} style={styles.icon} />
+          </TouchableOpacity>
         </View>
 
-        <Queue />
+        <Image source={bookmark} style={styles.icon} />
+      </View>
+      <View style={styles.contentView}>
+        <View style={styles.progressBar}>
+          <Text>00:00</Text>
+          <View style={{width: width - 150}}>
+            <Slider
+              value={value}
+              onValueChange={setValue}
+              maximumValue={10000}
+              minimumValue={0}
+              step={1}
+              allowTouchTrack
+              trackStyle={{height: 5, backgroundColor: 'transparent'}}
+              thumbStyle={{
+                height: 20,
+                width: 20,
+                backgroundColor: 'transparent',
+              }}
+              thumbProps={{}}
+            />
+          </View>
+
+          <Text>04:41</Text>
+        </View>
       </View>
     </View>
   );
@@ -143,5 +172,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#11535C',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+  progressBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: width - 40,
+    // marginTop: 20,
+    justifyContent: 'space-between',
+  },
+  contentView: {
+    paddingLeft: 20,
   },
 });
