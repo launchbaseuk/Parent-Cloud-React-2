@@ -1,4 +1,6 @@
 export default async function getSubscriptions(email) {
+    let activeSubscription = false;
+
     let responseGetID = await fetch(`https://parentcloud.borne.io/wp-json/mp/v1/members?search=${email}`, {
         method: 'GET',
         headers: {
@@ -15,5 +17,18 @@ export default async function getSubscriptions(email) {
     });
     responseGetSubscriptions = await responseGetSubscriptions.json();
 
-    console.log(responseGetSubscriptions);
+    for(let i=0; i<responseGetSubscriptions.length; i++) {
+        if(responseGetSubscriptions[i].status === "active") {
+            activeSubscription = true;
+            break;
+        } else {
+            activeSubscription = false;
+        }
+    }
+
+    if(activeSubscription) {
+        return true;
+    }
+
+    return false;
 }

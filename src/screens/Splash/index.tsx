@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, StyleSheet } from "react-native";
 import SplashImage from "../../images/svg/SplashImage";
+import LinearGradient from 'react-native-linear-gradient';
 
 export function WithSplashScreen({
   children,
@@ -76,8 +77,9 @@ export const Splash = ({ isAppReady }: { isAppReady: boolean }) => {
       collapsable={false}
       style={[style.container, { opacity: containerOpacity }]}
     >
+      <LinearGradient start={{x: 0.0, y: 0}} end={{x: 1, y: 0}} locations={[0.145,0.913]} colors={['#F5CF7C', '#FCEFB5']} style={style.linearGradient}>
       <Animated.Image
-        source={require("../../images/parentcloudlogo.png")}
+        source={require("../../images/parentcloudlogo2.png")}
         fadeDuration={0}
         onLoad={() => {
           setState(FADE_IN_IMAGE);
@@ -85,6 +87,7 @@ export const Splash = ({ isAppReady }: { isAppReady: boolean }) => {
         style={[style.image, { opacity: imageOpacity }]}
         resizeMode="contain"
       />
+      </LinearGradient>
       {/* <SplashImage /> */}
     </Animated.View>
   );
@@ -97,8 +100,14 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  linearGradient: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: '#FFFFFF',
+    alignItems: "center",
+    justifyContent: "center",
+  },
   image: {
-    width: 180,
-    height: 180,
+    width: 120,
+    height: 120,
   },
 });
