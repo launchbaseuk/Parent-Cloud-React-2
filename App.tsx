@@ -68,6 +68,7 @@ import Custom from './src/components/shared/Custom';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import ReviewDetails from './src/screens/ReviewDetails';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -108,10 +109,11 @@ const App = () => {
       {!loggedIn ? (
         <Stack.Navigator
           screenOptions={{headerShown: false}}
-          initialRouteName="Onboarding">
+          initialRouteName="ReviewDetails">
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />
           <Stack.Screen name="Onboarding" component={Onboarding} />
+          <Stack.Screen name="ReviewDetails" component={ReviewDetails} />
           <Stack.Screen name="Success" component={Success} />
           <Stack.Screen name="EmailSent" component={EmailSent} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
