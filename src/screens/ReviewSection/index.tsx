@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {ScrollView, Text} from 'react-native';
+import {ScrollView, Text, Dimensions} from 'react-native';
 import BackButton from '../../components/BackButton';
 import {DropDown} from '../../components/DropDown';
 import Selection from '../../components/shared/Selection';
 
-import {LineChart, Line} from 'recharts';
+import {LineChart} from 'react-native-chart-kit';
 
 // const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}];
 const ReviewSection = () => {
@@ -18,10 +18,6 @@ const ReviewSection = () => {
     <ScrollView>
       <BackButton text="Mood Tracker" />
 
-      {/* <LineChart width={400} height={400} data={data}>
-        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-      </LineChart> */}
-
       <Text
         style={{
           fontFamily: 'SofiaProBlack',
@@ -33,6 +29,43 @@ const ReviewSection = () => {
         }}>
         Review your mood
       </Text>
+
+      <LineChart
+        data={{
+          labels: ['Awful', 'Bad', 'Good', 'Great'],
+          datasets: [
+            {
+              data: [100, 75, 50, 0, 25],
+            },
+          ],
+        }}
+        width={Dimensions.get('window').width} // from react-native
+        height={220}
+        // yAxisLabel="$"
+        // yAxisSuffix="k"
+        yAxisInterval={1} // optional, defaults to 1
+        chartConfig={{
+          backgroundColor: 'white',
+          backgroundGradientFrom: 'white',
+          backgroundGradientTo: 'white',
+          decimalPlaces: 1, // optional, defaults to 2dp
+          color: (opacity = 1) => `#27AE604D`,
+          labelColor: (opacity = 1) => `black`,
+          style: {
+            borderRadius: 16,
+          },
+          propsForDots: {
+            r: '6',
+            strokeWidth: '2',
+            stroke: '#27AE604D',
+          },
+        }}
+        bezier
+        style={{
+          marginVertical: 8,
+          borderRadius: 16,
+        }}
+      />
 
       <Text
         style={{
