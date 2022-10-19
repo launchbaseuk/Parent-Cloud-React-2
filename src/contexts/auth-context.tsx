@@ -25,7 +25,7 @@ const AuthProvider = (props: any) => {
                     const response = await check.json();
 					console.log(response)
                     if (response.data.status === 200) {
-						getSubscriptions(await AsyncStorage.getItem("user_email"));
+						let subscription = await getSubscriptions(await AsyncStorage.getItem("user_email"));
                         setLoggedIn(true);
                     } else {
                         setLoggedIn(false);
@@ -63,8 +63,7 @@ const AuthProvider = (props: any) => {
 					await AsyncStorage.setItem("user_email", response.user_email);
 					await AsyncStorage.setItem("user_nicename", response.user_nicename);
 
-					getSubscriptions(response.user_email);
-
+					let subscription = await getSubscriptions(response.user_email);
 					setLoggedIn(true);
 				} else {
 					setLoggedIn(false);
