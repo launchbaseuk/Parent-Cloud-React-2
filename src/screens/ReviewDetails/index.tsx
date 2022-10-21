@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Dimensions, Text, ScrollView} from 'react-native';
+import BackButton from '../../components/BackButton';
 import FeelingsCard from '../../components/FeelingsCard';
 
 // Components
@@ -19,6 +20,8 @@ export default function ReviewDetails({navigation}) {
 
   return (
     <ScrollView>
+      <BackButton text="Details" />
+
       <Text
         style={{
           fontFamily: 'SofiaProBlack',

@@ -110,12 +110,10 @@ const App = () => {
       {!loggedIn ? (
         <Stack.Navigator
           screenOptions={{headerShown: false}}
-          initialRouteName="ReviewSection">
+          initialRouteName="Onboarding">
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />
           <Stack.Screen name="Onboarding" component={Onboarding} />
-          <Stack.Screen name="ReviewDetails" component={ReviewDetails} />
-          <Stack.Screen name="ReviewSection" component={ReviewSection} />
           <Stack.Screen name="Success" component={Success} />
           <Stack.Screen name="EmailSent" component={EmailSent} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
@@ -154,6 +152,8 @@ const App = () => {
           <Stack.Screen name="Thoughts" component={Thoughts} />
           <Stack.Screen name="Learn" component={Learn} />
           <Stack.Screen name="Gratitude" component={Gratitude} />
+          <Stack.Screen name="ReviewDetails" component={ReviewDetails} />
+          <Stack.Screen name="MoodTracker" component={ReviewSection} />
           <Stack.Screen name="SleepStories" component={SleepStories} />
           <Stack.Screen name="GuidedMeditation" component={GuidedMeditation} />
           <Stack.Screen name="MediaDetails" component={MediaDetails} />
