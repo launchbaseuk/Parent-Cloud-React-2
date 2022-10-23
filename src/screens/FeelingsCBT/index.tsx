@@ -26,7 +26,15 @@ import DepressedSelected from '../../icons/svg/DepressedSelected';
 const {width, height} = Dimensions.get('window');
 export default function FeelingsCBT() {
   const navigation = useNavigation();
-  const [selected, setSelected] = useState<string>('');
+  const [selected, setSelected] = useState<any>([]);
+
+  const handleSelected = (item: string) => {
+    if (selected.includes(item)) {
+      setSelected(selected.filter((i: string) => i !== item));
+    } else {
+      setSelected([item]);
+    }
+  }
 
   return (
     <View>
@@ -68,7 +76,7 @@ export default function FeelingsCBT() {
           iconSelected={<DepressedSelected />}
           itemKey="awful"
           selected={selected}
-          setSelected={setSelected}
+          setSelected={handleSelected}
         />
         <FeelingsCard
           text="Not good"
@@ -76,7 +84,7 @@ export default function FeelingsCBT() {
           iconSelected={<AnxiousSelected />}
           itemKey="notgood"
           selected={selected}
-          setSelected={setSelected}
+          setSelected={handleSelected}
         />
         <FeelingsCard
           text="Ok"
@@ -84,7 +92,7 @@ export default function FeelingsCBT() {
           iconSelected={<HappySelected />}
           itemKey="ok"
           selected={selected}
-          setSelected={setSelected}
+          setSelected={handleSelected}
         />
         <FeelingsCard
           text="Great"
@@ -92,7 +100,7 @@ export default function FeelingsCBT() {
           iconSelected={<PlayfulSelected />}
           itemKey="great"
           selected={selected}
-          setSelected={setSelected}
+          setSelected={handleSelected}
         />
       </View>
 

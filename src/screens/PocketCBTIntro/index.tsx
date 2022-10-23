@@ -9,7 +9,7 @@ export default function PocketCBTIntro() {
     const navigation = useNavigation();
     const onPressHandler = async () => {
         await AsyncStorage.setItem("pocketCBT", "true");
-        navigation.navigate("FeelingCBT");
+        navigation.navigate("FeelingsCBT");
     }
 
     return (

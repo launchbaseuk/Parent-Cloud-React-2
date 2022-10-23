@@ -5,7 +5,7 @@ const { width, height } = Dimensions.get("window");
 export default function FeelingsCard({ text, icon, iconSelected, selected, setSelected, itemKey }: any) {
     return (
         <TouchableOpacity style={{ width: 80, height: 80, borderRadius: 5, backgroundColor: "#F2F2F280", justifyContent: "center", alignItems: "center"}} onPress={() => setSelected(itemKey)}>
-            {selected === itemKey ? (
+            {selected.includes(itemKey) ? (
                 <>{iconSelected}</>
             ) : (
                 <>{icon}</>

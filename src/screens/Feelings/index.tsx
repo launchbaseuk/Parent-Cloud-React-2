@@ -57,7 +57,15 @@ import CalmSelected from "../../icons/svg/CalmSelected";
 const { width, height } = Dimensions.get("window");
 export default function Feelings({ navigation, route }: any) {
     const feeling = route.params.feeling;
-    const [selected, setSelected] = useState<string>("");
+    const [selected, setSelected] = useState<any>([]);
+
+    const handleSelected = (item: string) => {
+        if (selected.includes(item)) {
+          setSelected(selected.filter((i: string) => i !== item));
+        } else {
+          setSelected([...selected, item]);
+        }
+    };
 
     return (
         <View>
@@ -66,69 +74,69 @@ export default function Feelings({ navigation, route }: any) {
             {feeling == "awful" || feeling == "notgood" ? (
                 <>
                     <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center" }}>
-                        <FeelingsCard text="Depressed" icon={<Depressed />} iconSelected={<DepressedSelected />} itemKey="depressed" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Depressed" icon={<Depressed />} iconSelected={<DepressedSelected />} itemKey="depressed" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Anxious" icon={<Anxious />} iconSelected={<AnxiousSelected />} itemKey="anxious" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Anxious" icon={<Anxious />} iconSelected={<AnxiousSelected />} itemKey="anxious" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Confused" icon={<Confused />} iconSelected={<ConfusedSelected />} itemKey="confused" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Confused" icon={<Confused />} iconSelected={<ConfusedSelected />} itemKey="confused" selected={selected} setSelected={handleSelected} />
                     </View>
                     <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center" }}>
-                        <FeelingsCard text="Sick" icon={<Sick />} iconSelected={<SickSelected />} itemKey="sick" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Sick" icon={<Sick />} iconSelected={<SickSelected />} itemKey="sick" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Envious" icon={<Envious />} iconSelected={<EnviousSelected />} itemKey="envious" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Envious" icon={<Envious />} iconSelected={<EnviousSelected />} itemKey="envious" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Tired" icon={<Tired />} iconSelected={<TiredSelected />} itemKey="tired" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Tired" icon={<Tired />} iconSelected={<TiredSelected />} itemKey="tired" selected={selected} setSelected={handleSelected} />
                     </View>
                     <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center"}}>
-                        <FeelingsCard text="Guilty" icon={<Guilty />} iconSelected={<GuiltySelected />} itemKey="guilty" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Guilty" icon={<Guilty />} iconSelected={<GuiltySelected />} itemKey="guilty" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Sad" icon={<Sad />} iconSelected={<SadSelected />} itemKey="sad" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Sad" icon={<Sad />} iconSelected={<SadSelected />} itemKey="sad" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Overwhelmed" icon={<Overwhelmed />} iconSelected={<OverwhelmedSelected />} itemKey="overwhelmed" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Overwhelmed" icon={<Overwhelmed />} iconSelected={<OverwhelmedSelected />} itemKey="overwhelmed" selected={selected} setSelected={handleSelected} />
                     </View>
                     <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center"}}>
-                        <FeelingsCard text="Frustrated" icon={<Frustrated />} iconSelected={<FrustratedSelected />} itemKey="frustrated" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Frustrated" icon={<Frustrated />} iconSelected={<FrustratedSelected />} itemKey="frustrated" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Angry" icon={<Angry />} iconSelected={<AngrySelected />} itemKey="angry" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Angry" icon={<Angry />} iconSelected={<AngrySelected />} itemKey="angry" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Furious" icon={<Ashamed />} iconSelected={<AshamedSelected />} itemKey="furious" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Furious" icon={<Ashamed />} iconSelected={<AshamedSelected />} itemKey="furious" selected={selected} setSelected={handleSelected} />
                     </View>
                 </>
             ) : (
                 <>
                     <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center" }}>
-                        <FeelingsCard text="Relieved" icon={<Relieved />} iconSelected={<RelievedSelected />} itemKey="relieved" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Relieved" icon={<Relieved />} iconSelected={<RelievedSelected />} itemKey="relieved" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Happy" icon={<Happy />} iconSelected={<HappySelected />} itemKey="happy" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Happy" icon={<Happy />} iconSelected={<HappySelected />} itemKey="happy" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Productive" icon={<Productive />} iconSelected={<ProductiveSelected />} itemKey="productive" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Productive" icon={<Productive />} iconSelected={<ProductiveSelected />} itemKey="productive" selected={selected} setSelected={handleSelected} />
                     </View>
                     <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center" }}>
-                        <FeelingsCard text="Confident" icon={<Confident />} iconSelected={<ConfidentSelected />} itemKey="confident" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Confident" icon={<Confident />} iconSelected={<ConfidentSelected />} itemKey="confident" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Loved" icon={<Loved />} iconSelected={<LovedSelected />} itemKey="loved" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Loved" icon={<Loved />} iconSelected={<LovedSelected />} itemKey="loved" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Grateful" icon={<Grateful />} iconSelected={<GratefulSelected />} itemKey="grateful" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Grateful" icon={<Grateful />} iconSelected={<GratefulSelected />} itemKey="grateful" selected={selected} setSelected={handleSelected} />
                     </View>
                     <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center"}}>
-                        <FeelingsCard text="Playful" icon={<Playful />} iconSelected={<PlayfulSelected />} itemKey="playful" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Playful" icon={<Playful />} iconSelected={<PlayfulSelected />} itemKey="playful" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Inspired" icon={<StarsHappy />} iconSelected={<StarsHappySelected />} itemKey="inspired" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Inspired" icon={<StarsHappy />} iconSelected={<StarsHappySelected />} itemKey="inspired" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Relaxed" icon={<Relaxed />} iconSelected={<RelaxedSelected />} itemKey="relaxed" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Relaxed" icon={<Relaxed />} iconSelected={<RelaxedSelected />} itemKey="relaxed" selected={selected} setSelected={handleSelected} />
                     </View>
                     <View style={{ width: width - 40, alignSelf: "center", flexDirection: "row", marginBottom: 16, justifyContent: "center"}}>
-                        <FeelingsCard text="Optimistic" icon={<Optimistic />} iconSelected={<OptimisticSelected />} itemKey="optimistic" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Optimistic" icon={<Optimistic />} iconSelected={<OptimisticSelected />} itemKey="optimistic" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Excited" icon={<Excited />} iconSelected={<ExcitedSelected />} itemKey="excited" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Excited" icon={<Excited />} iconSelected={<ExcitedSelected />} itemKey="excited" selected={selected} setSelected={handleSelected} />
                         <View style={{ width: 16 }} />
-                        <FeelingsCard text="Calm" icon={<Calm />} iconSelected={<CalmSelected />} itemKey="calm" selected={selected} setSelected={setSelected} />
+                        <FeelingsCard text="Calm" icon={<Calm />} iconSelected={<CalmSelected />} itemKey="calm" selected={selected} setSelected={handleSelected} />
                     </View>
                 </>
             )}
 
             <View style={{ flexDirection: "row", width: width - 40, justifyContent: "space-between", alignItems: "center", alignSelf: "center", marginTop: 45 }}>
-                <SecondaryButton size="small" text="Back" onPress={() => navigation.goBack()} />
+                <SecondaryButton size="small" text="Back" onPress={() => {navigation.goBack(); setSelected([])}} />
                 <PrimaryButton size="small" text="Continue" onPress={() => navigation.navigate("Activities", { feelings: feeling, otherFeeling: selected })} disabled={selected != "" ? false : true} />
             </View>
         </View>
