@@ -62,19 +62,29 @@ import VideoDetails from './src/screens/VideoDetails';
 import PodcastDetails from './src/screens/PodcastDetails';
 import AudioPlayer from './src/components/shared/AudioPlayer';
 import VideoPlayerShared from './src/components/shared/VideoPlayer';
+import ReviewDetails from './src/screens/ReviewDetails';
+import ReviewSection from './src/screens/ReviewSection';
+import NoSubscription from './src/screens/NoSubscription';
 import Custom from './src/components/shared/Custom';
 
 // Navigation
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ReviewDetails from './src/screens/ReviewDetails';
-import ReviewSection from './src/screens/ReviewSection';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const TabNav = () => {
+  const navigation = useNavigation();
+  const { sub }: any = useAuth();
+  
+  useEffect(() => {
+    if(!sub) {
+      navigation.navigate("NoSubscription");
+    }
+  }, [sub]);
+
   return (
     <Tab.Navigator
       screenOptions={{headerShown: false}}
@@ -164,6 +174,7 @@ const App = () => {
           <Stack.Screen name="VideoDetails" component={VideoDetails} />
           <Stack.Screen name="VideoPlayer" component={VideoPlayerShared} />
           <Stack.Screen name="PodcastDetails" component={PodcastDetails} />
+          <Stack.Screen name="NoSubscription" component={NoSubscription} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

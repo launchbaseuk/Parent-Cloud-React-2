@@ -17,17 +17,19 @@ export default async function getSubscriptions(email) {
     });
     responseGetSubscriptions = await responseGetSubscriptions.json();
 
-    for(let i=0; i<responseGetSubscriptions.length; i++) {
-        if(responseGetSubscriptions[i].status === "active") {
-            activeSubscription = true;
-            break;
-        } else {
-            activeSubscription = false;
+    if(responseGetSubscriptions.length > 0) {
+        for(let i=0; i<responseGetSubscriptions.length; i++) {
+            if(responseGetSubscriptions[i].status === "active") {
+                activeSubscription = true;
+                break;
+            } else {
+                activeSubscription = false;
+            }
         }
-    }
-
-    if(activeSubscription) {
-        return true;
+    
+        if(activeSubscription) {
+            return true;
+        }
     }
 
     return false;
