@@ -24,6 +24,7 @@ import Queue from '../../icons/svg/Queue';
 import forward from '../../images/forward.png';
 import replay from '../../images/replay.png';
 import bookmark from '../../images/bookmark.png';
+import AudioPlayer from '../../components/shared/AudioPlayer';
 
 const {width, height} = Dimensions.get('window');
 export default function MediaDetails({navigation, route}) {
@@ -93,62 +94,7 @@ export default function MediaDetails({navigation, route}) {
         </View>
       </View>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          marginTop: 32,
-          backgroundColor: '#f2f2f280',
-          alignSelf: 'center',
-          width: width - 40,
-          height: 100,
-          borderRadius: 5,
-          paddingLeft: 20,
-          paddingRight: 20,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-        <Replay />
-
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => console.log('clicked')}>
-            <Image source={replay} style={styles.icon} />
-          </TouchableOpacity>
-          <View style={{width: 21}} />
-          <TouchableOpacity onPress={() => console.log('clicked')}>
-            <PlayIconBig />
-          </TouchableOpacity>
-          <View style={{width: 21}} />
-          <TouchableOpacity onPress={() => console.log('clicked')}>
-            <Image source={forward} style={styles.icon} />
-          </TouchableOpacity>
-        </View>
-
-        <Image source={bookmark} style={styles.icon} />
-      </View>
-      <View style={styles.contentView}>
-        <View style={styles.progressBar}>
-          <Text>00:00</Text>
-          <View style={{width: width - 150}}>
-            <Slider
-              value={value}
-              onValueChange={setValue}
-              maximumValue={10000}
-              minimumValue={0}
-              step={1}
-              allowTouchTrack
-              trackStyle={{height: 5, backgroundColor: 'transparent'}}
-              thumbStyle={{
-                height: 20,
-                width: 20,
-                backgroundColor: 'transparent',
-              }}
-              thumbProps={{}}
-            />
-          </View>
-
-          <Text>04:41</Text>
-        </View>
-      </View>
+      <AudioPlayer />
     </View>
   );
 }

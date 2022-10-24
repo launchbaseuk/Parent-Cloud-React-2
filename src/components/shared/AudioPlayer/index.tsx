@@ -1,55 +1,70 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
-  TouchableOpacity,
+  Text,
   Dimensions,
   Image,
+  TouchableOpacity,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Slider, Text as TextStyled, Icon} from '@rneui/themed';
 
-import {Switch} from '@rneui/themed';
+import {Slider} from '@rneui/themed';
 
+// Components
+import BackButton from '../../components/BackButton';
+
+// Images
+// import headphones from '../../../icons/headphones.png';
+import placeholderImage from '../../../images/PlaceholderImage.png';
 import Replay from '../../../icons/svg/Replay';
 import Backwards from '../../../icons/svg/Backwards';
 import Forwards from '../../../icons/svg/Forwards';
 import PlayIconBig from '../../../icons/svg/PlayIconBig';
 import Queue from '../../../icons/svg/Queue';
-import eclipse from '../../../images/EclipsePlayer.png';
-// import PlaylistPlayer from '../../images/svg/PlaylistPlayer.svg';
-// import {Sound} from 'react-native-sound';
+import forward from '../../../images/forward.png';
+import replay from '../../../images/replay.png';
+import bookmark from '../../../images/bookmark.png';
 
 const {width, height} = Dimensions.get('window');
 
 const AudioPlayer = () => {
   const [value, setValue] = useState(0);
 
-  // const Feature = ({title, onPress, buttonLabel = 'PLAY', status}) => (
-  //   <View style={styles.feature}>
-  //     <Header style={{flex: 1}}>{title}</Header>
-  //     {status ? (
-  //       <Text style={{padding: 5}}>{resultIcons[status] || ''}</Text>
-  //     ) : null}
-  //     <Button title={buttonLabel} onPress={onPress} />
-  //   </View>
-  // );
-
   return (
-    <SafeAreaView style={styles.wrapper}>
-      {/* <Search /> */}
-      {/* <LiveTalks /> */}
-      {/* <Player /> */}
-      <Text style={styles.title}>Meditation</Text>
-      <Text style={styles.desc}>Lorem ipsum...</Text>
+    <View>
+      <View
+        style={{
+          flexDirection: 'row',
+          marginTop: 32,
+          backgroundColor: '#f2f2f280',
+          alignSelf: 'center',
+          width: width - 40,
+          height: 100,
+          borderRadius: 5,
+          paddingLeft: 20,
+          paddingRight: 20,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <Replay />
 
-      <Switch style={{marginTop: 30, marginBottom: 30}} />
-      <View style={[styles.contentView]}>
-        <View style={{alignSelf: 'center'}}>
-          <Image source={eclipse} />
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => console.log('clicked')}>
+            <Image source={replay} style={styles.icon} />
+          </TouchableOpacity>
+          <View style={{width: 21}} />
+          <TouchableOpacity onPress={() => console.log('clicked')}>
+            <PlayIconBig />
+          </TouchableOpacity>
+          <View style={{width: 21}} />
+          <TouchableOpacity onPress={() => console.log('clicked')}>
+            <Image source={forward} style={styles.icon} />
+          </TouchableOpacity>
         </View>
 
+        <Image source={bookmark} style={styles.icon} />
+      </View>
+      <View style={styles.contentView}>
         <View style={styles.progressBar}>
           <Text>00:00</Text>
           <View style={{width: width - 150}}>
@@ -72,83 +87,44 @@ const AudioPlayer = () => {
 
           <Text>04:41</Text>
         </View>
-
-        <View style={styles.playDashboard}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Backwards />
-            <View style={{width: 21}} />
-            <TouchableOpacity onPress={() => console.log()}>
-              <PlayIconBig />
-            </TouchableOpacity>
-            <View style={{width: 21}} />
-            <Forwards />
-          </View>
-        </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
+  container: {
+    width: width - 40,
+    paddingLeft: 8,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingRight: 18,
+    alignSelf: 'center',
+    borderRadius: 5,
+    backgroundColor: '#f2f2f280',
+    flexDirection: 'row',
+  },
+  imageContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 5,
+    backgroundColor: '#11535C',
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    fontSize: 25,
-    marginTop: 22,
-    marginBottom: 8,
-  },
-  desc: {
-    fontSize: 16,
+  icon: {
+    width: 24,
+    height: 24,
   },
   progressBar: {
     flexDirection: 'row',
     alignItems: 'center',
     width: width - 40,
-    marginTop: 20,
+    // marginTop: 20,
     justifyContent: 'space-between',
-  },
-  playDashboard: {
-    flexDirection: 'row',
-    // marginTop: 32,
-    backgroundColor: '#f2f2f280',
-    alignSelf: 'center',
-    width: width - 40,
-    height: 100,
-    borderRadius: 5,
-    paddingLeft: 20,
-    paddingRight: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bottomDashboard: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: width - 100,
-    alignSelf: 'center',
-    marginTop: 30,
   },
   contentView: {
-    padding: 20,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'stretch',
-  },
-  verticalContent: {
-    padding: 20,
-    flex: 1,
-    flexDirection: 'row',
-    height: 500,
-    justifyContent: 'center',
-    alignItems: 'stretch',
-  },
-  subHeader: {
-    backgroundColor: '#2089dc',
-    color: 'white',
-    textAlign: 'center',
-    paddingVertical: 5,
-    marginBottom: 10,
+    paddingLeft: 20,
   },
 });
 
