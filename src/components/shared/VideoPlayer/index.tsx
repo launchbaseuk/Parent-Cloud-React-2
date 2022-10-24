@@ -34,8 +34,8 @@ const VideoPlayerShared = () => {
         }}
         source={{uri: video.videoUrl}}
         navigator={navigation}
-        fullscreen={true}
-        resizeMode={'cover'}
+        fullscreen={false}
+        resizeMode={'contain'}
       />
     </SafeAreaView>
   );
