@@ -10,6 +10,8 @@ import {
 
 import {Slider} from '@rneui/themed';
 
+import Sound from 'react-native-sound';
+
 // Components
 import BackButton from '../../components/BackButton';
 
@@ -25,10 +27,38 @@ import forward from '../../../images/forward.png';
 import replay from '../../../images/replay.png';
 import bookmark from '../../../images/bookmark.png';
 
+import dings from '../../../sounds/advertising.mp3';
+
 const {width, height} = Dimensions.get('window');
+
+var ding = new Sound(dings, error => {
+  if (error) {
+    console.log('failed to load the sound', error);
+    return;
+  }
+
+  console.log('volume: ' + ding.getVolume());
+});
+Sound.setCategory('Playback');
 
 const AudioPlayer = () => {
   const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    ding.setVolume(100);
+    return () => {
+      ding.release();
+    };
+  }, []);
+  const playPause = () => {
+    ding.play(success => {
+      if (success) {
+        console.log('successfully finished playing');
+      } else {
+        console.log('playback failed due to audio decoding errors');
+      }
+    });
+  };
 
   return (
     <View>
@@ -53,7 +83,7 @@ const AudioPlayer = () => {
             <Image source={replay} style={styles.icon} />
           </TouchableOpacity>
           <View style={{width: 21}} />
-          <TouchableOpacity onPress={() => console.log('clicked')}>
+          <TouchableOpacity onPress={playPause}>
             <PlayIconBig />
           </TouchableOpacity>
           <View style={{width: 21}} />
