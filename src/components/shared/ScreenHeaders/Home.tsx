@@ -1,12 +1,20 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Dimensions, Text, Image } from "react-native";
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg"
 
 const { width, height } = Dimensions.get("window");
 export default function Home() {
+    const [username, setUsername] = useState<string>("");
+    useEffect(() => {
+        AsyncStorage.getItem("user_nicename").then((value) => {
+            setUsername(value);
+        });
+    }, []);
+
     return (
         <View style={styles.screenHeaderContainer}>
-            <Text style={styles.screenHeaderText}>Hi user_name!</Text>
+            <Text style={styles.screenHeaderText}>Hi {username}!</Text>
             <Svg
                 width={356}
                 height={380}

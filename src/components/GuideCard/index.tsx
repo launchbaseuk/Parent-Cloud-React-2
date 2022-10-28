@@ -9,14 +9,16 @@ import guidespicture from "../../images/GuidesPicture.png";
 import PrimaryButton from "../shared/PrimaryButton";
 
 const { width, height } = Dimensions.get("window");
-function GuideCardSmall() {
+function GuideCardSmall({ text, redirect, title }: any) {
+    const navigation = useNavigation();
+    
     return (
         <View style={styles.guidecardsmallContainer}>
-            <Text style={{ fontFamily: "SofiaProBlack", fontSize: 16, color: "#11535C", marginBottom: 4 }}>Lorem Ipsum</Text>
-            <Text style={{ fontFamily: "Montserrat-Regular", fontSize: 13, color: "#150E00", width: 130 }}>Lorem ipsum dolor sit amet, consec tetur adipiscing elit.</Text>
+            <Text style={{ fontFamily: "SofiaProBlack", fontSize: 16, color: "#11535C", marginBottom: 4 }}>{title}</Text>
+            <Text style={{ fontFamily: "Montserrat-Regular", fontSize: 13, color: "#150E00", width: 130 }}>{text}</Text>
 
             <View style={{ marginLeft: -8, justifyContent: "center", alignItems: "center", width: 150, marginTop: 30 }}>
-                <PrimaryButton size="mini" text="Download" />
+                <PrimaryButton size="mini" text="Download" onPress={() => navigation.navigate("PDFViewer", { text: redirect })} />
             </View>
         </View>
     );
@@ -46,7 +48,6 @@ function GuideCardBig() {
 const styles = StyleSheet.create({
     guidecardsmallContainer: {
         backgroundColor: "#F2F2F280",
-        height: 180,
         width: 150,
         borderRadius: 5,
         paddingLeft: 8,

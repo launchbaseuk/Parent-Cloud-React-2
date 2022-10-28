@@ -22,6 +22,7 @@ import Happy from '../../icons/svg/Happy';
 import HappySelected from '../../icons/svg/HappySelected';
 import Depressed from '../../icons/svg/Depressed';
 import DepressedSelected from '../../icons/svg/DepressedSelected';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {width, height} = Dimensions.get('window');
 export default function FeelingsCBT() {
@@ -46,7 +47,7 @@ export default function FeelingsCBT() {
           fontFamily: 'SofiaProBlack',
           fontSize: 31,
         }}>
-        Hi user_name
+        Hi {(async() => {await AsyncStorage.getItem('user_nicename')})()}
       </Text>
 
       <Text

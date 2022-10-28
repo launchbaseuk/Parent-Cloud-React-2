@@ -4,29 +4,18 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View, Dimensions, TouchableOpacity } from "react-native";
 import BackButton from "../../components/BackButton";
 import { GuideCardSmall } from "../../components/GuideCard";
+import { getGuides } from "../../functions/requests";
 
 const { width, height } = Dimensions.get("window");
 export default function GuidesMedia({ navigation, route }: any) {
-    async function requests() {
-        let email = await AsyncStorage.getItem("user_email");
+    const [guides, setGuides] = useState<any>([]);
 
-        // Get User ID
-        // let responseID: any = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/getUserID/${email}`);
-        // responseID = await responseID.json();
-        // responseID = responseID[0].ID;
-
-        // Get membership
-        // let responseMembership: any = await fetch(`https://parentcloud.borne.io/wp-json/mp/v1/subscriptions/${responseID}`, {
-        //     headers: {
-        //         "MEMBERPRESS-API-KEY": "8T5AkgBptM"
-        //     }
-        // });
-        // responseMembership = await responseMembership.json();
-        
-    }
     useFocusEffect(
         React.useCallback(() => {
-            requests();
+            (async() => {
+                let response = await getGuides();
+                setGuides(response);
+            })();
         }, [])
     );
     
@@ -35,38 +24,28 @@ export default function GuidesMedia({ navigation, route }: any) {
             <ScrollView contentContainerStyle={{ paddingBottom: 10 }}>
                 <BackButton text="Guides" />
 
-                <View style={styles.guidesHeader}>
-                    <Text style={{ fontFamily: "SofiaProBlack", color: "#11535C", fontSize: 20 }}>Topic #1</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate("Guides")}><Text style={{ fontFamily: "Montserrat-Bold", color: "#150E00", fontSize: 14}}>See all</Text></TouchableOpacity>
-                </View>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ marginLeft: 8, paddingRight: 15 }}>
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                </ScrollView>
+                {guides.map((guide) => (
+                    <>
+                        <View style={styles.guidesHeader}>
+                            <Text style={{ fontFamily: "SofiaProBlack", color: "#11535C", fontSize: 20 }}>{guide.filter}</Text>
+                            <TouchableOpacity onPress={() => navigation.navigate("Guides")}><Text style={{ fontFamily: "Montserrat-Bold", color: "#150E00", fontSize: 14}}>See all</Text></TouchableOpacity>
+                        </View>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ marginLeft: 8, paddingRight: 15 }}>
+                        {guide.guides.length > 0 ? guide.guides.map((gui) => {
+                            // Remove all html tags from gui.excerpt.rendered
+                            let excerpt = gui.excerpt.rendered.replace(/(<([^>]+)>)/gi, "");
 
-                <View style={styles.guidesHeader}>
-                    <Text style={{ fontFamily: "SofiaProBlack", color: "#11535C", fontSize: 20 }}>Topic #2</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate("Guides")}><Text style={{ fontFamily: "Montserrat-Bold", color: "#150E00", fontSize: 14}}>See all</Text></TouchableOpacity>
-                </View>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ marginLeft: 8, paddingRight: 15 }}>
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                </ScrollView>
-
-                <View style={styles.guidesHeader}>
-                    <Text style={{ fontFamily: "SofiaProBlack", color: "#11535C", fontSize: 20 }}>Topic #3</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate("Guides")}><Text style={{ fontFamily: "Montserrat-Bold", color: "#150E00", fontSize: 14}}>See all</Text></TouchableOpacity>
-                </View>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ marginLeft: 8, paddingRight: 15 }}>
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                </ScrollView>
+                            console.log(gui.title.rendered, gui.content.rendered)
+                            
+                            return (
+                                <GuideCardSmall text={excerpt} title={gui.title.rendered} redirect={gui.content.rendered} />
+                            )
+                        }) : (
+                            <Text style={styles.noContentStyling}>No content</Text>
+                        )}
+                        </ScrollView>
+                    </>
+                ))}
             </ScrollView>
         </View>
     );
@@ -82,4 +61,10 @@ const styles = StyleSheet.create({
         marginTop: 41,
         marginBottom: 16
     },
+    noContentStyling: {
+        marginLeft: 12,
+        fontFamily: "SofiaProBlack",
+        color: "#333",
+        fontSize: 20
+    }
 });
