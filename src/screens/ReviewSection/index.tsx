@@ -57,7 +57,7 @@ const ReviewSection = () => {
       <View style={{}}>
         <LineChart
           data={{
-            labels: ['Awful', 'Bad', 'Good', 'Great'],
+            labels: ['🙁 Awful', '😔 Bad', '🙂 Good', '😃 Great'],
             datasets: [
               {
                 data: [100, 75, 50, 0, 25],
