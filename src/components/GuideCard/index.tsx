@@ -15,9 +15,9 @@ function GuideCardSmall({ text, redirect, title }: any) {
     return (
         <View style={styles.guidecardsmallContainer}>
             <Text style={{ fontFamily: "SofiaProBlack", fontSize: 16, color: "#11535C", marginBottom: 4 }}>{title}</Text>
-            <Text style={{ fontFamily: "Montserrat-Regular", fontSize: 13, color: "#150E00", width: 130 }}>{text}</Text>
+            <Text style={{ fontFamily: "Montserrat-Regular", fontSize: 13, color: "#150E00", width: 130 }} numberOfLines={4}>{text}</Text>
 
-            <View style={{ marginLeft: -8, justifyContent: "center", alignItems: "center", width: 150, marginTop: 30 }}>
+            <View style={{ marginLeft: -8, justifyContent: "center", alignItems: "center", width: 150, marginTop: 30, bottom: 10, position: "absolute" }}>
                 <PrimaryButton size="mini" text="Download" onPress={() => navigation.navigate("PDFViewer", { text: redirect })} />
             </View>
         </View>
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     guidecardsmallContainer: {
         backgroundColor: "#F2F2F280",
         width: 150,
+        height: 220,
         borderRadius: 5,
         paddingLeft: 8,
         paddingTop: 8,

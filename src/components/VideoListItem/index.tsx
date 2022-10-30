@@ -13,14 +13,14 @@ import { useNavigation } from '@react-navigation/native';
 import playiconyellow from "../../icons/PlayIconYellow.png";
 
 const {width, height} = Dimensions.get('window');
-export default function VideoListItem({text, description, image}: any) {
+export default function VideoListItem({text, description, image, details, vimeoLink}: any) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("VideoDetails")}>
+    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("VideoDetails", {title: text, details: details, vimeoLink: vimeoLink})}>
       <View style={{flexDirection: 'row'}}>
         <View style={styles.imageContainer}>
-          <Image source={playiconyellow} style={styles.image} />
+          <Image source={image[0].href} style={styles.image} />
         </View>
 
         <View style={styles.textContainer}>
@@ -29,8 +29,9 @@ export default function VideoListItem({text, description, image}: any) {
               fontFamily: 'Montserrat-Bold',
               color: '#11535C',
               fontSize: 14,
+              width: width - 120
             }}>
-            Lorem ipsum
+            {text}
           </Text>
           <Text
             style={{
@@ -39,8 +40,9 @@ export default function VideoListItem({text, description, image}: any) {
               color: '#150E00',
               lineHeight: 19,
               fontSize: 11,
-            }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            }}
+            numberOfLines={3}>
+            {description}
           </Text>
         </View>
       </View>
