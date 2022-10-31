@@ -34,8 +34,6 @@ export default function GuidesMedia({ navigation, route }: any) {
                         {guide.guides.length > 0 ? guide.guides.map((gui) => {
                             // Remove all html tags from gui.excerpt.rendered
                             let excerpt = gui.excerpt.rendered.replace(/(<([^>]+)>)/gi, "");
-
-                            console.log(gui.title.rendered, gui.content.rendered)
                             
                             return (
                                 <GuideCardSmall text={excerpt} title={gui.title.rendered} redirect={gui.content.rendered} />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { getPageDocs } from "../../functions/requests";
 
 // Components
 import BackButton from "../../components/BackButton";
@@ -13,6 +14,18 @@ import placeholderImage from "../../images/PlaceholderImage.png";
 const { width, height } = Dimensions.get("window");
 export default function Fertility() {
     const navigation = useNavigation();
+    const [guides, setGuides] = useState<any>([]);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            (async() => {
+                // Fetch data
+                let docs = await getPageDocs("fertility");
+                setGuides(docs);
+                console.log('fertility docs', docs)
+            })();
+        }, [])
+    );
 
     return (
         <View>
@@ -25,10 +38,13 @@ export default function Fertility() {
                 </View>
 
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ marginLeft: 8, paddingRight: 15 }}>
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                    <GuideCardSmall />
-                    <GuideCardSmall />
+                    {guides.map((guide: any) => {
+                        let excerpt = guide.excerpt.rendered.replace(/(<([^>]+)>)/gi, "");
+
+                        return (
+                            <GuideCardSmall key={guide.id} text={excerpt} title={guide.title.rendered} redirect={guide.content.rendered} />
+                        )
+                    })}
                 </ScrollView>
                 <View style={styles.card}>
                     <View style={{ flexDirection: "row", width: "100%", paddingTop: 16, paddingLeft: 16, marginBottom: 70  }}>

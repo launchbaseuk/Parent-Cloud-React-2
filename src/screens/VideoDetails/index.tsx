@@ -21,7 +21,13 @@ import PlayIconBig from '../../icons/svg/PlayIconBig';
 import Queue from '../../icons/svg/Queue';
 
 const {width, height} = Dimensions.get('window');
-export default function VideoDetails({navigation, route}) {
+export default function VideoDetails({navigation, route}: any) {
+  const {title, details, vimeoLink} = route.params;
+  const videoId = vimeoLink.replace(/\&.*$/, '');
+  // remove all spaces at the start of the videoId string
+  const videoIdTrimmed = videoId.replace(/^\s+/, '');
+  console.log(videoIdTrimmed);
+  
   return (
     <View>
       <BackButton text="Video Details" />
@@ -39,7 +45,7 @@ export default function VideoDetails({navigation, route}) {
               color: '#11535C',
               fontSize: 13,
             }}>
-            Lorem ipsum
+            {title}
           </Text>
           <Text
             style={{
@@ -47,12 +53,10 @@ export default function VideoDetails({navigation, route}) {
               color: '#150E00',
               fontSize: 10,
               lineHeight: 19.5,
+              marginTop: -80,
+              marginBottom: -20
             }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            dictum enim elementum sociis facilisis. Ultrices adipiscing gravida
-            pellentesque suspendisse a ornare. Nulla velit, pellentesque ipsum
-            enim. Tellus mauris hac erat eu morbi urna eu nisi, lectus. Odio
-            massa rhoncus iaculis lorem.
+            {details.replace('\n', '')}
           </Text>
         </View>
       </View>
@@ -118,7 +122,7 @@ export default function VideoDetails({navigation, route}) {
             onPress={() =>
               navigation.navigate('VideoPlayer', {
                 title: '',
-                filepath: './advertising.mp3',
+                filepath: {videoId},
               })
             }>
             <PlayIconBig />

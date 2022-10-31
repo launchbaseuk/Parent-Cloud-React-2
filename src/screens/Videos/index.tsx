@@ -1,5 +1,7 @@
+import { useFocusEffect } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View, Dimensions } from "react-native";
+import { getVideos } from "../../functions/requests";
 
 // Components
 import BackButton from "../../components/BackButton";
@@ -8,6 +10,17 @@ import VideoListItem from "../../components/VideoListItem";
 
 const { width, height } = Dimensions.get("window");
 export default function Videos({ navigation, route }: any) {
+    const [videos, setVideos] = useState<any>([]);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            (async() => {
+                const response = await getVideos();
+                setVideos(response);
+            })();
+        }, [])
+    );
+
     return (
         <ScrollView>
             <BackButton text="Videos" />
@@ -16,13 +29,19 @@ export default function Videos({ navigation, route }: any) {
             <TagFilter />
             <View style={{ height: 16 }} />
 
-            <VideoListItem />
-            <VideoListItem />
-            <VideoListItem />
-            <VideoListItem />
-            <VideoListItem />
-            <VideoListItem />
-            <VideoListItem />
+            {videos.map((video: any) => {
+                // remove html from excerpt
+                const excerpt = video.excerpt.rendered.replace(/(<([^>]+)>)/gi, "");
+                const details = video.content.rendered.replace(/(<([^>]+)>)/gi, "");
+                
+                // Get link inside src="" of iframe
+                let vimeoLink = video.content.rendered.match(/src="([^"]+)"/);
+                vimeoLink = vimeoLink[0].replace("src=", "").replace(/"/g, "");
+
+                return (
+                    <VideoListItem text={video.title.rendered} description={excerpt} image={video._links["wp:featuredmedia"]} vimeoLink={vimeoLink} details={details} /> 
+                )
+            })}
         </ScrollView>
     );
 };
