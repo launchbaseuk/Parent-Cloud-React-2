@@ -27,7 +27,7 @@ import forward from '../../../images/forward.png';
 import replay from '../../../images/replay.png';
 import bookmark from '../../../images/bookmark.png';
 
-import dings from '../../../sounds/advertising.mp3';
+import dings from '../../../sounds/mens-mental-fitness.mp3';
 
 const {width, height} = Dimensions.get('window');
 
@@ -42,15 +42,22 @@ var ding = new Sound(dings, error => {
 Sound.setCategory('Playback');
 
 const AudioPlayer = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState({
+    playState: false,
+    playSeconds: 0,
+    duration: 0,
+  });
+  const [sliderEditing, setSliderEditing] = useState(false);
 
   useEffect(() => {
     ding.setVolume(100);
-    return () => {
-      ding.release();
-    };
+    // return () => {
+    //   ding.release();
+    // };
   }, []);
-  const playPause = () => {
+  const play = () => {
+    console.log('play');
+    setValue({...value, playState: true});
     ding.play(success => {
       if (success) {
         console.log('successfully finished playing');
@@ -58,6 +65,23 @@ const AudioPlayer = () => {
         console.log('playback failed due to audio decoding errors');
       }
     });
+  };
+  const pause = () => {
+    console.log('pauseee');
+    setValue({...value, playState: false});
+    ding.pause();
+  };
+
+  const onSliderEditStart = () => {
+    setSliderEditing(true);
+  };
+  const onSliderEditEnd = () => {
+    setSliderEditing(false);
+  };
+  const onSliderEditing = val => {
+    console.log('aaa', val);
+    // ding.setCurrentTime(val);
+    setValue({...value, playSeconds: val});
   };
 
   return (
@@ -73,35 +97,43 @@ const AudioPlayer = () => {
           borderRadius: 5,
           paddingLeft: 20,
           paddingRight: 20,
-          justifyContent: 'space-between',
+          justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Replay />
+        {/* <TouchableOpacity onPress={() => ding.setCurrentTime(0)}>
+          <Replay />
+        </TouchableOpacity> */}
 
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => console.log('clicked')}>
+          {/* <TouchableOpacity onPress={() => console.log('clicked')}>
             <Image source={replay} style={styles.icon} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={{width: 21}} />
-          <TouchableOpacity onPress={playPause}>
-            <PlayIconBig />
-          </TouchableOpacity>
+          {value.playState && (
+            <TouchableOpacity onPress={pause}>
+              <PlayIconBig />
+            </TouchableOpacity>
+          )}
+          {!value.playState && (
+            <TouchableOpacity onPress={play}>
+              <PlayIconBig />
+            </TouchableOpacity>
+          )}
           <View style={{width: 21}} />
-          <TouchableOpacity onPress={() => console.log('clicked')}>
+          {/* <TouchableOpacity onPress={() => console.log('clicked')}>
             <Image source={forward} style={styles.icon} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
-        <Image source={bookmark} style={styles.icon} />
+        {/* <Image source={bookmark} style={styles.icon} /> */}
       </View>
-      <View style={styles.contentView}>
+      {/* <View style={styles.contentView}>
         <View style={styles.progressBar}>
           <Text>00:00</Text>
           <View style={{width: width - 150}}>
             <Slider
-              value={value}
-              onValueChange={setValue}
-              maximumValue={10000}
+              value={value.playSeconds}
+              maximumValue={value.duration}
               minimumValue={0}
               step={1}
               allowTouchTrack
@@ -112,12 +144,15 @@ const AudioPlayer = () => {
                 backgroundColor: 'transparent',
               }}
               thumbProps={{}}
+              onValueChange={onSliderEditing}
+              onSlidingStart={onSliderEditStart}
+              onSlidingComplete={onSliderEditEnd}
             />
           </View>
 
           <Text>04:41</Text>
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };

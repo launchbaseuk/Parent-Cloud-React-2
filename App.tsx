@@ -65,7 +65,7 @@ import VideoPlayerShared from './src/components/shared/VideoPlayer';
 import ReviewDetails from './src/screens/ReviewDetails';
 import ReviewSection from './src/screens/ReviewSection';
 import NoSubscription from './src/screens/NoSubscription';
-import Custom from './src/components/shared/Custom';
+import PlayerScreen from 'react-native-sound-playerview';
 
 // Navigation
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
@@ -77,11 +77,11 @@ const Tab = createBottomTabNavigator();
 
 const TabNav = () => {
   const navigation = useNavigation();
-  const { sub }: any = useAuth();
-  
+  const {sub}: any = useAuth();
+
   useEffect(() => {
-    if(!sub) {
-      navigation.navigate("NoSubscription");
+    if (!sub) {
+      navigation.navigate('NoSubscription');
     }
   }, [sub]);
 
@@ -168,6 +168,7 @@ const App = () => {
           <Stack.Screen name="GuidedMeditation" component={GuidedMeditation} />
           <Stack.Screen name="MediaDetails" component={MediaDetails} />
           <Stack.Screen name="AudioPlayer" component={AudioPlayer} />
+          <Stack.Screen name="player" component={PlayerScreen} />
           <Stack.Screen name="GuidesMedia" component={GuidesMedia} />
           <Stack.Screen name="Videos" component={Videos} />
           <Stack.Screen name="Podcasts" component={Podcasts} />
