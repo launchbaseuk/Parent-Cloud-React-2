@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {View, Dimensions} from 'react-native';
-import Video from 'react-native-video';
-import {WebView} from 'react-native-webview';
+import {View} from 'react-native';
 
 import VideoPlayer from 'react-native-video-controls';
 import {useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-const {width, height} = Dimensions.get('window');
-const VideoPlayerShared = ({route}: any) => {
+const VideoPlayerShared = () => {
   const [video, setVideo] = useState({
     thumbnailUrl: '',
     videoUrl: '',
@@ -17,7 +14,7 @@ const VideoPlayerShared = ({route}: any) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    const VIMEO_ID = '339349131';
+    const VIMEO_ID = '399030109';
     fetch(`https://player.vimeo.com/video/${VIMEO_ID}/config`)
       .then(res => res.json())
       .then(res =>
@@ -31,20 +28,14 @@ const VideoPlayerShared = ({route}: any) => {
   }, []);
   return (
     <SafeAreaView style={{flex: 1}}>
-      {/* <VideoPlayer
-        // ref={ref => {
-        //   this.player = ref;
-        // }}
-        source={{ uri: route.params.filepath.toString() }}
+      <VideoPlayer
+        ref={ref => {
+          this.player = ref;
+        }}
+        source={{uri: video.videoUrl}}
         navigator={navigation}
         fullscreen={false}
         resizeMode={'contain'}
-      /> */}
-      <WebView
-        source={{uri: route.params.filepath.toString()}}
-        style={{width: width, height: height}}
-        javaScriptEnabled
-        scalesPageToFit
       />
     </SafeAreaView>
   );
