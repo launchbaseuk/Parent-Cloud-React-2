@@ -22,6 +22,7 @@ import Replay from '../../../icons/svg/Replay';
 import Backwards from '../../../icons/svg/Backwards';
 import Forwards from '../../../icons/svg/Forwards';
 import PlayIconBig from '../../../icons/svg/PlayIconBig';
+import pauseBtn from '../../../images/Pause.png';
 import Queue from '../../../icons/svg/Queue';
 import forward from '../../../images/forward.png';
 import replay from '../../../images/replay.png';
@@ -111,7 +112,7 @@ const AudioPlayer = () => {
           <View style={{width: 21}} />
           {value.playState && (
             <TouchableOpacity onPress={pause}>
-              <PlayIconBig />
+              <Image source={pauseBtn} style={styles.icon} />
             </TouchableOpacity>
           )}
           {!value.playState && (
@@ -178,8 +179,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    width: 24,
-    height: 24,
+    width: 50,
+    height: 50,
   },
   progressBar: {
     flexDirection: 'row',
