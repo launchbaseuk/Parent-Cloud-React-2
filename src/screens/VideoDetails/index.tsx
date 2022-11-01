@@ -25,8 +25,9 @@ export default function VideoDetails({navigation, route}: any) {
   const {title, details, vimeoLink} = route.params;
   const videoId = vimeoLink.replace(/\&.*$/, '');
   // remove all spaces at the start of the videoId string
-  const videoIdTrimmed = videoId.replace(/^\s+/, '');
-  console.log(videoIdTrimmed);
+  let videoIdTrimmed = videoId.replace(/^\s+/, '');
+  videoIdTrimmed = videoIdTrimmed.split("/");
+  videoIdTrimmed = videoIdTrimmed[videoIdTrimmed.length - 1];
   
   return (
     <View>
