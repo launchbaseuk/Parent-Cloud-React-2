@@ -5,13 +5,15 @@ import VideoPlayer from 'react-native-video-controls';
 import {useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-const VideoPlayerShared = () => {
+const VideoPlayerShared = ({route}) => {
   const [video, setVideo] = useState({
     thumbnailUrl: '',
     videoUrl: '',
     video: '',
   });
   const navigation = useNavigation();
+
+  console.log('asdasd', route.params.filepath);
 
   useEffect(() => {
     const VIMEO_ID = '399030109';
