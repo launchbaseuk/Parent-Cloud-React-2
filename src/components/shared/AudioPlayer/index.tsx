@@ -135,14 +135,14 @@ const AudioPlayer = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <TouchableOpacity onPress={() => ding.setCurrentTime(0)}>
+        {/* <TouchableOpacity onPress={() => ding.setCurrentTime(0)}>
           <Replay />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => console.log('clicked')}>
+          {/* <TouchableOpacity onPress={() => console.log('clicked')}>
             <Image source={replay} style={styles.icon} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={{width: 21}} />
           {value.playState && (
             <TouchableOpacity onPress={pause}>
@@ -155,14 +155,14 @@ const AudioPlayer = () => {
             </TouchableOpacity>
           )}
           <View style={{width: 21}} />
-          <TouchableOpacity onPress={() => console.log('clicked')}>
+          {/* <TouchableOpacity onPress={() => console.log('clicked')}>
             <Image source={forward} style={styles.icon} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
-        <Image source={bookmark} style={styles.icon} />
+        {/* <Image source={bookmark} style={styles.icon} /> */}
       </View>
-      <View style={styles.contentView}>
+      {/* <View style={styles.contentView}>
         <View style={styles.progressBar}>
           <Text>00:00</Text>
           <View style={{width: width - 150}}>
@@ -187,7 +187,7 @@ const AudioPlayer = () => {
 
           <Text>04:41</Text>
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };

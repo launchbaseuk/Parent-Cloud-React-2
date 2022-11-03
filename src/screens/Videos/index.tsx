@@ -1,51 +1,66 @@
-import { useFocusEffect } from "@react-navigation/native";
-import React, { useState, useEffect } from "react";
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View, Dimensions } from "react-native";
-import { getVideos } from "../../functions/requests";
+import {useFocusEffect} from '@react-navigation/native';
+import React, {useState, useEffect} from 'react';
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+  Dimensions,
+} from 'react-native';
+import {getVideos} from '../../functions/requests';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 // Components
-import BackButton from "../../components/BackButton";
-import TagFilter from "../../components/TagFilter";
-import VideoListItem from "../../components/VideoListItem";
+import BackButton from '../../components/BackButton';
+import TagFilter from '../../components/TagFilter';
+import VideoListItem from '../../components/VideoListItem';
 
-const { width, height } = Dimensions.get("window");
-export default function Videos({ navigation, route }: any) {
-    const [videos, setVideos] = useState<any>([]);
+const {width, height} = Dimensions.get('window');
+export default function Videos({navigation, route}: any) {
+  const [videos, setVideos] = useState<any>([]);
 
-    useFocusEffect(
-        React.useCallback(() => {
-            (async() => {
-                const response = await getVideos();
-                setVideos(response);
-            })();
-        }, [])
-    );
+  useFocusEffect(
+    React.useCallback(() => {
+      (async () => {
+        const response = await getVideos();
+        setVideos(response);
+      })();
+    }, []),
+  );
 
-    return (
-        <ScrollView>
-            <BackButton text="Videos" />
-            <View style={{ height: 16 }} />
+  return (
+    <SafeAreaView>
+      <ScrollView>
+        <BackButton text="Videos" />
+        <View style={{height: 16}} />
 
-            <TagFilter />
-            <View style={{ height: 16 }} />
+        <TagFilter />
+        <View style={{height: 16}} />
 
-            {videos.map((video: any) => {
-                // remove html from excerpt
-                const excerpt = video.excerpt.rendered.replace(/(<([^>]+)>)/gi, "");
-                const details = video.content.rendered.replace(/(<([^>]+)>)/gi, "");
-                
-                // Get link inside src="" of iframe
-                let vimeoLink = video.content.rendered.match(/src="([^"]+)"/);
-                vimeoLink = vimeoLink[0].replace("src=", "").replace(/"/g, "");
+        {videos.map((video: any) => {
+          // remove html from excerpt
+          const excerpt = video.excerpt.rendered.replace(/(<([^>]+)>)/gi, '');
+          const details = video.content.rendered.replace(/(<([^>]+)>)/gi, '');
 
-                return (
-                    <VideoListItem text={video.title.rendered} description={excerpt} image={video._links["wp:featuredmedia"]} vimeoLink={vimeoLink} details={details} /> 
-                )
-            })}
-        </ScrollView>
-    );
-};
+          // Get link inside src="" of iframe
+          let vimeoLink = video.content.rendered.match(/src="([^"]+)"/);
+          vimeoLink = vimeoLink[0].replace('src=', '').replace(/"/g, '');
 
-const styles = StyleSheet.create({
+          return (
+            <VideoListItem
+              text={video.title.rendered}
+              description={excerpt}
+              image={video._links['wp:featuredmedia']}
+              vimeoLink={vimeoLink}
+              details={details}
+            />
+          );
+        })}
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
 
-});
+const styles = StyleSheet.create({});

@@ -6,7 +6,8 @@ import Calendar from '../../components/Calendar';
 import PrimaryButton from '../../components/shared/PrimaryButton';
 import SecondaryButton from '../../components/shared/SecondaryButton';
 import Selection from '../../components/shared/Selection';
-import { WebView } from 'react-native-webview';
+import {WebView} from 'react-native-webview';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const {width, height} = Dimensions.get('window');
 export default function OnetooneSessions() {
@@ -48,7 +49,8 @@ export default function OnetooneSessions() {
   );
 
   // <View style={styles.onetoonecontainer}>
-      {/* <ScrollView>
+  {
+    /* <ScrollView>
         <BackButton text={'1-2-1 Sessions'} />
 
         <Text style={[styles.sectionTitle, {marginBottom: 16}]}>
@@ -103,22 +105,25 @@ export default function OnetooneSessions() {
           <SecondaryButton size="small" text="Redeem coupon" />
           <PrimaryButton size="small" text="Pay Now" />
         </View>
-      </ScrollView> */}
-    {/* </View> */}
+      </ScrollView> */
+  }
+  {
+    /* </View> */
+  }
 
   return (
-    <View style={{ flex: 1, paddingBottom: 20 }}>
+    <SafeAreaView style={{flex: 1, paddingBottom: 20}}>
       <BackButton text={'1-2-1 Sessions'} />
 
       <WebView
-          scalesPageToFit={true}
-          bounces={false}
-          javaScriptEnabled
-          style={{ width: width, flex: 1 }}
-          source={{ uri: "https://parentcloudandwellnesscloud.as.me/" }}
-          automaticallyAdjustContentInsets={false}
-        />
-    </View>
+        scalesPageToFit={true}
+        bounces={false}
+        javaScriptEnabled
+        style={{width: width, flex: 1}}
+        source={{uri: 'https://parentcloudandwellnesscloud.as.me/'}}
+        automaticallyAdjustContentInsets={false}
+      />
+    </SafeAreaView>
   );
 }
 

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -10,6 +9,8 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useAuth} from './src/contexts/auth-context';
+
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 // Screens
 import Homepage from './src/screens/Homepage';

@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 // Components
 import BackButton from '../../components/BackButton';
@@ -26,11 +27,11 @@ export default function VideoDetails({navigation, route}: any) {
   const videoId = vimeoLink.replace(/\&.*$/, '');
   // remove all spaces at the start of the videoId string
   let videoIdTrimmed = videoId.replace(/^\s+/, '');
-  videoIdTrimmed = videoIdTrimmed.split("/");
+  videoIdTrimmed = videoIdTrimmed.split('/');
   videoIdTrimmed = videoIdTrimmed[videoIdTrimmed.length - 1];
-  
+
   return (
-    <View>
+    <SafeAreaView>
       <BackButton text="Video Details" />
       <View style={{height: 42}} />
 
@@ -55,7 +56,7 @@ export default function VideoDetails({navigation, route}: any) {
               fontSize: 10,
               lineHeight: 19.5,
               marginTop: -80,
-              marginBottom: -20
+              marginBottom: -20,
             }}>
             {details.replace('\n', '')}
           </Text>
@@ -135,7 +136,7 @@ export default function VideoDetails({navigation, route}: any) {
 
         {/* <Queue /> */}
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
