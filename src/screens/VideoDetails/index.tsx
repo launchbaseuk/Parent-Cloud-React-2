@@ -124,7 +124,7 @@ export default function VideoDetails({navigation, route}: any) {
             onPress={() =>
               navigation.navigate('VideoPlayer', {
                 title: '',
-                filepath: {videoId},
+                filepath: videoId,
               })
             }>
             <PlayIconBig />

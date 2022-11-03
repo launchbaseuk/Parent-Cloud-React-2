@@ -25,13 +25,14 @@ import forward from '../../images/forward.png';
 import replay from '../../images/replay.png';
 import bookmark from '../../images/bookmark.png';
 import AudioPlayer from '../../components/shared/AudioPlayer';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const {width, height} = Dimensions.get('window');
 export default function MediaDetails({navigation, route}) {
   const [value, setValue] = useState(0);
 
   return (
-    <View>
+    <SafeAreaView>
       <BackButton text="Details" />
       <View style={{height: 42}} />
 
@@ -95,7 +96,7 @@ export default function MediaDetails({navigation, route}) {
       </View>
 
       <AudioPlayer />
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -144,12 +144,12 @@ const AudioPlayer = () => {
             <Image source={replay} style={styles.icon} />
           </TouchableOpacity> */}
           <View style={{width: 21}} />
-          {value.playState && (
+          {isPlaying && (
             <TouchableOpacity onPress={pause}>
               <Image source={pauseBtn} style={styles.pauseIcon} />
             </TouchableOpacity>
           )}
-          {!value.playState && (
+          {!isPlaying && (
             <TouchableOpacity onPress={play}>
               <PlayIconBig />
             </TouchableOpacity>
