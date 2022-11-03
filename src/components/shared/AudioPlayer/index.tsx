@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -50,15 +50,49 @@ const AudioPlayer = () => {
   });
   const [sliderEditing, setSliderEditing] = useState(false);
 
+  // const [trackIndex, setTrackIndex] = useState(0);
+  const [trackProgress, setTrackProgress] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // Refs
+  const audioRef = useRef(ding);
+  const intervalRef = useRef();
+  const isReady = useRef(false);
+
+  // Destructure for conciseness
+  const {duration} = audioRef.current;
+
+  // useEffect(() => {
+  //   console.log('aaa');
+  //   const timeout = setInterval(() => {
+  //     if (ding && ding.isLoaded() && playstate && !sliderEditing) {
+  //       ding.getCurrentTime((seconds, isPlaying) => {
+  //         setValue({...value, playSeconds: seconds});
+  //       });
+  //     }
+  //   }, 100);
+  //   return () => {
+  //     if (ding) {
+  //       ding.release();
+  //       // ding = null;
+  //     }
+  //     if (timeout) {
+  //       clearInterval(timeout);
+  //     }
+  //   };
+  // }, []);
+
   useEffect(() => {
-    ding.setVolume(100);
-    // return () => {
-    //   ding.release();
-    // };
+    // Pause and clean up on unmount
+    return () => {
+      audioRef.current.pause();
+      clearInterval(intervalRef.current);
+    };
   }, []);
+
   const play = () => {
+    setIsPlaying(true);
     console.log('play');
-    setValue({...value, playState: true});
     ding.play(success => {
       if (success) {
         console.log('successfully finished playing');
@@ -68,8 +102,8 @@ const AudioPlayer = () => {
     });
   };
   const pause = () => {
+    setIsPlaying(false);
     console.log('pauseee');
-    setValue({...value, playState: false});
     ding.pause();
   };
 
@@ -101,18 +135,18 @@ const AudioPlayer = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        {/* <TouchableOpacity onPress={() => ding.setCurrentTime(0)}>
+        <TouchableOpacity onPress={() => ding.setCurrentTime(0)}>
           <Replay />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          {/* <TouchableOpacity onPress={() => console.log('clicked')}>
+          <TouchableOpacity onPress={() => console.log('clicked')}>
             <Image source={replay} style={styles.icon} />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
           <View style={{width: 21}} />
           {value.playState && (
             <TouchableOpacity onPress={pause}>
-              <Image source={pauseBtn} style={styles.icon} />
+              <Image source={pauseBtn} style={styles.pauseIcon} />
             </TouchableOpacity>
           )}
           {!value.playState && (
@@ -121,14 +155,14 @@ const AudioPlayer = () => {
             </TouchableOpacity>
           )}
           <View style={{width: 21}} />
-          {/* <TouchableOpacity onPress={() => console.log('clicked')}>
+          <TouchableOpacity onPress={() => console.log('clicked')}>
             <Image source={forward} style={styles.icon} />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
 
-        {/* <Image source={bookmark} style={styles.icon} /> */}
+        <Image source={bookmark} style={styles.icon} />
       </View>
-      {/* <View style={styles.contentView}>
+      <View style={styles.contentView}>
         <View style={styles.progressBar}>
           <Text>00:00</Text>
           <View style={{width: width - 150}}>
@@ -153,7 +187,7 @@ const AudioPlayer = () => {
 
           <Text>04:41</Text>
         </View>
-      </View> */}
+      </View>
     </View>
   );
 };
@@ -179,6 +213,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
+    width: 24,
+    height: 24,
+  },
+  pauseIcon: {
     width: 50,
     height: 50,
   },
