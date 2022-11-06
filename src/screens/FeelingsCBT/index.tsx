@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 // Components
 import FeelingsCard from '../../components/FeelingsCard';
@@ -28,6 +28,17 @@ const {width, height} = Dimensions.get('window');
 export default function FeelingsCBT() {
   const navigation = useNavigation();
   const [selected, setSelected] = useState<any>([]);
+  const [username, setUsername] = useState<string>("");
+
+  useFocusEffect(
+    React.useCallback(() => {
+      (async() => {
+        const username = await AsyncStorage.getItem('user_nicename')
+        
+        if(username) setUsername(username);
+      })();
+    }, [])
+  );
 
   const handleSelected = (item: string) => {
     if (selected.includes(item)) {
@@ -47,7 +58,7 @@ export default function FeelingsCBT() {
           fontFamily: 'SofiaProBlack',
           fontSize: 31,
         }}>
-        Hi {(async() => {await AsyncStorage.getItem('user_nicename')})()}
+        Hi {username}
       </Text>
 
       <Text
