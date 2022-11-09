@@ -6,6 +6,7 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  ScrollView
 } from 'react-native';
 
 // Components
@@ -20,11 +21,15 @@ import Forwards from '../../icons/svg/Forwards';
 import PlayIconBig from '../../icons/svg/PlayIconBig';
 import Queue from '../../icons/svg/Queue';
 import AudioPlayer from '../../components/shared/AudioPlayer';
+import { useFocusEffect } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 export default function PodcastDetails({navigation, route}) {
+  const { podcast } = route.params;
+  const content = podcast.post_content.replace(/(<([^>]+)>)/gi, '');
+
   return (
-    <View>
+    <ScrollView>
       <BackButton text="Podcast Details" />
       <View style={{height: 42}} />
 
@@ -40,7 +45,7 @@ export default function PodcastDetails({navigation, route}) {
               color: '#11535C',
               fontSize: 13,
             }}>
-            Lorem ipsum
+            {podcast.post_title}
           </Text>
           <Text
             style={{
@@ -48,12 +53,9 @@ export default function PodcastDetails({navigation, route}) {
               color: '#150E00',
               fontSize: 10,
               lineHeight: 19.5,
+              marginTop: -80
             }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            dictum enim elementum sociis facilisis. Ultrices adipiscing gravida
-            pellentesque suspendisse a ornare. Nulla velit, pellentesque ipsum
-            enim. Tellus mauris hac erat eu morbi urna eu nisi, lectus. Odio
-            massa rhoncus iaculis lorem.
+            {content}
           </Text>
         </View>
       </View>
@@ -88,7 +90,7 @@ export default function PodcastDetails({navigation, route}) {
       </View>
 
       <AudioPlayer />
-    </View>
+    </ScrollView>
   );
 }
 

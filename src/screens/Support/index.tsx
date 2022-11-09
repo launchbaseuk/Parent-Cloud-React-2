@@ -19,7 +19,7 @@ export default function Support() {
     {text: 'Live Talks', image: <LiveTalksImage />, screen: 'LiveTalks'},
     {text: 'Antenatal Classes', image: <AntenatalCoursesImage />, screen: 'Antenatal'},
     {text: 'Baby Classes', image: <BabyClassesImage />, screen: 'BabyClasses'},
-    {text: 'Fertility', image: <FertilityImage />, screen: 'Fertility'},
+    // {text: 'Fertility', image: <FertilityImage />, screen: 'Fertility'},
   ];
 
   return (

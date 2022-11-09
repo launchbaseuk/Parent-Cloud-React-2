@@ -14,7 +14,7 @@ import headphones from '../../icons/headphones.png';
 import PlayIconSmall from '../../icons/svg/PlayIconSmall';
 
 const {width, height} = Dimensions.get('window');
-export default function MediaListItem({text, description, image, onPress}: any) {
+export default function MediaListItem({title, content, image, onPress}: any) {
   const navigation = useNavigation();
 
   const handlePress = () => {
@@ -38,8 +38,9 @@ export default function MediaListItem({text, description, image, onPress}: any) 
               fontFamily: 'Montserrat-Bold',
               color: '#11535C',
               fontSize: 14,
+              width: "65%"
             }}>
-            Lorem ipsum
+            {title}
           </Text>
           <Text
             style={{
@@ -49,13 +50,13 @@ export default function MediaListItem({text, description, image, onPress}: any) 
               lineHeight: 19,
               fontSize: 11,
             }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            {content}
           </Text>
         </View>
       </View>
 
       <TouchableOpacity
-        style={{alignSelf: 'center'}}
+        style={{alignSelf: 'center', position: "absolute", bottom: 14, right: 14 }}
         onPress={handlePress}>
         <PlayIconSmall />
       </TouchableOpacity>
@@ -76,12 +77,13 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 8
   },
   textContainer: {
     marginLeft: 8,
     height: 100,
     justifyContent: 'center',
-    marginTop: -10,
+    marginTop: 15
   },
   imageContainer: {
     width: 80,

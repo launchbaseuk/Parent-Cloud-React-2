@@ -120,36 +120,6 @@ export default function ReviewDetails({navigation}) {
           ipsum.
         </Text>
       </View>
-      <View style={{marginTop: 64}}>
-        <Text
-          style={{
-            fontFamily: 'SofiaProBlack',
-            color: '#11535C',
-            fontSize: 20,
-            paddingLeft: 16,
-            marginBottom: 16,
-          }}>
-          How could you challenge this thought?
-        </Text>
-        <Text
-          style={{
-            alignSelf: 'center',
-            width: width - 40,
-            backgroundColor: '#F2F2F280',
-            color: '#150E00',
-            padding: 16,
-            // paddingTop: 0,
-            textAlignVertical: 'top',
-            borderRadius: 5,
-            fontFamily: 'Montserrat-Regular',
-            opacity: 0.5,
-          }}>
-          Convallis vestibulum tellus ultrices mus feugiat ornare. Phasellus
-          magna augue felis, ultricies dignissim penatibus interdum. Vestibulum
-          quisque et auctor sed metus. Varius nisl, at nisl risus, aliquet
-          ipsum.
-        </Text>
-      </View>
       <View style={{paddingBottom: 50}}>
         <Text
           style={{

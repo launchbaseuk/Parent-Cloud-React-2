@@ -19,10 +19,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 const {width, height} = Dimensions.get('window');
 export default function Podcasts({navigation, route}: any) {
+  const [podcasts, setPodcasts] = useState<any>([]);
+
   useFocusEffect(
     React.useCallback(() => {
       (async () => {
         const response = await getPodcasts();
+        setPodcasts(response);
       })();
     }, []),
   );
@@ -36,13 +39,15 @@ export default function Podcasts({navigation, route}: any) {
         <TagFilter />
         <View style={{height: 16}} />
 
-        <MediaListItem onPress={() => navigation.navigate('PodcastDetails')} />
-        <MediaListItem onPress={() => navigation.navigate('PodcastDetails')} />
-        <MediaListItem onPress={() => navigation.navigate('PodcastDetails')} />
-        <MediaListItem onPress={() => navigation.navigate('PodcastDetails')} />
-        <MediaListItem onPress={() => navigation.navigate('PodcastDetails')} />
-        <MediaListItem onPress={() => navigation.navigate('PodcastDetails')} />
-        <MediaListItem onPress={() => navigation.navigate('PodcastDetails')} />
+        {podcasts.map((podcast: any) => {
+          // remove all <> tags from post_content
+          const regex = /(<([^>]+)>)/gi;
+          const result = podcast.post_content.replace(regex, '');
+
+          return (
+            <MediaListItem onPress={() => navigation.navigate('PodcastDetails', {podcast: podcast})} key={podcast.ID} title={podcast.post_title} content={result}  />
+          )
+        })}
       </ScrollView>
     </SafeAreaView>
   );

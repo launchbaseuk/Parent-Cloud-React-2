@@ -111,12 +111,14 @@ async function getPodcasts() {
         }
     });
     const data = await response.json();
+    console.log('got data')
 
     for(let i=0; i<data.length; i++) {
         if(data[i].post_status === "publish" && !(data[i].post_content.includes("wp:embed"))) {
             podcasts.push(data[i]);
         }
     }
+    console.log('done')
 
     return podcasts;
 }
