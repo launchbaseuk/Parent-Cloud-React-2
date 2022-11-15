@@ -13,11 +13,11 @@ import { useNavigation } from '@react-navigation/native';
 import playiconyellow from "../../icons/PlayIconYellow.png";
 
 const {width, height} = Dimensions.get('window');
-export default function VideoListItem({text, description, image, details, vimeoLink}: any) {
+export default function VideoListItem({text, description, image, details, vimeoLink, video}: any) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("VideoDetails", {title: text, details: details, vimeoLink: vimeoLink})}>
+    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("VideoDetails", {title: text, details: details, vimeoLink: vimeoLink, video: video})}>
       <View style={{flexDirection: 'row'}}>
         <View style={styles.imageContainer}>
           <Image source={image[0].href} style={styles.image} />

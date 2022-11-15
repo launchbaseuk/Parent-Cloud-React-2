@@ -14,7 +14,7 @@ import headphones from '../../icons/headphones.png';
 import PlayIconSmall from '../../icons/svg/PlayIconSmall';
 
 const {width, height} = Dimensions.get('window');
-export default function MediaListItem({title, content, image, onPress}: any) {
+export default function MediaListItem({title, content, link, image, onPress}: any) {
   const navigation = useNavigation();
 
   const handlePress = () => {
@@ -29,7 +29,7 @@ export default function MediaListItem({title, content, image, onPress}: any) {
     <View style={styles.container}>
       <View style={{flexDirection: 'row'}}>
         <View style={styles.imageContainer}>
-          <Image source={headphones} style={styles.image} />
+          <Image source={link ? { uri: link } : headphones} style={{ width: "100%", height: "100%" }} />
         </View>
 
         <View style={styles.textContainer}>

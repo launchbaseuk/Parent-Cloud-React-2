@@ -123,7 +123,46 @@ async function getPodcasts() {
     return podcasts;
 }
 
-export { getGuides, getPageDocs, getVideos, getPodcasts };
+async function getNarratorDetails(narratorId) {
+    const id = narratorId;
+    const token = await AsyncStorage.getItem("token");
+
+    const response = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/getNarratorDetails/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+    const data = await response.json();
+    
+    const responseDesc = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/getNarratorMeta/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+    const dataDesc = await responseDesc.json();
+
+    // Get meta_key description and profile_image and add it to an object
+    let meta = {};
+    for(let i=0; i<dataDesc.length; i++) {
+        if(dataDesc[i].meta_key === "description") {
+            meta.description = dataDesc[i].meta_value;
+        } else if(dataDesc[i].meta_key === "profile_image") {
+            let id = dataDesc[i].meta_value;
+            
+            const respImage = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/media/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+            const dataImage = await respImage.json();
+            meta.profile_image = dataImage.guid.rendered;
+        }
+    }
+
+    return [ data, meta ];
+}
+
+export { getGuides, getPageDocs, getVideos, getPodcasts, getNarratorDetails };
 
 // filters {"id": 31, "name": "Adult Nutrition", "slug": "adult-nutrition"}
 // LOG  filters {"id": 80, "name": "Bereavement", "slug": "bereavement"}

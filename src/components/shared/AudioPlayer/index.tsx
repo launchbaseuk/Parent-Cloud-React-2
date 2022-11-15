@@ -32,17 +32,31 @@ import dings from '../../../sounds/mens-mental-fitness.mp3';
 
 const {width, height} = Dimensions.get('window');
 
-var ding = new Sound(dings, error => {
-  if (error) {
-    console.log('failed to load the sound', error);
-    return;
-  }
+const audio = (audioLink: string) => {
+  var ding = new Sound(audioLink, undefined, error => {
+    if (error) {
+      console.log('failed to load the sound', error);
+      return;
+    }
+    
+    console.log('volume: ' + ding.getVolume());
+  });
+  Sound.setCategory('Playback');
+  
+  return ding;
+}
 
-  console.log('volume: ' + ding.getVolume());
-});
-Sound.setCategory('Playback');
+const AudioPlayer = (props: any) => {
+  const [ss, setSS] = useState<any>();
 
-const AudioPlayer = () => {
+  useEffect(() => {
+    if(props.audioLink) {
+      setSS(audio(props.audioLink));
+    } else {
+      setSS(audio(dings));
+    }
+  }, [props.audioLink]);
+
   const [value, setValue] = useState({
     playState: false,
     playSeconds: 0,
@@ -55,32 +69,12 @@ const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   // Refs
-  const audioRef = useRef(ding);
+  const audioRef = useRef(ss);
   const intervalRef = useRef();
   const isReady = useRef(false);
 
   // Destructure for conciseness
-  const {duration} = audioRef.current;
-
-  // useEffect(() => {
-  //   console.log('aaa');
-  //   const timeout = setInterval(() => {
-  //     if (ding && ding.isLoaded() && playstate && !sliderEditing) {
-  //       ding.getCurrentTime((seconds, isPlaying) => {
-  //         setValue({...value, playSeconds: seconds});
-  //       });
-  //     }
-  //   }, 100);
-  //   return () => {
-  //     if (ding) {
-  //       ding.release();
-  //       // ding = null;
-  //     }
-  //     if (timeout) {
-  //       clearInterval(timeout);
-  //     }
-  //   };
-  // }, []);
+  // const {duration} = audioRef.current;
 
   useEffect(() => {
     // Pause and clean up on unmount
@@ -93,7 +87,7 @@ const AudioPlayer = () => {
   const play = () => {
     setIsPlaying(true);
     console.log('play');
-    ding.play(success => {
+    ss.play(success => {
       if (success) {
         console.log('successfully finished playing');
       } else {
@@ -104,7 +98,9 @@ const AudioPlayer = () => {
   const pause = () => {
     setIsPlaying(false);
     console.log('pauseee');
-    ding.pause();
+    ss.pause(success => {
+      if(success) console.log(success);
+    });
   };
 
   const onSliderEditStart = () => {
@@ -119,77 +115,83 @@ const AudioPlayer = () => {
     setValue({...value, playSeconds: val});
   };
 
-  return (
-    <View>
-      <View
-        style={{
-          flexDirection: 'row',
-          marginTop: 32,
-          backgroundColor: '#f2f2f280',
-          alignSelf: 'center',
-          width: width - 40,
-          height: 100,
-          borderRadius: 5,
-          paddingLeft: 20,
-          paddingRight: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <TouchableOpacity style={{ marginRight: 56 }} onPress={() => ding.setCurrentTime(0)}>
-          <Replay />
-        </TouchableOpacity>
-
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => console.log('clicked')}>
-            <Image source={replay} style={styles.icon} />
+  if(ss == undefined) {
+    return (
+      <Text>Loading...</Text>
+    )
+  } else {
+    return (
+      <View>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: 32,
+            backgroundColor: '#f2f2f280',
+            alignSelf: 'center',
+            width: width - 40,
+            height: 100,
+            borderRadius: 5,
+            paddingLeft: 20,
+            paddingRight: 20,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity style={{ marginRight: 56 }} onPress={() => ss.setCurrentTime(0)}>
+            <Replay />
           </TouchableOpacity>
-          <View style={{width: 21}} />
-          {isPlaying && (
-            <TouchableOpacity onPress={pause}>
-              <Image source={pauseBtn} style={styles.pauseIcon} />
+  
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => console.log('clicked')}>
+              <Image source={replay} style={styles.icon} />
             </TouchableOpacity>
-          )}
-          {!isPlaying && (
-            <TouchableOpacity onPress={play}>
-              <PlayIconBig />
+            <View style={{width: 21}} />
+            {isPlaying && (
+              <TouchableOpacity onPress={pause}>
+                <Image source={pauseBtn} style={styles.pauseIcon} />
+              </TouchableOpacity>
+            )}
+            {!isPlaying && (
+              <TouchableOpacity onPress={play}>
+                <PlayIconBig />
+              </TouchableOpacity>
+            )}
+            <View style={{width: 21}} />
+            <TouchableOpacity onPress={() => console.log('clicked')}>
+              <Image source={forward} style={styles.icon} />
             </TouchableOpacity>
-          )}
-          <View style={{width: 21}} />
-          <TouchableOpacity onPress={() => console.log('clicked')}>
-            <Image source={forward} style={styles.icon} />
-          </TouchableOpacity>
-        </View>
-
-        <Image source={bookmark} style={[styles.icon, { marginLeft: 56 }]} />
-      </View>
-      <View style={styles.contentView}>
-        <View style={styles.progressBar}>
-          <Text>00:00</Text>
-          <View style={{width: width - 150}}>
-            <Slider
-              value={value.playSeconds}
-              maximumValue={value.duration}
-              minimumValue={0}
-              step={1}
-              allowTouchTrack
-              trackStyle={{height: 5, backgroundColor: 'transparent'}}
-              thumbStyle={{
-                height: 20,
-                width: 20,
-                backgroundColor: 'transparent',
-              }}
-              thumbProps={{}}
-              onValueChange={onSliderEditing}
-              onSlidingStart={onSliderEditStart}
-              onSlidingComplete={onSliderEditEnd}
-            />
           </View>
-
-          <Text>04:41</Text>
+  
+          <Image source={bookmark} style={[styles.icon, { marginLeft: 56 }]} />
+        </View>
+        <View style={styles.contentView}>
+          <View style={styles.progressBar}>
+            <Text>00:00</Text>
+            <View style={{width: width - 150}}>
+              <Slider
+                value={value.playSeconds}
+                maximumValue={value.duration}
+                minimumValue={0}
+                step={1}
+                allowTouchTrack
+                trackStyle={{height: 5, backgroundColor: 'transparent'}}
+                thumbStyle={{
+                  height: 20,
+                  width: 20,
+                  backgroundColor: 'transparent',
+                }}
+                thumbProps={{}}
+                onValueChange={onSliderEditing}
+                onSlidingStart={onSliderEditStart}
+                onSlidingComplete={onSliderEditEnd}
+              />
+            </View>
+  
+            <Text>04:41</Text>
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
+  }
 };
 
 const styles = StyleSheet.create({

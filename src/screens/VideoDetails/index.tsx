@@ -20,15 +20,33 @@ import Backwards from '../../icons/svg/Backwards';
 import Forwards from '../../icons/svg/Forwards';
 import PlayIconBig from '../../icons/svg/PlayIconBig';
 import Queue from '../../icons/svg/Queue';
+import { useFocusEffect } from '@react-navigation/native';
+import { getNarratorDetails } from '../../functions/requests';
 
 const {width, height} = Dimensions.get('window');
 export default function VideoDetails({navigation, route}: any) {
-  const {title, details, vimeoLink} = route.params;
+  const {title, details, vimeoLink, video} = route.params;
   const videoId = vimeoLink.replace(/\&.*$/, '');
   // remove all spaces at the start of the videoId string
   let videoIdTrimmed = videoId.replace(/^\s+/, '');
   videoIdTrimmed = videoIdTrimmed.split('/');
   videoIdTrimmed = videoIdTrimmed[videoIdTrimmed.length - 1];
+
+  const [author, setAuthor] = useState<any>();
+  const [description, setDescription] = useState<string>("");
+  const [image, setImage] = useState<string>("");
+
+  useFocusEffect(
+    React.useCallback(() => {
+      (async() => {
+        const data = await getNarratorDetails(video.author);
+        setAuthor(data[0][0]);
+
+        setDescription(data[1].description);
+        setImage(data[1].profile_image);
+      })();
+    }, [])
+  );
 
   return (
     <SafeAreaView>
@@ -64,9 +82,9 @@ export default function VideoDetails({navigation, route}: any) {
       </View>
 
       <View style={[styles.container, {marginTop: 16}]}>
-        <View style={styles.imageContainerNarrator}>
-          <Image source={placeholderImage} />
-        </View>
+          <View style={{ width: 60, height: 60 }}>
+            <Image style={{ width: "100%", height: "100%" }} source={image ? { uri: image } : placeholderImage} />
+          </View>
 
         <View style={{width: 230, marginLeft: 8}}>
           <Text
@@ -75,7 +93,7 @@ export default function VideoDetails({navigation, route}: any) {
               color: '#11535C',
               fontSize: 13,
             }}>
-            Narrator Details
+            {author ? author.display_name : ""}
           </Text>
           <Text
             style={{
@@ -84,10 +102,7 @@ export default function VideoDetails({navigation, route}: any) {
               fontSize: 10,
               lineHeight: 19.5,
             }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            dictum enim elementum sociis facilisis. Ultrices adipiscing gravida
-            pellentesque suspendisse a ornare. Nulla velit, pellentesque ipsum
-            enim. Tellus mauris hac erat eu morbi urna eu nisi, lectus.
+            {description}
           </Text>
         </View>
       </View>

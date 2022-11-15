@@ -55,6 +55,7 @@ export default function Videos({navigation, route}: any) {
               image={video._links['wp:featuredmedia']}
               vimeoLink={vimeoLink}
               details={details}
+              video={video}
             />
           );
         })}
