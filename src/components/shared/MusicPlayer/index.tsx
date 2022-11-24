@@ -2,7 +2,7 @@
 import TrackPlayer, {State} from 'react-native-track-player';
 // import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useMemo} from 'react';
 import {
   View,
   StyleSheet,
@@ -60,40 +60,22 @@ const MusicPlayer = ({audioFile}: any) => {
     title: 'FC',
   };
 
-  const setUpTrackPlayer = async () => {
-    try {
-      await TrackPlayer.setupPlayer();
-      // await TrackPlayer.add(track2);
-      await TrackPlayer.add(audioFile ? track2 : track);
-      console.log('Tracks added');
-      const position = await TrackPlayer.getPosition();
-      const duration = await TrackPlayer.getDuration();
-      console.log(`${duration - position} seconds left.`);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   const addTrack = async () => {
     try {
-      await TrackPlayer.add(audioFile ? audioFile : track);
+      await TrackPlayer.reset();
+      await TrackPlayer.add(audioFile ? track2 : track);
     } catch (e) {
       console.log(e);
     }
   };
 
-  // useEffect(() => {
-  //   addTrack();
-  //   console.log('adding');
-  // }, [audioFile]);
+  const a = useMemo(() => audioFile, []);
 
   useEffect(() => {
-    setUpTrackPlayer();
-
-    return () => {
-      TrackPlayer.seekTo(0);
-    };
-  }, []);
+    // this will be triggered only when "a" value actually changes
+    addTrack();
+    console.log('track added');
+  }, [a]);
 
   const skipTo = async (add?: boolean) => {
     try {

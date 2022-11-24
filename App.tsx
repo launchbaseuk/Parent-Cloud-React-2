@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo, useCallback} from 'react';
 import {
   ScrollView,
   StatusBar,
@@ -121,6 +121,26 @@ const App = () => {
   //     }
   //   })();
   // }, []);
+
+  const setUpTrackPlayer = useCallback(async () => {
+    try {
+      await TrackPlayer.setupPlayer();
+      console.log('Player Set Up');
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
+  // useMemo(() => {
+  //   useCallback(() => {
+  //     setUpTrackPlayer();
+  //   });
+  // }, [setUpTrackPlayer]);
+
+  useEffect(() => {
+    // this will be triggered only when "fetch" value actually changes
+    setUpTrackPlayer();
+  }, [setUpTrackPlayer]);
 
   return (
     <NavigationContainer>
