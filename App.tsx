@@ -10,7 +10,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useAuth} from './src/contexts/auth-context';
 
-import {SafeAreaView} from 'react-native-safe-area-context';
+import TrackPlayer from 'react-native-track-player';
 
 // Screens
 import Homepage from './src/screens/Homepage';
@@ -72,6 +72,7 @@ import PlayerScreen from 'react-native-sound-playerview';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import MusicPlayer from './src/components/shared/MusicPlayer';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -88,7 +89,9 @@ const TabNav = () => {
 
   return (
     <Tab.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{
+        headerShown: false,
+      }}
       tabBar={props => <TabBar {...props} />}>
       <Tab.Screen name="Home" component={Homepage} />
       <Tab.Screen name="Support" component={Support} />
@@ -98,6 +101,9 @@ const TabNav = () => {
     </Tab.Navigator>
   );
 };
+
+//Declaring an audioplayer
+TrackPlayer.registerPlaybackService(() => require('./service'));
 
 const App = () => {
   const {loggedIn}: any = useAuth();
@@ -169,6 +175,7 @@ const App = () => {
           <Stack.Screen name="GuidedMeditation" component={GuidedMeditation} />
           <Stack.Screen name="MediaDetails" component={MediaDetails} />
           <Stack.Screen name="AudioPlayer" component={AudioPlayer} />
+          <Stack.Screen name="MusicPlayer" component={MusicPlayer} />
           <Stack.Screen name="player" component={PlayerScreen} />
           <Stack.Screen name="GuidesMedia" component={GuidesMedia} />
           <Stack.Screen name="Videos" component={Videos} />
