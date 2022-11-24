@@ -38,19 +38,20 @@ const audio = (audioLink: string) => {
       console.log('failed to load the sound', error);
       return;
     }
-    
+
     console.log('volume: ' + ding.getVolume());
   });
   Sound.setCategory('Playback');
-  
+
   return ding;
-}
+};
 
 const AudioPlayer = (props: any) => {
   const [ss, setSS] = useState<any>();
+  const [audioDuration, setAudioDuration] = useState<any>();
 
   useEffect(() => {
-    if(props.audioLink) {
+    if (props.audioLink) {
       setSS(audio(props.audioLink));
     } else {
       setSS(audio(dings));
@@ -79,15 +80,29 @@ const AudioPlayer = (props: any) => {
   useEffect(() => {
     // Pause and clean up on unmount
     return () => {
-      audioRef.current.pause();
+      // audioRef?.current.pause();
       clearInterval(intervalRef.current);
     };
   }, []);
 
+  useEffect(() => {
+    const SECONDS = ss?.getDuration();
+
+    if (SECONDS < 3600) {
+      const dur = new Date(SECONDS * 1000).toISOString().substring(14, 19);
+      setAudioDuration(dur);
+      return;
+    }
+    const dur = new Date(SECONDS * 1000).toISOString().substring(11, 16);
+    setAudioDuration(dur);
+  }, []);
+
+  console.log('durrration', audioDuration);
+
   const play = () => {
     setIsPlaying(true);
     console.log('play');
-    ss.play(success => {
+    ss?.play(success => {
       if (success) {
         console.log('successfully finished playing');
       } else {
@@ -98,8 +113,8 @@ const AudioPlayer = (props: any) => {
   const pause = () => {
     setIsPlaying(false);
     console.log('pauseee');
-    ss.pause(success => {
-      if(success) console.log(success);
+    ss?.pause(success => {
+      if (success) console.log(success);
     });
   };
 
@@ -115,10 +130,8 @@ const AudioPlayer = (props: any) => {
     setValue({...value, playSeconds: val});
   };
 
-  if(ss == undefined) {
-    return (
-      <Text>Loading...</Text>
-    )
+  if (ss == undefined) {
+    return <Text>Loading...</Text>;
   } else {
     return (
       <View>
@@ -136,10 +149,12 @@ const AudioPlayer = (props: any) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <TouchableOpacity style={{ marginRight: 56 }} onPress={() => ss.setCurrentTime(0)}>
+          <TouchableOpacity
+            style={{marginRight: 56}}
+            onPress={() => ss.setCurrentTime(0)}>
             <Replay />
           </TouchableOpacity>
-  
+
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <TouchableOpacity onPress={() => console.log('clicked')}>
               <Image source={replay} style={styles.icon} />
@@ -160,8 +175,8 @@ const AudioPlayer = (props: any) => {
               <Image source={forward} style={styles.icon} />
             </TouchableOpacity>
           </View>
-  
-          <Image source={bookmark} style={[styles.icon, { marginLeft: 56 }]} />
+
+          <Image source={bookmark} style={[styles.icon, {marginLeft: 56}]} />
         </View>
         <View style={styles.contentView}>
           <View style={styles.progressBar}>
@@ -185,7 +200,7 @@ const AudioPlayer = (props: any) => {
                 onSlidingComplete={onSliderEditEnd}
               />
             </View>
-  
+
             <Text>04:41</Text>
           </View>
         </View>

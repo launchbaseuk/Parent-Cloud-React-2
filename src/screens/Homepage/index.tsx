@@ -18,8 +18,16 @@ export default function Homepage() {
   const constantOptions = [
     {text: 'One-to-one Sessions', image: <OneToOneImage />, screen: 'OneToOne'},
     {text: 'Pocket CBT', image: <PocketCBTImage />, screen: 'PocketCBT'},
-    {text: 'Dynamic content #1', image: <DynamicOneImage />, screen: 'DynamicOne'},
-    {text: 'Dynamic content #2', image: <DynamicTwoImage />, screen: 'DynamicTwo'},
+    {
+      text: 'Dynamic content #1',
+      image: <DynamicOneImage />,
+      screen: 'DynamicOne',
+    },
+    {
+      text: 'Dynamic content #2',
+      image: <DynamicTwoImage />,
+      screen: 'DynamicTwo',
+    },
   ];
 
   return (
@@ -39,5 +47,3 @@ export default function Homepage() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({});

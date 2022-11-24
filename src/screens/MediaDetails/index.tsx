@@ -1,14 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  Dimensions,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-
-import {Slider} from '@rneui/themed';
+import React, {useState} from 'react';
+import {View, StyleSheet, Text, Dimensions, Image} from 'react-native';
 
 // Components
 import BackButton from '../../components/BackButton';
@@ -16,21 +7,11 @@ import BackButton from '../../components/BackButton';
 // Images
 import headphones from '../../icons/headphones.png';
 import placeholderImage from '../../images/PlaceholderImage.png';
-import Replay from '../../icons/svg/Replay';
-import Backwards from '../../icons/svg/Backwards';
-import Forwards from '../../icons/svg/Forwards';
-import PlayIconBig from '../../icons/svg/PlayIconBig';
-import Queue from '../../icons/svg/Queue';
-import forward from '../../images/forward.png';
-import replay from '../../images/replay.png';
-import bookmark from '../../images/bookmark.png';
-import AudioPlayer from '../../components/shared/AudioPlayer';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import MusicPlayer from '../../components/shared/MusicPlayer';
 
 const {width, height} = Dimensions.get('window');
 export default function MediaDetails({navigation, route}) {
-  const [value, setValue] = useState(0);
-
   return (
     <SafeAreaView>
       <BackButton text="Details" />
@@ -94,8 +75,7 @@ export default function MediaDetails({navigation, route}) {
           </Text>
         </View>
       </View>
-
-      <AudioPlayer />
+      <MusicPlayer />
     </SafeAreaView>
   );
 }

@@ -14,22 +14,31 @@ import headphones from '../../icons/headphones.png';
 import PlayIconSmall from '../../icons/svg/PlayIconSmall';
 
 const {width, height} = Dimensions.get('window');
-export default function MediaListItem({title, content, link, image, onPress}: any) {
+export default function MediaListItem({
+  title,
+  content,
+  link,
+  image,
+  onPress,
+}: any) {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    if(onPress) {
+    if (onPress) {
       onPress();
     } else {
       navigation.navigate('MediaDetails');
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row'}}>
         <View style={styles.imageContainer}>
-          <Image source={link ? { uri: link } : headphones} style={{ width: "100%", height: "100%" }} />
+          <Image
+            source={link ? {uri: link} : headphones}
+            style={{width: '100%', height: '100%'}}
+          />
         </View>
 
         <View style={styles.textContainer}>
@@ -38,7 +47,7 @@ export default function MediaListItem({title, content, link, image, onPress}: an
               fontFamily: 'Montserrat-Bold',
               color: '#11535C',
               fontSize: 14,
-              width: "65%"
+              width: '65%',
             }}>
             {title}
           </Text>
@@ -56,7 +65,12 @@ export default function MediaListItem({title, content, link, image, onPress}: an
       </View>
 
       <TouchableOpacity
-        style={{alignSelf: 'center', position: "absolute", bottom: 14, right: 14 }}
+        style={{
+          alignSelf: 'center',
+          position: 'absolute',
+          bottom: 14,
+          right: 14,
+        }}
         onPress={handlePress}>
         <PlayIconSmall />
       </TouchableOpacity>
@@ -77,13 +91,13 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 8
+    marginTop: 8,
   },
   textContainer: {
     marginLeft: 8,
     height: 100,
     justifyContent: 'center',
-    marginTop: 15
+    marginTop: 15,
   },
   imageContainer: {
     width: 80,
