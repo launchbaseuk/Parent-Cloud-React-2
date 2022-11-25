@@ -13,6 +13,8 @@ const VideoPlayerShared = ({route}: any) => {
   });
   const navigation = useNavigation();
 
+  console.log('aaa', route);
+
   useEffect(() => {
     const VIMEO_ID = '652384203';
     fetch(`https://player.vimeo.com/video/${VIMEO_ID}/config`)
@@ -29,9 +31,9 @@ const VideoPlayerShared = ({route}: any) => {
   return (
     // <SafeAreaView style={{flex: 1}}>
     <VideoPlayer
-      ref={ref => {
-        this.player = ref;
-      }}
+      // ref={ref => {
+      //   this.player = ref;
+      // }}
       source={{uri: video.videoUrl}}
       navigator={navigation}
       fullscreen={false}
