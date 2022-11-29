@@ -17,9 +17,7 @@ export default function PocketCBTCard({text, image, route}: any) {
     <TouchableOpacity
       style={styles.cardContainer}
       onPress={() => navigation.navigate(route)}>
-      <View style={styles.imageWrapper}>
-        {image}
-      </View>
+      <View style={styles.imageWrapper}>{image}</View>
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
