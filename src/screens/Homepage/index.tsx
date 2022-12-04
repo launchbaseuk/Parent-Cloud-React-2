@@ -24,7 +24,7 @@ export default function Homepage() {
       screen: 'DynamicOne',
     },
     {
-      text: 'Dynamic content #2',
+      text: 'Latest Releases',
       image: <DynamicTwoImage />,
       screen: 'DynamicTwo',
     },

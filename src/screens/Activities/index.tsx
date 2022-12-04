@@ -29,6 +29,8 @@ import Reading from "../../icons/svg/Reading";
 import ReadingSelected from "../../icons/svg/ReadingSelected";
 import Friend from "../../icons/svg/Friend";
 import FriendSelected from "../../icons/svg/FriendSelected";
+import uploadCheckIn from "../../functions/uploadCheckIn";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { width, height } = Dimensions.get("window");
 export default function Activities({ navigation, route }: any) {
@@ -36,8 +38,12 @@ export default function Activities({ navigation, route }: any) {
     const otherFeeling = route.params.otherFeeling;
     const [selected, setSelected] = useState<any>([]);
 
-    const handlePress = () => {
+    const handlePress = async () => {
         if(feeling == "ok" || feeling == "great") {
+            const email = await AsyncStorage.getItem("user_email");
+            const token = await AsyncStorage.getItem('token');
+
+            await uploadCheckIn(feeling, otherFeeling, selected, "", "", "", "", email, token);
             navigation.navigate("SuccessApricity", { pageFrom: "mindhub" });
         } else {
             navigation.navigate("Thoughts", { feeling: feeling, otherFeeling: otherFeeling, activity: selected });
