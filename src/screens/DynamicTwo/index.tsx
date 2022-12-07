@@ -1,17 +1,54 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, SafeAreaView} from 'react-native';
+import {View, StyleSheet, Text, SafeAreaView, ScrollView} from 'react-native';
 import BackButton from '../../components/BackButton';
+import latestItems from '../../functions/latestItems';
+
+// Components
+import DynamicContentContainer from '../../components/DynamicContentContainer';
 
 export default function DynamicTwo() {
+  const [guides, setGuides] = useState<any>([]);
+  const [videos, setVideos] = useState<any>([]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      (async() => {
+        const items = await latestItems();
+
+        setGuides(items[0]);
+        setVideos(items[1]);
+      })();
+    }, [])
+  );
+
   return (
     <SafeAreaView>
-      <BackButton text={'Homepage'} />
-      <View style={styles.wrapper}>
-        <Text style={styles.title}>Dynamic Content #2</Text>
-        <Text style={styles.content}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Text>
-      </View>
+      <ScrollView>
+        <BackButton text={'Latest Releases'} />
+        <View style={styles.wrapper}>
+          <Text style={styles.title}>Latest Guides</Text>
+          {/* MAP GUIDES */}
+          {guides.map((guide: any) => {
+            const excerpt = guide?.excerpt?.rendered.replace(/(<([^>]+)>)/gi, '');
+            const title = guide?.title.rendered;
+            const mediaId = guide?.featured_media;
+
+            return (
+              <DynamicContentContainer
+                key={mediaId}
+                title={title}
+                excerpt={excerpt}
+                mediaId={mediaId}
+              />
+            )
+          })}
+
+          <Text style={styles.title}>Latest Videos</Text>
+          {/* MAP VIDEOS */}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -20,6 +57,7 @@ const styles = StyleSheet.create({
   wrapper: {
     marginTop: 50,
     marginLeft: 32,
+    marginRight: 32
   },
   title: {
     color: '#11535C',

@@ -8,6 +8,8 @@ import FeelingsCard from '../../components/FeelingsCard';
 import PrimaryButton from '../../components/shared/PrimaryButton';
 import SecondaryButton from '../../components/shared/SecondaryButton';
 import Selection from '../../components/shared/Selection';
+import Anxious from '../../icons/svg/Anxious';
+import AnxiousSelected from '../../icons/svg/AnxiousSelected';
 import Depressed from '../../icons/svg/Depressed';
 import DepressedSelected from '../../icons/svg/DepressedSelected';
 import Happy from '../../icons/svg/Happy';
@@ -16,8 +18,86 @@ import Playful from '../../icons/svg/Playful';
 import PlayfulSelected from '../../icons/svg/PlayfulSelected';
 
 const {width, height} = Dimensions.get('window');
-export default function ReviewDetails({navigation}) {
+export default function ReviewDetails({navigation, route}: any) {
   const [selected, setSelected] = useState<string>('');
+  const {checkIn} = route.params;
+  const [feelingCards, setFeelingCards] = useState([
+    {
+      key: 'ok',
+      code: (
+        <FeelingsCard
+          text="Ok"
+          icon={<Happy />}
+          iconSelected={<HappySelected />}
+          itemKey="ok"
+          selected={''}
+          setSelected={() => console.log('')}
+        />
+      ),
+    },
+    {
+      key: 'notgood',
+      code: (
+        <FeelingsCard
+          text="Not good"
+          icon={<Anxious />}
+          iconSelected={<AnxiousSelected />}
+          itemKey="notgood"
+          selected={selected}
+          setSelected={() => console.log('')}
+        />
+      ),
+    },
+    {
+      key: 'awful',
+      code: (
+        <FeelingsCard
+          text="Awful"
+          icon={<Depressed />}
+          iconSelected={<DepressedSelected />}
+          itemKey="awful"
+          selected={selected}
+          setSelected={() => console.log('')}
+        />
+      ),
+    },
+    {
+      key: 'great',
+      code: (
+        <FeelingsCard
+          text="Great"
+          icon={<Playful />}
+          iconSelected={<PlayfulSelected />}
+          itemKey="great"
+          selected={selected}
+          setSelected={() => console.log('')}
+        />
+      ),
+    },
+  ]);
+
+  const [distortions, setDistortions] = useState([
+    {text: 'All or nothing thinking', key: 'allOrNothing'},
+    {text: 'Overgeneralisation', key: 'overgeneralisation'},
+    {text: 'Catastrophising', key: 'catastrophising'},
+    {text: 'Jumping to conclusions', key: 'jumpingToConclusions'},
+    {text: 'Emotional reasoning', key: 'emotionalReasoning'},
+    {text: 'Should or must statements', key: 'shouldOrMustStatements'},
+    {text: 'Labelling', key: 'labelling'},
+    {text: 'Blaming', key: 'blaming'},
+  ]);
+  const [feeling_now, setFeelingNow] = useState([
+    {key: 'better', text: 'Better'},
+    {key: 'worse', text: 'Worse'},
+    {key: 'same', text: 'The same'},
+  ]);
+
+  const date = new Date(checkIn.date);
+  const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+  const month =
+    date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const year = date.getFullYear();
+  const formattedDate = `${day}/${month}/${year}`;
 
   return (
     <SafeAreaView>
@@ -32,7 +112,7 @@ export default function ReviewDetails({navigation}) {
             paddingLeft: 16,
             marginTop: 50,
           }}>
-          01/01/2023
+          {formattedDate}
         </Text>
         <Text
           style={{
@@ -47,30 +127,18 @@ export default function ReviewDetails({navigation}) {
         </Text>
         <View
           style={{flexDirection: 'row', alignSelf: 'center', marginBottom: 64}}>
-          <FeelingsCard
-            text="Happy"
-            icon={<Happy />}
-            iconSelected={<HappySelected />}
-            itemKey="happy"
-            selected={''}
-            setSelected={() => console.log('')}
-          />
-          <FeelingsCard
-            text="Playful"
-            icon={<Playful />}
-            iconSelected={<PlayfulSelected />}
-            itemKey="playful"
-            selected={''}
-            setSelected={() => console.log('')}
-          />
-          <FeelingsCard
-            text="Depressed"
-            icon={<Depressed />}
-            iconSelected={<DepressedSelected />}
-            itemKey="depressed"
-            selected={''}
-            setSelected={() => console.log('')}
-          />
+          {checkIn.acf.feeling ? (
+            checkIn.acf.feeling.map((feel: any) => {
+              const feelingCard = feelingCards.find(card => card.key === feel);
+              if (feelingCard) {
+                return feelingCard.code;
+              } else {
+                return <Text>No feeling selected.</Text>;
+              }
+            })
+          ) : (
+            <Text>No feeling selected.</Text>
+          )}
         </View>
 
         <View>
@@ -80,16 +148,27 @@ export default function ReviewDetails({navigation}) {
               color: '#11535C',
               fontSize: 20,
               paddingLeft: 16,
-              marginBottom: 16,
+              marginTop: 50,
             }}>
-            Which cognitive distortions does this thought have?
+            01/01/2023
           </Text>
-          <Selection
-            selected={'Should or must statements'}
-            setSelected={setSelected}
-            text="Should or must statements"
-            itemKey="Should or must statements"
-          />
+          {checkIn.acf.cognitive_distortions ? (
+            <View style={styles.cognitiveContainer}>
+              <Text style={styles.cognitiveText}>
+                {distortions.map((dist: any) => {
+                  if (dist.key === checkIn.acf.cognitive_distortions) {
+                    return dist.text;
+                  }
+                })}
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.cognitiveContainer}>
+              <Text style={styles.cognitiveText}>
+                No cognitive distortions selected.
+              </Text>
+            </View>
+          )}
         </View>
 
         <View style={{marginTop: 64}}>
@@ -99,9 +178,10 @@ export default function ReviewDetails({navigation}) {
               color: '#11535C',
               fontSize: 20,
               paddingLeft: 16,
+              marginTop: 50,
               marginBottom: 16,
             }}>
-            How could you challenge this thought?
+            What are your feelings?
           </Text>
           <Text
             style={{
@@ -116,10 +196,7 @@ export default function ReviewDetails({navigation}) {
               fontFamily: 'Montserrat-Regular',
               opacity: 0.5,
             }}>
-            Convallis vestibulum tellus ultrices mus feugiat ornare. Phasellus
-            magna augue felis, ultricies dignissim penatibus interdum.
-            Vestibulum quisque et auctor sed metus. Varius nisl, at nisl risus,
-            aliquet ipsum.
+            {checkIn.acf.challenge ? checkIn.acf.challenge : 'No challenge'}
           </Text>
         </View>
         <View style={{paddingBottom: 50}}>
@@ -133,16 +210,41 @@ export default function ReviewDetails({navigation}) {
             }}>
             How are you feeling now?
           </Text>
-          <Selection
-            selected={'Should or must statements'}
-            setSelected={setSelected}
-            text="Should or must statements"
-            itemKey="Should or must statements"
-          />
+          {checkIn.acf.feeling_now ? (
+            <View style={styles.cognitiveContainer}>
+              <Text style={styles.cognitiveText}>
+                {feeling_now.map((dist: any) => {
+                  if (dist.key === checkIn.acf.feeling_now) {
+                    return dist.text;
+                  }
+                })}
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.cognitiveContainer}>
+              <Text style={styles.cognitiveText}>No feeling selected.</Text>
+            </View>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  cognitiveContainer: {
+    backgroundColor: '#11535C',
+    width: width - 40,
+    height: 44,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginTop: 8,
+    justifyContent: 'center',
+    paddingLeft: 16,
+  },
+  cognitiveText: {
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 13,
+    color: '#FFFAC5',
+  },
+});

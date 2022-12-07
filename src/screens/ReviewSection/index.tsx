@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {ScrollView, View, Text, Dimensions} from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 
 import axios from 'axios';
 
@@ -9,9 +16,13 @@ import {DropDown} from '../../components/DropDown';
 import {LineChart} from 'react-native-chart-kit';
 import StaticSelection from '../../components/shared/StaticSelection';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useFocusEffect} from '@react-navigation/native';
+import getCheckIns from '../../functions/getCheckIns';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}];
-const ReviewSection = () => {
+const {width, height} = Dimensions.get('window');
+const ReviewSection = ({navigation, route}: any) => {
   const [dropdown, setDropdown] = useState({
     june: false,
     july: false,
@@ -19,19 +30,61 @@ const ReviewSection = () => {
   });
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:1337/api/feelings/1')
-      .then(res => {
-        console.log(res);
-        setData(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:1337/api/feelings/1')
+  //     .then(res => {
+  //       console.log(res);
+  //       setData(res.data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
-  console.log(data);
+  // console.log(data);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      (async () => {
+        const email = await AsyncStorage.getItem('user_email');
+        const token = await AsyncStorage.getItem('token');
+
+        let checkIns: any = await getCheckIns(email, token);
+
+        let groupedCheckIns: any = {};
+        for (let i = 0; i < checkIns.length; i++) {
+          let date = checkIns[i].modified;
+          date = new Date(date);
+          const monthNames = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+          ];
+          let month = monthNames[date.getMonth()];
+
+          let checkIn: any = checkIns[i];
+
+          if (groupedCheckIns[month] === undefined) {
+            groupedCheckIns[month] = [];
+          }
+
+          groupedCheckIns[month].push(checkIn);
+        }
+
+        setData(groupedCheckIns);
+      })();
+    }, []),
+  );
 
   return (
     <SafeAreaView>
@@ -112,36 +165,56 @@ const ReviewSection = () => {
           }}>
           Previous
         </Text>
-        <DropDown
-          title="June"
-          onPress={() => setDropdown({...dropdown, june: !dropdown.june})}
-          isOpen={dropdown.june}>
-          <Text>Monday 1st</Text>
-          <Text>Monday 1st</Text>
-          <Text>Monday 1st</Text>
-          <Text>Monday 1st</Text>
-        </DropDown>
-        <DropDown
-          title="July"
-          onPress={() => setDropdown({...dropdown, july: !dropdown.july})}
-          isOpen={dropdown.july}>
-          <Text>Monday 1st</Text>
-          <Text>Monday 1st</Text>
-          <Text>Monday 1st</Text>
-          <Text>Monday 1st</Text>
-        </DropDown>
-        <DropDown
-          title="August"
-          onPress={() => setDropdown({...dropdown, aug: !dropdown.aug})}
-          isOpen={dropdown.aug}>
-          <Text>Monday 1st</Text>
-          <Text>Monday 1st</Text>
-          <Text>Monday 1st</Text>
-          <Text>Monday 1st</Text>
-        </DropDown>
+        {Object.keys(data).map((key: any) => {
+          return (
+            <DropDown
+              title={key}
+              onPress={() => setDropdown({...dropdown, june: !dropdown.june})}
+              isOpen={dropdown.june}>
+              {Object.values(data[key]).map((checkIn: any) => {
+                let date = checkIn.modified;
+                date = new Date(date);
+                date =
+                  (date.getDate() < 10
+                    ? '0' + date.getDate()
+                    : date.getDate()) +
+                  '/' +
+                  (date.getMonth + 1 < 10
+                    ? '0' + date.getMonth() + 1
+                    : date.getMonth() + 1) +
+                  '/' +
+                  date.getFullYear();
+
+                const handleNavigation = () => {
+                  navigation.navigate('ReviewDetails', {checkIn: checkIn});
+                };
+
+                return (
+                  <TouchableOpacity
+                    style={styles.buttonPrevious}
+                    onPress={handleNavigation}>
+                    <Text>{date}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </DropDown>
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default ReviewSection;
+
+const styles = StyleSheet.create({
+  buttonPrevious: {
+    width: width * 0.9,
+    height: 40,
+    borderRadius: 8,
+    paddingLeft: 20,
+    backgroundColor: '#e1e2e3',
+    justifyContent: 'center',
+    marginTop: 5,
+  },
+});

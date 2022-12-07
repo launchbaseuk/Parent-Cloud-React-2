@@ -25,7 +25,7 @@ export default function Thoughts({ navigation, route }: any) {
     return (
         <View>
             {confirmed ? (
-                <Questions />
+                <Questions optionPrevious={selected} feeling={route.params.feeling} otherFeeling={route.params.otherFeeling} activity={route.params.activity} />
             ) : (
                 <>
                     <Text style={styles.headerText}>Which cognitive distortions does this thought have?</Text>
