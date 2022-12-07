@@ -14,7 +14,7 @@ import LearnImage from '../../images/svg/LearnImage';
 export default function PocketCBT() {
   return (
     <SafeAreaView>
-      <View style={styles.container}>
+      <View>
         <BackButton text={'Pocket CBT'} />
 
         <View style={{height: 32}} />

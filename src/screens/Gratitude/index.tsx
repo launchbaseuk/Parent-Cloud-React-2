@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Dimensions, Text, TextInput} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 // Components
 import PrimaryButton from '../../components/shared/PrimaryButton';
@@ -11,7 +12,7 @@ export default function Gratitude({navigation}) {
   const [selected, setSelected] = useState<string>('');
 
   return (
-    <View>
+    <SafeAreaView>
       <Text
         style={{
           fontFamily: 'SofiaProBlack',
@@ -91,7 +92,7 @@ export default function Gratitude({navigation}) {
           disabled={selected != '' ? false : true}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

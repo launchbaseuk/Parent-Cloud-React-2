@@ -1,17 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {
-  ScrollView,
-  View,
-  Text,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+import {ScrollView, View, Text, Dimensions} from 'react-native';
 
 import axios from 'axios';
 
 import BackButton from '../../components/BackButton';
 import {DropDown} from '../../components/DropDown';
-import Selection from '../../components/shared/Selection';
 
 import {LineChart} from 'react-native-chart-kit';
 import StaticSelection from '../../components/shared/StaticSelection';

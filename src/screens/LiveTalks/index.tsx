@@ -1,6 +1,8 @@
 import {useFocusEffect} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Text, ScrollView} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
 import BackButton from '../../components/BackButton';
 import ListItem from '../../components/ListItem';
 import TagFilter from '../../components/TagFilter';
@@ -25,7 +27,7 @@ export default function LiveTalks() {
   );
 
   return (
-    <View>
+    <SafeAreaView>
       <ScrollView>
         <BackButton text={'Live Talks'} />
         <TagFilter />
@@ -43,7 +45,7 @@ export default function LiveTalks() {
           );
         })}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
