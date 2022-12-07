@@ -68,7 +68,7 @@ const IntroSlider = ({navigation}) => {
                   fontSize: 27,
                   fontFamily: 'SofiaProBlack',
                 }}>
-                One-to-one Sessions
+                One-to-One Sessions
               </Text>
               <Text
                 style={{

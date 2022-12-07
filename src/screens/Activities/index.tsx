@@ -81,7 +81,7 @@ export default function Activities({navigation, route}: any) {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: 'white', height: '100%'}}>
       <Text
         style={{
           fontFamily: 'SofiaProBlack',

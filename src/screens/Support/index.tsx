@@ -7,7 +7,7 @@ import LiveSupport from '../../components/shared/ScreenHeaders/LiveSupport';
 import ContentCard from '../../components/shared/ContentCard';
 
 // Images
-import OneToOneImage from "../../images/svg/OneToOneImage";
+import OneToOneImage from '../../images/svg/OneToOneImage';
 import LiveTalksImage from '../../images/svg/LiveTalksImage';
 import AntenatalCoursesImage from '../../images/svg/AntenatalCoursesImage';
 import BabyClassesImage from '../../images/svg/BabyClassesImage';
@@ -15,9 +15,13 @@ import FertilityImage from '../../images/svg/FertilityImage';
 
 export default function Support() {
   const constantOptions = [
-    {text: 'One-to-one Sessions', image: <OneToOneImage />, screen: 'OneToOne'},
+    {text: 'One-to-One Sessions', image: <OneToOneImage />, screen: 'OneToOne'},
     {text: 'Live Talks', image: <LiveTalksImage />, screen: 'LiveTalks'},
-    {text: 'Antenatal Classes', image: <AntenatalCoursesImage />, screen: 'Antenatal'},
+    {
+      text: 'Antenatal Classes',
+      image: <AntenatalCoursesImage />,
+      screen: 'Antenatal',
+    },
     {text: 'Baby Classes', image: <BabyClassesImage />, screen: 'BabyClasses'},
     // {text: 'Fertility', image: <FertilityImage />, screen: 'Fertility'},
   ];

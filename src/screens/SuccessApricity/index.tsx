@@ -77,5 +77,6 @@ const styles = StyleSheet.create({
   successContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    height: '100%',
   },
 });
