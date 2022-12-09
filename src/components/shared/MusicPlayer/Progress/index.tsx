@@ -54,13 +54,13 @@ const styles = StyleSheet.create({
   },
   container: {
     height: 40,
-    width: width - 40,
+    width: width - 60,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   labelContainer: {
-    width: 370,
+    width: width - 60,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

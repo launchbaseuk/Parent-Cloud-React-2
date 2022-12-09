@@ -154,52 +154,54 @@ const ReviewSection = ({navigation, route}: any) => {
         <StaticSelection text="Monday" route="ReviewDetails" />
         <StaticSelection text="Tuesday" route="ReviewDetails" />
         <StaticSelection text="Wednesday" route="ReviewDetails" />
-        <Text
-          style={{
-            fontFamily: 'SofiaProBlack',
-            color: '#11535C',
-            fontSize: 20,
-            paddingLeft: 16,
-            marginTop: 50,
-            marginBottom: 16,
-          }}>
-          Previous
-        </Text>
-        {Object.keys(data).map((key: any) => {
-          return (
-            <DropDown
-              title={key}
-              onPress={() => setDropdown({...dropdown, june: !dropdown.june})}
-              isOpen={dropdown.june}>
-              {Object.values(data[key]).map((checkIn: any) => {
-                let date = checkIn.modified;
-                date = new Date(date);
-                date =
-                  (date.getDate() < 10
-                    ? '0' + date.getDate()
-                    : date.getDate()) +
-                  '/' +
-                  (date.getMonth + 1 < 10
-                    ? '0' + date.getMonth() + 1
-                    : date.getMonth() + 1) +
-                  '/' +
-                  date.getFullYear();
+        <View style={{paddingBottom: 100}}>
+          <Text
+            style={{
+              fontFamily: 'SofiaProBlack',
+              color: '#11535C',
+              fontSize: 20,
+              paddingLeft: 16,
+              marginTop: 50,
+              marginBottom: 16,
+            }}>
+            Previous
+          </Text>
+          {Object.keys(data).map((key: any) => {
+            return (
+              <DropDown
+                title={key}
+                onPress={() => setDropdown({...dropdown, june: !dropdown.june})}
+                isOpen={dropdown.june}>
+                {Object.values(data[key]).map((checkIn: any) => {
+                  let date = checkIn.modified;
+                  date = new Date(date);
+                  date =
+                    (date.getDate() < 10
+                      ? '0' + date.getDate()
+                      : date.getDate()) +
+                    '/' +
+                    (date.getMonth + 1 < 10
+                      ? '0' + date.getMonth() + 1
+                      : date.getMonth() + 1) +
+                    '/' +
+                    date.getFullYear();
 
-                const handleNavigation = () => {
-                  navigation.navigate('ReviewDetails', {checkIn: checkIn});
-                };
+                  const handleNavigation = () => {
+                    navigation.navigate('ReviewDetails', {checkIn: checkIn});
+                  };
 
-                return (
-                  <TouchableOpacity
-                    style={styles.buttonPrevious}
-                    onPress={handleNavigation}>
-                    <Text>{date}</Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </DropDown>
-          );
-        })}
+                  return (
+                    <TouchableOpacity
+                      style={styles.buttonPrevious}
+                      onPress={handleNavigation}>
+                      <Text>{date}</Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              </DropDown>
+            );
+          })}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

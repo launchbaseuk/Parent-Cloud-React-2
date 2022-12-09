@@ -12,7 +12,7 @@ export default function Gratitude({navigation}) {
   const [selected, setSelected] = useState<string>('');
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{height: '100%', justifyContent: 'center'}}>
       <Text
         style={{
           fontFamily: 'SofiaProBlack',

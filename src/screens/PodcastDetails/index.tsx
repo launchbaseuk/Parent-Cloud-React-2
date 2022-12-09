@@ -15,12 +15,7 @@ import BackButton from '../../components/BackButton';
 // Images
 import headphones from '../../icons/headphones.png';
 import placeholderImage from '../../images/PlaceholderImage.png';
-import Replay from '../../icons/svg/Replay';
-import Backwards from '../../icons/svg/Backwards';
-import Forwards from '../../icons/svg/Forwards';
-import PlayIconBig from '../../icons/svg/PlayIconBig';
-import Queue from '../../icons/svg/Queue';
-import AudioPlayer from '../../components/shared/AudioPlayer';
+
 import {useFocusEffect} from '@react-navigation/native';
 import {getNarratorDetails} from '../../functions/requests';
 import MusicPlayer from '../../components/shared/MusicPlayer';
