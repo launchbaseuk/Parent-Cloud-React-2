@@ -14,7 +14,7 @@ import LearnImage from '../../images/svg/LearnImage';
 export default function PocketCBT() {
   return (
     <SafeAreaView>
-      <View>
+      <View style={styles.container}>
         <BackButton text={'Pocket CBT'} />
 
         <View style={{height: 32}} />
@@ -40,4 +40,9 @@ export default function PocketCBT() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#FFFFFF',
+    height: '100%',
+  },
+});
