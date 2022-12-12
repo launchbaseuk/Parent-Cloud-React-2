@@ -39,19 +39,38 @@ export default function Podcasts({navigation, route}: any) {
         <TagFilter />
         <View style={{height: 16}} />
 
-        {podcasts.map((podcast: any) => {
-          // remove all <> tags from post_content
-          const regex = /(<([^>]+)>)/gi;
-          const result = podcast.post_content.replace(regex, '');
-          const link = podcast.post_content.match(/<img[^>]+src="?([^"\s]+)"?[^>]*>/)[1];
+        <View style={styles.wrapper}>
+          {podcasts.map((podcast: any) => {
+            // remove all <> tags from post_content
+            const regex = /(<([^>]+)>)/gi;
+            const result = podcast.post_content.replace(regex, '');
+            const link = podcast.post_content.match(
+              /<img[^>]+src="?([^"\s]+)"?[^>]*>/,
+            )[1];
 
-          return (
-            <MediaListItem onPress={() => navigation.navigate('PodcastDetails', {podcast: podcast, link: link})} key={podcast.ID} link={link} title={podcast.post_title} content={result}  />
-          )
-        })}
+            return (
+              <MediaListItem
+                onPress={() =>
+                  navigation.navigate('PodcastDetails', {
+                    podcast: podcast,
+                    link: link,
+                  })
+                }
+                key={podcast.ID}
+                link={link}
+                title={podcast.post_title}
+                content={result}
+              />
+            );
+          })}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  wrapper: {
+    paddingBottom: 100,
+  },
+});

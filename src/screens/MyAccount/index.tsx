@@ -37,20 +37,22 @@ export default function MyAccount() {
 
   return (
     <SafeAreaView>
-      <BackButton text="My Account" />
-      <View style={{height: 40}} />
+      <View style={{backgroundColor: '#ffffff', height: '100%'}}>
+        <BackButton text="My Account" />
+        <View style={{height: 40}} />
 
-      {options.map((option: any, index: number) => {
-        return (
-          <SettingsCard
-            text={option.text}
-            icon={option.icon}
-            route={option.route}
-            key={index}
-            logout={option.text == 'Logout' && logout}
-          />
-        );
-      })}
+        {options.map((option: any, index: number) => {
+          return (
+            <SettingsCard
+              text={option.text}
+              icon={option.icon}
+              route={option.route}
+              key={index}
+              logout={option.text == 'Logout' && logout}
+            />
+          );
+        })}
+      </View>
     </SafeAreaView>
   );
 }
