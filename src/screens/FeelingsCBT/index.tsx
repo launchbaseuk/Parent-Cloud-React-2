@@ -28,16 +28,16 @@ const {width, height} = Dimensions.get('window');
 export default function FeelingsCBT() {
   const navigation = useNavigation();
   const [selected, setSelected] = useState<any>([]);
-  const [username, setUsername] = useState<string>("");
+  const [username, setUsername] = useState<string>('');
 
   useFocusEffect(
     React.useCallback(() => {
-      (async() => {
-        const username = await AsyncStorage.getItem('user_nicename')
-        
-        if(username) setUsername(username);
+      (async () => {
+        const username = await AsyncStorage.getItem('user_nicename');
+
+        if (username) setUsername(username);
       })();
-    }, [])
+    }, []),
   );
 
   const handleSelected = (item: string) => {
@@ -46,10 +46,10 @@ export default function FeelingsCBT() {
     } else {
       setSelected([item]);
     }
-  }
+  };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text
         style={{
           marginTop: 130,
@@ -71,7 +71,7 @@ export default function FeelingsCBT() {
           textAlign: 'center',
           marginTop: 64,
         }}>
-        What are your feelings in this moment?
+        How are you feeling right now?
       </Text>
       <View
         style={{
@@ -140,4 +140,9 @@ export default function FeelingsCBT() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    height: '100%',
+  },
+});

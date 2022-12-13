@@ -47,7 +47,8 @@ export default function MediaListItem({
               fontFamily: 'Montserrat-Bold',
               color: '#11535C',
               fontSize: 14,
-              width: '65%',
+              width: '45%',
+              marginBottom: 2,
             }}>
             {title}
           </Text>
@@ -56,10 +57,9 @@ export default function MediaListItem({
               width: 200,
               fontFamily: 'Montserrat-Regular',
               color: '#150E00',
-              lineHeight: 19,
               fontSize: 11,
             }}>
-            {content}
+            {content.toString().substring(0, 50)}
           </Text>
         </View>
       </View>
@@ -81,7 +81,7 @@ export default function MediaListItem({
 const styles = StyleSheet.create({
   container: {
     width: width - 40,
-    height: 100,
+    height: 80,
     borderRadius: 5,
     backgroundColor: '#F2F2F280',
     alignSelf: 'center',
@@ -95,9 +95,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     marginLeft: 8,
-    height: 100,
-    justifyContent: 'center',
-    marginTop: 15,
+    height: '100%',
   },
   imageContainer: {
     width: 80,

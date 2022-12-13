@@ -61,7 +61,6 @@ import Videos from './src/screens/Videos';
 import Podcasts from './src/screens/Podcasts';
 import VideoDetails from './src/screens/VideoDetails';
 import PodcastDetails from './src/screens/PodcastDetails';
-import AudioPlayer from './src/components/shared/AudioPlayer';
 import VideoPlayerShared from './src/components/shared/VideoPlayer';
 import ReviewDetails from './src/screens/ReviewDetails';
 import ReviewSection from './src/screens/ReviewSection';
@@ -194,7 +193,6 @@ const App = () => {
           <Stack.Screen name="SleepStories" component={SleepStories} />
           <Stack.Screen name="GuidedMeditation" component={GuidedMeditation} />
           <Stack.Screen name="MediaDetails" component={MediaDetails} />
-          <Stack.Screen name="AudioPlayer" component={AudioPlayer} />
           <Stack.Screen name="MusicPlayer" component={MusicPlayer} />
           <Stack.Screen name="player" component={PlayerScreen} />
           <Stack.Screen name="GuidesMedia" component={GuidesMedia} />

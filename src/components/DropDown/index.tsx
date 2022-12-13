@@ -1,7 +1,16 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Text, Image} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image,
+  Dimensions,
+} from 'react-native';
 
 import downArrow from '../../images/dropdownArrow.png';
+
+const {width} = Dimensions.get('window');
 
 type IDropdown = React.FC<{
   onPress: () => void;
@@ -30,6 +39,14 @@ export const DropDown: IDropdown = ({title, onPress, isOpen, children}) => {
 const styles = StyleSheet.create({
   self: {
     position: 'relative',
+    backgroundColor: '#E5E5E5',
+    width: width - 40,
+    // height: 65,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginTop: 8,
+    justifyContent: 'center',
+    // paddingLeft: 16,
 
     // zIndex: 9999,
     // elevation: 9999,
@@ -48,22 +65,8 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 16,
+    paddingVertical: 20,
     paddingHorizontal: 20,
-  },
-  contentContainer: {
-    paddingBottom: 16,
-    paddingHorizontal: 20,
-    // position: 'absolute',
-    // backgroundColor: '#2A2C2E',
-    // color: 'black',
-    // left: 0,
-    // right: 0,
-    // top: '100%',
-    // zIndex: 9999,
-    // elevation: 9999,
-    // borderBottomLeftRadius: 8,
-    // borderBottomRightRadius: 8,
   },
   chevronIcon: {
     color: '#3AC3EE',

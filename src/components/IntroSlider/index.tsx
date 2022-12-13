@@ -68,7 +68,7 @@ const IntroSlider = ({navigation}) => {
                   fontSize: 27,
                   fontFamily: 'SofiaProBlack',
                 }}>
-                One-to-one Sessions
+                One-to-One Sessions
               </Text>
               <Text
                 style={{
@@ -148,12 +148,12 @@ const IntroSlider = ({navigation}) => {
           ))}
         </View>
         <View style={styles.buttons}>
-          <PrimaryButton
-            text="Signup"
+          <PrimaryButton text="Login" onPress={handleLogin} />
+          <View style={{height: 8}} />
+          <SecondaryButton
+            text="Contact Support"
             onPress={() => navigation.navigate('Signup')}
           />
-          <View style={{height: 8}} />
-          <SecondaryButton text="Login" onPress={handleLogin} />
         </View>
       </SafeAreaView>
     </View>

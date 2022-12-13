@@ -1,51 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import { useAuth } from "../../../contexts/auth-context";
+import {useAuth} from '../../../contexts/auth-context';
 
 // Components
 import Input from '../../shared/Input';
 import AuthSharedScreen from '../AuthScreenShared';
 
 const Login = () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const navigation = useNavigation();
-  const { login } = useAuth();
+  const {login} = useAuth();
 
   const handleUsername = (e: any) => {
     setUsername(e);
-  }
+  };
   const handlePassword = (e: any) => {
     setPassword(e);
-  }
+  };
 
   const handleLogin = () => {
-    console.log(username, password)
+    console.log(username, password);
     login(username, password);
-  }
+  };
 
   return (
     <View style={styles.wrapper}>
       <AuthSharedScreen
-        middleText={'New to WellnessCloud?'}
+        middleText={'New to Wellness Cloud?'}
         buttonTextTop={'Login'}
         buttonTextBottom={'Register'}
         routeTop={'ForgotPassword'}
         routeBot={'Sign up'}
         loginFunc={handleLogin}>
-        <View style={{ width: "100%", justifyContent: "center", alignItems: "center" }}>
+        <View
+          style={{
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
           <View>
             <Text style={styles.title}>Login</Text>
             <Text style={styles.content}>
               Login to your Wellness Cloud account
             </Text>
           </View>
-          <View style={{ marginBottom: 100, marginTop: 32, justifyContent: 'center' }}>
-            <Input label="Email Address" placeholder="example@gmail.com" value={username} onChangeText={handleUsername} />
-            <Input label="Password" placeholder="Minimum 6 characters" value={password} onChangeText={handlePassword} secureTextEntry={true} />
+          <View
+            style={{
+              marginBottom: 100,
+              marginTop: 32,
+              justifyContent: 'center',
+            }}>
+            <Input
+              label="Email Address"
+              placeholder="example@gmail.com"
+              value={username}
+              onChangeText={handleUsername}
+            />
+            <Input
+              label="Password"
+              placeholder="Minimum 6 characters"
+              value={password}
+              onChangeText={handlePassword}
+              secureTextEntry={true}
+            />
             <TouchableOpacity
               onPress={() => navigation.navigate('ForgotPassword')}>
               <Text style={styles.forgotPassword}>Forgot Password?</Text>

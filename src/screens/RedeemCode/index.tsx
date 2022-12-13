@@ -17,7 +17,7 @@ export default function RedeemCode() {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 4}}>
-        <BackButton text={'1-2-1 Sessions'} />
+        <BackButton text={'One-to-One Sessions'} />
 
         <Text style={[styles.sectionTitle, {marginBottom: 16}]}>
           Redeem Coupon

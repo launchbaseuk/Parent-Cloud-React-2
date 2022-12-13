@@ -17,7 +17,7 @@ export default function Payment() {
   return (
     <View>
       <SafeAreaView>
-        <BackButton text={'1-2-1 Sessions'} />
+        <BackButton text={'One-to-One Sessions'} />
 
         <Text style={[styles.sectionTitle, {marginBottom: 16}]}>
           Service purchased name...

@@ -51,7 +51,7 @@ export default function OnetooneSessions() {
   // <View style={styles.onetoonecontainer}>
   {
     /* <ScrollView>
-        <BackButton text={'1-2-1 Sessions'} />
+        <BackButton text={'One-to-One Sessions'} />
 
         <Text style={[styles.sectionTitle, {marginBottom: 16}]}>
           What would you like to talk about?
@@ -113,7 +113,7 @@ export default function OnetooneSessions() {
 
   return (
     <SafeAreaView style={{flex: 1, paddingBottom: 20}}>
-      <BackButton text={'1-2-1 Sessions'} />
+      <BackButton text={'One-to-One Sessions'} />
 
       <WebView
         scalesPageToFit={true}

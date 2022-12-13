@@ -31,7 +31,8 @@ export default function GuidesMedia({navigation, route}: any) {
 
   return (
     <SafeAreaView>
-      <ScrollView contentContainerStyle={{paddingBottom: 10}}>
+      <ScrollView
+        contentContainerStyle={{paddingBottom: 10, backgroundColor: '#ffffff'}}>
         <BackButton text="Guides" />
 
         {guides.map(guide => (

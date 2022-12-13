@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+PRODID:-//44.240.47.214//NONSGML iCalcreator 2.6//
+VERSION:2.0
+BEGIN:VEVENT
+UID:945869021@scheduling
+DTSTAMP:20221207T200003Z
+DESCRIPTION:Client time zone: Europe/Belgrade\nName: Dusan Milic\nPhone: +3
+ 81637739927\nEmail: matrixwalker@protonmail.com\n\nChange Appointment: htt
+ ps://app.acuityscheduling.com/schedule.php?owner=16531000&action=appt&id%5
+ B%5D=2c2c1cb361e0f76b95e85ecb34cc2a56\n
+DTSTART:20221209T210000Z
+DTEND:20221209T213000Z
+LOCATION:
+SUMMARY:Todd V Dating: Strategy Call (Roy)
+END:VEVENT
+END:VCALENDAR

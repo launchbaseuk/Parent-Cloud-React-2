@@ -26,7 +26,7 @@ export default StaticSelection;
 
 const styles = StyleSheet.create({
   selectionContainer: {
-    backgroundColor: '#F2F2F280',
+    backgroundColor: '#E5E5E5',
     width: width - 40,
     height: 44,
     borderRadius: 5,

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Dimensions, Text, ScrollView} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import BackButton from '../../components/BackButton';
 import FeelingsCard from '../../components/FeelingsCard';
 
@@ -19,148 +20,214 @@ import PlayfulSelected from '../../icons/svg/PlayfulSelected';
 const {width, height} = Dimensions.get('window');
 export default function ReviewDetails({navigation, route}: any) {
   const [selected, setSelected] = useState<string>('');
-  const { checkIn } = route.params;
+  const {checkIn} = route.params;
   const [feelingCards, setFeelingCards] = useState([
-    {key: "ok", code: <FeelingsCard text="Ok" icon={<Happy />} iconSelected={<HappySelected />} itemKey="ok" selected={''} setSelected={() => console.log('')} />},
-    {key: "notgood", code: <FeelingsCard text="Not good" icon={<Anxious />} iconSelected={<AnxiousSelected />} itemKey="notgood" selected={selected} setSelected={() => console.log('')} />},
-    {key: "awful", code: <FeelingsCard text="Awful" icon={<Depressed />} iconSelected={<DepressedSelected />} itemKey="awful" selected={selected} setSelected={() => console.log('')} />},
-    {key: "great", code: <FeelingsCard text="Great" icon={<Playful />} iconSelected={<PlayfulSelected />} itemKey="great" selected={selected} setSelected={() => console.log('')} />}
+    {
+      key: 'ok',
+      code: (
+        <FeelingsCard
+          text="Ok"
+          icon={<Happy />}
+          iconSelected={<HappySelected />}
+          itemKey="ok"
+          selected={''}
+          setSelected={() => console.log('')}
+        />
+      ),
+    },
+    {
+      key: 'notgood',
+      code: (
+        <FeelingsCard
+          text="Not good"
+          icon={<Anxious />}
+          iconSelected={<AnxiousSelected />}
+          itemKey="notgood"
+          selected={selected}
+          setSelected={() => console.log('')}
+        />
+      ),
+    },
+    {
+      key: 'awful',
+      code: (
+        <FeelingsCard
+          text="Awful"
+          icon={<Depressed />}
+          iconSelected={<DepressedSelected />}
+          itemKey="awful"
+          selected={selected}
+          setSelected={() => console.log('')}
+        />
+      ),
+    },
+    {
+      key: 'great',
+      code: (
+        <FeelingsCard
+          text="Great"
+          icon={<Playful />}
+          iconSelected={<PlayfulSelected />}
+          itemKey="great"
+          selected={selected}
+          setSelected={() => console.log('')}
+        />
+      ),
+    },
   ]);
 
   const [distortions, setDistortions] = useState([
-    {text: "All or nothing thinking", key: "allOrNothing"},
-    {text: "Overgeneralisation", key: "overgeneralisation"},
-    {text: "Catastrophising", key: "catastrophising"},
-    {text: "Jumping to conclusions", key: "jumpingToConclusions"},
-    {text: "Emotional reasoning", key: "emotionalReasoning"},
-    {text: "Should or must statements", key: "shouldOrMustStatements"},
-    {text: "Labelling", key: "labelling"},
-    {text: "Blaming", key: "blaming"}
+    {text: 'All or nothing thinking', key: 'allOrNothing'},
+    {text: 'Overgeneralisation', key: 'overgeneralisation'},
+    {text: 'Catastrophising', key: 'catastrophising'},
+    {text: 'Jumping to conclusions', key: 'jumpingToConclusions'},
+    {text: 'Emotional reasoning', key: 'emotionalReasoning'},
+    {text: 'Should or must statements', key: 'shouldOrMustStatements'},
+    {text: 'Labelling', key: 'labelling'},
+    {text: 'Blaming', key: 'blaming'},
   ]);
   const [feeling_now, setFeelingNow] = useState([
-    {key: "better", text: "Better"},
-    {key: "worse", text: "Worse"},
-    {key: "same", text: "The same"}
+    {key: 'better', text: 'Better'},
+    {key: 'worse', text: 'Worse'},
+    {key: 'same', text: 'The same'},
   ]);
 
   const date = new Date(checkIn.date);
   const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-  const month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const month =
+    date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
   const year = date.getFullYear();
   const formattedDate = `${day}/${month}/${year}`;
 
   return (
-    <ScrollView>
-      <BackButton text="Details" />
+    <SafeAreaView>
+      <ScrollView>
+        <BackButton text="Details" />
 
-      <Text
-        style={{
-          fontFamily: 'SofiaProBlack',
-          color: '#11535C',
-          fontSize: 20,
-          paddingLeft: 16,
-          marginTop: 50,
-        }}>
-        {formattedDate}
-      </Text>
-      <Text
-        style={{
-          fontFamily: 'SofiaProBlack',
-          color: '#11535C',
-          fontSize: 20,
-          paddingLeft: 16,
-          marginTop: 50,
-          marginBottom: 16,
-        }}>
-        What are your feelings?
-      </Text>
-      <View
-        style={{flexDirection: 'row', alignSelf: 'center', marginBottom: 64}}>
-        {checkIn.acf.feeling ? checkIn.acf.feeling.map((feel: any) => {
-          const feelingCard = feelingCards.find((card) => card.key === feel);
-          if(feelingCard) {
-            return feelingCard.code;
-          } else {
-            return <Text>No feeling selected.</Text>
-          }
-        }) : <Text>No feeling selected.</Text>}
-      </View>
-
-      <View>
         <Text
           style={{
             fontFamily: 'SofiaProBlack',
             color: '#11535C',
             fontSize: 20,
             paddingLeft: 16,
+            marginTop: 50,
+          }}>
+          {formattedDate}
+        </Text>
+        <Text
+          style={{
+            fontFamily: 'SofiaProBlack',
+            color: '#11535C',
+            fontSize: 20,
+            paddingLeft: 16,
+            marginTop: 50,
             marginBottom: 16,
           }}>
-          Which cognitive distortions does this thought have?
+          What are your feelings?
         </Text>
-        {checkIn.acf.cognitive_distortions ?
-          <View style={styles.cognitiveContainer}>
-            <Text style={styles.cognitiveText}>{
-            distortions.map((dist: any) => {
-              if(dist.key === checkIn.acf.cognitive_distortions) {
-                return dist.text;
+        <View
+          style={{flexDirection: 'row', alignSelf: 'center', marginBottom: 64}}>
+          {checkIn.acf.feeling ? (
+            checkIn.acf.feeling.map((feel: any) => {
+              const feelingCard = feelingCards.find(card => card.key === feel);
+              if (feelingCard) {
+                return feelingCard.code;
+              } else {
+                return <Text>No feeling selected.</Text>;
               }
             })
-          }</Text>
-          </View>
-        : <View style={styles.cognitiveContainer}><Text style={styles.cognitiveText}>No cognitive distortions selected.</Text></View>}
-      </View>
+          ) : (
+            <Text>No feeling selected.</Text>
+          )}
+        </View>
 
-      <View style={{marginTop: 64}}>
-        <Text
-          style={{
-            fontFamily: 'SofiaProBlack',
-            color: '#11535C',
-            fontSize: 20,
-            paddingLeft: 16,
-            marginBottom: 16,
-          }}>
-          How could you challenge this thought?
-        </Text>
-        <Text
-          style={{
-            alignSelf: 'center',
-            width: width - 40,
-            backgroundColor: '#F2F2F280',
-            color: '#150E00',
-            padding: 16,
-            // paddingTop: 0,
-            textAlignVertical: 'top',
-            borderRadius: 5,
-            fontFamily: 'Montserrat-Regular',
-            opacity: 0.5,
-          }}>
-          {checkIn.acf.challenge ? checkIn.acf.challenge : "No challenge"}
-        </Text>
-      </View>
-      <View style={{paddingBottom: 50}}>
-        <Text
-          style={{
-            fontFamily: 'SofiaProBlack',
-            color: '#11535C',
-            fontSize: 20,
-            paddingLeft: 16,
-            marginTop: 64,
-          }}>
-          How are you feeling now?
-        </Text>
-        {checkIn.acf.feeling_now ?
-          <View style={styles.cognitiveContainer}>
-            <Text style={styles.cognitiveText}>{
-            feeling_now.map((dist: any) => {
-              if(dist.key === checkIn.acf.feeling_now) {
-                return dist.text;
-              }
-            })
-          }</Text>
-          </View>
-        : <View style={styles.cognitiveContainer}><Text style={styles.cognitiveText}>No feeling selected.</Text></View>}
-      </View>
-    </ScrollView>
+        <View>
+          <Text
+            style={{
+              fontFamily: 'SofiaProBlack',
+              color: '#11535C',
+              fontSize: 20,
+              paddingLeft: 16,
+              marginTop: 50,
+            }}>
+            01/01/2023
+          </Text>
+          {checkIn.acf.cognitive_distortions ? (
+            <View style={styles.cognitiveContainer}>
+              <Text style={styles.cognitiveText}>
+                {distortions.map((dist: any) => {
+                  if (dist.key === checkIn.acf.cognitive_distortions) {
+                    return dist.text;
+                  }
+                })}
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.cognitiveContainer}>
+              <Text style={styles.cognitiveText}>
+                No cognitive distortions selected.
+              </Text>
+            </View>
+          )}
+        </View>
+
+        <View style={{marginTop: 64}}>
+          <Text
+            style={{
+              fontFamily: 'SofiaProBlack',
+              color: '#11535C',
+              fontSize: 20,
+              paddingLeft: 16,
+              marginTop: 50,
+              marginBottom: 16,
+            }}>
+            What are your feelings?
+          </Text>
+          <Text
+            style={{
+              alignSelf: 'center',
+              width: width - 40,
+              backgroundColor: '#F2F2F280',
+              color: '#150E00',
+              padding: 16,
+              // paddingTop: 0,
+              textAlignVertical: 'top',
+              borderRadius: 5,
+              fontFamily: 'Montserrat-Regular',
+              opacity: 0.5,
+            }}>
+            {checkIn.acf.challenge ? checkIn.acf.challenge : 'No challenge'}
+          </Text>
+        </View>
+        <View style={{paddingBottom: 50}}>
+          <Text
+            style={{
+              fontFamily: 'SofiaProBlack',
+              color: '#11535C',
+              fontSize: 20,
+              paddingLeft: 16,
+              marginTop: 64,
+            }}>
+            How are you feeling now?
+          </Text>
+          {checkIn.acf.feeling_now ? (
+            <View style={styles.cognitiveContainer}>
+              <Text style={styles.cognitiveText}>
+                {feeling_now.map((dist: any) => {
+                  if (dist.key === checkIn.acf.feeling_now) {
+                    return dist.text;
+                  }
+                })}
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.cognitiveContainer}>
+              <Text style={styles.cognitiveText}>No feeling selected.</Text>
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -179,5 +246,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Bold',
     fontSize: 13,
     color: '#FFFAC5',
-  }
+  },
 });

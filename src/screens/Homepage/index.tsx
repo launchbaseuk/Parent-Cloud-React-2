@@ -16,7 +16,7 @@ import DynamicTwoImage from '../../images/svg/DynamicTwoImage';
 export default function Homepage() {
   const route = useRoute();
   const constantOptions = [
-    {text: 'One-to-one Sessions', image: <OneToOneImage />, screen: 'OneToOne'},
+    {text: 'One-to-One Sessions', image: <OneToOneImage />, screen: 'OneToOne'},
     {text: 'Pocket CBT', image: <PocketCBTImage />, screen: 'PocketCBT'},
     {
       text: 'Dynamic content #1',

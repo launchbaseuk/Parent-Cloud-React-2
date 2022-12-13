@@ -128,33 +128,6 @@ const MusicPlayer = ({audioFile}: any) => {
         <Image source={bookmark} style={[styles.icon, {marginLeft: 56}]} />
       </View>
       <Progress live={track?.isLiveStream} />
-
-      {/* <View style={styles.contentView}>
-        <View style={styles.progressBar}>
-          <Text>00:00</Text>
-          <View style={{width: width - 150}}>
-            <Slider
-              value={value.playSeconds}
-              maximumValue={value.duration}
-              minimumValue={0}
-              step={1}
-              allowTouchTrack
-              trackStyle={{height: 5, backgroundColor: 'transparent'}}
-              thumbStyle={{
-                height: 20,
-                width: 20,
-                backgroundColor: 'transparent',
-              }}
-              thumbProps={{}}
-              onValueChange={onSliderEditing}
-              onSlidingStart={onSliderEditStart}
-              onSlidingComplete={onSliderEditEnd}
-            />
-          </View>
-
-          <Text>04:41</Text>
-        </View>
-      </View> */}
     </View>
   );
 };
@@ -192,7 +165,7 @@ const styles = StyleSheet.create({
   progressBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: width - 40,
+    width: width - 100,
     // marginTop: 20,
     justifyContent: 'space-between',
   },

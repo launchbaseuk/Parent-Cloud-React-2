@@ -40,4 +40,9 @@ export default function PocketCBT() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#FFFFFF',
+    height: '100%',
+  },
+});
