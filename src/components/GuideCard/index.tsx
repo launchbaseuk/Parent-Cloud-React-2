@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import RNFetchBlob from 'rn-fetch-blob';
 
 // Images
 import guidespicture from '../../images/GuidesPicture.png';
@@ -21,7 +22,20 @@ function GuideCardSmall({text, redirect, title, fileLink}: any) {
 
   const handlePress = () => {
     if(fileLink) {
-      
+      let link = fileLink.replace("https", "http");
+      RNFetchBlob.config({
+        fileCache: true,
+        addAndroidDownloads: {
+          useDownloadManager: true,
+          notification: true,
+          path: RNFetchBlob.fs.dirs.DownloadDir + '/' + title + '.pdf',
+          description: 'Downloading file.',
+        },
+      })
+        .fetch('GET', link)
+        .then((res) => {
+          console.log('The file saved to ', res.path());
+        });
     } else {
       navigation.navigate('PDFViewer', {text: redirect});
     }
@@ -69,9 +83,9 @@ function GuideCardSmall({text, redirect, title, fileLink}: any) {
   );
 }
 
-function GuideCardBig() {
+function GuideCardBig({ title, excerpt, content }: any) {
   const navigation = useNavigation();
-
+  console.log(content)
   return (
     <View style={styles.guidecardbigContainer}>
       <Image source={guidespicture} style={{marginTop: 16, marginBottom: 16}} />
@@ -86,11 +100,12 @@ function GuideCardBig() {
           <Text
             style={{
               fontFamily: 'SofiaProBlack',
-              fontSize: 20,
+              fontSize: 14,
+              width: 180,
               color: '#11535C',
               marginBottom: 4,
             }}>
-            Lorem ipsum
+            {title}
           </Text>
           <Text
             style={{
@@ -98,8 +113,9 @@ function GuideCardBig() {
               color: '#11535C',
               fontFamily: 'Montserrat-Regular',
               fontSize: 13,
-            }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            }}
+            numberOfLines={2}>
+            {excerpt}
           </Text>
         </View>
 
@@ -107,7 +123,7 @@ function GuideCardBig() {
           <PrimaryButton
             size="mini"
             text="Download"
-            onPress={() => navigation.navigate('PDFViewer')}
+            onPress={() => navigation.navigate('PDFViewer', { text: content })}
           />
         </View>
       </View>
