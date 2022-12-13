@@ -41,6 +41,7 @@ export default function Videos({navigation, route}: any) {
 
         {videos.map((video: any) => {
           // remove html from excerpt
+          console.log(video._links["wp:featuredmedia"][0].href);
           const excerpt = video.excerpt.rendered.replace(/(<([^>]+)>)/gi, '');
           const details = video.content.rendered.replace(/(<([^>]+)>)/gi, '');
 

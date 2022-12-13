@@ -16,8 +16,16 @@ import guidespicture from '../../images/GuidesPicture.png';
 import PrimaryButton from '../shared/PrimaryButton';
 
 const {width, height} = Dimensions.get('window');
-function GuideCardSmall({text, redirect, title}: any) {
+function GuideCardSmall({text, redirect, title, fileLink}: any) {
   const navigation = useNavigation();
+
+  const handlePress = () => {
+    if(fileLink) {
+      
+    } else {
+      navigation.navigate('PDFViewer', {text: redirect});
+    }
+  }
 
   return (
     <View style={styles.guidecardsmallContainer}>
@@ -54,7 +62,7 @@ function GuideCardSmall({text, redirect, title}: any) {
         <PrimaryButton
           size="mini"
           text="Download"
-          onPress={() => navigation.navigate('PDFViewer', {text: redirect})}
+          onPress={handlePress}
         />
       </View>
     </View>

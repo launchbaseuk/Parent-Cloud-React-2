@@ -15,7 +15,7 @@ export default function LiveTalks() {
     React.useCallback(() => {
       (async () => {
         let response = await fetch(
-          'https://parentcloud.borne.io/wp-json/mo/v1/posts/live-learning',
+          'http://parentcloud.borne.io/wp-json/mo/v1/posts/live-learning',
         );
         response = await response.json();
 
@@ -33,6 +33,7 @@ export default function LiveTalks() {
         <View style={{height: 12}} />
 
         {liveTalks?.map((talk, index) => {
+          console.log(talk)
           return (
             <ListItem
               key={talk.ID}

@@ -9,12 +9,12 @@ export default function DynamicContentContainer({ title, excerpt, mediaId }: any
 
     useEffect(() => {
         (async() => {
-            const response = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/media/${mediaId}`);
+            const response = await fetch(`http://parentcloud.borne.io/wp-json/wp/v2/media/${mediaId}`);
             const data = await response.json();
                 
             let imageUrl = data.guid.rendered;
             // replace everything before the third slash with nothing
-            imageUrl = "https://parentcloud.borne.io/" + imageUrl.split("/").slice(3).join("/");
+            imageUrl = "http://parentcloud.borne.io/" + imageUrl.split("/").slice(3).join("/");
 
             setImageUrl(imageUrl);
             setLoading(false);
