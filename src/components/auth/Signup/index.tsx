@@ -1,60 +1,18 @@
 import React from 'react';
-
-import {View, StyleSheet, Text} from 'react-native';
-import Input from '../../shared/Input';
-import AuthSharedScreen from '../AuthScreenShared';
+import InfoScreenNew from '../../shared/InfoScreenNew';
 
 const Signup = () => {
   return (
-    <View style={styles.wrapper}>
-      <AuthSharedScreen
-        middleText={'Already have an account with us?'}
-        buttonTextTop={'Sign up'}
-        buttonTextBottom={'Login'}
-        routeTop={'Login'}
-        routeBot={'Login'}>
-        <View>
-          <View>
-            <Text style={styles.title}>Signup</Text>
-            <Text style={styles.content}>
-              Create a new Wellness Cloud account.
-            </Text>
-          </View>
-          <View style={{ marginTop: 32, marginBottom: 50, justifyContent: 'center'}}>
-            <Input label="Email Address" placeholder="example@gmail.com" />
-            <Input label="Password" placeholder="Minimum 6 characters" />
-            <Input label="Repeat Password" placeholder="Must match the above" />
-          </View>
-        </View>
-      </AuthSharedScreen>
-    </View>
+    <InfoScreenNew
+      title={'Do you have an active subscription?'}
+      content={
+        'If you’ve not yet had your corporate account set up, please either contact your HR team or you can email us directly for support.'
+      }
+      buttonText={'Contact Support'}
+      buttonTextSecond={'Cancel'}
+      route={'Success'}
+    />
   );
 };
 
 export default Signup;
-
-const styles = StyleSheet.create({
-  wrapper: {
-    paddingTop: 115,
-    alignItems: 'center',
-  },
-  title: {
-    color: '#11535C',
-    fontSize: 31,
-    fontFamily: 'SofiaProBlack',
-    textAlign: 'center',
-  },
-  contentWrapper: {
-    width: '100%',
-    alignSelf: 'center',
-  },
-  content: {
-    fontSize: 16,
-    marginTop: 8,
-    fontFamily: 'Montserrat-Regular',
-    color: '#150E00',
-    maxWidth: 200,
-    textAlign: 'center',
-    alignSelf: 'center',
-  },
-});

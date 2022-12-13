@@ -15,3 +15,5 @@ const EmailSent = () => {
 };
 
 export default EmailSent;
+
+//WarningAuthImage

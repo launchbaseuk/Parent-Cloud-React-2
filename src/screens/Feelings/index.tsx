@@ -61,6 +61,8 @@ import ExcitedSelected from '../../icons/svg/ExcitedSelected';
 import Calm from '../../icons/svg/Calm';
 import CalmSelected from '../../icons/svg/CalmSelected';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import Inspired from '../../icons/svg/Inspired';
+import InspiredSelected from '../../icons/svg/InspiredSelected';
 
 const {width, height} = Dimensions.get('window');
 export default function Feelings({navigation, route}: any) {
@@ -323,8 +325,8 @@ export default function Feelings({navigation, route}: any) {
             <View style={{width: 16}} />
             <FeelingsCard
               text="Inspired"
-              icon={<StarsHappy />}
-              iconSelected={<StarsHappySelected />}
+              icon={<Inspired />}
+              iconSelected={<InspiredSelected />}
               itemKey="inspired"
               selected={selected}
               setSelected={handleSelected}
