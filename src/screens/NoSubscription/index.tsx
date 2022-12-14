@@ -12,7 +12,7 @@ const { width, height } = Dimensions.get("window");
 export default function NoSubscription() {
     const { sub, logout }: any = useAuth();
     const navigation = useNavigation();
-    const url = "http://parentcloud.borne.io";
+    const url = "https://parentcloud.borne.io";
 
     useEffect(() => {
         if(sub) {

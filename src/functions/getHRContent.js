@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default async function getHRContent() {
     const token = await AsyncStorage.getItem("token");
 
-    let response = await fetch("http://parentcloud.borne.io/wp-json/wp/v2/categories", {
+    let response = await fetch("https://parentcloud.borne.io/wp-json/wp/v2/categories", {
         headers: {
             Authorization: `Bearer ${token}`,
         }
@@ -19,7 +19,7 @@ export default async function getHRContent() {
         }
     }
 
-    let responseInformation = await fetch(`http://parentcloud.borne.io/wp-json/wp/v2/categories/${catId}`, {
+    let responseInformation = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/categories/${catId}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         }

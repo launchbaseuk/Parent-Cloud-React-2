@@ -18,7 +18,7 @@ export default function PersonalDetails() {
   useFocusEffect(
     React.useCallback(() => {
       (async () => {
-        let response = await fetch(`http://parentcloud.borne.io/wp-json/mp/v1/members?search=${await AsyncStorage.getItem("user_email")}`, {
+        let response = await fetch(`https://parentcloud.borne.io/wp-json/mp/v1/members?search=${await AsyncStorage.getItem("user_email")}`, {
           headers: {
             // "Authorization": "Bearer " + await AsyncStorage.getItem("token"),
             "MEMBERPRESS-API-KEY": "8T5AkgBptM"

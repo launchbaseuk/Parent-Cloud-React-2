@@ -22,7 +22,6 @@ function GuideCardSmall({text, redirect, title, fileLink}: any) {
 
   const handlePress = () => {
     if(fileLink) {
-      let link = fileLink.replace("https", "http");
       RNFetchBlob.config({
         fileCache: true,
         addAndroidDownloads: {

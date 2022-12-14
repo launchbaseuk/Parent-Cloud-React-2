@@ -17,7 +17,7 @@ const AuthProvider = (props: any) => {
     
                 (async () => {
                     const check = await fetch(
-                        `http://parentcloud.borne.io/wp-json/jwt-auth/v1/token/validate`, {
+                        `https://parentcloud.borne.io/wp-json/jwt-auth/v1/token/validate`, {
 							method: "POST",
 							headers: {
 								Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ const AuthProvider = (props: any) => {
 		(async () => {
 			if (username && password) {
 				const login = await fetch(
-					"http://parentcloud.borne.io/wp-json/jwt-auth/v1/token",
+					"https://parentcloud.borne.io/wp-json/jwt-auth/v1/token",
 					{
 						method: "POST",
 						headers: {

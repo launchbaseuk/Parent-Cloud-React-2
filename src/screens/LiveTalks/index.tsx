@@ -17,7 +17,7 @@ export default function LiveTalks() {
     React.useCallback(() => {
       (async () => {
         let response = await fetch(
-          'http://parentcloud.borne.io/wp-json/mo/v1/posts/live-learning',
+          'https://parentcloud.borne.io/wp-json/mo/v1/posts/live-learning',
         );
         response = await response.json();
 
