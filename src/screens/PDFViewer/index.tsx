@@ -5,6 +5,7 @@ import Pdf from 'react-native-pdf';
 
 // Components
 import BackButton from '../../components/BackButton';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const {width, height} = Dimensions.get('window');
 export default function PDFViewer({navigation, route}: any) {
@@ -18,7 +19,7 @@ export default function PDFViewer({navigation, route}: any) {
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <BackButton text="PDF Title" />
 
       <View style={styles.container}>
@@ -40,7 +41,7 @@ export default function PDFViewer({navigation, route}: any) {
           style={styles.pdf}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

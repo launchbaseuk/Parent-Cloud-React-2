@@ -137,6 +137,7 @@ export default function VideoDetails({navigation, route}: any) {
             style={{
               flexDirection: 'row',
               alignItems: 'center',
+              justifyContent: 'center',
               backgroundColor: '#c2c6c8',
               borderRadius: 10,
               width: '100%',
@@ -144,11 +145,10 @@ export default function VideoDetails({navigation, route}: any) {
               paddingBottom: 10,
             }}>
             {/* <Backwards /> */}
-            <View style={{width: 21}} />
 
             <PlayIconBig />
-            <View style={{width: 21}} />
-            <Text style={styles.backButtonText}>Play Video</Text>
+
+            <Text style={styles.playText}>Play Video</Text>
             {/* <Forwards /> */}
           </View>
         </TouchableOpacity>
@@ -181,6 +181,12 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     marginLeft: 15,
+    fontFamily: 'SofiaProBold',
+    color: '#11535C',
+    fontSize: 25,
+  },
+  playText: {
+    marginLeft: 10,
     fontFamily: 'SofiaProBold',
     color: '#11535C',
     fontSize: 25,

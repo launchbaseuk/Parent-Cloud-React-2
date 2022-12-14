@@ -65,7 +65,7 @@ export default function SupportSettings() {
             fontSize: 16,
             marginLeft: 8,
           }}>
-          info@parentcloud.com
+          info@the-wellness-cloud.com
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
