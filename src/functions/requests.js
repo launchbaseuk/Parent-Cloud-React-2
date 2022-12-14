@@ -1,168 +1,197 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function getFilters() {
-    const token = await AsyncStorage.getItem("token");
-    const response = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/master_filter`, {
-        headers: {
+  const token = await AsyncStorage.getItem('token');
+  const response = await fetch(
+    `https://parentcloud.borne.io/wp-json/wp/v2/master_filter`,
+    {
+      headers: {
         Authorization: `Bearer ${token}`,
-        },
+      },
+    },
+  );
+  const data = await response.json();
+  let filters = [];
+
+  for (let i = 0; i < data.length; i++) {
+    filters.push({
+      id: data[i].id,
+      name: data[i].name,
+      slug: data[i].slug,
     });
-    const data = await response.json();
-    let filters = [];
+  }
 
-    for(let i=0; i<data.length; i++) {
-        filters.push({
-            id: data[i].id,
-            name: data[i].name,
-            slug: data[i].slug
-        });
-    }
-
-    return filters;
+  return filters;
 }
 
 async function getGuides() {
-    const token = await AsyncStorage.getItem("token");
-    const filters = await getFilters();
-    let guides = [];
+  const token = await AsyncStorage.getItem('token');
+  const filters = await getFilters();
+  let guides = [];
 
-    for (let i = 0; i < filters.length; i++) {
-        let response = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/guides?master_filter=${filters[i].id}`, {
-            headers: {
-            Authorization: `Bearer ${token}`,
-            }
-        });
-        response = await response.json();
+  for (let i = 0; i < filters.length; i++) {
+    let response = await fetch(
+      `https://parentcloud.borne.io/wp-json/wp/v2/guides?master_filter=${filters[i].id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    response = await response.json();
 
-        // Check if the filter exists, if it does push it otherwise create new filter
-        if (guides.find((guide) => guide.filter === filters[i].name)) {
-            guides.find((guide) => guide.filter === filters[i].name).guides.push(response);
-        } else {
-            guides.push({
-                filter: filters[i].name,
-                guides: response
-            });
-        }
+    // Check if the filter exists, if it does push it otherwise create new filter
+    if (guides.find(guide => guide.filter === filters[i].name)) {
+      guides
+        .find(guide => guide.filter === filters[i].name)
+        .guides.push(response);
+    } else {
+      guides.push({
+        filter: filters[i].name,
+        guides: response,
+      });
     }
+  }
 
-    return guides;
-};
+  return guides;
+}
 
 async function getPageDocs(page) {
-    const token = await AsyncStorage.getItem("token");
-    const filters = await getFilters();
+  const token = await AsyncStorage.getItem('token');
+  const filters = await getFilters();
 
-    for (let i = 0; i < filters.length; i++) {
-        if(filters[i].slug === page) {
-            let response = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/guides?master_filter=${filters[i].id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-            response = await response.json();
+  for (let i = 0; i < filters.length; i++) {
+    if (filters[i].slug === page) {
+      let response = await fetch(
+        `https://parentcloud.borne.io/wp-json/wp/v2/guides?master_filter=${filters[i].id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      response = await response.json();
 
-            return response;           
-        }
+      return response;
     }
+  }
 }
 
 async function getVideos() {
-    const token = await AsyncStorage.getItem("token");
-    let videos = [];
-    const filters = await getFilters();
-    // const response = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/posts/videos`, {
-    //     headers: {
-    //         Authorization: `Bearer ${token}`,
-    //     }
-    // });
-    // const data = await response.json();
+  const token = await AsyncStorage.getItem('token');
+  let videos = [];
+  const filters = await getFilters();
+  // const response = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/posts/videos`, {
+  //     headers: {
+  //         Authorization: `Bearer ${token}`,
+  //     }
+  // });
+  // const data = await response.json();
 
-    // for(let i=0; i<data.length; i++) {
-    //     if(data[i].post_status === "publish") {
-    //         videos.push(data[i]);
-    //     }
-    // }
+  // for(let i=0; i<data.length; i++) {
+  //     if(data[i].post_status === "publish") {
+  //         videos.push(data[i]);
+  //     }
+  // }
 
-    for (let i = 0; i < filters.length; i++) {
-        let response = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/videos?master_filter=${filters[i].id}`, {
-            headers: {
-            Authorization: `Bearer ${token}`,
-            }
-        });
-        response = await response.json();
+  for (let i = 0; i < filters.length; i++) {
+    let response = await fetch(
+      `https://parentcloud.borne.io/wp-json/wp/v2/videos?master_filter=${filters[i].id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    response = await response.json();
 
-        // Check if the filter exists, if it does push it otherwise create new filter
-        if(response.length > 0) {
-            for(let j=0; j<response.length; j++) {
-                videos.push(response[j]);
-            }
-        }
+    // Check if the filter exists, if it does push it otherwise create new filter
+    if (response.length > 0) {
+      for (let j = 0; j < response.length; j++) {
+        videos.push(response[j]);
+      }
     }
+  }
 
-    return videos;
+  return videos;
 }
 
 async function getPodcasts() {
-    const token = await AsyncStorage.getItem("token");
-    let podcasts = [];
-    const response = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/posts/videos`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
-    const data = await response.json();
-    console.log('got data')
+  const token = await AsyncStorage.getItem('token');
+  let podcasts = [];
+  const response = await fetch(
+    `https://parentcloud.borne.io/wp-json/mo/v1/posts/videos`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  const data = await response.json();
+  console.log('got data');
 
-    for(let i=0; i<data.length; i++) {
-        if(data[i].post_status === "publish" && !(data[i].post_content.includes("wp:embed"))) {
-            podcasts.push(data[i]);
-        }
+  for (let i = 0; i < data.length; i++) {
+    if (
+      data[i].post_status === 'publish' &&
+      !data[i].post_content.includes('wp:embed')
+    ) {
+      podcasts.push(data[i]);
     }
-    console.log('done')
+  }
+  console.log('done');
 
-    return podcasts;
+  return podcasts;
 }
 
 async function getNarratorDetails(narratorId) {
-    const id = narratorId;
-    const token = await AsyncStorage.getItem("token");
+  const id = narratorId;
+  const token = await AsyncStorage.getItem('token');
 
-    const response = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/getNarratorDetails/${id}`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
-    const data = await response.json();
-    
-    const responseDesc = await fetch(`https://parentcloud.borne.io/wp-json/mo/v1/getNarratorMeta/${id}`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
-    const dataDesc = await responseDesc.json();
+  const response = await fetch(
+    `https://parentcloud.borne.io/wp-json/mo/v1/getNarratorDetails/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  const data = await response.json();
 
-    // Get meta_key description and profile_image and add it to an object
-    let meta = {};
-    for(let i=0; i<dataDesc.length; i++) {
-        if(dataDesc[i].meta_key === "description") {
-            meta.description = dataDesc[i].meta_value;
-        } else if(dataDesc[i].meta_key === "profile_image") {
-            let id = dataDesc[i].meta_value;
-            
-            const respImage = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/media/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-            const dataImage = await respImage.json();
-            meta.profile_image = dataImage.guid.rendered;
-        }
+  const responseDesc = await fetch(
+    `https://parentcloud.borne.io/wp-json/mo/v1/getNarratorMeta/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  const dataDesc = await responseDesc.json();
+
+  // Get meta_key description and profile_image and add it to an object
+  let meta = {};
+  for (let i = 0; i < dataDesc.length; i++) {
+    if (dataDesc[i].meta_key === 'description') {
+      meta.description = dataDesc[i].meta_value;
+    } else if (dataDesc[i].meta_key === 'profile_image') {
+      let id = dataDesc[i].meta_value;
+
+      const respImage = await fetch(
+        `https://parentcloud.borne.io/wp-json/wp/v2/media/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      const dataImage = await respImage.json();
+      meta.profile_image = dataImage.guid.rendered;
     }
+  }
 
-    return [ data, meta ];
+  return [data, meta];
 }
 
-export { getGuides, getPageDocs, getVideos, getPodcasts, getNarratorDetails };
+export {getGuides, getPageDocs, getVideos, getPodcasts, getNarratorDetails};
 
 // filters {"id": 31, "name": "Adult Nutrition", "slug": "adult-nutrition"}
 // LOG  filters {"id": 80, "name": "Bereavement", "slug": "bereavement"}

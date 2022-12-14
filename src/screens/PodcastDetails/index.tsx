@@ -123,7 +123,8 @@ export default function PodcastDetails({navigation, route}) {
       </SafeAreaView>
     );
   } else {
-    return <Text>Loading....</Text>;
+    //Loading...
+    return <Text></Text>;
   }
 }
 

@@ -129,9 +129,9 @@ const AudioPlayer = (props: any) => {
     // ding.setCurrentTime(val);
     setValue({...value, playSeconds: val});
   };
-
+  //Loading...
   if (ss == undefined) {
-    return <Text>Loading...</Text>;
+    return <Text></Text>;
   } else {
     return (
       <View>
