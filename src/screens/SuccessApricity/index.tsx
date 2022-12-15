@@ -66,7 +66,7 @@ export default function SuccessApricity({navigation, route}: any) {
               ? 'Done'
               : 'Primary Action'
           }
-          onPress={() => navigation.navigate('PocketCBT')}
+          onPress={() => navigation.navigate('Home')}
         />
       </View>
     </SafeAreaView>

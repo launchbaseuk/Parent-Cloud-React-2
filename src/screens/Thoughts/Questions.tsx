@@ -153,7 +153,8 @@ const styles = StyleSheet.create({
     width: width - 40,
   },
   buttonContainer: {
-    marginTop: 32,
+    marginTop: 64,
+    marginBottom: 60,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: 344,
