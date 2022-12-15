@@ -154,10 +154,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 32,
-    marginBottom: 32,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: width - 40,
+    width: 344,
     alignSelf: 'center',
   },
 });
