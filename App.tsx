@@ -72,6 +72,7 @@ import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MusicPlayer from './src/components/shared/MusicPlayer';
+import DefaultTheme from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -141,8 +142,16 @@ const App = () => {
     setUpTrackPlayer();
   }, [setUpTrackPlayer]);
 
+  const navTheme = {
+    ...DefaultTheme,
+    colors: {
+      // ...DefaultTheme.colors,
+      background: '#ffffff',
+    },
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navTheme}>
       {!loggedIn ? (
         <Stack.Navigator
           screenOptions={{
