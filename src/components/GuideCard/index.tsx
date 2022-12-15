@@ -8,7 +8,6 @@ import {
   Dimensions,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import RNFetchBlob from 'rn-fetch-blob';
 
 // Images
 import guidespicture from '../../images/GuidesPicture.png';
@@ -20,25 +19,25 @@ const {width, height} = Dimensions.get('window');
 function GuideCardSmall({text, redirect, title, fileLink}: any) {
   const navigation = useNavigation();
 
-  const handlePress = () => {
-    if(fileLink) {
-      RNFetchBlob.config({
-        fileCache: true,
-        addAndroidDownloads: {
-          useDownloadManager: true,
-          notification: true,
-          path: RNFetchBlob.fs.dirs.DownloadDir + '/' + title + '.pdf',
-          description: 'Downloading file.',
-        },
-      })
-        .fetch('GET', link)
-        .then((res) => {
-          console.log('The file saved to ', res.path());
-        });
-    } else {
-      navigation.navigate('PDFViewer', {text: redirect});
-    }
-  }
+  // const handlePress = () => {
+  //   if (fileLink) {
+  //     RNFetchBlob.config({
+  //       fileCache: true,
+  //       addAndroidDownloads: {
+  //         useDownloadManager: true,
+  //         notification: true,
+  //         path: RNFetchBlob.fs.dirs.DownloadDir + '/' + title + '.pdf',
+  //         description: 'Downloading file.',
+  //       },
+  //     })
+  //       .fetch('GET', link)
+  //       .then(res => {
+  //         console.log('The file saved to ', res.path());
+  //       });
+  //   } else {
+  //     navigation.navigate('PDFViewer', {text: redirect});
+  //   }
+  // };
 
   return (
     <View style={styles.guidecardsmallContainer}>
@@ -75,16 +74,18 @@ function GuideCardSmall({text, redirect, title, fileLink}: any) {
         <PrimaryButton
           size="mini"
           text="Download"
-          onPress={handlePress}
+          onPress={() =>
+            navigation.navigate('PDFViewer', {text: redirect, pdf: fileLink})
+          }
         />
       </View>
     </View>
   );
 }
 
-function GuideCardBig({ title, excerpt, content }: any) {
+function GuideCardBig({title, excerpt, content}: any) {
   const navigation = useNavigation();
-  console.log(content)
+  console.log(content);
   return (
     <View style={styles.guidecardbigContainer}>
       <Image source={guidespicture} style={{marginTop: 16, marginBottom: 16}} />
@@ -122,7 +123,7 @@ function GuideCardBig({ title, excerpt, content }: any) {
           <PrimaryButton
             size="mini"
             text="Download"
-            onPress={() => navigation.navigate('PDFViewer', { text: content })}
+            onPress={() => navigation.navigate('PDFViewer', {text: content})}
           />
         </View>
       </View>

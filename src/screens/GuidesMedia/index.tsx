@@ -68,9 +68,11 @@ export default function GuidesMedia({navigation, route}: any) {
                     /(<([^>]+)>)/gi,
                     '',
                   );
+
                   // get file link and save it to variable from gui.acf.documents
                   let fileLink = gui.acf.documents[0]?.file;
                   //https://parentcloud.borne.io/wp-content/uploads/2021/08/Pregnancy-Checklist-UK.pdf
+                  console.log('pdf link', fileLink);
                   return (
                     <GuideCardSmall
                       text={excerpt}

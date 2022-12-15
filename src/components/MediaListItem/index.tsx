@@ -59,7 +59,9 @@ export default function MediaListItem({
               color: '#150E00',
               fontSize: 11,
             }}>
-            {content.toString().substring(0, 50)}
+            {/* {content.toString().substring(0, 50)} */}
+            {/* {content} */}
+            Lorem ipsum dolor sit amet...
           </Text>
         </View>
       </View>

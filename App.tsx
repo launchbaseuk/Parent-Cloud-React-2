@@ -145,7 +145,9 @@ const App = () => {
     <NavigationContainer>
       {!loggedIn ? (
         <Stack.Navigator
-          screenOptions={{headerShown: false}}
+          screenOptions={{
+            headerShown: false,
+          }}
           initialRouteName="Onboarding">
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />

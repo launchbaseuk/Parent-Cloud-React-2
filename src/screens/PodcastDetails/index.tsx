@@ -119,11 +119,13 @@ export default function PodcastDetails({navigation, route}) {
             </View>
           </View>
           <MusicPlayer audioFile={audio} />
+          <View style={{height: 102}} />
         </ScrollView>
       </SafeAreaView>
     );
   } else {
-    return <Text>Loading....</Text>;
+    //Loading...
+    return <Text></Text>;
   }
 }
 
