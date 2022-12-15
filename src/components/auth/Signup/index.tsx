@@ -1,5 +1,6 @@
 import React from 'react';
 import InfoScreenNew from '../../shared/InfoScreenNew';
+import { Linking } from "react-native";
 
 const Signup = () => {
   return (
@@ -11,6 +12,7 @@ const Signup = () => {
       buttonText={'Contact Support'}
       buttonTextSecond={'Cancel'}
       route={'Success'}
+      action={() => Linking.openURL("mailto:info@the-wellness-cloud.com")}
     />
   );
 };

@@ -23,6 +23,7 @@ type Props = {
   buttonText: string;
   buttonTextSecond: string;
   route: never | string;
+  action: () => void;
 };
 
 const {width, height} = Dimensions.get('window');
@@ -32,8 +33,16 @@ export default function InfoScreenNew({
   buttonText,
   route,
   buttonTextSecond,
+  action
 }: Props) {
   const navigation = useNavigation();
+  const handlePress = () => {
+    if(action) {
+      action();
+    } else {
+      navigation.navigate(route)
+    }
+  }
 
   return (
     <SafeAreaView style={styles.successContainer}>
@@ -65,7 +74,7 @@ export default function InfoScreenNew({
 
       <PrimaryButton
         text={buttonText}
-        onPress={() => navigation.navigate(route)}
+        onPress={handlePress}
       />
       <View style={{height: 8}} />
       <SecondaryButton

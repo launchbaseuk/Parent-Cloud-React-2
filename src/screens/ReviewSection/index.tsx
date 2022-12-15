@@ -29,6 +29,7 @@ const ReviewSection = ({navigation, route}: any) => {
     aug: false,
   });
   const [data, setData] = useState([]);
+  const [values, setValues] = useState([]);
 
   // useEffect(() => {
   //   axios

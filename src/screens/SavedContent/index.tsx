@@ -24,7 +24,7 @@ export default function SavedContent() {
     <SafeAreaView>
       <BackButton text="Saved Content" />
 
-      <TagFilter />
+      {/* <TagFilter /> */}
       <View style={{height: 16}} />
 
       {Array.from({length: 7}).map((_, index) => {

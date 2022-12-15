@@ -7,7 +7,7 @@ const { width, height } = Dimensions.get("window");
 export default function Home() {
     const [username, setUsername] = useState<string>("");
     useEffect(() => {
-        AsyncStorage.getItem("user_nicename").then((value) => {
+        AsyncStorage.getItem("user_nameDisplay").then((value) => {
             setUsername(value);
         });
     }, []);

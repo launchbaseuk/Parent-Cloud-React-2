@@ -63,10 +63,19 @@ const AuthProvider = (props: any) => {
 				console.log(response);
 
 				if (response.token) {
+					let responseUserInfo: any = await fetch(`https://parentcloud.borne.io/wp-json/mp/v1/members?search=${response.user_email}`, {
+						headers: {
+							"MEMBERPRESS-API-KEY": "8T5AkgBptM"
+						}
+					});
+					responseUserInfo = await responseUserInfo.json();
+					const display = responseUserInfo[0].first_name + " " + responseUserInfo[0].last_name;
+
 					await AsyncStorage.setItem("token", response.token);
 					await AsyncStorage.setItem("user_email", response.user_email);
 					await AsyncStorage.setItem("user_nicename", response.user_nicename);
-
+					await AsyncStorage.setItem("user_nameDisplay", display)
+					
 					let subscription = await getSubscriptions(response.user_email);
 					
 					setSubscription(subscription);

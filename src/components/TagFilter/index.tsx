@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import Chip from "../shared/Chip";
 
-export default function TagFilter({ categories }: any) {
+export default function TagFilter({ selected, setSelected, categories }: any) {
     const [options, setOptions] = useState<any>([{ key: "all", text: "All" }]);
-    const [selected, setSelected] = useState<string>(options[0].key);
 
     useEffect(() => {
         // add {key: "all", text: "All" } and categories into options

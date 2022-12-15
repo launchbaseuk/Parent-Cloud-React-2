@@ -34,7 +34,7 @@ const Login = () => {
         buttonTextTop={'Login'}
         buttonTextBottom={'Register'}
         routeTop={'ForgotPassword'}
-        routeBot={'Sign up'}
+        routeBot={'Signup'}
         loginFunc={handleLogin}>
         <View
           style={{

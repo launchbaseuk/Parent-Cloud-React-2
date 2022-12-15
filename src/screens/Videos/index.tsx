@@ -36,7 +36,7 @@ export default function Videos({navigation, route}: any) {
         <BackButton text="Videos" />
         <View style={{height: 16}} />
 
-        <TagFilter />
+        {/* <TagFilter /> */}
         <View style={{height: 16}} />
 
         {videos.map((video: any) => {

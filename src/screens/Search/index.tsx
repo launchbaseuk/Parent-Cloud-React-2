@@ -30,7 +30,7 @@ const SearchScreen = () => {
         <Text style={[styles.sectionTitle, {marginBottom: 16, marginTop: 41}]}>
           Suggested
         </Text>
-        <TagFilter />
+        {/* <TagFilter /> */}
 
         <View style={styles.results}>
           <Text

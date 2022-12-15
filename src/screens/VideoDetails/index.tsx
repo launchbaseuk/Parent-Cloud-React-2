@@ -82,7 +82,7 @@ export default function VideoDetails({navigation, route}: any) {
       </View>
 
       <View style={[styles.container, {marginTop: 16}]}>
-        <View style={{width: 60, height: 60}}>
+        {/* <View style={{width: 60, height: 60}}>
           <Image
             style={{width: '100%', height: '100%'}}
             source={image ? {uri: image} : placeholderImage}
@@ -107,7 +107,7 @@ export default function VideoDetails({navigation, route}: any) {
             }}>
             {description}
           </Text>
-        </View>
+        </View> */}
       </View>
 
       <View

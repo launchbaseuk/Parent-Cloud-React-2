@@ -47,12 +47,12 @@ export default function MediaDetails({navigation, route}) {
         </View>
       </View>
 
-      <View style={[styles.container, {marginTop: 16}]}>
+      {/* <View style={[styles.container, {marginTop: 16}]}>
         <View style={styles.imageContainerNarrator}>
           <Image source={placeholderImage} />
         </View>
 
-        <View style={{width: 230, marginLeft: 8}}>
+        {/* <View style={{width: 230, marginLeft: 8}}>
           <Text
             style={{
               fontFamily: 'Montserrat-Bold',
@@ -73,8 +73,8 @@ export default function MediaDetails({navigation, route}) {
             pellentesque suspendisse a ornare. Nulla velit, pellentesque ipsum
             enim. Tellus mauris hac erat eu morbi urna eu nisi, lectus.
           </Text>
-        </View>
-      </View>
+        </View> 
+          </View> */}
       <MusicPlayer />
     </SafeAreaView>
   );

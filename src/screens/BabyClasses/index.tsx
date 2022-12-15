@@ -13,7 +13,7 @@ export default function BabyClasses() {
     <SafeAreaView>
       <ScrollView>
         <BackButton text={'Baby Classes'} />
-        <TagFilter />
+        {/* <TagFilter /> */}
 
         <View style={{height: 12}} />
 

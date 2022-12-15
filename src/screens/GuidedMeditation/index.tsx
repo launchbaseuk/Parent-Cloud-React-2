@@ -15,7 +15,7 @@ export default function GuidedMeditation({navigation}: any) {
         <BackButton text="Guided Meditation" />
         <View style={{height: 40}} />
 
-        <TagFilter />
+        {/* <TagFilter /> */}
         <View style={{height: 16}} />
 
         <View>

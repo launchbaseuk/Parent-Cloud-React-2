@@ -15,7 +15,7 @@ export default function SleepStories({navigation}: any) {
         <BackButton text="Sleep Stories" />
         <View style={{height: 40}} />
 
-        <TagFilter />
+        {/* <TagFilter /> */}
         <View style={{height: 16}} />
 
         <View>
