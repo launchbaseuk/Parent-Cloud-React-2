@@ -19,6 +19,26 @@ const {width, height} = Dimensions.get('window');
 function GuideCardSmall({text, redirect, title, fileLink}: any) {
   const navigation = useNavigation();
 
+  // const handlePress = () => {
+  //   if (fileLink) {
+  //     RNFetchBlob.config({
+  //       fileCache: true,
+  //       addAndroidDownloads: {
+  //         useDownloadManager: true,
+  //         notification: true,
+  //         path: RNFetchBlob.fs.dirs.DownloadDir + '/' + title + '.pdf',
+  //         description: 'Downloading file.',
+  //       },
+  //     })
+  //       .fetch('GET', link)
+  //       .then(res => {
+  //         console.log('The file saved to ', res.path());
+  //       });
+  //   } else {
+  //     navigation.navigate('PDFViewer', {text: redirect});
+  //   }
+  // };
+
   return (
     <View style={styles.guidecardsmallContainer}>
       <Text
@@ -63,9 +83,9 @@ function GuideCardSmall({text, redirect, title, fileLink}: any) {
   );
 }
 
-function GuideCardBig() {
+function GuideCardBig({title, excerpt, content}: any) {
   const navigation = useNavigation();
-
+  console.log(content);
   return (
     <View style={styles.guidecardbigContainer}>
       <Image source={guidespicture} style={{marginTop: 16, marginBottom: 16}} />
@@ -80,11 +100,12 @@ function GuideCardBig() {
           <Text
             style={{
               fontFamily: 'SofiaProBlack',
-              fontSize: 20,
+              fontSize: 14,
+              width: 180,
               color: '#11535C',
               marginBottom: 4,
             }}>
-            Lorem ipsum
+            {title}
           </Text>
           <Text
             style={{
@@ -92,8 +113,9 @@ function GuideCardBig() {
               color: '#11535C',
               fontFamily: 'Montserrat-Regular',
               fontSize: 13,
-            }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            }}
+            numberOfLines={2}>
+            {excerpt}
           </Text>
         </View>
 
@@ -101,7 +123,7 @@ function GuideCardBig() {
           <PrimaryButton
             size="mini"
             text="Download"
-            onPress={() => navigation.navigate('PDFViewer')}
+            onPress={() => navigation.navigate('PDFViewer', {text: content})}
           />
         </View>
       </View>

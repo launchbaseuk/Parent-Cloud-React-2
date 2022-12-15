@@ -2,20 +2,14 @@ import React, { useState, useEffect } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import Chip from "../shared/Chip";
 
-export default function TagFilter() {
-    const options = [
-        {text: "All", key: "all"},
-        {text: "Tag #1", key: "tag1"},
-        {text: "Tag #2", key: "tag2"},
-        {text: "Tag #3", key: "tag3"},
-        {text: "Tag #4", key: "tag4"},
-        {text: "Tag #5", key: "tag5"},
-        {text: "Tag #6", key: "tag6"},
-        {text: "Tag #7", key: "tag7"},
-        {text: "Tag #8", key: "tag8"},
-        {text: "Tag #9", key: "tag9"},
-    ];
+export default function TagFilter({ categories }: any) {
+    const [options, setOptions] = useState<any>([{ key: "all", text: "All" }]);
     const [selected, setSelected] = useState<string>(options[0].key);
+
+    useEffect(() => {
+        // add {key: "all", text: "All" } and categories into options
+        setOptions(prevState => [...prevState, ...categories]);
+    }, []);
 
     return (
         <View>

@@ -68,7 +68,7 @@ export default function Fertility() {
           contentContainerStyle={{marginLeft: 8, paddingRight: 15}}>
           {guides.map((guide: any) => {
             let excerpt = guide.excerpt.rendered.replace(/(<([^>]+)>)/gi, '');
-
+            
             return (
               <GuideCardSmall
                 key={guide.id}

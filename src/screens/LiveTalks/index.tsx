@@ -30,11 +30,11 @@ export default function LiveTalks() {
     <SafeAreaView>
       <ScrollView>
         <BackButton text={'Live Talks'} />
-        <TagFilter />
 
         <View style={{height: 12}} />
 
         {liveTalks?.map((talk, index) => {
+          console.log(talk)
           return (
             <ListItem
               key={talk.ID}
