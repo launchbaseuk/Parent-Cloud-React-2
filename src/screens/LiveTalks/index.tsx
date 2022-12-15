@@ -34,7 +34,7 @@ export default function LiveTalks() {
         <View style={{height: 12}} />
 
         {liveTalks?.map((talk, index) => {
-          console.log(talk)
+          console.log(talk);
           return (
             <ListItem
               key={talk.ID}

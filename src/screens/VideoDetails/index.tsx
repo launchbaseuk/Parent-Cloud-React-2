@@ -81,7 +81,7 @@ export default function VideoDetails({navigation, route}: any) {
         </View>
       </View>
 
-      <View style={[styles.container, {marginTop: 16}]}>
+      {/* <View style={[styles.container, {marginTop: 16}]}>
         <View style={{width: 60, height: 60}}>
           <Image
             style={{width: '100%', height: '100%'}}
@@ -108,7 +108,7 @@ export default function VideoDetails({navigation, route}: any) {
             {description}
           </Text>
         </View>
-      </View>
+      </View> */}
 
       <View
         style={{
@@ -124,7 +124,6 @@ export default function VideoDetails({navigation, route}: any) {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        {/* <Replay /> */}
         <TouchableOpacity
           style={{width: '100%'}}
           onPress={() =>
@@ -144,16 +143,11 @@ export default function VideoDetails({navigation, route}: any) {
               paddingTop: 10,
               paddingBottom: 10,
             }}>
-            {/* <Backwards /> */}
-
             <PlayIconBig />
 
             <Text style={styles.playText}>Play Video</Text>
-            {/* <Forwards /> */}
           </View>
         </TouchableOpacity>
-
-        {/* <Queue /> */}
       </View>
     </SafeAreaView>
   );

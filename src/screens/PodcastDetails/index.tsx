@@ -90,7 +90,7 @@ export default function PodcastDetails({navigation, route}) {
             </View>
           </View>
 
-          <View style={[styles.container, {marginTop: 16}]}>
+          {/* <View style={[styles.container, {marginTop: 16}]}>
             <View style={{width: 60, height: 60}}>
               <Image
                 style={{width: '100%', height: '100%'}}
@@ -117,7 +117,7 @@ export default function PodcastDetails({navigation, route}) {
                 {description}
               </Text>
             </View>
-          </View>
+          </View> */}
           <MusicPlayer audioFile={audio} />
           <View style={{height: 102}} />
         </ScrollView>

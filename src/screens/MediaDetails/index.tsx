@@ -47,11 +47,13 @@ export default function MediaDetails({navigation, route}) {
         </View>
       </View>
 
-      <View style={[styles.container, {marginTop: 16}]}>
+      {/* SEB REQUEST TO REMOVE NARRATOR DETAILS */}
+      {/* <View style={[styles.container, {marginTop: 16}]}>
         <View style={styles.imageContainerNarrator}>
           <Image source={placeholderImage} />
         </View>
 
+        
         <View style={{width: 230, marginLeft: 8}}>
           <Text
             style={{
@@ -74,7 +76,7 @@ export default function MediaDetails({navigation, route}) {
             enim. Tellus mauris hac erat eu morbi urna eu nisi, lectus.
           </Text>
         </View>
-      </View>
+      </View> */}
       <MusicPlayer />
     </SafeAreaView>
   );
