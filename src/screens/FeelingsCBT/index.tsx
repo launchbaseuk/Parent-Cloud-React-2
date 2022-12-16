@@ -116,14 +116,7 @@ export default function FeelingsCBT() {
         />
       </View>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          width: width - 40,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          alignSelf: 'center',
-        }}>
+      <View style={styles.buttonContainer}>
         <SecondaryButton
           size="small"
           text="Back"
@@ -144,5 +137,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     height: '100%',
+  },
+  buttonContainer: {
+    marginTop: 64,
+    marginBottom: 60,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 344,
+    alignSelf: 'center',
   },
 });

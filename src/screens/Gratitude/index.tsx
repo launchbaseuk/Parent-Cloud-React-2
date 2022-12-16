@@ -70,14 +70,7 @@ export default function Gratitude({navigation}) {
         itemKey="same"
       />
 
-      <View
-        style={{
-          width: width - 40,
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          marginTop: 32,
-          alignSelf: 'center',
-        }}>
+      <View style={styles.buttonContainer}>
         <SecondaryButton
           size="small"
           text="Back"
@@ -96,4 +89,13 @@ export default function Gratitude({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  buttonContainer: {
+    marginTop: 64,
+    marginBottom: 60,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 344,
+    alignSelf: 'center',
+  },
+});

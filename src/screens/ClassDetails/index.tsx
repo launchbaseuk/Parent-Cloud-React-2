@@ -35,12 +35,7 @@ export default function ClassDetails() {
         </Text>
       </View>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          width: width - 40,
-          justifyContent: 'space-evenly',
-        }}>
+      <View style={styles.buttonContainer}>
         <SecondaryButton
           size="small"
           text="Back"
@@ -80,5 +75,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     backgroundColor: '#F2F2F280',
     paddingVertical: 32,
+  },
+  buttonContainer: {
+    marginTop: 64,
+    marginBottom: 60,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 344,
+    alignSelf: 'center',
   },
 });
