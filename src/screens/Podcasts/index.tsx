@@ -25,50 +25,48 @@ export default function Podcasts({ navigation, route }: any) {
   const [selected, setSelected] = useState<string>("all");
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       setCategories([]);
-      const response = await getPodcasts();
-      setPodcasts(response);
+      if (selected === "all") {
+        const response = await getPodcasts();
+        setPodcasts(response);
 
-      // get response.ID and fetch categories from https://parentcloud.borne.io/wp-json/wp/v2/videos/${response.ID}
-      if (categories.length === 0) {
-        for (let i = 0; i < response.length; i++) {
-          const categoriesS = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/videos/${response[i].ID}`, {
-            headers: {
-              "Authorization": `Bearer ${await AsyncStorage.getItem("token")}`
-            }
-          });
-          const data = await categoriesS.json();
-
-          for (let j = 0; j < data.master_filter.length; j++) {
-            const responseS = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/master_filter/${data.master_filter[j]}`, {
-              headers: {
-                "Authorization": `Bearer ${await AsyncStorage.getItem("token")}`
-              }
-            });
-            const dataS = await responseS.json();
-
-            // check all categories value and if dataS.id doesn't exist in any then add it
-            if (categories.length === 0) {
-              setCategories(prevState => [...prevState, { key: dataS.id, text: dataS.name }]);
-            } else {
-              let isExist = false;
-              for (let k = 0; k < categories.length; k++) {
-                if (categories[k].key === dataS.id) {
-                  isExist = true;
-                  break;
-                }
-              }
-
-              if (!isExist) {
-                setCategories(prevState => [...prevState, { key: dataS.id, text: dataS.name }]);
-              }
-            }
+        let responseTags: any = await fetch("https://parentcloud.borne.io/wp-json/wp/v2/tags", {
+          headers: {
+            "Authorization": `Bearer ${await AsyncStorage.getItem("token")}`,
           }
-        }
+        });
+        responseTags = await responseTags.json();
+
+        setCategories(responseTags.map((tags: any) => {
+          return {
+            text: tags.name,
+            key: tags.id,
+          }
+        }))
+      } else {
+        setPodcasts([]);
+        let responseTags: any = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/videos?tags=${selected}`, {
+          headers: {
+            "Authorization": `Bearer ${await AsyncStorage.getItem("token")}`,
+          }
+        });
+        responseTags = await responseTags.json();
+
+        setPodcasts(responseTags.map((tags: any) => {
+          return {
+            post_title: tags.title.rendered,
+            post_content: tags.content.rendered,
+            ID: tags.id,
+          }
+        }));
       }
     })();
-  }, []);
+  }, [selected]);
+
+  useEffect(() => {
+    console.log(podcasts)
+  }, [podcasts])
 
   return (
     <SafeAreaView>
@@ -86,7 +84,7 @@ export default function Podcasts({ navigation, route }: any) {
             const result = podcast.post_content.replace(regex, '');
             const link = podcast.post_content.match(
               /<img[^>]+src="?([^"\s]+)"?[^>]*>/,
-            )[1];
+            );
 
             return (
               <MediaListItem

@@ -8,7 +8,7 @@ export default function TagFilter({ selected, setSelected, categories }: any) {
     useEffect(() => {
         // add {key: "all", text: "All" } and categories into options
         setOptions(prevState => [...prevState, ...categories]);
-    }, []);
+    }, [categories]);
 
     return (
         <View>

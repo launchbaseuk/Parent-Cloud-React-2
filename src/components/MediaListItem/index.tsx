@@ -36,7 +36,7 @@ export default function MediaListItem({
       <View style={{flexDirection: 'row'}}>
         <View style={styles.imageContainer}>
           <Image
-            source={link ? {uri: link} : headphones}
+            source={link ? {uri: link[1]} : headphones}
             style={{width: '100%', height: '100%'}}
           />
         </View>
