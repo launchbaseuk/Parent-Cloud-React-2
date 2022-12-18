@@ -7,23 +7,37 @@ import TagFilter from '../../components/TagFilter';
 
 // Image
 import listitemimage from '../../images/ListItemImage.png';
+import { useFocusEffect } from '@react-navigation/native';
+import getContentPresenters from '../../functions/getContentPresenters';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function BabyClasses() {
+  const [presenters, setPresenters] = useState<any>([]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      (async() => {
+        let presenters = await getContentPresenters(await AsyncStorage.getItem('token'));
+        setPresenters(presenters)
+      })();
+    }, [])
+  );
+
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ paddingBottom: 25 }}>
         <BackButton text={'Baby Classes'} />
         {/* <TagFilter /> */}
 
         <View style={{height: 12}} />
 
-        {Array.from({length: 10}).map((_, index) => {
+        {presenters.map((presenter: any, index: number) => {
           return (
             <ListItem
-              key={index}
-              text="Lorem ipsum + DATE/TIME"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci turpis et tortor diam mi mollis hendrerit lobortis ullamcorper."
-              image={listitemimage}
+              key={presenter.id}
+              id={presenter.id}
+              text={presenter.title}
+              image={presenter.imageLink}
             />
           );
         })}

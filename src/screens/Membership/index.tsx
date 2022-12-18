@@ -22,7 +22,7 @@ export default function Membership() {
           }
         });
         response = await response.json();
-        const subId = response[0].recent_subscriptions[0].id;
+        const subId = response[0]?.recent_subscriptions[0]?.id;
         let responseSub = await fetch(`https://parentcloud.borne.io/wp-json/mp/v1/subscriptions/${subId}`, {
           headers: {
             "MEMBERPRESS-API-KEY": "8T5AkgBptM"
@@ -62,7 +62,7 @@ export default function Membership() {
                   fontSize: 16,
                   marginLeft: 26,
                 }}>
-                {subscription.membership.title}
+                {subscription?.membership?.title}
               </Text>
             </View>
           </View>
@@ -106,7 +106,7 @@ export default function Membership() {
                   fontSize: 16,
                   marginLeft: 26,
                 }}>
-                {subscription.status[0].toUpperCase() + subscription.status.slice(1).toLowerCase()}
+                {subscription?.status[0].toUpperCase() + subscription?.status.slice(1).toLowerCase()}
               </Text>
             </View>
           </View>
@@ -128,7 +128,7 @@ export default function Membership() {
                   fontSize: 16,
                   marginLeft: 26,
                 }}>
-                {subscription.membership.date.split("-")[1] + "/" + subscription.membership.date.split("-")[0]}
+                {subscription?.membership?.date.split("-")[1] + "/" + subscription?.membership?.date.split("-")[0]}
               </Text>
             </View>
           </View>

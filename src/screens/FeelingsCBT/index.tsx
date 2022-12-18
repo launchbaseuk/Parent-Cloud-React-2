@@ -33,7 +33,7 @@ export default function FeelingsCBT() {
   useFocusEffect(
     React.useCallback(() => {
       (async () => {
-        const username = await AsyncStorage.getItem('user_nicename');
+        const username = await AsyncStorage.getItem('user_nameDisplay');
 
         if (username) setUsername(username);
       })();

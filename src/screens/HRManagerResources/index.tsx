@@ -67,7 +67,7 @@ export default function HRManagerResources() {
               {item.items.map((it: any) => {
                 console.log(item.type == "guides" ? it.title + " " + it.content : it.title)
                 return (
-                  <GuideCardSmall title={it.title} excerpt={it.excerpt} redirect={it.content} />
+                  <GuideCardSmall title={it.title} excerpt={it.excerpt} redirect={it.content} vimeoLink={it.vimeoLink} />
                 )
               })}
               </ScrollView>

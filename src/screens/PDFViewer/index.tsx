@@ -12,16 +12,16 @@ export default function PDFViewer({navigation, route}: any) {
   const text: any = {
     html: route?.params?.text,
   };
+  const title = route?.params?.title;
   const pdfFile = {uri: route?.params?.pdf, cache: true};
   const source = {
     uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf',
     // cache: true,
   };
-  console.log(text);
 
   return (
     <SafeAreaView>
-      <BackButton text="PDF Title" />
+      <BackButton text={title || "PDF Title"} />
 
       <ScrollView contentContainerStyle={styles.container}>
         {text ? 

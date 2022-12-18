@@ -3,12 +3,12 @@ import { View, StyleSheet, Dimensions, Image, Text, TouchableOpacity } from "rea
 import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
-export default function ListItem({ text, image, description }: any) {
+export default function ListItem({ text, image, description, id }: any) {
     const navigation = useNavigation();
 
     return (
         <TouchableOpacity style={styles.listItemContainer} onPress={() => navigation.navigate("ClassDetails")}>
-            <Image source={image} style={{ borderRadius: 5, marginRight: 8 }} />
+            <Image source={{ uri: image }} style={{ width: 220, height: 120, borderRadius: 5, marginRight: 8, resizeMode: 'contain' }} />
             <View style={styles.listItemTextContainer}>
                 <Text style={styles.title}>{text}</Text>
                 <Text style={styles.description}>{description}</Text>
@@ -20,11 +20,10 @@ export default function ListItem({ text, image, description }: any) {
 const styles = StyleSheet.create({
     listItemContainer: {
         width: width - 40,
-        height: 100,
+        height: 200,
         borderRadius: 5,
         backgroundColor: "#F2F2F280",
         alignSelf: "center",
-        flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
@@ -34,7 +33,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: "#11535C",
         fontFamily: "Montserrat-Bold",
-        width: 260
+        width: 260,
+        marginTop: 20
     },
     description: {
         width: 245,

@@ -16,7 +16,7 @@ import guidespicture from '../../images/GuidesPicture.png';
 import PrimaryButton from '../shared/PrimaryButton';
 
 const {width, height} = Dimensions.get('window');
-function GuideCardSmall({text, redirect, title, fileLink}: any) {
+function GuideCardSmall({text, redirect, title, fileLink, vimeoLink }: any) {
   const navigation = useNavigation();
 
   // const handlePress = () => {

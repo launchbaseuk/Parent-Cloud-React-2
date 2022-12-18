@@ -46,7 +46,7 @@ export default function LearnCard({ image, title, excerpt, content }: any) {
             <PrimaryButton
                 size="mini"
                 text="Learn"
-                onPress={() => navigation.navigate('PDFViewer', {text: content})}
+                onPress={() => navigation.navigate('PDFViewer', {text: content, title: title})}
             />
             </View>
         </View>

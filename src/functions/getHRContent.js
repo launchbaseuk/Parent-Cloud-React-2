@@ -39,18 +39,27 @@ export default async function getHRContent() {
         response = await response.json();
 
         for(let i=0; i<response.length; i++) {
+            console.log(response[i])
             let type = response[i].type;
             let excerpt = response[i].excerpt.rendered.replace(/<[^>]*>?/gm, '');
             let title = response[i].title.rendered;
             let content = response[i].content.rendered;
+            let vimeoLink;
 
-            console.log(response[i])
+            if (content.includes("https://player.vimeo.com/video/")) {
+                vimeoLink = content.substring(content.indexOf("https://player.vimeo.com/video/"), content.indexOf("frameborder=") - 2);
+                vimeoLink = vimeoLink.substring(vimeoLink.indexOf("/", 8), vimeoLink.indexOf("?"));
+                vimeoLink = "https://player.vimeo.com" + vimeoLink;
+            }
+
+            console.log(vimeoLink)
 
             if (postTypesItems.find((item) => item.type === type)) {
                 postTypesItems.find((item) => item.type === type).items.push({
                     title,
                     excerpt,
-                    content
+                    content,
+                    vimeoLink
                 });
             } else {
                 postTypesItems.push({
@@ -58,7 +67,8 @@ export default async function getHRContent() {
                     items: [{
                         title,
                         excerpt,
-                        content
+                        content,
+                        vimeoLink
                     }]
                 });
             }
