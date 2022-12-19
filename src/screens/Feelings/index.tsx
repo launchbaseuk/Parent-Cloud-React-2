@@ -381,12 +381,12 @@ export default function Feelings({navigation, route}: any) {
 
       <View
         style={{
+          marginTop: 64,
+          marginBottom: 60,
           flexDirection: 'row',
-          width: width - 40,
           justifyContent: 'space-between',
-          alignItems: 'center',
+          width: 344,
           alignSelf: 'center',
-          marginTop: 45,
         }}>
         <SecondaryButton
           size="small"

@@ -8,7 +8,7 @@ export default function ListItem({ text, image, description, id }: any) {
 
     return (
         <TouchableOpacity style={styles.listItemContainer} onPress={() => navigation.navigate("ClassDetails")}>
-            <Image source={{ uri: image }} style={{ width: 220, height: 120, borderRadius: 5, marginRight: 8, resizeMode: 'contain' }} />
+            <Image source={image} style={{ width: 220, height: 120, borderRadius: 5, marginRight: 8, resizeMode: 'contain' }} />
             <View style={styles.listItemTextContainer}>
                 <Text style={styles.title}>{text}</Text>
                 <Text style={styles.description}>{description}</Text>

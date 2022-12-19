@@ -9,8 +9,8 @@ import BackButton from '../../components/BackButton';
 
 const {width, height} = Dimensions.get('window');
 export default function Membership() {
-  const [details, setDetails] = useState<any>([]);
-  const [subscription, setSubscription] = useState<any>([]);
+  const [status, setStatus] = useState<any>(undefined);
+  const [subscription, setSubscription] = useState<any>(undefined);
   
   useFocusEffect(
     React.useCallback(() => {
@@ -29,17 +29,16 @@ export default function Membership() {
           }
         });
         responseSub = await responseSub.json();
-        responseSub = responseSub;
 
         setSubscription(responseSub);
-        setDetails(response[0]);
+        setStatus(responseSub?.status[0].toUpperCase() + responseSub?.status.slice(1).toLowerCase())
       })();
     }, [])
   );
   
   return (
     <SafeAreaView>
-      {subscription ? (
+      {subscription && status ? (
         <View style={styles.wrapper}>
           <BackButton text="Membership" />
           <View style={{height: 32}} />
@@ -106,7 +105,7 @@ export default function Membership() {
                   fontSize: 16,
                   marginLeft: 26,
                 }}>
-                {subscription?.status[0].toUpperCase() + subscription?.status.slice(1).toLowerCase()}
+                {status}
               </Text>
             </View>
           </View>
