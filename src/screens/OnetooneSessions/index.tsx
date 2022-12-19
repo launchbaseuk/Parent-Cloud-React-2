@@ -112,19 +112,18 @@ export default function OnetooneSessions() {
   }
 
   return (
-    // <View>
-    <View style={{flex: 1}}>
-      <BackButton text={'One-to-One Sessions'} />
+    <SafeAreaView style={{flex: 1, paddingBottom: 20, marginTop: -20}}>
+      <BackButton text={'1-2-1 Sessions'} />
+
       <WebView
         scalesPageToFit={true}
         bounces={false}
         javaScriptEnabled
-        style={{width: width, flex: 1}}
+        style={{width: width, flex: 1, marginTop: -50}}
         source={{uri: 'https://parentcloudandwellnesscloud.as.me/'}}
         automaticallyAdjustContentInsets={false}
       />
-    </View>
-    // </View>
+    </SafeAreaView>
   );
 }
 
