@@ -7,17 +7,33 @@ import {
   Text,
   Dimensions,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 // Images
-import playiconyellow from "../../icons/PlayIconYellow.png";
+import playiconyellow from '../../icons/PlayIconYellow.png';
 
 const {width, height} = Dimensions.get('window');
-export default function VideoListItem({text, description, image, details, vimeoLink, video}: any) {
+export default function VideoListItem({
+  text,
+  description,
+  image,
+  details,
+  vimeoLink,
+  video,
+}: any) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("VideoDetails", {title: text, details: details, vimeoLink: vimeoLink, video: video})}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate('VideoDetails', {
+          title: text,
+          details: details,
+          vimeoLink: vimeoLink,
+          video: video,
+        })
+      }>
       <View style={{flexDirection: 'row'}}>
         <View style={styles.imageContainer}>
           <Image source={image[0].href} style={styles.image} />
@@ -29,9 +45,9 @@ export default function VideoListItem({text, description, image, details, vimeoL
               fontFamily: 'Montserrat-Bold',
               color: '#11535C',
               fontSize: 14,
-              width: width - 120
+              width: width - 120,
             }}>
-            {text}
+            {text.substring(0, 30) + '...'}
           </Text>
           <Text
             style={{
@@ -57,6 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#F2F2F280',
     alignSelf: 'center',
+    marginBottom: 10,
     paddingLeft: 10,
     paddingBottom: 10,
     paddingTop: 10,

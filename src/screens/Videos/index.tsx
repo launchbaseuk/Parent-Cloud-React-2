@@ -27,41 +27,51 @@ export default function Videos({navigation, route}: any) {
   useFocusEffect(
     React.useCallback(() => {
       (async () => {
-        if(selected == "all") {
+        if (selected == 'all') {
           const response = await getVideos();
           setVideos(response);
 
-          let responseTags: any = await fetch("https://parentcloud.borne.io/wp-json/wp/v2/tags", {
-            headers: {
-              "Authorization": `Bearer ${await AsyncStorage.getItem("token")}`,
-            }
-          });
+          let responseTags: any = await fetch(
+            'https://parentcloud.borne.io/wp-json/wp/v2/tags',
+            {
+              headers: {
+                Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+              },
+            },
+          );
           responseTags = await responseTags.json();
 
-          setCategories(responseTags.map((tags: any) => {
-            return {
-              text: tags.name,
-              key: tags.id,
-            }
-          }))
+          setCategories(
+            responseTags.map((tags: any) => {
+              return {
+                text: tags.name,
+                key: tags.id,
+              };
+            }),
+          );
         } else {
           setVideos([]);
-          let responseTags: any = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/videos?tags=${selected}`, {
-            headers: {
-              "Authorization": `Bearer ${await AsyncStorage.getItem("token")}`,
-            }
-          });
+          let responseTags: any = await fetch(
+            `https://parentcloud.borne.io/wp-json/wp/v2/videos?tags=${selected}`,
+            {
+              headers: {
+                Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+              },
+            },
+          );
           responseTags = await responseTags.json();
 
-          setVideos(responseTags.map((tags: any) => {
-            return {
-              post_title: tags.title.rendered,
-              post_content: tags.content.rendered,
-              ID: tags.id,
-              post_excerpt: tags.excerpt.rendered,
-              _links: tags._links,
-            }
-          }));
+          setVideos(
+            responseTags.map((tags: any) => {
+              return {
+                post_title: tags.title.rendered,
+                post_content: tags.content.rendered,
+                ID: tags.id,
+                post_excerpt: tags.excerpt.rendered,
+                _links: tags._links,
+              };
+            }),
+          );
         }
       })();
     }, []),
@@ -73,12 +83,16 @@ export default function Videos({navigation, route}: any) {
         <BackButton text="Videos" />
         <View style={{height: 16}} />
 
-        <TagFilter selected={selected} setSelected={setSelected} categories={categories} />
+        <TagFilter
+          selected={selected}
+          setSelected={setSelected}
+          categories={categories}
+        />
         <View style={{height: 16}} />
 
         {videos.map((video: any) => {
           // remove html from excerpt
-          console.log(video._links["wp:featuredmedia"][0].href);
+          console.log(video._links['wp:featuredmedia'][0].href);
           const excerpt = video.excerpt.rendered.replace(/(<([^>]+)>)/gi, '');
           const details = video.content.rendered.replace(/(<([^>]+)>)/gi, '');
 

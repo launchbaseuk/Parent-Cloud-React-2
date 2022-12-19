@@ -74,15 +74,15 @@ export default function VideoDetails({navigation, route}: any) {
               fontSize: 10,
               lineHeight: 19.5,
               marginTop: -80,
-              marginBottom: -20,
+              marginBottom: -80,
             }}>
             {details.replace('\n', '')}
           </Text>
         </View>
       </View>
 
-      <View style={[styles.container, {marginTop: 16}]}>
-        {/* <View style={{width: 60, height: 60}}>
+      {/* <View style={[styles.container, {marginTop: 16}]}> */}
+      {/* <View style={{width: 60, height: 60}}>
           <Image
             style={{width: '100%', height: '100%'}}
             source={image ? {uri: image} : placeholderImage}
@@ -108,13 +108,13 @@ export default function VideoDetails({navigation, route}: any) {
             {description}
           </Text>
         </View> */}
-      </View>
+      {/* </View> */}
 
       <View
         style={{
           flexDirection: 'row',
           marginTop: 32,
-          backgroundColor: '#f2f2f280',
+          // backgroundColor: '#f2f2f280',
           alignSelf: 'center',
           width: width - 40,
           height: 100,
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     width: width - 40,
     paddingLeft: 8,
     paddingTop: 8,
-    paddingBottom: 8,
+    // paddingBottom: 8,
     paddingRight: 18,
     alignSelf: 'center',
     borderRadius: 5,
