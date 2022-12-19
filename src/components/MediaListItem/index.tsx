@@ -50,6 +50,7 @@ export default function MediaListItem({
               width: '45%',
               marginBottom: 2,
             }}>
+            {/* {title.substring(0, 50) + '...'} */}
             {title}
           </Text>
           <Text
@@ -60,8 +61,8 @@ export default function MediaListItem({
               fontSize: 11,
             }}>
             {/* {content.toString().substring(0, 50)} */}
-            {/* {content} */}
-            Lorem ipsum dolor sit amet...
+            {content.substring(0, 30) + '...'}
+            {/* Lorem ipsum dolor sit amet... */}
           </Text>
         </View>
       </View>
@@ -83,25 +84,28 @@ export default function MediaListItem({
 const styles = StyleSheet.create({
   container: {
     width: width - 40,
-    height: 80,
+    maxHeight: 100,
     borderRadius: 5,
     backgroundColor: '#F2F2F280',
     alignSelf: 'center',
     paddingLeft: 10,
-    paddingBottom: 10,
+    // paddingBottom: 50,
     paddingTop: 10,
+    // paddingBottom: 10,
     paddingRight: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 8,
+    // marginTop: 8,
+    marginBottom: 20,
   },
   textContainer: {
     marginLeft: 8,
-    height: '100%',
+    // height: '100%',
+    marginBottom: 10,
   },
   imageContainer: {
     width: 80,
-    height: 80,
+    height: 70,
     borderRadius: 5,
     backgroundColor: '#11535C',
     justifyContent: 'center',
