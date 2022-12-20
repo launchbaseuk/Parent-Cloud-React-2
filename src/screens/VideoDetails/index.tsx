@@ -81,35 +81,6 @@ export default function VideoDetails({navigation, route}: any) {
         </View>
       </View>
 
-      {/* <View style={[styles.container, {marginTop: 16}]}> */}
-      {/* <View style={{width: 60, height: 60}}>
-          <Image
-            style={{width: '100%', height: '100%'}}
-            source={image ? {uri: image} : placeholderImage}
-          />
-        </View>
-
-        <View style={{width: 230, marginLeft: 8}}>
-          <Text
-            style={{
-              fontFamily: 'Montserrat-Bold',
-              color: '#11535C',
-              fontSize: 13,
-            }}>
-            {author ? author.display_name : ''}
-          </Text>
-          <Text
-            style={{
-              fontFamily: 'Montserrat-Regular',
-              color: '#150E00',
-              fontSize: 10,
-              lineHeight: 19.5,
-            }}>
-            {description}
-          </Text>
-        </View> */}
-      {/* </View> */}
-
       <View
         style={{
           flexDirection: 'row',

@@ -46,35 +46,6 @@ export default function MediaDetails({navigation, route}) {
           </Text>
         </View>
       </View>
-
-      {/* <View style={[styles.container, {marginTop: 16}]}>
-        <View style={styles.imageContainerNarrator}>
-          <Image source={placeholderImage} />
-        </View>
-
-        {/* <View style={{width: 230, marginLeft: 8}}>
-          <Text
-            style={{
-              fontFamily: 'Montserrat-Bold',
-              color: '#11535C',
-              fontSize: 13,
-            }}>
-            Narrator Details
-          </Text>
-          <Text
-            style={{
-              fontFamily: 'Montserrat-Regular',
-              color: '#150E00',
-              fontSize: 10,
-              lineHeight: 19.5,
-            }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            dictum enim elementum sociis facilisis. Ultrices adipiscing gravida
-            pellentesque suspendisse a ornare. Nulla velit, pellentesque ipsum
-            enim. Tellus mauris hac erat eu morbi urna eu nisi, lectus.
-          </Text>
-        </View> 
-          </View> */}
       <MusicPlayer />
     </SafeAreaView>
   );

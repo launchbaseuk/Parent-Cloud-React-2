@@ -152,9 +152,9 @@ const ReviewSection = ({navigation, route}: any) => {
           }}>
           Last Week
         </Text>
-        <StaticSelection text="Monday" route="ReviewDetails" />
+        {/* <StaticSelection text="Monday" route="ReviewDetails" />
         <StaticSelection text="Tuesday" route="ReviewDetails" />
-        <StaticSelection text="Wednesday" route="ReviewDetails" />
+        <StaticSelection text="Wednesday" route="ReviewDetails" /> */}
         <View style={{paddingBottom: 100}}>
           <Text
             style={{
