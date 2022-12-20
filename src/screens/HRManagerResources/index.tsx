@@ -22,12 +22,12 @@ export default function HRManagerResources() {
 
   useFocusEffect(
     React.useCallback(() => {
-      (async() => {
+      (async () => {
         let items = await getHRContent();
 
         setItems(items);
       })();
-    }, [])
+    }, []),
   );
 
   return (
@@ -39,40 +39,57 @@ export default function HRManagerResources() {
         {items.map((item: any, index: number) => {
           return (
             <>
-            <View style={styles.guidesHeader}>
-              <Text
-                style={{
-                  fontFamily: 'SofiaProBlack',
-                  color: '#11535C',
-                  fontSize: 20,
-                }}>
-                {item.type[0].toUpperCase() + item.type.slice(1)}
-              </Text>
-              <TouchableOpacity onPress={() => navigation.navigate(`${item.type[0].toUpperCase()}${item.type.slice(1)}`, {items: item})}>
+              <View style={styles.guidesHeader}>
                 <Text
                   style={{
-                    fontFamily: 'Montserrat-Bold',
-                    color: '#150E00',
-                    fontSize: 14,
+                    fontFamily: 'SofiaProBlack',
+                    color: '#11535C',
+                    fontSize: 20,
                   }}>
-                  See all
+                  {item.type[0].toUpperCase() + item.type.slice(1)}
                 </Text>
-              </TouchableOpacity>
-            </View>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate(
+                      `${item.type[0].toUpperCase()}${item.type.slice(1)}`,
+                      {items: item},
+                    )
+                  }>
+                  <Text
+                    style={{
+                      fontFamily: 'Montserrat-Bold',
+                      color: '#150E00',
+                      fontSize: 14,
+                    }}>
+                    See all
+                  </Text>
+                </TouchableOpacity>
+              </View>
               <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{marginLeft: 8, paddingRight: 15}}
-              >
-              {item.items.map((it: any) => {
-                console.log(item.type == "guides" ? it.title + " " + it.content : it.title)
-                return (
-                  <GuideCardSmall title={it.title} excerpt={it.excerpt} redirect={it.content} vimeoLink={it.vimeoLink} />
-                )
-              })}
+                contentContainerStyle={{marginLeft: 8, paddingRight: 15}}>
+                {item.items.map((it: any) => {
+                  console.log(
+                    item.type == 'guides'
+                      ? it.title + ' ' + it.content
+                      : it.title,
+                  );
+
+                  console.log('aaa', it);
+                  return (
+                    <GuideCardSmall
+                      title={it.title}
+                      excerpt={it.excerpt}
+                      redirect={it.content}
+                      vimeoLink={it.vimeoLink}
+                      fileLink={it.content}
+                    />
+                  );
+                })}
               </ScrollView>
             </>
-          )
+          );
         })}
       </ScrollView>
     </SafeAreaView>
