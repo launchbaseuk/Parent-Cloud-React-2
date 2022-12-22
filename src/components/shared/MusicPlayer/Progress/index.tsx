@@ -58,11 +58,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor: '#f2f2f280',
   },
   labelContainer: {
     width: width - 60,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    // backgroundColor: '#f2f2f280',
   },
   labelText: {
     color: 'black',

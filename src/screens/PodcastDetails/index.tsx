@@ -62,10 +62,11 @@ export default function PodcastDetails({navigation, route}) {
 
           <View style={styles.container}>
             <View style={styles.imageContainer}>
-              <Image
+              {/* The image crashes the app for some reason */}
+              {/* <Image
                 style={{width: '100%', height: '100%'}}
                 source={link ? {uri: link} : headphones}
-              />
+              /> */}
             </View>
 
             <View style={{width: 230, marginLeft: 8}}>
@@ -88,35 +89,6 @@ export default function PodcastDetails({navigation, route}) {
                 {content}
               </Text>
             </View>
-          </View>
-
-          <View style={[styles.container, {marginTop: 16}]}>
-            {/* <View style={{width: 60, height: 60}}>
-              <Image
-                style={{width: '100%', height: '100%'}}
-                source={image ? {uri: image} : placeholderImage}
-              />
-            </View>
-
-            <View style={{width: 230, marginLeft: 8}}>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-Bold',
-                  color: '#11535C',
-                  fontSize: 13,
-                }}>
-                {author ? author[0].display_name : ''}
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-Regular',
-                  color: '#150E00',
-                  fontSize: 10,
-                  lineHeight: 19.5,
-                }}>
-                {description}
-              </Text>
-              </View> */}
           </View>
           <MusicPlayer audioFile={audio} />
           <View style={{height: 102}} />

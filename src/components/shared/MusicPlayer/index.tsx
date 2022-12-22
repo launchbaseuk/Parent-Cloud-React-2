@@ -92,18 +92,24 @@ const MusicPlayer = ({audioFile}: any) => {
   };
 
   return (
-    <View>
+    <View
+      style={{
+        backgroundColor: '#f2f2f280',
+        width: width - 40,
+        height: 100,
+        borderRadius: 5,
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingBottom: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+      }}>
       <View
         style={{
           flexDirection: 'row',
           marginTop: 32,
-          backgroundColor: '#f2f2f280',
           alignSelf: 'center',
-          width: width - 40,
-          height: 100,
-          borderRadius: 5,
-          paddingLeft: 20,
-          paddingRight: 20,
           justifyContent: 'center',
           alignItems: 'center',
         }}>

@@ -71,7 +71,7 @@ export default function MediaListItem({
         style={{
           alignSelf: 'center',
           position: 'absolute',
-          bottom: 14,
+          // bottom: 14,
           right: 14,
         }}
         onPress={handlePress}>
