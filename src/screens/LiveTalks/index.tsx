@@ -6,6 +6,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import BackButton from '../../components/BackButton';
 import ListItem from '../../components/ListItem';
 import TagFilter from '../../components/TagFilter';
+import VideoListItem from '../../components/VideoListItem';
 
 // Image
 import listitemimage from '../../images/ListItemImage.png';
@@ -34,13 +35,14 @@ export default function LiveTalks() {
         <View style={{height: 12}} />
 
         {liveTalks?.map((talk, index) => {
-          console.log(talk)
+          console.log(talk);
           return (
-            <ListItem
-              key={talk.ID}
+            <VideoListItem
               text={talk.post_title}
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci turpis et tortor diam mi mollis hendrerit lobortis ullamcorper."
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci turpis et tortor..."
               image={listitemimage}
+              key={talk.ID}
+              liveTalk
             />
           );
         })}

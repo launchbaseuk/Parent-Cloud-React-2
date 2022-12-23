@@ -14,17 +14,20 @@ import playiconyellow from '../../icons/PlayIconYellow.png';
 
 const {width, height} = Dimensions.get('window');
 export default function VideoListItem({
+  key,
   text,
   description,
   image,
   details,
   vimeoLink,
   video,
+  liveTalk,
 }: any) {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
+      key={key}
       style={styles.container}
       onPress={() =>
         navigation.navigate('VideoDetails', {
@@ -36,7 +39,10 @@ export default function VideoListItem({
       }>
       <View style={{flexDirection: 'row'}}>
         <View style={styles.imageContainer}>
-          <Image source={image[0].href} style={styles.image} />
+          <Image
+            source={liveTalk ? image : image[0].href}
+            style={styles.image}
+          />
         </View>
 
         <View style={styles.textContainer}>

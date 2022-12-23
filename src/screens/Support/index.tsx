@@ -29,6 +29,7 @@ export default function Support() {
   return (
     <SafeAreaView>
       <LiveSupport />
+      <View style={{height: 16}} />
       {constantOptions.map((option, index) => {
         return (
           <ContentCard

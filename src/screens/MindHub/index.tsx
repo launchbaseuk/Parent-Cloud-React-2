@@ -7,9 +7,9 @@ import MindHub from '../../components/shared/ScreenHeaders/MindHub';
 import ContentCard from '../../components/shared/ContentCard';
 
 // Images
-import PocketCBTImage from "../../images/svg/PocketCBTImage";
-import GuidedMeditation from "../../images/svg/GuidedMeditation";
-import SleepStoriesImage from "../../images/svg/SleepStoriesImage";
+import PocketCBTImage from '../../images/svg/PocketCBTImage';
+import GuidedMeditation from '../../images/svg/GuidedMeditation';
+import SleepStoriesImage from '../../images/svg/SleepStoriesImage';
 
 const {width, height} = Dimensions.get('window');
 export default function MindHubScreen() {
@@ -34,7 +34,11 @@ export default function MindHubScreen() {
         text="Sleep Stories"
         route="SleepStories"
       />
-      <ContentCard image={<PocketCBTImage />} text="Pocket CBT" route="PocketCBT" />
+      <ContentCard
+        image={<PocketCBTImage />}
+        text="Pocket CBT"
+        route="PocketCBT"
+      />
     </SafeAreaView>
   );
 }
