@@ -73,10 +73,10 @@ export default function VideoDetails({navigation, route}: any) {
               color: '#150E00',
               fontSize: 10,
               lineHeight: 19.5,
-              marginTop: -80,
-              marginBottom: -80,
+              marginTop: 10,
+              marginBottom: 20,
             }}>
-            {details.replace('\n', '')}
+            {details.replace('\n', '').trim()}
           </Text>
         </View>
       </View>
