@@ -52,7 +52,7 @@ export default function HRManagerResources() {
                   onPress={() =>
                     navigation.navigate(
                       `${item.type[0].toUpperCase()}${item.type.slice(1)}`,
-                      {items: item},
+                      {items: item.items},
                     )
                   }>
                   <Text

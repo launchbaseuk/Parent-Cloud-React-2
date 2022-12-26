@@ -46,7 +46,7 @@ export default function GuidesMedia({navigation, route}: any) {
                 }}>
                 {guide.filter}
               </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Guides')}>
+              <TouchableOpacity onPress={() => navigation.navigate('Guides', { items: guide.guides })}>
                 <Text
                   style={{
                     fontFamily: 'Montserrat-Bold',

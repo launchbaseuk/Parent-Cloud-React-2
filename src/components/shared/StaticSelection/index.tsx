@@ -10,13 +10,13 @@ import {useNavigation} from '@react-navigation/native';
 
 const {width} = Dimensions.get('window');
 
-const StaticSelection = ({text, route}: any) => {
+const StaticSelection = ({text, route, checkIn }: any) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       style={styles.selectionContainer}
-      onPress={() => navigation.navigate(route)}>
+      onPress={() => navigation.navigate(route, { checkIn: checkIn })}>
       <Text>{text}</Text>
     </TouchableOpacity>
   );

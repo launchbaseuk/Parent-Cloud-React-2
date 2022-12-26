@@ -8,7 +8,7 @@ import {GuideCardBig} from '../../components/GuideCard';
 
 export default function Guides({ navigation, route }: any) {
   const { items } = route.params;
-  console.log(items)
+  console.log(items.map((item) => console.log(item.excerpt)))
 
   return (
     <SafeAreaView>
@@ -16,10 +16,16 @@ export default function Guides({ navigation, route }: any) {
 
       <View style={{height: 57}} />
       <ScrollView>
-        {items.items.map((item: any) => {
-          return (
-            <GuideCardBig title={item.title} excerpt={item.excerpt} redirect={item.content} />
-          )
+        {items.map((item: any) => {
+          if(item.title.rendered && item.excerpt.rendered) {
+            return (
+              <GuideCardBig title={item.title.rendered} excerpt={item.excerpt.rendered.replace(/<[^>]+>/g, '')} redirect={item.content} />
+            )
+          } else {
+            return (
+              <GuideCardBig title={item.title} excerpt={item.excerpt} redirect={item.content} />
+            )
+          }
         })}
       </ScrollView>
     </SafeAreaView>

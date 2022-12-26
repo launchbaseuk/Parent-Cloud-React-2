@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -13,13 +13,16 @@ import downArrow from '../../images/dropdownArrow.png';
 const {width} = Dimensions.get('window');
 
 type IDropdown = React.FC<{
-  onPress: () => void;
-  isOpen: boolean;
   title: string;
   children: any;
 }>;
 
-export const DropDown: IDropdown = ({title, onPress, isOpen, children}) => {
+
+export const DropDown: IDropdown = ({title, children}) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const onPress = () => {
+    setIsOpen(!isOpen);
+  }
   return (
     <View style={[styles.self, isOpen && styles.selfOpen]}>
       <TouchableOpacity onPress={onPress}>

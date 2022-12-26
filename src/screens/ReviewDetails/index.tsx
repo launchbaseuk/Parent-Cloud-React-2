@@ -92,7 +92,7 @@ export default function ReviewDetails({navigation, route}: any) {
     {key: 'same', text: 'The same'},
   ]);
 
-  const date = new Date(checkIn.date);
+  const date = new Date(checkIn.date_gmt);
   const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
   const month =
     date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
@@ -150,7 +150,7 @@ export default function ReviewDetails({navigation, route}: any) {
               paddingLeft: 16,
               marginTop: 50,
             }}>
-            01/01/2023
+            Which cognitive distortions does this thought have?
           </Text>
           {checkIn.acf.cognitive_distortions ? (
             <View style={styles.cognitiveContainer}>
