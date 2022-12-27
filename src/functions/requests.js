@@ -120,20 +120,30 @@ async function getPodcasts() {
   const token = await AsyncStorage.getItem('token');
   let podcasts = [];
   const response = await fetch(
-    `https://parentcloud.borne.io/wp-json/mo/v1/posts/videos`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
+    `https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos`,
+    // {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // },
   );
   const data = await response.json();
   console.log('got data');
 
+  // for (let i = 0; i < data.length; i++) {
+  //   if (
+  //     data[i].post_status === 'publish' &&
+  //     !data[i].post_content.includes('wp:embed')
+  //   ) {
+  //     podcasts.push(data[i]);
+  //   }
+  // }
+  // console.log('done');
+
   for (let i = 0; i < data.length; i++) {
     if (
-      data[i].post_status === 'publish' &&
-      !data[i].post_content.includes('wp:embed')
+      data[i].status === 'publish' &&
+      !data[i].content.rendered.includes('wp-block-embed')
     ) {
       podcasts.push(data[i]);
     }

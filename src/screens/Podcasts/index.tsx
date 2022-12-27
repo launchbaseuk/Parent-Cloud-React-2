@@ -32,12 +32,12 @@ export default function Podcasts({navigation, route}: any) {
         setPodcasts(response);
 
         let responseTags: any = await fetch(
-          'https://parentcloud.borne.io/wp-json/wp/v2/tags',
-          {
-            headers: {
-              Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
-            },
-          },
+          'https://hub.the-wellness-cloud.com/wp-json/wp/v2/tags',
+          // {
+          //   headers: {
+          //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+          //   },
+          // },
         );
         responseTags = await responseTags.json();
 
@@ -52,12 +52,12 @@ export default function Podcasts({navigation, route}: any) {
       } else {
         setPodcasts([]);
         let responseTags: any = await fetch(
-          `https://parentcloud.borne.io/wp-json/wp/v2/videos?tags=${selected}`,
-          {
-            headers: {
-              Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
-            },
-          },
+          `https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos?tags=${selected}`,
+          // {
+          //   headers: {
+          //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+          //   },
+          // },
         );
         responseTags = await responseTags.json();
 
@@ -75,7 +75,7 @@ export default function Podcasts({navigation, route}: any) {
   }, [selected]);
 
   useEffect(() => {
-    console.log(podcasts);
+    console.log('poddd', podcasts);
   }, [podcasts]);
 
   return (
@@ -91,7 +91,7 @@ export default function Podcasts({navigation, route}: any) {
         />
         <View style={{height: 16}} />
 
-        <View style={styles.wrapper}>
+        {/* <View style={styles.wrapper}>
           {podcasts.map((podcast: any) => {
             // remove all <> tags from post_content
             const regex = /(<([^>]+)>)/gi;
@@ -111,6 +111,31 @@ export default function Podcasts({navigation, route}: any) {
                 key={podcast.ID}
                 link={link}
                 title={podcast.post_title}
+                content={result}
+              />
+            );
+          })}
+        </View> */}
+        <View style={styles.wrapper}>
+          {podcasts.map((podcast: any) => {
+            // remove all <> tags from post_content
+            const regex = /(<([^>]+)>)/gi;
+            const result = podcast.excerpt.rendered.replace(regex, '').trim();
+            const link = podcast.content.rendered.match(
+              /<img[^>]+src="?([^"\s]+)"?[^>]*>/,
+            );
+
+            return (
+              <MediaListItem
+                onPress={() =>
+                  navigation.navigate('PodcastDetails', {
+                    podcast: podcast,
+                    link: link,
+                  })
+                }
+                key={podcast.ID}
+                link={link}
+                title={podcast.title.rendered}
                 content={result}
               />
             );

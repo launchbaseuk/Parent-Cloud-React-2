@@ -29,16 +29,16 @@ export default function PodcastDetails({navigation, route}) {
   const [audio, setAudioLink] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<string>('');
-  const content = podcast.post_content.replace(/(<([^>]+)>)/gi, '');
+  const content = podcast.excerpt.rendered.replace(/(<([^>]+)>)/gi, '');
 
   useFocusEffect(
     React.useCallback(() => {
       (async () => {
-        const data = await getNarratorDetails(podcast.post_author);
-        setAuthor(data[0]);
-        console.log(data);
+        // const data = await getNarratorDetails(podcast.post_author);
+        // setAuthor(data[0]);
+        // console.log(data);
 
-        let audioLink = podcast.post_content.match(
+        let audioLink = podcast.content.rendered.match(
           /<audio[^>]+src="?([^"\s]+)"?[^>]*>/,
         )[1];
         audioLink = audioLink.substring(audioLink.indexOf('/', 8) + 1);
@@ -75,7 +75,7 @@ export default function PodcastDetails({navigation, route}) {
                   color: '#11535C',
                   fontSize: 13,
                 }}>
-                {podcast.post_title}
+                {podcast.title.rendered}
               </Text>
               <Text
                 style={{
@@ -83,7 +83,8 @@ export default function PodcastDetails({navigation, route}) {
                   color: '#150E00',
                   fontSize: 10,
                   lineHeight: 19.5,
-                  marginTop: -80,
+                  marginTop: 10,
+                  marginBottom: 10,
                 }}>
                 {content}
               </Text>
