@@ -16,7 +16,7 @@ const VideoPlayerShared = ({route}: any) => {
   console.log('aaa', route);
 
   useEffect(() => {
-    const VIMEO_ID = '652384203';
+    const VIMEO_ID = '775794041';
     fetch(`https://player.vimeo.com/video/${VIMEO_ID}/config`)
       .then(res => res.json())
       .then(res =>

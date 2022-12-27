@@ -33,11 +33,11 @@ export default function Videos({navigation, route}: any) {
 
           let responseTags: any = await fetch(
             'https://parentcloud.borne.io/wp-json/wp/v2/tags',
-            {
-              headers: {
-                Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
-              },
-            },
+            // {
+            //   headers: {
+            //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+            //   },
+            // },
           );
           responseTags = await responseTags.json();
 
@@ -53,11 +53,11 @@ export default function Videos({navigation, route}: any) {
           setVideos([]);
           let responseTags: any = await fetch(
             `https://parentcloud.borne.io/wp-json/wp/v2/videos?tags=${selected}`,
-            {
-              headers: {
-                Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
-              },
-            },
+            // {
+            //   headers: {
+            //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+            //   },
+            // },
           );
           responseTags = await responseTags.json();
 
@@ -97,15 +97,17 @@ export default function Videos({navigation, route}: any) {
           const details = video.content.rendered.replace(/(<([^>]+)>)/gi, '');
 
           // Get link inside src="" of iframe
-          let vimeoLink = video.content.rendered.match(/src="([^"]+)"/);
-          vimeoLink = vimeoLink[0].replace('src=', '').replace(/"/g, '');
+          // let vimeoLink = video.content.rendered.match(/src="([^"]+)"/);
+          // vimeoLink = vimeoLink[0].replace('src=', '').replace(/"/g, '');
+
+          console.log('viddata', video.content.rendered);
 
           return (
             <VideoListItem
               text={video.title.rendered}
               description={excerpt}
               image={video._links['wp:featuredmedia']}
-              vimeoLink={vimeoLink}
+              // vimeoLink={vimeoLink}
               details={details}
               video={video}
             />

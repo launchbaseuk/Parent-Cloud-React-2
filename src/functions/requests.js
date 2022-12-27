@@ -3,12 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 async function getFilters() {
   const token = await AsyncStorage.getItem('token');
   const response = await fetch(
-    `https://parentcloud.borne.io/wp-json/wp/v2/master_filter`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
+    `https://hub.the-wellness-cloud.com/wp-json/wp/v2/master_filter`,
+    // {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // },
   );
   const data = await response.json();
   let filters = [];
@@ -96,23 +96,25 @@ async function getVideos() {
 
   for (let i = 0; i < filters.length; i++) {
     let response = await fetch(
-      `https://parentcloud.borne.io/wp-json/wp/v2/videos?master_filter=${filters[i].id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
+      `https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos?master_filter=${filters[i].id}`,
+      // {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // },
     );
+    //response.includes
     response = await response.json();
 
     // Check if the filter exists, if it does push it otherwise create new filter
     if (response.length > 0) {
       for (let j = 0; j < response.length; j++) {
-        videos.push(response[j]);
+        if (response[j].content.rendered.includes('vimeo')) {
+          videos.push(response[j]);
+        }
       }
     }
   }
-
   return videos;
 }
 

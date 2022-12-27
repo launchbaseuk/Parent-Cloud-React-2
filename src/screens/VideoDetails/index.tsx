@@ -26,11 +26,11 @@ import {getNarratorDetails} from '../../functions/requests';
 const {width, height} = Dimensions.get('window');
 export default function VideoDetails({navigation, route}: any) {
   const {title, details, vimeoLink, video} = route.params;
-  const videoId = vimeoLink.replace(/\&.*$/, '');
+  // const videoId = vimeoLink.replace(/\&.*$/, '');
   // remove all spaces at the start of the videoId string
-  let videoIdTrimmed = videoId.replace(/^\s+/, '');
-  videoIdTrimmed = videoIdTrimmed.split('/');
-  videoIdTrimmed = videoIdTrimmed[videoIdTrimmed.length - 1];
+  // let videoIdTrimmed = videoId.replace(/^\s+/, '');
+  // videoIdTrimmed = videoIdTrimmed.split('/');
+  // videoIdTrimmed = videoIdTrimmed[videoIdTrimmed.length - 1];
 
   const [author, setAuthor] = useState<any>();
   const [description, setDescription] = useState<string>('');
@@ -101,7 +101,7 @@ export default function VideoDetails({navigation, route}: any) {
           onPress={() =>
             navigation.navigate('VideoPlayer', {
               title: '',
-              filepath: videoId,
+              filepath: '',
             })
           }>
           <View
