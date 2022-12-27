@@ -29,6 +29,10 @@ export default function GuidesMedia({navigation, route}: any) {
     }, []),
   );
 
+  console.log('guidd', guides);
+
+  // [{"filter": "Bereavement", "guides": []}, {"filter": "Coaching &amp; Career", "guides": []}, {"filter": "Expectant Parent", "guides": []}, {"filter": "Family Activity", "guides": []}, {"filter": "Fertility", "guides": []}, {"filter": "Financial Wellbeing", "guides": []}, {"filter": "HR", "guides": []}, {"filter": "Infant Sleep", "guides": [[Object], [Object]]}, {"filter": "Men's Health", "guides": []}, {"filter": "Menopause", "guides": [[Object]]}]
+
   return (
     <SafeAreaView>
       <ScrollView
@@ -46,7 +50,10 @@ export default function GuidesMedia({navigation, route}: any) {
                 }}>
                 {guide.filter}
               </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Guides', { items: guide.guides })}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('Guides', {items: guide.guides})
+                }>
                 <Text
                   style={{
                     fontFamily: 'Montserrat-Bold',
