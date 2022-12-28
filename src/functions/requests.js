@@ -203,7 +203,6 @@ async function getNarratorDetails(narratorId) {
   return [data, meta];
 }
 
-//https://hub.the-wellness-cloud.com/wp-json/wp/v2/guided_meditation
 async function getGuidedMeditation() {
   const token = await AsyncStorage.getItem('token');
   let meditations = [];
@@ -225,6 +224,27 @@ async function getGuidedMeditation() {
   return meditations;
 }
 
+async function getSleepStories() {
+  const token = await AsyncStorage.getItem('token');
+  let stories = [];
+
+  let response = await fetch(
+    `https://hub.the-wellness-cloud.com/wp-json/wp/v2/sleep_stories`,
+    // {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // },
+  );
+  response = await response.json();
+
+  for (let i = 0; i < response.length; i++) {
+    stories.push(response[i]);
+  }
+
+  return stories;
+}
+
 export {
   getGuides,
   getPageDocs,
@@ -232,6 +252,7 @@ export {
   getPodcasts,
   getNarratorDetails,
   getGuidedMeditation,
+  getSleepStories,
 };
 
 // filters {"id": 31, "name": "Adult Nutrition", "slug": "adult-nutrition"}
