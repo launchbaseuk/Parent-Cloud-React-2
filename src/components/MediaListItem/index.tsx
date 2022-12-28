@@ -61,7 +61,7 @@ export default function MediaListItem({
               fontSize: 11,
             }}>
             {/* {content.toString().substring(0, 50)} */}
-            {content?.substring(0, 30) + '...'}
+            {content ? content?.substring(0, 30) + '...' : 'No description.'}
             {/* Lorem ipsum dolor sit amet... */}
           </Text>
         </View>

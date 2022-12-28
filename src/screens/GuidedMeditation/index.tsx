@@ -1,14 +1,31 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Dimensions, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useFocusEffect} from '@react-navigation/native';
 
 // Components
 import BackButton from '../../components/BackButton';
 import MediaListItem from '../../components/MediaListItem';
-import TagFilter from '../../components/TagFilter';
+import {getGuidedMeditation} from '../../functions/requests';
 
-const {width, height} = Dimensions.get('window');
 export default function GuidedMeditation({navigation}: any) {
+  const [items, setItems] = useState<any>([]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      (async () => {
+        console.log('test');
+        // async () => {
+        const response = await getGuidedMeditation();
+        // console.log('meddd', response);
+        setItems(response);
+        // };
+      })();
+    }, []),
+  );
+
+  console.log('itemsss', items);
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -19,13 +36,11 @@ export default function GuidedMeditation({navigation}: any) {
         <View style={{height: 16}} />
 
         <View>
-          <MediaListItem />
-          <MediaListItem />
-          <MediaListItem />
-          <MediaListItem />
-          <MediaListItem />
-          <MediaListItem />
-          <MediaListItem />
+          {items.map((item: any) => {
+            console.log('eh', item);
+
+            return <MediaListItem title={item.title.rendered} />;
+          })}
         </View>
       </ScrollView>
     </SafeAreaView>

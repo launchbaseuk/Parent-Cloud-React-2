@@ -74,10 +74,6 @@ export default function Podcasts({navigation, route}: any) {
     })();
   }, [selected]);
 
-  useEffect(() => {
-    console.log('poddd', podcasts);
-  }, [podcasts]);
-
   return (
     <SafeAreaView>
       <ScrollView>

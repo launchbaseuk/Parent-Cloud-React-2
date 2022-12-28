@@ -203,7 +203,36 @@ async function getNarratorDetails(narratorId) {
   return [data, meta];
 }
 
-export {getGuides, getPageDocs, getVideos, getPodcasts, getNarratorDetails};
+//https://hub.the-wellness-cloud.com/wp-json/wp/v2/guided_meditation
+async function getGuidedMeditation() {
+  const token = await AsyncStorage.getItem('token');
+  let meditations = [];
+
+  let response = await fetch(
+    `https://hub.the-wellness-cloud.com/wp-json/wp/v2/guided_meditation`,
+    // {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // },
+  );
+  response = await response.json();
+
+  for (let i = 0; i < response.length; i++) {
+    meditations.push(response[i]);
+  }
+
+  return meditations;
+}
+
+export {
+  getGuides,
+  getPageDocs,
+  getVideos,
+  getPodcasts,
+  getNarratorDetails,
+  getGuidedMeditation,
+};
 
 // filters {"id": 31, "name": "Adult Nutrition", "slug": "adult-nutrition"}
 // LOG  filters {"id": 80, "name": "Bereavement", "slug": "bereavement"}
