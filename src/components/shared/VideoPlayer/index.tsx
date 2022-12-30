@@ -13,11 +13,11 @@ const VideoPlayerShared = ({route}: any) => {
   });
   const navigation = useNavigation();
 
-  console.log('aaa', route);
+  console.log('aaa', route.params.videoId);
 
   useEffect(() => {
     const VIMEO_ID = '775794041';
-    fetch(`https://player.vimeo.com/video/${VIMEO_ID}/config`)
+    fetch(`https://player.vimeo.com/video/${route.params.videoId}/config`)
       .then(res => res.json())
       .then(res =>
         setVideo({

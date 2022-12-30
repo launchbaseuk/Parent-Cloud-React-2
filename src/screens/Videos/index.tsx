@@ -24,6 +24,15 @@ export default function Videos({navigation, route}: any) {
   const [selected, setSelected] = useState<any>('all');
   const [categories, setCategories] = useState<any>([]);
 
+  function extractString(input: string) {
+    const regex = /video\/(.+)\?h/;
+    const match = input.match(regex);
+    if (match) {
+      return match[1];
+    }
+    return null;
+  }
+
   useFocusEffect(
     React.useCallback(() => {
       (async () => {
@@ -100,14 +109,16 @@ export default function Videos({navigation, route}: any) {
           // let vimeoLink = video.content.rendered.match(/src="([^"]+)"/);
           // vimeoLink = vimeoLink[0].replace('src=', '').replace(/"/g, '');
 
-          console.log('viddata', video.content.rendered);
+          console.log('viddata', extractString(video.content.rendered));
+
+          // extractSubstring(video.content.rendered)
 
           return (
             <VideoListItem
               text={video.title.rendered}
               description={excerpt}
               image={video._links['wp:featuredmedia']}
-              // vimeoLink={vimeoLink}
+              vimeoLink={extractString(video.content.rendered)}
               details={details}
               video={video}
             />

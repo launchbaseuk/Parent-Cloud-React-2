@@ -100,8 +100,7 @@ export default function VideoDetails({navigation, route}: any) {
           style={{width: '100%'}}
           onPress={() =>
             navigation.navigate('VideoPlayer', {
-              title: '',
-              filepath: '',
+              videoId: vimeoLink,
             })
           }>
           <View
