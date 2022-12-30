@@ -8,6 +8,7 @@ import {
   useColorScheme,
   View,
   Dimensions,
+  Image,
 } from 'react-native';
 import {getVideos} from '../../functions/requests';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -16,13 +17,15 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import BackButton from '../../components/BackButton';
 import TagFilter from '../../components/TagFilter';
 import VideoListItem from '../../components/VideoListItem';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loader from '../../components/Loader';
 
-const {width, height} = Dimensions.get('window');
 export default function Videos({navigation, route}: any) {
   const [videos, setVideos] = useState<any>([]);
   const [selected, setSelected] = useState<any>('all');
   const [categories, setCategories] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const loader = require('../../icons/spinner.gif');
 
   function extractString(input: string) {
     const regex = /video\/(.+)\?h/;
@@ -37,11 +40,12 @@ export default function Videos({navigation, route}: any) {
     React.useCallback(() => {
       (async () => {
         if (selected == 'all') {
+          setLoading(true);
           const response = await getVideos();
           setVideos(response);
 
           let responseTags: any = await fetch(
-            'https://parentcloud.borne.io/wp-json/wp/v2/tags',
+            'https://hub.the-wellness-cloud.com/wp-json/wp/v2/tags',
             // {
             //   headers: {
             //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
@@ -58,10 +62,11 @@ export default function Videos({navigation, route}: any) {
               };
             }),
           );
+          setLoading(false);
         } else {
           setVideos([]);
           let responseTags: any = await fetch(
-            `https://parentcloud.borne.io/wp-json/wp/v2/videos?tags=${selected}`,
+            `https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos?tags=${selected}`,
             // {
             //   headers: {
             //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
@@ -81,6 +86,8 @@ export default function Videos({navigation, route}: any) {
               };
             }),
           );
+
+          setLoading(false);
         }
       })();
     }, []),
@@ -90,40 +97,44 @@ export default function Videos({navigation, route}: any) {
     <SafeAreaView>
       <ScrollView>
         <BackButton text="Videos" />
-        <View style={{height: 16}} />
+        {loading ? (
+          <Loader />
+        ) : (
+          <View>
+            <View style={{height: 16}} />
 
-        <TagFilter
-          selected={selected}
-          setSelected={setSelected}
-          categories={categories}
-        />
-        <View style={{height: 16}} />
-
-        {videos.map((video: any) => {
-          // remove html from excerpt
-          console.log(video._links['wp:featuredmedia'][0].href);
-          const excerpt = video.excerpt.rendered.replace(/(<([^>]+)>)/gi, '');
-          const details = video.content.rendered.replace(/(<([^>]+)>)/gi, '');
-
-          // Get link inside src="" of iframe
-          // let vimeoLink = video.content.rendered.match(/src="([^"]+)"/);
-          // vimeoLink = vimeoLink[0].replace('src=', '').replace(/"/g, '');
-
-          console.log('viddata', extractString(video.content.rendered));
-
-          // extractSubstring(video.content.rendered)
-
-          return (
-            <VideoListItem
-              text={video.title.rendered}
-              description={excerpt}
-              image={video._links['wp:featuredmedia']}
-              vimeoLink={extractString(video.content.rendered)}
-              details={details}
-              video={video}
+            <TagFilter
+              selected={selected}
+              setSelected={setSelected}
+              categories={categories}
             />
-          );
-        })}
+            <View style={{height: 16}} />
+
+            {videos.map((video: any) => {
+              // remove html from excerpt
+              console.log(video._links['wp:featuredmedia'][0].href);
+              const excerpt = video.excerpt.rendered.replace(
+                /(<([^>]+)>)/gi,
+                '',
+              );
+              const details = video.content.rendered.replace(
+                /(<([^>]+)>)/gi,
+                '',
+              );
+
+              return (
+                <VideoListItem
+                  text={video.title.rendered}
+                  description={excerpt}
+                  image={video._links['wp:featuredmedia']}
+                  vimeoLink={extractString(video.content.rendered)}
+                  details={details}
+                  video={video}
+                />
+              );
+            })}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

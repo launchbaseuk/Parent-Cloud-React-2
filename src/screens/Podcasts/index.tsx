@@ -1,14 +1,5 @@
-import {useFocusEffect} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Dimensions,
-} from 'react-native';
+import {ScrollView, StyleSheet, View, Dimensions} from 'react-native';
 import {getPodcasts} from '../../functions/requests';
 
 // Components
@@ -16,10 +7,8 @@ import BackButton from '../../components/BackButton';
 import MediaListItem from '../../components/MediaListItem';
 import TagFilter from '../../components/TagFilter';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const {width, height} = Dimensions.get('window');
-export default function Podcasts({navigation, route}: any) {
+export default function Podcasts({navigation}: any) {
   const [podcasts, setPodcasts] = useState<any>([]);
   const [categories, setCategories] = useState<any>([]);
   const [selected, setSelected] = useState<string>('all');
@@ -87,31 +76,6 @@ export default function Podcasts({navigation, route}: any) {
         />
         <View style={{height: 16}} />
 
-        {/* <View style={styles.wrapper}>
-          {podcasts.map((podcast: any) => {
-            // remove all <> tags from post_content
-            const regex = /(<([^>]+)>)/gi;
-            const result = podcast.post_content.replace(regex, '').trim();
-            const link = podcast.post_content.match(
-              /<img[^>]+src="?([^"\s]+)"?[^>]*>/,
-            );
-
-            return (
-              <MediaListItem
-                onPress={() =>
-                  navigation.navigate('PodcastDetails', {
-                    podcast: podcast,
-                    link: link,
-                  })
-                }
-                key={podcast.ID}
-                link={link}
-                title={podcast.post_title}
-                content={result}
-              />
-            );
-          })}
-        </View> */}
         <View style={styles.wrapper}>
           {podcasts.map((podcast: any) => {
             // remove all <> tags from post_content
