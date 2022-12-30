@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
+import Loader from '../../components/Loader';
+
 const {width, height} = Dimensions.get('window');
 export default function DynamicContentContainer({
   title,
@@ -39,8 +41,7 @@ export default function DynamicContentContainer({
   return (
     <TouchableOpacity style={styles.container}>
       {loading ? (
-        //Loading...
-        <Text></Text>
+        <Loader />
       ) : (
         <Image style={styles.image} source={{uri: image}} />
       )}

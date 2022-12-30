@@ -21,6 +21,7 @@ import DetailsEditInput from '../../components/DetailsEditInput';
 // Images
 import placeholderImage from '../../images/PlaceholderImage.png';
 import getCountryName from '../../functions/getCountryName';
+import Loader from '../../components/Loader';
 
 const {width, height} = Dimensions.get('window');
 export default function PersonalDetails() {
@@ -131,7 +132,7 @@ export default function PersonalDetails() {
       <BackButton text="Personal Details" />
 
       {details.length == 0 ? (
-        <Text>Loading...</Text>
+        <Loader />
       ) : (
         <>
           <View

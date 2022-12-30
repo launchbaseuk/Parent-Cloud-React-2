@@ -16,15 +16,20 @@ import BackButton from '../../components/BackButton';
 import {GuideCardSmall} from '../../components/GuideCard';
 import {getGuides} from '../../functions/requests';
 
+import Loader from '../../components/Loader';
+
 const {width, height} = Dimensions.get('window');
 export default function GuidesMedia({navigation, route}: any) {
   const [guides, setGuides] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useFocusEffect(
     React.useCallback(() => {
       (async () => {
+        setLoading(true);
         let response = await getGuides();
         setGuides(response);
+        setLoading(false);
       })();
     }, []),
   );
@@ -36,65 +41,72 @@ export default function GuidesMedia({navigation, route}: any) {
   return (
     <SafeAreaView>
       <ScrollView
-        contentContainerStyle={{paddingBottom: 10, backgroundColor: '#ffffff'}}>
+        contentContainerStyle={{
+          paddingBottom: 10,
+          backgroundColor: '#ffffff',
+        }}>
         <BackButton text="Guides" />
 
-        {guides.map(guide => (
-          <>
-            <View style={styles.guidesHeader}>
-              <Text
-                style={{
-                  fontFamily: 'SofiaProBlack',
-                  color: '#11535C',
-                  fontSize: 20,
-                }}>
-                {guide.filter}
-              </Text>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('Guides', {items: guide.guides})
-                }>
+        {loading ? (
+          <Loader />
+        ) : (
+          guides.map(guide => (
+            <>
+              <View style={styles.guidesHeader}>
                 <Text
                   style={{
-                    fontFamily: 'Montserrat-Bold',
-                    color: '#150E00',
-                    fontSize: 14,
+                    fontFamily: 'SofiaProBlack',
+                    color: '#11535C',
+                    fontSize: 20,
                   }}>
-                  See all
+                  {guide.filter}
                 </Text>
-              </TouchableOpacity>
-            </View>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{marginLeft: 8, paddingRight: 15}}>
-              {guide.guides.length > 0 ? (
-                guide.guides.map(gui => {
-                  // Remove all html tags from gui.excerpt.rendered
-                  let excerpt = gui.excerpt.rendered.replace(
-                    /(<([^>]+)>)/gi,
-                    '',
-                  );
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('Guides', {items: guide.guides})
+                  }>
+                  <Text
+                    style={{
+                      fontFamily: 'Montserrat-Bold',
+                      color: '#150E00',
+                      fontSize: 14,
+                    }}>
+                    See all
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{marginLeft: 8, paddingRight: 15}}>
+                {guide.guides.length > 0 ? (
+                  guide.guides.map(gui => {
+                    // Remove all html tags from gui.excerpt.rendered
+                    let excerpt = gui.excerpt.rendered.replace(
+                      /(<([^>]+)>)/gi,
+                      '',
+                    );
 
-                  // get file link and save it to variable from gui.acf.documents
-                  let fileLink = gui.acf.documents[0]?.file;
-                  //https://parentcloud.borne.io/wp-content/uploads/2021/08/Pregnancy-Checklist-UK.pdf
-                  console.log('pdf link', fileLink);
-                  return (
-                    <GuideCardSmall
-                      text={excerpt}
-                      title={gui.title.rendered}
-                      redirect={gui.content.rendered}
-                      fileLink={fileLink}
-                    />
-                  );
-                })
-              ) : (
-                <Text style={styles.noContentStyling}>No content</Text>
-              )}
-            </ScrollView>
-          </>
-        ))}
+                    // get file link and save it to variable from gui.acf.documents
+                    let fileLink = gui.acf.documents[0]?.file;
+                    //https://parentcloud.borne.io/wp-content/uploads/2021/08/Pregnancy-Checklist-UK.pdf
+                    console.log('pdf link', fileLink);
+                    return (
+                      <GuideCardSmall
+                        text={excerpt}
+                        title={gui.title.rendered}
+                        redirect={gui.content.rendered}
+                        fileLink={fileLink}
+                      />
+                    );
+                  })
+                ) : (
+                  <Text style={styles.noContentStyling}>No content</Text>
+                )}
+              </ScrollView>
+            </>
+          ))
+        )}
       </ScrollView>
     </SafeAreaView>
   );

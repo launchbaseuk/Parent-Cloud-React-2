@@ -30,6 +30,8 @@ import bookmark from '../../../images/bookmark.png';
 
 import dings from '../../../sounds/mens-mental-fitness.mp3';
 
+import Loader from '../../components/Loader';
+
 const {width, height} = Dimensions.get('window');
 
 const audio = (audioLink: string) => {
@@ -129,9 +131,9 @@ const AudioPlayer = (props: any) => {
     // ding.setCurrentTime(val);
     setValue({...value, playSeconds: val});
   };
-  //Loading...
+
   if (ss == undefined) {
-    return <Text></Text>;
+    return <Loader />;
   } else {
     return (
       <View>

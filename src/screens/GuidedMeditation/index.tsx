@@ -8,23 +8,22 @@ import BackButton from '../../components/BackButton';
 import MediaListItem from '../../components/MediaListItem';
 import {getGuidedMeditation} from '../../functions/requests';
 
+import Loader from '../../components/Loader';
+
 export default function GuidedMeditation({navigation}: any) {
   const [items, setItems] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useFocusEffect(
     React.useCallback(() => {
       (async () => {
-        console.log('test');
-        // async () => {
+        setLoading(true);
         const response = await getGuidedMeditation();
-        // console.log('meddd', response);
         setItems(response);
-        // };
+        setLoading(false);
       })();
     }, []),
   );
-
-  console.log('itemsss', items);
 
   return (
     <SafeAreaView>
@@ -35,13 +34,17 @@ export default function GuidedMeditation({navigation}: any) {
         {/* <TagFilter /> */}
         <View style={{height: 16}} />
 
-        <View>
-          {items.map((item: any) => {
-            console.log('eh', item);
+        {loading ? (
+          <Loader />
+        ) : (
+          <View>
+            {items.map((item: any) => {
+              console.log('eh', item);
 
-            return <MediaListItem title={item.title.rendered} />;
-          })}
-        </View>
+              return <MediaListItem title={item.title.rendered} />;
+            })}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

@@ -20,6 +20,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import {getNarratorDetails} from '../../functions/requests';
 import MusicPlayer from '../../components/shared/MusicPlayer';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import Loader from '../../components/Loader';
 
 const {width, height} = Dimensions.get('window');
 export default function PodcastDetails({navigation, route}) {
@@ -96,8 +97,7 @@ export default function PodcastDetails({navigation, route}) {
       </SafeAreaView>
     );
   } else {
-    //Loading...
-    return <Text></Text>;
+    return <Loader />;
   }
 }
 

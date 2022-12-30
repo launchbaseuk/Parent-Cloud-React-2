@@ -11,20 +11,22 @@ import TagFilter from '../../components/TagFilter';
 
 import {getSleepStories} from '../../functions/requests';
 
-const {width, height} = Dimensions.get('window');
+import Loader from '../../components/Loader';
+
 export default function SleepStories({navigation}: any) {
   const [items, setItems] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useFocusEffect(
     React.useCallback(() => {
       (async () => {
+        setLoading(true);
         const response = await getSleepStories();
         setItems(response);
+        setLoading(false);
       })();
     }, []),
   );
-
-  console.log('itemsss', items);
 
   return (
     <SafeAreaView>
@@ -35,11 +37,15 @@ export default function SleepStories({navigation}: any) {
         {/* <TagFilter /> */}
         <View style={{height: 16}} />
 
-        <View>
-          {items.map((item: any) => {
-            return <MediaListItem title={item.title.rendered} />;
-          })}
-        </View>
+        {loading ? (
+          <Loader />
+        ) : (
+          <View>
+            {items.map((item: any) => {
+              return <MediaListItem title={item.title.rendered} />;
+            })}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
