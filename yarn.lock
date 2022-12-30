@@ -6948,7 +6948,7 @@
     "react-draggable" "^4.4.3"
     "sortablejs" "^1.13.0"
 
-"react-native-blob-util@0.17.0":
+"react-native-blob-util@^0.17.0":
   "integrity" "sha512-aCyBu3+Q11+DAA/AccMXgISP+D2bG+jcJ1a4atJs3Xr4/v2LMh9NgLUCkPdK9VH4kCh9YPnuf/YI0jeXZ4rYfw=="
   "resolved" "https://registry.npmjs.org/react-native-blob-util/-/react-native-blob-util-0.17.0.tgz"
   "version" "0.17.0"

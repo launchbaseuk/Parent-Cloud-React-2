@@ -262,7 +262,7 @@ android {
       pickFirst 'lib/x86_64/libc++_shared.so'
       pickFirst 'lib/armeabi-v7a/libc++_shared.so'
     }
-}
+} 
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -272,7 +272,8 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
-    implementation 'com.facebook.fresco:animated-gif:2.0.0' 
+    implementation 'com.facebook.fresco:fresco:2.6.0'
+    implementation 'com.facebook.fresco:animated-gif:2.5.0'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
