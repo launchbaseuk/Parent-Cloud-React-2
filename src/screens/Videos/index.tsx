@@ -25,8 +25,6 @@ export default function Videos({navigation, route}: any) {
   const [categories, setCategories] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const loader = require('../../icons/spinner.gif');
-
   function extractString(input: string) {
     const regex = /video\/(.+)\?h/;
     const match = input.match(regex);

@@ -8,15 +8,19 @@ import MediaListItem from '../../components/MediaListItem';
 import TagFilter from '../../components/TagFilter';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
+import Loader from '../../components/Loader';
+
 export default function Podcasts({navigation}: any) {
   const [podcasts, setPodcasts] = useState<any>([]);
   const [categories, setCategories] = useState<any>([]);
   const [selected, setSelected] = useState<string>('all');
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
       setCategories([]);
       if (selected === 'all') {
+        setLoading(true);
         const response = await getPodcasts();
         setPodcasts(response);
 
@@ -38,6 +42,7 @@ export default function Podcasts({navigation}: any) {
             };
           }),
         );
+        setLoading(false);
       } else {
         setPodcasts([]);
         let responseTags: any = await fetch(
@@ -59,6 +64,7 @@ export default function Podcasts({navigation}: any) {
             };
           }),
         );
+        setLoading(false);
       }
     })();
   }, [selected]);
@@ -68,39 +74,46 @@ export default function Podcasts({navigation}: any) {
       <ScrollView>
         <BackButton text="Podcasts" />
         <View style={{height: 16}} />
+        {loading ? (
+          <Loader />
+        ) : (
+          <View>
+            <TagFilter
+              categories={categories}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <View style={{height: 16}} />
 
-        <TagFilter
-          categories={categories}
-          selected={selected}
-          setSelected={setSelected}
-        />
-        <View style={{height: 16}} />
+            <View style={styles.wrapper}>
+              {podcasts.map((podcast: any) => {
+                // remove all <> tags from post_content
+                const regex = /(<([^>]+)>)/gi;
+                const result = podcast.excerpt.rendered
+                  .replace(regex, '')
+                  .trim();
+                const link = podcast.content.rendered.match(
+                  /<img[^>]+src="?([^"\s]+)"?[^>]*>/,
+                );
 
-        <View style={styles.wrapper}>
-          {podcasts.map((podcast: any) => {
-            // remove all <> tags from post_content
-            const regex = /(<([^>]+)>)/gi;
-            const result = podcast.excerpt.rendered.replace(regex, '').trim();
-            const link = podcast.content.rendered.match(
-              /<img[^>]+src="?([^"\s]+)"?[^>]*>/,
-            );
-
-            return (
-              <MediaListItem
-                onPress={() =>
-                  navigation.navigate('PodcastDetails', {
-                    podcast: podcast,
-                    link: link,
-                  })
-                }
-                key={podcast.ID}
-                link={link}
-                title={podcast.title.rendered}
-                content={result}
-              />
-            );
-          })}
-        </View>
+                return (
+                  <MediaListItem
+                    onPress={() =>
+                      navigation.navigate('PodcastDetails', {
+                        podcast: podcast,
+                        link: link,
+                      })
+                    }
+                    key={podcast.ID}
+                    link={link}
+                    title={podcast.title.rendered}
+                    content={result}
+                  />
+                );
+              })}
+            </View>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
