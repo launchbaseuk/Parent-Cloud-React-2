@@ -17,6 +17,7 @@ import {GuideCardSmall} from '../../components/GuideCard';
 import {getGuides} from '../../functions/requests';
 
 import Loader from '../../components/Loader';
+import axios from 'axios';
 
 const {width, height} = Dimensions.get('window');
 export default function GuidesMedia({navigation, route}: any) {
@@ -59,7 +60,7 @@ export default function GuidesMedia({navigation, route}: any) {
                     color: '#11535C',
                     fontSize: 20,
                   }}>
-                  {guide.filter}
+                  {guide.filter.replace(/&[^;]*;/g, '')}
                 </Text>
                 <TouchableOpacity
                   onPress={() =>
@@ -80,25 +81,21 @@ export default function GuidesMedia({navigation, route}: any) {
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={{marginLeft: 8, paddingRight: 15}}>
                 {guide.guides.length > 0 ? (
-                  guide.guides.map(gui => {
+                  guide.guides.map((gui) => {
                     // Remove all html tags from gui.excerpt.rendered
-                    let excerpt = gui.excerpt.rendered.replace(
-                      /(<([^>]+)>)/gi,
-                      '',
-                    );
-
-                    // get file link and save it to variable from gui.acf.documents
-                    let fileLink = gui.acf.documents[0]?.file;
-                    //https://parentcloud.borne.io/wp-content/uploads/2021/08/Pregnancy-Checklist-UK.pdf
-                    console.log('pdf link', fileLink);
-                    return (
-                      <GuideCardSmall
-                        text={excerpt}
-                        title={gui.title.rendered}
-                        redirect={gui.content.rendered}
-                        fileLink={fileLink}
-                      />
-                    );
+                      let excerpt = gui.excerpt.rendered.replace(
+                        /(<([^>]+)>)/gi,
+                        '',
+                      );
+                        
+                        return (
+                          <GuideCardSmall
+                            text={excerpt.replace(/&[^;]*;/g, '')}
+                            title={gui.title.rendered.replace(/&[^;]*;/g, '')}
+                            redirect={gui.content.rendered.replace(/&[^;]*;/g, '')}
+                            fileLink={gui.fileLihk}
+                          />
+                        );
                   })
                 ) : (
                   <Text style={styles.noContentStyling}>No content</Text>

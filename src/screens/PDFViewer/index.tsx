@@ -17,6 +17,7 @@ export default function PDFViewer({navigation, route}: any) {
     uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf',
     // cache: true,
   };
+  console.log(route.params)
 
   return (
     <SafeAreaView>
