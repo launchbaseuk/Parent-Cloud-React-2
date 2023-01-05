@@ -86,13 +86,13 @@ export default function Podcasts({navigation}: any) {
             <View style={{height: 16}} />
 
             <View style={styles.wrapper}>
-              {podcasts.map((podcast: any) => {
+              {podcasts?.map((podcast: any) => {
                 // remove all <> tags from post_content
                 const regex = /(<([^>]+)>)/gi;
-                const result = podcast.excerpt.rendered
+                const result = podcast?.excerpt?.rendered
                   .replace(regex, '')
                   .trim();
-                const link = podcast.content.rendered.match(
+                const link = podcast?.content?.rendered?.match(
                   /<img[^>]+src="?([^"\s]+)"?[^>]*>/,
                 );
 
@@ -104,9 +104,9 @@ export default function Podcasts({navigation}: any) {
                         link: link,
                       })
                     }
-                    key={podcast.ID}
+                    key={podcast?.ID}
                     link={link}
-                    title={podcast.title.rendered}
+                    title={podcast?.title?.rendered}
                     content={result}
                   />
                 );

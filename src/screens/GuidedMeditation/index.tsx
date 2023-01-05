@@ -41,7 +41,16 @@ export default function GuidedMeditation({navigation}: any) {
             {items.map((item: any) => {
               console.log('eh', item);
 
-              return <MediaListItem title={item.title.rendered} />;
+              return (
+                <MediaListItem
+                  onPress={() =>
+                    navigation.navigate('PodcastDetails', {
+                      podcast: item,
+                    })
+                  }
+                  title={item.title.rendered}
+                />
+              );
             })}
           </View>
         )}

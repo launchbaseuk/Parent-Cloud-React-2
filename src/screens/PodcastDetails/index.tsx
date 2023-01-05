@@ -40,7 +40,7 @@ export default function PodcastDetails({navigation, route}) {
         // console.log(data);
 
         let audioLink = podcast.content.rendered.match(
-          /<audio[^>]+src="?([^"\s]+)"?[^>]*>/,
+          /<audio[^>]+controls[^>]+src="?([^"\s]+)"?[^>]*>/,
         )[1];
         audioLink = audioLink.substring(audioLink.indexOf('/', 8) + 1);
         audioLink = 'https://hub.the-wellness-cloud.com/' + audioLink;
@@ -51,7 +51,7 @@ export default function PodcastDetails({navigation, route}) {
     }, []),
   );
 
-  console.log(podcast);
+  console.log('miliii', link);
 
   if (audio !== '') {
     return (
@@ -63,10 +63,10 @@ export default function PodcastDetails({navigation, route}) {
           <View style={styles.container}>
             <View style={styles.imageContainer}>
               {/* The image crashes the app for some reason */}
-              {/* <Image
+              <Image
                 style={{width: '100%', height: '100%'}}
-                source={link ? {uri: link} : headphones}
-              /> */}
+                source={link ? {uri: link[1]} : headphones}
+              />
             </View>
 
             <View style={{width: 230, marginLeft: 8}}>
