@@ -95,6 +95,7 @@ export default function Podcasts({navigation}: any) {
                 const link = podcast?.content?.rendered?.match(
                   /<img[^>]+src="?([^"\s]+)"?[^>]*>/,
                 );
+                //<audio controls
 
                 return (
                   <MediaListItem

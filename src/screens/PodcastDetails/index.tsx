@@ -40,7 +40,7 @@ export default function PodcastDetails({navigation, route}) {
         // console.log(data);
 
         let audioLink = podcast.content.rendered.match(
-          /<audio[^>]+src="?([^"\s]+)"?[^>]*>/,
+          /<audio[^>]+controls[^>]+src="?([^"\s]+)"?[^>]*>/,
         )[1];
         audioLink = audioLink.substring(audioLink.indexOf('/', 8) + 1);
         audioLink = 'https://hub.the-wellness-cloud.com/' + audioLink;
