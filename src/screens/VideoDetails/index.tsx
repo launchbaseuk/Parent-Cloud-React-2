@@ -25,7 +25,7 @@ import {getNarratorDetails} from '../../functions/requests';
 
 const {width, height} = Dimensions.get('window');
 export default function VideoDetails({navigation, route}: any) {
-  const {title, details, vimeoLink, video} = route.params;
+  const {title, details, vimeoLink, video, description} = route.params;
   // const videoId = vimeoLink.replace(/\&.*$/, '');
   // remove all spaces at the start of the videoId string
   // let videoIdTrimmed = videoId.replace(/^\s+/, '');
@@ -33,20 +33,23 @@ export default function VideoDetails({navigation, route}: any) {
   // videoIdTrimmed = videoIdTrimmed[videoIdTrimmed.length - 1];
 
   const [author, setAuthor] = useState<any>();
-  const [description, setDescription] = useState<string>('');
+  // const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<string>('');
 
-  useFocusEffect(
-    React.useCallback(() => {
-      (async () => {
-        const data = await getNarratorDetails(video.author);
-        setAuthor(data[0][0]);
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     (async () => {
+  //       const data = await getNarratorDetails(video.author);
+  //       setAuthor(data[0][0]);
 
-        setDescription(data[1].description);
-        setImage(data[1].profile_image);
-      })();
-    }, []),
-  );
+  //       setDescription(data[1].description);
+  //       setImage(data[1].profile_image);
+  //     })();
+  //   }, []),
+  // );
+
+  console.log('lax', details);
+  console.log('jfk', description);
 
   return (
     <SafeAreaView>
@@ -76,7 +79,7 @@ export default function VideoDetails({navigation, route}: any) {
               marginTop: 10,
               marginBottom: 20,
             }}>
-            {details.replace('\n', '').trim()}
+            {description}
           </Text>
         </View>
       </View>
