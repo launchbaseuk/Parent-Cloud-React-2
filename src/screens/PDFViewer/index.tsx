@@ -9,10 +9,10 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 const {width, height} = Dimensions.get('window');
 export default function PDFViewer({navigation, route}: any) {
+  const title = route?.params?.title;
   const text = {
     html: route?.params?.text,
   };
-  const pdfFile = {uri: route?.params?.pdf, cache: true};
   const source = {
     uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf',
     // cache: true,
@@ -24,14 +24,14 @@ export default function PDFViewer({navigation, route}: any) {
       <BackButton text={title || "PDF Title"} />
 
       <View style={styles.container}>
-      {text ? (
+      {text.html ? (
           <ScrollView style={{ width: width - 50, alignSelf: "center", backgroundColor: "#F2F2F250", borderRadius: 5, paddingLeft: 16, paddingRight: 16, paddingTop: 16, paddingBottom: 16 }}>
             <Text style={{ fontFamily: "Montserrat-Regular", color: "#150E00", fontSize: 16 }}>{text.html}</Text>
           </ScrollView>
         ) : (
           <Pdf
             trustAllCerts={false}
-            source={pdfFile}
+            source={{uri: encodeURI(route?.params?.pdf)}}
             onLoadComplete={(numberOfPages, filePath) => {
               console.log(`Number of pages: ${numberOfPages}`);
             }}

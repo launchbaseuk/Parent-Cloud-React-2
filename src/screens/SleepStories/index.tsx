@@ -16,6 +16,8 @@ import Loader from '../../components/Loader';
 export default function SleepStories({navigation}: any) {
   const [items, setItems] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [categories, setCategories] = useState<any>([]);
+  const [selected, setSelected] = useState<string>("all");
 
   useFocusEffect(
     React.useCallback(() => {
@@ -28,13 +30,67 @@ export default function SleepStories({navigation}: any) {
     }, []),
   );
 
+  useEffect(() => {
+    (async () => {
+      setItems([]);
+      if (selected === 'all') {
+        setLoading(true);
+        const response = await getSleepStories();
+        setItems(response);
+
+        let responseTags: any = await fetch(
+          'https://hub.the-wellness-cloud.com/wp-json/wp/v2/categories',
+          // {
+          //   headers: {
+          //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+          //   },
+          // },
+        );
+        responseTags = await responseTags.json();
+
+        setCategories(
+          responseTags.map((tags: any) => {
+            return {
+              text: tags.name,
+              key: tags.id,
+            };
+          }),
+        );
+        setLoading(false);
+      } else {
+        setItems([]);
+        setLoading(true);
+        let responseTags: any = await fetch(
+          `https://hub.the-wellness-cloud.com/wp-json/wp/v2/sleep_stories?categories=${selected}`,
+          // {
+          //   headers: {
+          //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+          //   },
+          // },
+        );
+        responseTags = await responseTags.json();
+
+        setItems(
+          responseTags.map((tags: any) => {
+            return tags;
+          }),
+        );
+        setLoading(false);
+      }
+    })();
+  }, [selected]);
+
   return (
     <SafeAreaView>
       <ScrollView>
         <BackButton text="Sleep Stories" />
-        <View style={{height: 40}} />
+        {/* <View style={{height: 40}} /> */}
 
-        {/* <TagFilter /> */}
+        <TagFilter
+          categories={categories}
+          selected={selected}
+          setSelected={setSelected}
+        />
         <View style={{height: 16}} />
 
         {loading ? (

@@ -93,7 +93,7 @@ export default function GuidesMedia({navigation, route}: any) {
                             text={excerpt.replace(/&[^;]*;/g, '')}
                             title={gui.title.rendered.replace(/&[^;]*;/g, '')}
                             redirect={gui.content.rendered.replace(/&[^;]*;/g, '')}
-                            fileLink={gui.fileLihk}
+                            fileLink={gui.fileLink}
                           />
                         );
                   })

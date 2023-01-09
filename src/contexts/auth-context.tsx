@@ -77,7 +77,7 @@ const AuthProvider = (props: any) => {
 					await AsyncStorage.setItem("user_nicename", responseUserInfo[0].nicename);
 					await AsyncStorage.setItem("user_nameDisplay", display)
 					
-					let subscription = await getSubscriptions(response.user_email);
+					let subscription = await getSubscriptions(responseUserInfo[0].email);
 					
 					setSubscription(subscription);
 					setLoggedIn(true);

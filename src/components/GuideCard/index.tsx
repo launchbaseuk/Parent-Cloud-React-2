@@ -76,7 +76,7 @@ function GuideCardSmall({text, redirect, title, fileLink, vimeoLink}: any) {
           size="mini"
           text="Download"
           onPress={() =>
-            navigation.navigate('PDFViewer', {text: redirect, pdf: fileLink})
+            navigation.navigate('PDFViewer', {pdf: fileLink})
           }
         />
       </View>
@@ -84,7 +84,7 @@ function GuideCardSmall({text, redirect, title, fileLink, vimeoLink}: any) {
   );
 }
 
-function GuideCardBig({title, excerpt, content}: any) {
+function GuideCardBig({title, excerpt, content, fileLink}: any) {
   const navigation = useNavigation();
   console.log(content);
   return (
@@ -124,7 +124,7 @@ function GuideCardBig({title, excerpt, content}: any) {
           <PrimaryButton
             size="mini"
             text="Download"
-            onPress={() => navigation.navigate('PDFViewer', {text: content})}
+            onPress={() => navigation.navigate('PDFViewer', {pdf: fileLink})}
           />
         </View>
       </View>

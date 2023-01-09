@@ -42,18 +42,20 @@ async function getGuides() {
 
     // Check if the filter exists, if it does push it otherwise create new filter
     if (guides.find(guide => guide.filter === filters[i].name)) {
-      console.log(response)
-      if(typeof response[0] == "object") {
-        if(response[0]._links["wp:attachment"][0].href) {
-          const request = await fetch(response[0]._links["wp:attachment"][0].href);
-          const data = await request.json();
-  
-          for (let j = 0; j < data.length; j++) {
-            if (data[j].guid.rendered.endsWith('.pdf')) {
-              let link = data[j].guid.rendered;
-              response.fileLink = link;
-  
-              break;
+      for(let j=0; j<response.length; j++) {
+        if(typeof response[j] == "object") {
+          if(response[j]._links["wp:attachment"][0].href) {
+            const request = await fetch(response[j]._links["wp:attachment"][0].href);
+            const data = await request.json();
+            for (let k = 0; k < data.length; k++) {
+              if (data[k].guid.rendered.endsWith('.pdf')) {
+                let link = data[k].guid.rendered;
+                
+                // push link to response[j]
+                response[j]["fileLink"] = link;
+
+                break;
+              }
             }
           }
         }
@@ -63,16 +65,20 @@ async function getGuides() {
         .find(guide => guide.filter === filters[i].name)
         .guides.push(response);
     } else {
-      if(typeof response[0] == "object") {
-        if(response[0]._links["wp:attachment"][0].href) {
-          const request = await fetch(response[0]._links["wp:attachment"][0].href);
-          const data = await request.json();
-  
-          for (let j = 0; j < data.length; j++) {
-            if (data[j].guid.rendered.endsWith('.pdf')) {
-              let link = data[j].guid.rendered;
-              response.fileLink = link;
-              break;
+      for(let j=0; j<response.length; j++) {
+        if(typeof response[j] == "object") {
+          if(response[j]._links["wp:attachment"][0].href) {
+            const request = await fetch(response[j]._links["wp:attachment"][0].href);
+            const data = await request.json();
+            for (let k = 0; k < data.length; k++) {
+              if (data[k].guid.rendered.endsWith('.pdf')) {
+                let link = data[k].guid.rendered;
+                
+                // push link to response[j]
+                response[j]["fileLink"] = link;
+
+                break;
+              }
             }
           }
         }

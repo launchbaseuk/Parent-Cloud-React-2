@@ -170,7 +170,7 @@ export default function Videos({navigation, route}: any) {
                    if(bookmark.type === "videos") {
                      console.log(bookmark)
                      if(bookmark.post_id === video.id) {
-                       bookmarked = true;
+                        bookmarked = true;
                      }
                    }
                  });

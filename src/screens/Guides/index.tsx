@@ -23,6 +23,7 @@ export default function Guides({navigation, route}: any) {
                 title={item.title.rendered}
                 excerpt={item.excerpt.rendered.replace(/<[^>]+>/g, '')}
                 redirect={item.content}
+                fileLink={item.fileLink}
               />
             );
           } else {
@@ -31,6 +32,7 @@ export default function Guides({navigation, route}: any) {
                 title={item.title}
                 excerpt={item.excerpt}
                 redirect={item.content}
+                fileLink={item.fileLink}
               />
             );
           }
