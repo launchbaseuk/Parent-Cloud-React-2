@@ -9,7 +9,6 @@ import {
   View,
   Dimensions,
   Image,
-  VirtualizedList,
 } from 'react-native';
 import {getVideos} from '../../functions/requests';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -19,14 +18,12 @@ import BackButton from '../../components/BackButton';
 import TagFilter from '../../components/TagFilter';
 import VideoListItem from '../../components/VideoListItem';
 import Loader from '../../components/Loader';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Videos({navigation, route}: any) {
   const [videos, setVideos] = useState<any>([]);
   const [selected, setSelected] = useState<any>('all');
   const [categories, setCategories] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [bookmarks, setBookmarks] = useState<any>();
 
   function extractString(input: string) {
     const regex = /video\/(.+)\?h/;
@@ -36,20 +33,6 @@ export default function Videos({navigation, route}: any) {
     }
     return null;
   }
-
-  const fetchBookmarks = async () => {
-    const email = await AsyncStorage.getItem("user_email");
-    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/get/?mail=${email}`);
-    const response = await request.json();
-
-    setBookmarks(response);
-  }
-
-  useFocusEffect(
-    React.useCallback(() => {
-      fetchBookmarks();
-    }, [])
-  );
 
   useFocusEffect(
     React.useCallback(() => {
@@ -79,10 +62,9 @@ export default function Videos({navigation, route}: any) {
           );
           setLoading(false);
         } else {
-          setLoading(true);
           setVideos([]);
           let responseTags: any = await fetch(
-            `https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos?tags=${selected}`
+            `https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos?tags=${selected}`,
             // {
             //   headers: {
             //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
@@ -106,21 +88,8 @@ export default function Videos({navigation, route}: any) {
           setLoading(false);
         }
       })();
-    }, [selected]),
+    }, []),
   );
-
-  const bookmarkItem = async (postid: string, posttype: string) => {
-    const email = await AsyncStorage.getItem("user_email");
-    const userid = await AsyncStorage.getItem("user_id");
-
-    console.log(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
-    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
-    const response = await request.json();
-    console.log('bookmark added', response);
-    if(response) {
-      fetchBookmarks();
-    }
-  }
 
   return (
     <SafeAreaView>
@@ -140,52 +109,25 @@ export default function Videos({navigation, route}: any) {
             <View style={{height: 16}} />
 
             {videos.map((video: any) => {
-              let excerpt = '', details = '', toExtract = '', title = '', bookmarked = false;
-              if(typeof video.excerpt == "object") {
-                excerpt = video.excerpt.rendered.replace(
-                  /(<([^>]+)>)/gi,
-                  '',
-                );
-                details = video.content.rendered.replace(
-                  /(<([^>]+)>)/gi,
-                  '',
-                );
-                toExtract = video.content.rendered;
-                title = video.title.rendered;
-              } else {
-                excerpt = video.post_excerpt.replace(
-                  /(<([^>]+)>)/gi,
-                  '',
-                );
-                details = video.post_content.replace(
-                  /(<([^>]+)>)/gi,
-                  '',
-                );
-                toExtract = video.post_content;
-                title = video.post_title;
-              }
-
-              if(bookmarks) {
-                bookmarks.forEach((bookmark: any) => {
-                  if(bookmark.type === "videos") {
-                    console.log(bookmark)
-                    if(bookmark.post_id === video.id) {
-                      bookmarked = true;
-                    }
-                  }
-                });
-              }
+              // remove html from excerpt
+              console.log(video._links['wp:featuredmedia'][0].href);
+              const excerpt = video.excerpt.rendered.replace(
+                /(<([^>]+)>)/gi,
+                '',
+              );
+              const details = video.content.rendered.replace(
+                /(<([^>]+)>)/gi,
+                '',
+              );
 
               return (
                 <VideoListItem
-                  text={title.replace(/&[^;]*;/g, '')}
-                  description={excerpt.replace(/&[^;]*;/g, '')}
+                  text={video.title.rendered}
+                  description={excerpt}
                   image={video._links['wp:featuredmedia']}
-                  vimeoLink={extractString(toExtract)}
+                  vimeoLink={extractString(video.content.rendered)}
                   details={details}
                   video={video}
-                  bookmarked={bookmarked}
-                  onPressBookmark={() => bookmarkItem(video.id, "videos")}
                 />
               );
             })}

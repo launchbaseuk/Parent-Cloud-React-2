@@ -1,17 +1,17 @@
 export default async function getCheckIns(email, token) {
-    let response = await fetch("https://hub.the-wellness-cloud.com/wp-json/mo/v1/posts/mood_tracker", {
+    let response = await fetch("https://parentcloud.borne.io/wp-json/mo/v1/posts/mood_tracker", {
         headers: {
-            // "Authorization": `Bearer ${token}`
+            "Authorization": `Bearer ${token}`
         }
     });
     response = await response.json();
 
     let checkIns = [];
     for (let i = 0; i < response.length; i++) {
-        let responseItems = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/mood_tracker/${response[i].ID}`, {
+        let responseItems = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/mood_tracker/${response[i].ID}`, {
             method: "GET",
             headers: {
-                // "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${token}`
             }
         });
         responseItems = await responseItems.json();

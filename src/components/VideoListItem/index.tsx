@@ -10,8 +10,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 
 // Images
-import Bookmark from '../../images/svg/Bookmark';
-import BookmarkMarked from '../../images/svg/BookmarkMarked';
+import playiconyellow from '../../icons/PlayIconYellow.png';
 
 const {width, height} = Dimensions.get('window');
 export default function VideoListItem({
@@ -23,8 +22,6 @@ export default function VideoListItem({
   vimeoLink,
   video,
   liveTalk,
-  bookmarked,
-  onPressBookmark,
 }: any) {
   const navigation = useNavigation();
 
@@ -50,32 +47,26 @@ export default function VideoListItem({
         </View>
 
         <View style={styles.textContainer}>
-          <View style={{ width: "80%" }}>
-            <Text
-              style={{
-                fontFamily: 'Montserrat-Bold',
-                color: '#11535C',
-                fontSize: 14,
-                width: width - 120,
-              }}>
-              {text.substring(0, 30) + '...'}
-            </Text>
-            <Text
-              style={{
-                width: 200,
-                fontFamily: 'Montserrat-Regular',
-                color: '#150E00',
-                lineHeight: 19,
-                fontSize: 11,
-              }}
-              numberOfLines={3}>
-              {description}
-            </Text>
-          </View>
-        
-          <TouchableOpacity style={{ marginLeft: -6, marginTop: 2 }} onPress={onPressBookmark}>
-            {bookmarked ? <BookmarkMarked /> : <Bookmark />}
-          </TouchableOpacity>
+          <Text
+            style={{
+              fontFamily: 'Montserrat-Bold',
+              color: '#11535C',
+              fontSize: 14,
+              width: width - 120,
+            }}>
+            {text.substring(0, 30) + '...'}
+          </Text>
+          <Text
+            style={{
+              width: 200,
+              fontFamily: 'Montserrat-Regular',
+              color: '#150E00',
+              lineHeight: 19,
+              fontSize: 11,
+            }}
+            numberOfLines={3}>
+            {description}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -100,9 +91,8 @@ const styles = StyleSheet.create({
   textContainer: {
     marginLeft: 8,
     height: 100,
+    justifyContent: 'center',
     marginTop: -10,
-    flexDirection: "row",
-    alignItems: "center"
   },
   imageContainer: {
     width: 80,
