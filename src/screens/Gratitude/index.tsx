@@ -39,6 +39,9 @@ export default function Gratitude({navigation}) {
           fontFamily: 'Montserrat-Regular',
         }}
         multiline
+        returnKeyType='done'
+        returnKeyLabel='done'
+        blurOnSubmit
       />
 
       <Text

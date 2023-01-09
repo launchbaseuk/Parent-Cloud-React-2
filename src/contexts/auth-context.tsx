@@ -72,8 +72,9 @@ const AuthProvider = (props: any) => {
 					const display = responseUserInfo[0].first_name + " " + responseUserInfo[0].last_name;
 
 					await AsyncStorage.setItem("token", response.token);
-					await AsyncStorage.setItem("user_email", response.user_email);
-					await AsyncStorage.setItem("user_nicename", response.user_nicename);
+					await AsyncStorage.setItem("user_id", responseUserInfo[0].id.toString());
+					await AsyncStorage.setItem("user_email", responseUserInfo[0].email);
+					await AsyncStorage.setItem("user_nicename", responseUserInfo[0].nicename);
 					await AsyncStorage.setItem("user_nameDisplay", display)
 					
 					let subscription = await getSubscriptions(response.user_email);
