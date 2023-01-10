@@ -14,11 +14,13 @@ import guidespicture from '../../images/GuidesPicture.png';
 
 // Components
 import PrimaryButton from '../shared/PrimaryButton';
+import BookmarkMarked from '../../images/svg/BookmarkMarked';
+import Bookmark from '../../images/svg/Bookmark';
 
 const {width, height} = Dimensions.get('window');
 function GuideCardSmall({text, redirect, title, fileLink, vimeoLink}: any) {
   const navigation = useNavigation();
-  console.log('file', fileLink)
+  // console.log('file', fileLink)
 
   // const handlePress = () => {
   //   if (fileLink) {
@@ -84,11 +86,14 @@ function GuideCardSmall({text, redirect, title, fileLink, vimeoLink}: any) {
   );
 }
 
-function GuideCardBig({title, excerpt, content, fileLink}: any) {
+function GuideCardBig({title, excerpt, content, fileLink, bookmarked, onPressBookmark}: any) {
   const navigation = useNavigation();
-  console.log(content);
+  // console.log(content);
   return (
     <View style={styles.guidecardbigContainer}>
+      <TouchableOpacity style={{ zIndex:1000, top:15, right: 30, position: "absolute" }} onPress={onPressBookmark}>
+        {bookmarked ? <BookmarkMarked /> : <Bookmark />}
+      </TouchableOpacity>
       <Image source={guidespicture} style={{marginTop: 16, marginBottom: 16}} />
 
       <View

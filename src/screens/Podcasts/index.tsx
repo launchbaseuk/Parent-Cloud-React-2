@@ -25,7 +25,7 @@ export default function Podcasts({navigation}: any) {
         setPodcasts(response);
 
         let responseTags: any = await fetch(
-          'https://hub.the-wellness-cloud.com/wp-json/wp/v2/tags',
+          'https://parentcloud.borne.io/wp-json/wp/v2/tags',
           // {
           //   headers: {
           //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
@@ -46,7 +46,7 @@ export default function Podcasts({navigation}: any) {
       } else {
         setPodcasts([]);
         let responseTags: any = await fetch(
-          `https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos?tags=${selected}`,
+          `https://parentcloud.borne.io/wp-json/wp/v2/videos?tags=${selected}`,
           // {
           //   headers: {
           //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
@@ -102,9 +102,11 @@ export default function Podcasts({navigation}: any) {
                       navigation.navigate('PodcastDetails', {
                         podcast: podcast,
                         link: link,
+                        postid: podcast?.id
                       })
                     }
-                    key={podcast?.ID}
+                    key={podcast?.id}
+                    postid={podcast?.id}
                     link={link}
                     title={podcast?.title?.rendered}
                     content={result}

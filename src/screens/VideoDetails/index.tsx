@@ -22,10 +22,11 @@ import PlayIconBig from '../../icons/svg/PlayIconBig';
 import Queue from '../../icons/svg/Queue';
 import {useFocusEffect} from '@react-navigation/native';
 import {getNarratorDetails} from '../../functions/requests';
+import Loader from '../../components/Loader';
 
 const {width, height} = Dimensions.get('window');
 export default function VideoDetails({navigation, route}: any) {
-  const {title, details, vimeoLink, video, description} = route.params;
+  const {title, details, vimeoLink, video, description, featuredMedia} = route.params;
   // const videoId = vimeoLink.replace(/\&.*$/, '');
   // remove all spaces at the start of the videoId string
   // let videoIdTrimmed = videoId.replace(/^\s+/, '');
@@ -34,7 +35,6 @@ export default function VideoDetails({navigation, route}: any) {
 
   const [author, setAuthor] = useState<any>();
   // const [description, setDescription] = useState<string>('');
-  const [image, setImage] = useState<string>('');
 
   // useFocusEffect(
   //   React.useCallback(() => {
@@ -50,86 +50,106 @@ export default function VideoDetails({navigation, route}: any) {
 
   console.log('lax', details);
   console.log('jfk', description);
+  console.log('media', featuredMedia);
+  const [image, setImage] = useState<string>("");
+  const [loadingImage, setLoadingImage] = useState<boolean>(true);
 
-  return (
-    <SafeAreaView>
-      <BackButton text="Video Details" />
-      <View style={{height: 42}} />
+  useEffect(() => {
+    (async() => {
+      setLoadingImage(true);
+      const request = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/media/${featuredMedia}`);
+      const response = await request.json();
+  
+      setImage(response.guid.rendered);
+      setLoadingImage(false);
+    })();
+  }, [featuredMedia])
 
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image source={headphones} />
-        </View>
-
-        <View style={{width: 230, marginLeft: 8}}>
-          <Text
-            style={{
-              fontFamily: 'Montserrat-Bold',
-              color: '#11535C',
-              fontSize: 13,
-            }}>
-            {title}
-          </Text>
-          <Text
-            style={{
-              fontFamily: 'Montserrat-Regular',
-              color: '#150E00',
-              fontSize: 10,
-              lineHeight: 19.5,
-              marginTop: 10,
-              marginBottom: 20,
-            }}>
-            {description}
-          </Text>
-        </View>
-      </View>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          marginTop: 32,
-          // backgroundColor: '#f2f2f280',
-          alignSelf: 'center',
-          width: width - 40,
-          height: 100,
-          borderRadius: 5,
-          paddingLeft: 20,
-          paddingRight: 20,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-        {/* <Replay /> */}
-        <TouchableOpacity
-          style={{width: '100%'}}
-          onPress={() =>
-            navigation.navigate('VideoPlayer', {
-              videoId: vimeoLink,
-            })
-          }>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#c2c6c8',
-              borderRadius: 10,
-              width: '100%',
-              paddingTop: 10,
-              paddingBottom: 10,
-            }}>
-            {/* <Backwards /> */}
-
-            <PlayIconBig />
-
-            <Text style={styles.playText}>Play Video</Text>
-            {/* <Forwards /> */}
+  if(loadingImage) {
+    return <SafeAreaView><Loader /></SafeAreaView>
+  } else {
+    return (
+      <SafeAreaView>
+        <BackButton text="Video Details" />
+        <View style={{height: 42}} />
+  
+        <View style={styles.container}>
+          <View style={styles.imageContainer}>
+            <Image source={headphones} />
           </View>
-        </TouchableOpacity>
-
-        {/* <Queue /> */}
-      </View>
-    </SafeAreaView>
-  );
+  
+          <View style={{width: 230, marginLeft: 8}}>
+            <Text
+              style={{
+                fontFamily: 'Montserrat-Bold',
+                color: '#11535C',
+                fontSize: 13,
+              }}>
+              {title}
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'Montserrat-Regular',
+                color: '#150E00',
+                fontSize: 10,
+                lineHeight: 19.5,
+                marginTop: 10,
+                marginBottom: 20,
+              }}>
+              {description}
+            </Text>
+          </View>
+        </View>
+  
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: 32,
+            // backgroundColor: '#f2f2f280',
+            alignSelf: 'center',
+            width: width - 40,
+            height: 100,
+            borderRadius: 5,
+            paddingLeft: 20,
+            paddingRight: 20,
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          {/* <Replay /> */}
+          <TouchableOpacity
+            style={{width: '100%'}}
+            onPress={() =>
+              navigation.navigate('VideoPlayer', {
+                videoId: vimeoLink,
+                loadingImage: loadingImage,
+                poster: image
+              })
+            }>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#c2c6c8',
+                borderRadius: 10,
+                width: '100%',
+                paddingTop: 10,
+                paddingBottom: 10,
+              }}>
+              {/* <Backwards /> */}
+  
+              <PlayIconBig />
+  
+              <Text style={styles.playText}>Play Video</Text>
+              {/* <Forwards /> */}
+            </View>
+          </TouchableOpacity>
+  
+          {/* <Queue /> */}
+        </View>
+      </SafeAreaView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   ScrollView,
@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Components
 import BackButton from '../../components/BackButton';
@@ -17,17 +17,138 @@ import TagFilter from '../../components/TagFilter';
 // Images
 import FileIcon from '../../icons/svg/FileIcon';
 import LinkIcon from '../../icons/svg/LinkIcon';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 export default function SavedContent() {
+  const navigation = useNavigation();
+  const [bookmarks, setBookmarks] = useState<any>([]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      (async () => {
+        const email = await AsyncStorage.getItem("user_email");
+        const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/get/?mail=${email}`);
+        const response = await request.json();
+
+        setBookmarks(response);
+      })();
+    }, [])
+  );
+
+  function extractString(input: string) {
+    const regex = /video\/(.+)\?h/;
+    const match = input.match(regex);
+    if (match) {
+      return match[1];
+    }
+    return null;
+  }
+
+  const handleNavigation = async (postid: string, type: string) => {
+    if (type == "guides") {
+      console.log(postid)
+      let pdfLink = "";
+      const request = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/guides/${postid}`);
+      const response = await request.json();
+
+      if (response._links["wp:attachment"][0].href) {
+        const request = await fetch(response._links["wp:attachment"][0].href);
+        const data = await request.json();
+        for (let k = 0; k < data.length; k++) {
+          if (data[k].guid.rendered.endsWith('.pdf')) {
+            let link = data[k].guid.rendered;
+
+            pdfLink = link;
+            break;
+          }
+        }
+      }
+
+      pdfLink = 'https://parentcloud.borne.io/' + pdfLink.split('/').slice(3).join('/');
+
+      navigation.navigate("PDFViewer", { pdf: pdfLink });
+    } else if (type == "videos") {
+      const request = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/videos/${postid}`);
+      const response = await request.json();
+
+      let excerpt = '', details = '', toExtract = '', title = '', bookmarked = false;
+      if (typeof response.excerpt == "object") {
+        excerpt = response.excerpt.rendered.replace(
+          /(<([^>]+)>)/gi,
+          '',
+        );
+        details = response.content.rendered.replace(
+          /(<([^>]+)>)/gi,
+          '',
+        );
+        toExtract = response.content.rendered;
+        title = response.title.rendered;
+      } else {
+        excerpt = response.post_excerpt.replace(
+          /(<([^>]+)>)/gi,
+          '',
+        );
+        details = response.post_content.replace(
+          /(<([^>]+)>)/gi,
+          '',
+        );
+        toExtract = response.post_content;
+        title = response.post_title;
+      }
+
+      navigation.navigate('VideoDetails', {
+        title: title.replace(/&[^;]*;/g, ''),
+        details: details,
+        vimeoLink: extractString(toExtract),
+        video: response,
+        featuredMedia: response.featured_media,
+        description: excerpt.replace(/&[^;]*;/g, ''),
+        bookmarked: bookmarked
+      })
+      console.log(response);
+    }
+  }
+
   return (
     <SafeAreaView>
       <BackButton text="Saved Content" />
 
       {/* <TagFilter /> */}
-      <View style={{height: 16}} />
+      <View style={{ height: 16 }} />
 
-      {Array.from({length: 7}).map((_, index) => {
+      {bookmarks.map((bookmark: any) => {
+        console.log(bookmark.type)
+        return (
+          <TouchableOpacity
+            style={{
+              marginTop: 4,
+              width: width - 40,
+              height: 44,
+              borderRadius: 5,
+              backgroundColor: '#F2F2F280',
+              alignSelf: 'center',
+              paddingLeft: 16,
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}
+            onPress={() => handleNavigation(bookmark.post_id, bookmark.type)}
+          >
+            <FileIcon />
+            <Text
+              style={{
+                fontFamily: 'Montserrat-Regular',
+                color: '#150E00',
+                fontSize: 16,
+                marginLeft: 10,
+              }}>
+              {bookmark.post_title.substring(0, 30) + '...'}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+      {/* {Array.from({length: 7}).map((_, index) => {
         return (
           <View
             style={{
@@ -53,9 +174,9 @@ export default function SavedContent() {
             </Text>
           </View>
         );
-      })}
-      <View style={{height: 16}} />
-      {Array.from({length: 3}).map((_, index) => {
+      })} */}
+      <View style={{ height: 16 }} />
+      {/* {Array.from({length: 3}).map((_, index) => {
         return (
           <View
             style={{
@@ -81,7 +202,7 @@ export default function SavedContent() {
             </Text>
           </View>
         );
-      })}
+      })} */}
     </SafeAreaView>
   );
 }

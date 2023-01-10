@@ -122,6 +122,17 @@ export default function Videos({navigation, route}: any) {
     }
   }
 
+  const unbookmarkItem = async (postid: string) => {
+    const email = await AsyncStorage.getItem("user_email");
+    const userid = await AsyncStorage.getItem("user_id");
+
+    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/unset/?mail=${email}&postid=${postid}&userid=${userid}`)
+    const response = await request.json();
+    if(response) {
+      fetchBookmarks();
+    }
+  }
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -169,12 +180,14 @@ export default function Videos({navigation, route}: any) {
                  bookmarks.forEach((bookmark: any) => {
                    if(bookmark.type === "videos") {
                      console.log(bookmark)
-                     if(bookmark.post_id === video.id) {
+                     if(bookmark.post_id == video.id) {
                         bookmarked = true;
                      }
                    }
                  });
                }
+
+               console.log(title, video.id);
 
               return (
                 <VideoListItem
@@ -185,7 +198,13 @@ export default function Videos({navigation, route}: any) {
                   details={details}
                   video={video}
                   bookmarked={bookmarked}
-                  onPressBookmark={() => bookmarkItem(video.id, "videos")}
+                  onPressBookmark={() => {
+                    if(bookmarked) {
+                      unbookmarkItem(video.id)
+                    } else {
+                      bookmarkItem(video.id, "videos")
+                    }
+                  }}
                 />
               );
             })}

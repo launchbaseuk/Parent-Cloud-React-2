@@ -96,6 +96,8 @@ export default function GuidedMeditation({navigation}: any) {
         ) : (
           <View>
             {items.map((item: any) => {
+              // replace the html tags in item.excerpt.rendered with ""
+
               console.log('eh', item);
 
               return (
@@ -106,6 +108,7 @@ export default function GuidedMeditation({navigation}: any) {
                     })
                   }
                   title={item.title.rendered}
+                  content={item.excerpt.rendered.replace(/<[^>]*>?/gm, '')}
                 />
               );
             })}

@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 async function getFilters() {
   const token = await AsyncStorage.getItem('token');
   const response = await fetch(
-    `https://hub.the-wellness-cloud.com/wp-json/wp/v2/master_filter`
+    `https://parentcloud.borne.io/wp-json/wp/v2/master_filter`
     // {
     //   headers: {
     //     Authorization: `Bearer ${token}`,
@@ -31,7 +31,7 @@ async function getGuides() {
 
   for (let i = 0; i < filters.length; i++) {
     let response = await fetch(
-      `https://hub.the-wellness-cloud.com/wp-json/wp/v2/guides?master_filter=${filters[i].id}`
+      `https://parentcloud.borne.io/wp-json/wp/v2/guides?master_filter=${filters[i].id}`
       // {
       //   headers: {
       //     Authorization: `Bearer ${token}`,
@@ -134,7 +134,7 @@ async function getVideos() {
 
   for (let i = 0; i < filters.length; i++) {
     let response = await fetch(
-      `https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos?master_filter=${filters[i].id}`,
+      `https://parentcloud.borne.io/wp-json/wp/v2/videos?master_filter=${filters[i].id}`,
       // {
       //   headers: {
       //     Authorization: `Bearer ${token}`,
@@ -160,7 +160,7 @@ async function getPodcasts() {
   const token = await AsyncStorage.getItem('token');
   let podcasts = [];
   const response = await fetch(
-    `https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos`,
+    `https://parentcloud.borne.io/wp-json/wp/v2/videos`,
     // {
     //   headers: {
     //     Authorization: `Bearer ${token}`,

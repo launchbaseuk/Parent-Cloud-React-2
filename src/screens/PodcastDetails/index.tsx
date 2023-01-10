@@ -21,16 +21,18 @@ import {getNarratorDetails} from '../../functions/requests';
 import MusicPlayer from '../../components/shared/MusicPlayer';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Loader from '../../components/Loader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {width, height} = Dimensions.get('window');
 export default function PodcastDetails({navigation, route}) {
-  const {podcast, link} = route.params;
+  const {podcast, link, postid} = route.params;
 
   const [author, setAuthor] = useState<any>();
   const [audio, setAudioLink] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<string>('');
   const content = podcast.excerpt.rendered.replace(/(<([^>]+)>)/gi, '');
+  const [bookmarked, setBookmarked] = useState<boolean>(false);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -50,6 +52,51 @@ export default function PodcastDetails({navigation, route}) {
       })();
     }, []),
   );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      (async() => {
+        const email = await AsyncStorage.getItem("user_email");
+        const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/get/?mail=${email}`);
+        const response = await request.json();
+
+        let i = 0;
+        response.forEach((fav: any) => {
+          if(fav.post_id == postid) {
+            setBookmarked(true);
+            i = 1;
+          } else if (i < 1) {
+            setBookmarked(false);
+          }
+        })
+      })();
+    }, [])
+  );
+
+  const bookmarkItem = async (postid: string, posttype: string) => {
+    const email = await AsyncStorage.getItem("user_email");
+    const userid = await AsyncStorage.getItem("user_id");
+    console.log(postid)
+
+    console.log(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
+    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
+    const response = await request.json();
+    console.log('bookmark added', response);
+    if(response) {
+      setBookmarked(true);
+    }
+  }
+
+  const unbookmarkItem = async (postid: string) => {
+    const email = await AsyncStorage.getItem("user_email");
+    const userid = await AsyncStorage.getItem("user_id");
+
+    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/unset/?mail=${email}&postid=${postid}&userid=${userid}`)
+    const response = await request.json();
+    if(response) {
+      setBookmarked(false);
+    }
+  }
 
   console.log('miliii', link);
 
@@ -91,7 +138,13 @@ export default function PodcastDetails({navigation, route}) {
               </Text>
             </View>
           </View>
-          <MusicPlayer audioFile={audio} />
+          <MusicPlayer audioFile={audio} bookmarked={bookmarked} onPressBookmark={() => {
+            if(bookmarked) {
+              unbookmarkItem(postid)
+            } else {
+              bookmarkItem(postid, "podcasts")
+            }
+          }} />
           <View style={{height: 102}} />
         </ScrollView>
       </SafeAreaView>

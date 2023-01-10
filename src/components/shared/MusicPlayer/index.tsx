@@ -33,6 +33,8 @@ import replay from '../../../images/replay.png';
 import bookmark from '../../../images/bookmark.png';
 import {PlayPauseBtn} from './PlayPauseBtn';
 import {Progress} from './Progress';
+import BookmarkMarked from '../../../images/svg/BookmarkMarked';
+import Bookmark from '../../../images/svg/Bookmark';
 
 const {width, height} = Dimensions.get('window');
 
@@ -51,7 +53,7 @@ TrackPlayer.updateOptions({
   ],
 });
 
-const MusicPlayer = ({audioFile}: any) => {
+const MusicPlayer = ({audioFile, bookmarked, onPressBookmark}: any) => {
   console.log('filee', audioFile);
 
   const track2 = {
@@ -131,7 +133,10 @@ const MusicPlayer = ({audioFile}: any) => {
           </TouchableOpacity>
         </View>
 
-        <Image source={bookmark} style={[styles.icon, {marginLeft: 56}]} />
+        {/* <Image source={bookmark} style={[styles.icon, {marginLeft: 56}]} /> */}
+        <TouchableOpacity style={{ marginLeft: 36, marginTop: 2 }} onPress={onPressBookmark}>
+          {bookmarked ? <BookmarkMarked /> : <Bookmark />}
+        </TouchableOpacity>
       </View>
       <Progress live={track?.isLiveStream} />
     </View>

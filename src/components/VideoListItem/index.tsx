@@ -38,7 +38,9 @@ export default function VideoListItem({
           details: details,
           vimeoLink: vimeoLink,
           video: video,
+          featuredMedia: video.featured_media,
           description: description,
+          bookmarked: bookmarked
         })
       }>
       <View style={{flexDirection: 'row'}}>
