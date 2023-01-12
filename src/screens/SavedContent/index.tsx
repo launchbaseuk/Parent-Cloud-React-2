@@ -98,16 +98,23 @@ export default function SavedContent() {
         title = response.post_title;
       }
 
-      navigation.navigate('VideoDetails', {
-        title: title.replace(/&[^;]*;/g, ''),
-        details: details,
-        vimeoLink: extractString(toExtract),
-        video: response,
-        featuredMedia: response.featured_media,
-        description: excerpt.replace(/&[^;]*;/g, ''),
-        bookmarked: bookmarked
-      })
-      console.log(response);
+      if(extractString(toExtract) != null) {
+        navigation.navigate('VideoDetails', {
+          title: title.replace(/&[^;]*;/g, ''),
+          details: details,
+          vimeoLink: extractString(toExtract),
+          video: response,
+          featuredMedia: response.featured_media,
+          description: excerpt.replace(/&[^;]*;/g, ''),
+          bookmarked: bookmarked
+        })
+      } else {
+        navigation.navigate('PodcastDetails', {
+          podcast: response,
+          postid: response.id,
+          bookmarked: bookmarked
+        })
+      }
     }
   }
 
