@@ -69,8 +69,18 @@ export default function Videos({navigation, route}: any) {
           );
           responseTags = await responseTags.json();
 
+          let newCategories: any = [];
+          responseTags.forEach((tag: any) => {
+            if (
+              !newCategories.some((category: any) => category.id == tag.id) &&
+              response.some((video: any) => video.tags.includes(tag.id))
+            ) {
+              newCategories.push(tag);
+            }
+          });
+
           setCategories(
-            responseTags.map((tags: any) => {
+            newCategories.map((tags: any) => {
               return {
                 text: tags.name,
                 key: tags.id,

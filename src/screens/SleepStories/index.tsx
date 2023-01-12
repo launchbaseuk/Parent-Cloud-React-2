@@ -12,6 +12,7 @@ import TagFilter from '../../components/TagFilter';
 import {getSleepStories} from '../../functions/requests';
 
 import Loader from '../../components/Loader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SleepStories({navigation}: any) {
   const [items, setItems] = useState<any>([]);
@@ -48,8 +49,18 @@ export default function SleepStories({navigation}: any) {
         );
         responseTags = await responseTags.json();
 
+        let newCategories: any = [];
+        responseTags.forEach((tag: any) => {
+          if (
+            !newCategories.some((category: any) => category.id == tag.id) &&
+            response.some((video: any) => video.tags.includes(tag.id))
+          ) {
+            newCategories.push(tag);
+          }
+        });
+
         setCategories(
-          responseTags.map((tags: any) => {
+          newCategories.map((tags: any) => {
             return {
               text: tags.name,
               key: tags.id,
