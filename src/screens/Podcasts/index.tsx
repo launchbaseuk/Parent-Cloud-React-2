@@ -9,6 +9,7 @@ import TagFilter from '../../components/TagFilter';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import Loader from '../../components/Loader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Podcasts({navigation}: any) {
   const [podcasts, setPodcasts] = useState<any>([]);
@@ -25,12 +26,12 @@ export default function Podcasts({navigation}: any) {
         setPodcasts(response);
 
         let responseTags: any = await fetch(
-          'https://parentcloud.borne.io/wp-json/wp/v2/tags',
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
-          //   },
-          // },
+          'https://hub.parent-cloud.com/wp-json/wp/v2/tags',
+          {
+            headers: {
+              Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+            },
+          },
         );
         responseTags = await responseTags.json();
 
@@ -46,12 +47,12 @@ export default function Podcasts({navigation}: any) {
       } else {
         setPodcasts([]);
         let responseTags: any = await fetch(
-          `https://parentcloud.borne.io/wp-json/wp/v2/videos?tags=${selected}`,
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
-          //   },
-          // },
+          `https://hub.parent-cloud.com/wp-json/wp/v2/videos?tags=${selected}`,
+          {
+            headers: {
+              Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+            },
+          },
         );
         responseTags = await responseTags.json();
 

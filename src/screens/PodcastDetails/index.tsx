@@ -45,7 +45,7 @@ export default function PodcastDetails({navigation, route}) {
           /<audio[^>]+controls[^>]+src="?([^"\s]+)"?[^>]*>/,
         )[1];
         audioLink = audioLink.substring(audioLink.indexOf('/', 8) + 1);
-        audioLink = 'https://hub.the-wellness-cloud.com/' + audioLink;
+        audioLink = 'https://hub.parent-cloud.com/' + audioLink;
         setAudioLink(audioLink);
         setDescription(data[1].description);
         setImage(data[1].profile_image);
@@ -57,7 +57,7 @@ export default function PodcastDetails({navigation, route}) {
     React.useCallback(() => {
       (async() => {
         const email = await AsyncStorage.getItem("user_email");
-        const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/get/?mail=${email}`);
+        const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgfav/v1/get/?mail=${email}`);
         const response = await request.json();
 
         let i = 0;
@@ -78,8 +78,8 @@ export default function PodcastDetails({navigation, route}) {
     const userid = await AsyncStorage.getItem("user_id");
     console.log(postid)
 
-    console.log(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
-    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
+    // console.log(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
+    const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
     const response = await request.json();
     console.log('bookmark added', response);
     if(response) {
@@ -91,7 +91,7 @@ export default function PodcastDetails({navigation, route}) {
     const email = await AsyncStorage.getItem("user_email");
     const userid = await AsyncStorage.getItem("user_id");
 
-    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/unset/?mail=${email}&postid=${postid}&userid=${userid}`)
+    const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgfav/v1/unset/?mail=${email}&postid=${postid}&userid=${userid}`)
     const response = await request.json();
     if(response) {
       setBookmarked(false);

@@ -1,7 +1,7 @@
 export default async function getContentPresenters(token) {
     let presenters = [];
 
-    const response = await fetch("https://parentcloud.borne.io/wp-json/wp/v2/content_presenter", {
+    const response = await fetch("https://hub.parent-cloud.com/wp-json/wp/v2/content_presenter", {
         headers: {
             Authorization: `Bearer ${token}`,
         }
@@ -11,7 +11,7 @@ export default async function getContentPresenters(token) {
     for(let i=0; i<data.length; i++) {
         const id = data[i].id;
         
-        const secondResponse = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/content_presenter/${id}`, {
+        const secondResponse = await fetch(`https://hub.parent-cloud.com/wp-json/wp/v2/content_presenter/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -28,7 +28,7 @@ export default async function getContentPresenters(token) {
         const dataImage = await thirdResponse.json();
 
         let imageLink = dataImage.guid.rendered;
-        imageLink = imageLink.replace(/.*wp-content/, "https://parentcloud.borne.io/wp-content");
+        imageLink = imageLink.replace(/.*wp-content/, "https://hub.parent-cloud.com/wp-content");
 
         const title = dataPresenter.title.rendered;
 

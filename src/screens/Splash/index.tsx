@@ -77,7 +77,7 @@ export const Splash = ({ isAppReady }: { isAppReady: boolean }) => {
       collapsable={false}
       style={[style.container, { opacity: containerOpacity }]}
     >
-      <LinearGradient start={{x: 0.0, y: 0}} end={{x: 1, y: 0}} locations={[0.145,0.913]} colors={['#F5CF7C', '#FCEFB5']} style={style.linearGradient}>
+      <LinearGradient start={{x: 0.0, y: 0}} end={{x: 1, y: 0}} locations={[0.145,0.913]} colors={['#336A75', '#78A6A8']} style={style.linearGradient}>
       <Animated.Image
         source={require("../../images/parentcloudlogo2.png")}
         fadeDuration={0}

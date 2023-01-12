@@ -22,8 +22,8 @@ export default function Support() {
       image: <AntenatalCoursesImage />,
       screen: 'Antenatal',
     },
-    // {text: 'Baby Classes', image: <BabyClassesImage />, screen: 'BabyClasses'},
-    // {text: 'Fertility', image: <FertilityImage />, screen: 'Fertility'},
+    {text: 'Baby Classes', image: <BabyClassesImage />, screen: 'BabyClasses'},
+    {text: 'Fertility', image: <FertilityImage />, screen: 'Fertility'},
   ];
 
   return (

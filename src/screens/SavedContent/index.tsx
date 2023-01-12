@@ -29,7 +29,7 @@ export default function SavedContent() {
     React.useCallback(() => {
       (async () => {
         const email = await AsyncStorage.getItem("user_email");
-        const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/get/?mail=${email}`);
+        const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgfav/v1/get/?mail=${email}`);
         const response = await request.json();
 
         setBookmarks(response);
@@ -50,7 +50,7 @@ export default function SavedContent() {
     if (type == "guides") {
       console.log(postid)
       let pdfLink = "";
-      const request = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/guides/${postid}`);
+      const request = await fetch(`https://hub.parent-cloud.com/wp-json/wp/v2/guides/${postid}`);
       const response = await request.json();
 
       if (response._links["wp:attachment"][0].href) {
@@ -66,11 +66,11 @@ export default function SavedContent() {
         }
       }
 
-      pdfLink = 'https://parentcloud.borne.io/' + pdfLink.split('/').slice(3).join('/');
+      pdfLink = 'https://hub.parent-cloud.com/' + pdfLink.split('/').slice(3).join('/');
 
       navigation.navigate("PDFViewer", { pdf: pdfLink });
     } else if (type == "videos") {
-      const request = await fetch(`https://parentcloud.borne.io/wp-json/wp/v2/videos/${postid}`);
+      const request = await fetch(`https://hub.parent-cloud.com/wp-json/wp/v2/videos/${postid}`);
       const response = await request.json();
 
       let excerpt = '', details = '', toExtract = '', title = '', bookmarked = false;

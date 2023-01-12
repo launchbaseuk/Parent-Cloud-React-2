@@ -15,7 +15,7 @@ export default function Guides({navigation, route}: any) {
 
   const fetchBookmarks = async () => {
     const email = await AsyncStorage.getItem("user_email");
-    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/get/?mail=${email}`);
+    const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgfav/v1/get/?mail=${email}`);
     const response = await request.json();
     console.log(response)
     setBookmarks(response);
@@ -27,7 +27,7 @@ export default function Guides({navigation, route}: any) {
     console.log('bookmarking')
 
     // console.log(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
-    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
+    const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
     const response = await request.json();
 
     if(response) {
@@ -40,7 +40,7 @@ export default function Guides({navigation, route}: any) {
     const userid = await AsyncStorage.getItem("user_id");
     console.log('unbookmarking')
 
-    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/unset/?mail=${email}&postid=${postid}&userid=${userid}`)
+    const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgfav/v1/unset/?mail=${email}&postid=${postid}&userid=${userid}`)
     const response = await request.json();
 
     if(response) {

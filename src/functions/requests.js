@@ -3,12 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 async function getFilters() {
   const token = await AsyncStorage.getItem('token');
   const response = await fetch(
-    `https://parentcloud.borne.io/wp-json/wp/v2/master_filter`
-    // {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // },
+    `https://hub.parent-cloud.com/wp-json/wp/v2/master_filter`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
   );
   const data = await response.json();
   let filters = [];
@@ -31,12 +31,12 @@ async function getGuides() {
 
   for (let i = 0; i < filters.length; i++) {
     let response = await fetch(
-      `https://parentcloud.borne.io/wp-json/wp/v2/guides?master_filter=${filters[i].id}`
-      // {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // },
+      `https://hub.parent-cloud.com/wp-json/wp/v2/guides?master_filter=${filters[i].id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     );
     response = await response.json();
 
@@ -101,7 +101,7 @@ async function getPageDocs(page) {
   for (let i = 0; i < filters.length; i++) {
     if (filters[i].slug === page) {
       let response = await fetch(
-        `https://parentcloud.borne.io/wp-json/wp/v2/guides?master_filter=${filters[i].id}`,
+        `https://hub.parent-cloud.com/wp-json/wp/v2/guides?master_filter=${filters[i].id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -134,12 +134,12 @@ async function getVideos() {
 
   for (let i = 0; i < filters.length; i++) {
     let response = await fetch(
-      `https://parentcloud.borne.io/wp-json/wp/v2/videos?master_filter=${filters[i].id}`,
-      // {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // },
+      `https://hub.parent-cloud.com/wp-json/wp/v2/videos?master_filter=${filters[i].id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     );
     //response.includes
     response = await response.json();
@@ -160,12 +160,12 @@ async function getPodcasts() {
   const token = await AsyncStorage.getItem('token');
   let podcasts = [];
   const response = await fetch(
-    `https://parentcloud.borne.io/wp-json/wp/v2/videos`,
-    // {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // },
+    `https://hub.parent-cloud.com/wp-json/wp/v2/videos`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
   );
   const data = await response.json();
   console.log('got data');
@@ -198,7 +198,7 @@ async function getNarratorDetails(narratorId) {
   const token = await AsyncStorage.getItem('token');
 
   const response = await fetch(
-    `https://parentcloud.borne.io/wp-json/mo/v1/getNarratorDetails/${id}`,
+    `https://hub.parent-cloud.com/wp-json/mo/v1/getNarratorDetails/${id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -208,7 +208,7 @@ async function getNarratorDetails(narratorId) {
   const data = await response.json();
 
   const responseDesc = await fetch(
-    `https://parentcloud.borne.io/wp-json/mo/v1/getNarratorMeta/${id}`,
+    `https://hub.parent-cloud.com/wp-json/mo/v1/getNarratorMeta/${id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -226,7 +226,7 @@ async function getNarratorDetails(narratorId) {
       let id = dataDesc[i].meta_value;
 
       const respImage = await fetch(
-        `https://parentcloud.borne.io/wp-json/wp/v2/media/${id}`,
+        `https://hub.parent-cloud.com/wp-json/wp/v2/media/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -246,12 +246,12 @@ async function getGuidedMeditation() {
   let meditations = [];
 
   let response = await fetch(
-    `https://hub.the-wellness-cloud.com/wp-json/wp/v2/guided_meditation`,
-    // {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // },
+    `https://hub.parent-cloud.com/wp-json/wp/v2/guided_meditation`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
   );
   response = await response.json();
 
@@ -267,12 +267,12 @@ async function getSleepStories() {
   let stories = [];
 
   let response = await fetch(
-    `https://hub.the-wellness-cloud.com/wp-json/wp/v2/sleep_stories`,
-    // {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // },
+    `https://hub.parent-cloud.com/wp-json/wp/v2/sleep_stories`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
   );
   response = await response.json();
 

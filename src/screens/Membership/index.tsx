@@ -17,12 +17,12 @@ export default function Membership() {
     React.useCallback(() => {
       (async () => {
         let response = await fetch(
-          `https://parentcloud.borne.io/wp-json/mp/v1/members?search=${await AsyncStorage.getItem(
+          `https://hub.parent-cloud.com/wp-json/mp/v1/members?search=${await AsyncStorage.getItem(
             'user_email',
           )}`,
           {
             headers: {
-              // "Authorization": "Bearer " + await AsyncStorage.getItem("token"),
+              "Authorization": "Bearer " + await AsyncStorage.getItem("token"),
               'MEMBERPRESS-API-KEY': '8T5AkgBptM',
             },
           },
@@ -30,7 +30,7 @@ export default function Membership() {
         response = await response.json();
         const subId = response[0]?.recent_subscriptions[0]?.id;
         let responseSub = await fetch(
-          `https://parentcloud.borne.io/wp-json/mp/v1/subscriptions/${subId}`,
+          `https://hub.parent-cloud.com/wp-json/mp/v1/subscriptions/${subId}`,
           {
             headers: {
               'MEMBERPRESS-API-KEY': '8T5AkgBptM',
@@ -72,6 +72,7 @@ export default function Membership() {
                   color: '#11535C',
                   fontSize: 16,
                   marginLeft: 26,
+                  width: "45%"
                 }}>
                 {subscription?.membership?.title}
               </Text>

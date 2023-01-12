@@ -177,7 +177,7 @@ const App = () => {
           <Stack.Screen name="LiveTalks" component={LiveTalks} />
           <Stack.Screen name="Antenatal" component={Antenatal} />
           <Stack.Screen name="BabyClasses" component={BabyClasses} />
-          {/* <Stack.Screen name="Fertility" component={Fertility} /> */}
+          <Stack.Screen name="Fertility" component={Fertility} />
           <Stack.Screen
             name="ApricityConsultation"
             component={ApricityConsultation}

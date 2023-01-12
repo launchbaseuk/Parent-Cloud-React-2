@@ -39,7 +39,7 @@ const ReviewSection = ({navigation, route}: any) => {
       (async() => {
         setGraph([]);
         const email = await AsyncStorage.getItem('user_email');
-        const request = await fetch(`https://parentcloud.borne.io/wp-json/swgraph/v1/user/?mail=${email}`);
+        const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgraph/v1/user/?mail=${email}`);
         const response = await request.json();
 
         Object.values(response).forEach((value: number) => {
@@ -57,7 +57,7 @@ const ReviewSection = ({navigation, route}: any) => {
         const token = await AsyncStorage.getItem('token');
 
         let checkIns: any = await getCheckIns(email, token);
-
+        // console.log(checkIns)
         let groupedCheckIns: any = {};
         for (let i = 0; i < checkIns.length; i++) {
           let date = checkIns[i].date_gmt;
@@ -120,17 +120,6 @@ const ReviewSection = ({navigation, route}: any) => {
         <ScrollView>
           <BackButton text="Mood Tracker" />
 
-          <Text
-            style={{
-              fontFamily: 'SofiaProBlack',
-              color: '#11535C',
-              fontSize: 20,
-              paddingLeft: 16,
-              marginTop: 50,
-              marginBottom: 16,
-            }}>
-            Review your mood
-          </Text>
           <Text style={{ fontFamily: 'SofiaProBlack',
               color: '#11535C',
               fontSize: 20,

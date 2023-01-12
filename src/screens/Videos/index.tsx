@@ -39,7 +39,7 @@ export default function Videos({navigation, route}: any) {
 
   const fetchBookmarks = async () => {
     const email = await AsyncStorage.getItem("user_email");
-    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/get/?mail=${email}`);
+    const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgfav/v1/get/?mail=${email}`);
     const response = await request.json();
 
     setBookmarks(response);
@@ -60,12 +60,12 @@ export default function Videos({navigation, route}: any) {
           setVideos(response);
 
           let responseTags: any = await fetch(
-            'https://hub.the-wellness-cloud.com/wp-json/wp/v2/tags',
-            // {
-            //   headers: {
-            //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
-            //   },
-            // },
+            'https://hub.parent-cloud.com/wp-json/wp/v2/tags',
+            {
+              headers: {
+                Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+              },
+            },
           );
           responseTags = await responseTags.json();
 
@@ -82,12 +82,12 @@ export default function Videos({navigation, route}: any) {
           setLoading(true);
           setVideos([]);
           let responseTags: any = await fetch(
-            `https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos?tags=${selected}`,
-            // {
-            //   headers: {
-            //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
-            //   },
-            // },
+            `https://hub.parent-cloud.com/wp-json/wp/v2/videos?tags=${selected}`,
+            {
+              headers: {
+                Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+              },
+            },
           );
           responseTags = await responseTags.json();
 
@@ -113,8 +113,8 @@ export default function Videos({navigation, route}: any) {
     const email = await AsyncStorage.getItem("user_email");
     const userid = await AsyncStorage.getItem("user_id");
 
-    console.log(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
-    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
+    // console.log(`https://parentcloud.borne.io/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
+    const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgfav/v1/set/?mail=${email}&postid=${postid}&userid=${userid}&type=${posttype}`);
     const response = await request.json();
     console.log('bookmark added', response);
     if(response) {
@@ -126,7 +126,7 @@ export default function Videos({navigation, route}: any) {
     const email = await AsyncStorage.getItem("user_email");
     const userid = await AsyncStorage.getItem("user_id");
 
-    const request = await fetch(`https://parentcloud.borne.io/wp-json/swgfav/v1/unset/?mail=${email}&postid=${postid}&userid=${userid}`)
+    const request = await fetch(`https://hub.parent-cloud.com/wp-json/swgfav/v1/unset/?mail=${email}&postid=${postid}&userid=${userid}`)
     const response = await request.json();
     if(response) {
       fetchBookmarks();

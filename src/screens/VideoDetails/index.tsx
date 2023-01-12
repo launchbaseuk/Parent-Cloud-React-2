@@ -57,7 +57,7 @@ export default function VideoDetails({navigation, route}: any) {
   useEffect(() => {
     (async() => {
       setLoadingImage(true);
-      const request = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/media/${featuredMedia}`);
+      const request = await fetch(`https://hub.parent-cloud.com/wp-json/wp/v2/media/${featuredMedia}`);
       const response = await request.json();
   
       setImage(response.guid.rendered);

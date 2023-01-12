@@ -43,12 +43,12 @@ export default function PersonalDetails() {
       (async () => {
         setChanged(false);
         let response = await fetch(
-          `https://parentcloud.borne.io/wp-json/mp/v1/members?search=${await AsyncStorage.getItem(
+          `https://hub.parent-cloud.com/wp-json/mp/v1/members?search=${await AsyncStorage.getItem(
             'user_email',
           )}`,
           {
             headers: {
-              // "Authorization": "Bearer " + await AsyncStorage.getItem("token"),
+              "Authorization": "Bearer " + await AsyncStorage.getItem("token"),
               'MEMBERPRESS-API-KEY': '8T5AkgBptM',
             },
           },
@@ -78,7 +78,7 @@ export default function PersonalDetails() {
 
   const handlePress = async () => {
     let response: any = await fetch(
-      `https://parentcloud.borne.io/wp-json/wp/v2/users/${id}`,
+      `https://hub.parent-cloud.com/wp-json/wp/v2/users/${id}`,
       {
         method: 'POST',
         headers: {
@@ -102,7 +102,7 @@ export default function PersonalDetails() {
     await AsyncStorage.setItem('user_email', email);
 
     let responseAddress: any = await fetch(
-      `https://parentcloud.borne.io/wp-json/mp/v1/members/${id}`,
+      `https://hub.parent-cloud.com/wp-json/mp/v1/members/${id}`,
       {
         method: 'POST',
         headers: {

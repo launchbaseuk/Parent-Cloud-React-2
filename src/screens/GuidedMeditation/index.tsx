@@ -37,12 +37,12 @@ export default function GuidedMeditation({navigation}: any) {
         setItems(response);
 
         let responseTags: any = await fetch(
-          'https://hub.the-wellness-cloud.com/wp-json/wp/v2/categories',
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
-          //   },
-          // },
+          'https://hub.parent-cloud.com/wp-json/wp/v2/categories',
+          {
+            headers: {
+              Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+            },
+          },
         );
         responseTags = await responseTags.json();
 
@@ -59,12 +59,12 @@ export default function GuidedMeditation({navigation}: any) {
         setItems([]);
         setLoading(true);
         let responseTags: any = await fetch(
-          `https://hub.the-wellness-cloud.com/wp-json/wp/v2/guided_meditation?categories=${selected}`,
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
-          //   },
-          // },
+          `https://hub.parent-cloud.com/wp-json/wp/v2/guided_meditation?categories=${selected}`,
+          {
+            headers: {
+              Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+            },
+          },
         );
         responseTags = await responseTags.json();
 

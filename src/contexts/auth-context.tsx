@@ -17,7 +17,7 @@ const AuthProvider = (props: any) => {
     
                 (async () => {
                     const check = await fetch(
-                        `https://parentcloud.borne.io/wp-json/jwt-auth/v1/token/validate`, {
+                        `https://hub.parent-cloud.com/wp-json/jwt-auth/v1/token/validate`, {
 							method: "POST",
 							headers: {
 								Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ const AuthProvider = (props: any) => {
 		(async () => {
 			if (username && password) {
 				const login = await fetch(
-					"https://parentcloud.borne.io/wp-json/jwt-auth/v1/token",
+					"https://hub.parent-cloud.com/wp-json/jwt-auth/v1/token",
 					{
 						method: "POST",
 						headers: {
@@ -63,7 +63,7 @@ const AuthProvider = (props: any) => {
 				console.log(response);
 
 				if (response.token) {
-					let responseUserInfo: any = await fetch(`https://parentcloud.borne.io/wp-json/mp/v1/members?search=${response.user_email}`, {
+					let responseUserInfo: any = await fetch(`https://hub.parent-cloud.com/wp-json/mp/v1/members?search=${response.user_email}`, {
 						headers: {
 							"MEMBERPRESS-API-KEY": "8T5AkgBptM"
 						}

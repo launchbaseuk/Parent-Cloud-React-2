@@ -4,7 +4,7 @@ export default async function getHRContent() {
   const token = await AsyncStorage.getItem('token');
 
   // let response = await fetch(
-  //   'https://hub.the-wellness-cloud.com/wp-json/wp/v2/categories'
+  //   'https://hub.parent-cloud.com/wp-json/wp/v2/categories'
   //   // {
   //   //   headers: {
   //   //     Authorization: `Bearer ${token}`,
@@ -23,7 +23,7 @@ export default async function getHRContent() {
   // }
 
   // let responseInformation = await fetch(
-  //   `https://hub.the-wellness-cloud.com/wp-json/wp/v2/categories/${catId}`
+  //   `https://hub.parent-cloud.com/wp-json/wp/v2/categories/${catId}`
   //   // {
   //   //   headers: {
   //   //     Authorization: `Bearer ${token}`,
@@ -35,20 +35,20 @@ export default async function getHRContent() {
   // let postTypes = responseInformation._links['wp:post_type'];
 
   let postTypesItems = [];
-  let response = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/guides?categories=45`
-    // {
-    // headers: {
-    //   Authorization: `Bearer ${token}`,
-    // },
-    // }
+  let response = await fetch(`https://hub.parent-cloud.com/wp-json/wp/v2/guides?categories=45`,
+    {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    }
   );
   response = await response.json();
-  let responseVideos = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos?categories=45`
-    // {
-    // headers: {
-    //   Authorization: `Bearer ${token}`,
-    // },
-    // }
+  let responseVideos = await fetch(`https://hub.parent-cloud.com/wp-json/wp/v2/videos?categories=45`,
+    {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    }
   );
   responseVideos = await responseVideos.json();
 
@@ -145,7 +145,7 @@ export default async function getHRContent() {
   // loop through postTypes, make a request for each one and push the response to postTypesItems like this: type: [{}, {}, {}]
   // if(postTypes.length > 0) {
   //   for (let i = 0; i < postTypes.length; i++) {
-  //     let response = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/guides?categories=45`
+  //     let response = await fetch(`https://hub.parent-cloud.com/wp-json/wp/v2/guides?categories=45`
   //       // {
   //       // headers: {
   //       //   Authorization: `Bearer ${token}`,

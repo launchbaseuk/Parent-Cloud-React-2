@@ -22,7 +22,7 @@ export default function LiveTalks() {
       (async () => {
         setLoading(true);
         let response = await fetch(
-          'https://hub.the-wellness-cloud.com/wp-json/mo/v1/posts/live-learning',
+          'https://hub.parent-cloud.com/wp-json/mo/v1/posts/live-learning',
         );
         response = await response.json();
 

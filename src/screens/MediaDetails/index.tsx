@@ -43,7 +43,7 @@ export default function PodcastDetails({navigation, route}) {
           /<audio[^>]+controls[^>]+src="?([^"\s]+)"?[^>]*>/,
         )[1];
         audioLink = audioLink.substring(audioLink.indexOf('/', 8) + 1);
-        audioLink = 'https://hub.the-wellness-cloud.com/' + audioLink;
+        audioLink = 'https://hub.parent-cloud.com/' + audioLink;
         setAudioLink(audioLink);
         // setDescription(data[1].description);
         // setImage(data[1].profile_image);
