@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Loader from '../Loader';
 
 // Images
 import guidespicture from '../../images/GuidesPicture.png';
@@ -86,15 +87,30 @@ function GuideCardSmall({text, redirect, title, fileLink, vimeoLink}: any) {
   );
 }
 
-function GuideCardBig({title, excerpt, content, fileLink, bookmarked, onPressBookmark}: any) {
+function GuideCardBig({title, excerpt, content, fileLink, bookmarked, onPressBookmark, postid}: any) {
   const navigation = useNavigation();
-  // console.log(content);
+  const [image, setImage] = useState<string>("");
+
+  useEffect(() => {
+    (async() => {
+      const request = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/guides/${postid}`);
+      const response = await request.json();
+
+      console.log(response.featured_media);
+      const requestTwo = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/media/${response.featured_media}`);
+      const responseTwo = await requestTwo.json();
+
+      setImage(responseTwo.source_url);
+    })();
+  }, []);
+
   return (
     <View style={styles.guidecardbigContainer}>
-      <TouchableOpacity style={{ zIndex:1000, top:15, right: 30, position: "absolute" }} onPress={onPressBookmark}>
-        {bookmarked ? <BookmarkMarked /> : <Bookmark />}
+      <TouchableOpacity style={{ zIndex:1000, top: 30, right: 35, position: "absolute" }} onPress={onPressBookmark}>
+        {bookmarked ? <BookmarkMarked color="#fff" /> : <Bookmark color="#fff" />}
       </TouchableOpacity>
-      <Image source={guidespicture} style={{marginTop: 16, marginBottom: 16}} />
+
+      {image ? <Image source={{ uri: image }} style={{width: 312, height: 120, borderRadius: 10, marginTop: 16, marginBottom: 16}} /> : <Loader />}
 
       <View
         style={{
@@ -154,6 +170,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2F2F280',
     alignItems: 'center',
     alignSelf: 'center',
+    marginTop: 8
   },
 });
 
