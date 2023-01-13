@@ -6,20 +6,26 @@ import {
   Dimensions,
   Image,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import SearchIcon from '../../icons/svg/Search';
+import { useNavigation } from "@react-navigation/native";
 
 const {width, height} = Dimensions.get('window');
 export default function Search() {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.searchContainer}>
+    <TouchableOpacity style={styles.searchContainer} onPress={() => navigation.navigate("Search")}>
       <SearchIcon style={styles.searchIcon} />
       <TextInput
         style={styles.searchInput}
         placeholder="Search..."
         placeholderTextColor="#00084B"
+        editable={false}
+        onPressOut={() => navigation.navigate("Search")}
       />
-    </View>
+    </TouchableOpacity>
   );
 }
 

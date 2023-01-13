@@ -73,6 +73,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MusicPlayer from './src/components/shared/MusicPlayer';
 import DefaultTheme from '@react-navigation/native';
+import Search from './src/screens/Search';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -170,6 +171,7 @@ const App = () => {
           screenOptions={{headerShown: false}}
           initialRouteName="TabNav">
           <Stack.Screen name="TabNav" component={TabNav} />
+          <Stack.Screen name="Search" component={Search} />
           <Stack.Screen name="OneToOne" component={OnetooneSessions} />
           <Stack.Screen name="PocketCBT" component={PocketCBT} />
           <Stack.Screen name="DynamicOne" component={DynamicOne} />

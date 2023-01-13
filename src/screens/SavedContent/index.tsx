@@ -19,6 +19,8 @@ import FileIcon from '../../icons/svg/FileIcon';
 import LinkIcon from '../../icons/svg/LinkIcon';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PodcastIcon from '../../images/svg/PodcastIcon';
+import VideoIcon from '../../images/svg/VideoIcon';
 
 const { width, height } = Dimensions.get('window');
 export default function SavedContent() {
@@ -44,6 +46,23 @@ export default function SavedContent() {
       return match[1];
     }
     return null;
+  }
+
+  const handlePodcastOrVideo = (bookmark: any) => {
+    if(bookmark.type == "videos") {
+      (async() => {
+        const request = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos/${bookmark.post_id}`);
+        const response = await request.json();
+
+        if(typeof response.content !== undefined) {
+          if(!response.content.rendered.includes(".mp3")) {
+            return <PodcastIcon />
+          }
+        }
+      })();
+    }
+
+    return <VideoIcon />
   }
 
   const handleNavigation = async (postid: string, type: string) => {
@@ -126,34 +145,35 @@ export default function SavedContent() {
       <View style={{ height: 16 }} />
 
       {bookmarks.map((bookmark: any) => {
-        console.log(bookmark.type)
+        if(bookmark.type !== "revision" && bookmark.type !== false) {
         return (
           <TouchableOpacity
             style={{
               marginTop: 4,
-              width: width - 40,
-              height: 44,
-              borderRadius: 5,
-              backgroundColor: '#F2F2F280',
-              alignSelf: 'center',
-              paddingLeft: 16,
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}
-            onPress={() => handleNavigation(bookmark.post_id, bookmark.type)}
-          >
-            <FileIcon />
-            <Text
-              style={{
-                fontFamily: 'Montserrat-Regular',
-                color: '#150E00',
-                fontSize: 16,
-                marginLeft: 10,
-              }}>
-              {bookmark.post_title.substring(0, 30) + '...'}
-            </Text>
-          </TouchableOpacity>
-        );
+                width: width - 40,
+                height: 44,
+                borderRadius: 5,
+                backgroundColor: '#F2F2F280',
+                alignSelf: 'center',
+                paddingLeft: 16,
+                alignItems: 'center',
+                flexDirection: 'row',
+              }}
+              onPress={() => handleNavigation(bookmark.post_id, bookmark.type)}
+            >
+              {bookmark.type == "videos" ? handlePodcastOrVideo(bookmark) : <FileIcon />}
+              <Text
+                style={{
+                  fontFamily: 'Montserrat-Regular',
+                  color: '#150E00',
+                  fontSize: 16,
+                  marginLeft: 10,
+                }}>
+                {bookmark.post_title.substring(0, 30) + '...'}
+              </Text>
+            </TouchableOpacity>
+          );
+        }
       })}
       {/* {Array.from({length: 7}).map((_, index) => {
         return (
