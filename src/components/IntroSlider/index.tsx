@@ -17,9 +17,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Images from './images';
 import PrimaryButton from '../shared/PrimaryButton';
 import SecondaryButton from '../shared/SecondaryButton';
+import Loader from '../Loader';
+import { useAuth } from '../../contexts/auth-context';
 
 const IntroSlider = ({navigation}) => {
   const [sliderState, setSliderState] = useState({currentPage: 0});
+  const { loadingUser } = useAuth();
 
   const setSliderPage = event => {
     const {currentPage} = sliderState;
@@ -148,12 +151,16 @@ const IntroSlider = ({navigation}) => {
           ))}
         </View>
         <View style={styles.buttons}>
-          <PrimaryButton text="Login" onPress={handleLogin} />
-          <View style={{height: 8}} />
-          <SecondaryButton
-            text="Contact Support"
-            onPress={() => navigation.navigate('Signup')}
-          />
+          {loadingUser ? <Loader /> : (
+            <>
+              <PrimaryButton text="Login" onPress={handleLogin} />
+              <View style={{height: 8}} />
+              <SecondaryButton
+                text="Contact Support"
+                onPress={() => navigation.navigate('Signup')}
+              />
+            </>
+          )}
         </View>
       </SafeAreaView>
     </View>

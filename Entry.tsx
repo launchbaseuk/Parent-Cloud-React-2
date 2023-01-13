@@ -1,20 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
-import { AuthProvider } from "./src/contexts/auth-context";
+import { AuthProvider, useAuth } from "./src/contexts/auth-context";
 import App from "./App";
 import { WithSplashScreen } from "./src/screens/Splash";
 
 export default function Entry() {
     const [isAppReady, setIsAppReady] = useState<boolean>(false);
-
+    const { loadingUser } = useAuth();
+    
     useEffect(() => {
-        setIsAppReady(true);
-    }, []);
+        if(loadingUser) {
+            setIsAppReady(false);
+        } else {
+            setIsAppReady(true);
+        }
+    }, [loadingUser]);
 
     return (
         <WithSplashScreen isAppReady={isAppReady}>
-            <AuthProvider>
-                <App />
-            </AuthProvider>
+            <App />
         </WithSplashScreen>
     )
 }

@@ -7,10 +7,12 @@ const AuthContext = createContext({});
 const AuthProvider = (props: any) => {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [sub, setSubscription] = useState(false);
+	const [loadingUser, setLoadingUser] = useState(false);
 
 	useEffect(() => {
 		// Pull saved state
 		(async() => {
+			setLoadingUser(true);
             if (await AsyncStorage.getItem("token")) {
                 const token = await AsyncStorage.getItem("token");
 				const email = await AsyncStorage.getItem("user_email");
@@ -31,12 +33,15 @@ const AuthProvider = (props: any) => {
 					
 						setSubscription(subscription);
                         setLoggedIn(true);
+						setLoadingUser(false);
                     } else {
                         setLoggedIn(false);
+						setLoadingUser(false);
                     }
                 })();
             } else {
                 setLoggedIn(false);
+				setLoadingUser(false);
             }
         })();
 	}, []);
@@ -101,7 +106,8 @@ const AuthProvider = (props: any) => {
 		login,
 		logout,
 		loggedIn,
-		sub
+		sub,
+		loadingUser
 	};
 
 	return <AuthContext.Provider value={authContextValue} {...props} />;

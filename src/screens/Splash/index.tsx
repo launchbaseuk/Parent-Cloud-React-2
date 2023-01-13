@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Animated, StyleSheet } from "react-native";
 import SplashImage from "../../images/svg/SplashImage";
 import LinearGradient from 'react-native-linear-gradient';
+import { useAuth } from "../../contexts/auth-context";
+import Loader from "../../components/Loader";
 
 export function WithSplashScreen({
   children,
@@ -10,9 +12,11 @@ export function WithSplashScreen({
   isAppReady: boolean;
   children: React.ReactNode;
 }) {
+  const { loadingUser } = useAuth();
+
   return (
     <>
-      {isAppReady && children}
+      {(isAppReady && !loadingUser) && children}
 
       <Splash isAppReady={isAppReady} />
     </>
@@ -78,15 +82,17 @@ export const Splash = ({ isAppReady }: { isAppReady: boolean }) => {
       style={[style.container, { opacity: containerOpacity }]}
     >
       <LinearGradient start={{x: 0.0, y: 0}} end={{x: 1, y: 0}} locations={[0.145,0.913]} colors={['#336A75', '#78A6A8']} style={style.linearGradient}>
-      <Animated.Image
-        source={require("../../images/parentcloudlogo2.png")}
-        fadeDuration={0}
-        onLoad={() => {
-          setState(FADE_IN_IMAGE);
-        }}
-        style={[style.image, { opacity: imageOpacity }]}
-        resizeMode="contain"
-      />
+        <Animated.Image
+          source={require("../../images/parentcloudlogo2.png")}
+          fadeDuration={0}
+          onLoad={() => {
+            setState(FADE_IN_IMAGE);
+          }}
+          style={[style.image, { opacity: imageOpacity }]}
+          resizeMode="contain"
+        />
+        
+        <Loader />
       </LinearGradient>
       {/* <SplashImage /> */}
     </Animated.View>
