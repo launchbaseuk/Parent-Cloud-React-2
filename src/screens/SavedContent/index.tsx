@@ -139,97 +139,44 @@ export default function SavedContent() {
 
   return (
     <SafeAreaView>
-      <BackButton text="Saved Content" />
+      <ScrollView contentContainerStyle={{ height: Dimensions.get("window").height }}>
+        <BackButton text="Saved Content" />
 
-      {/* <TagFilter /> */}
-      <View style={{ height: 16 }} />
+        {/* <TagFilter /> */}
+        <View style={{ height: 16 }} />
 
-      {bookmarks.map((bookmark: any) => {
-        if(bookmark.type !== "revision" && bookmark.type !== false) {
-        return (
-          <TouchableOpacity
-            style={{
-              marginTop: 4,
-                width: width - 40,
-                height: 44,
-                borderRadius: 5,
-                backgroundColor: '#F2F2F280',
-                alignSelf: 'center',
-                paddingLeft: 16,
-                alignItems: 'center',
-                flexDirection: 'row',
-              }}
-              onPress={() => handleNavigation(bookmark.post_id, bookmark.type)}
-            >
-              {bookmark.type == "videos" ? handlePodcastOrVideo(bookmark) : <FileIcon />}
-              <Text
+        {bookmarks.map((bookmark: any) => {
+          if(bookmark.type !== "revision" && bookmark.type !== false) {
+            return (
+              <TouchableOpacity
                 style={{
-                  fontFamily: 'Montserrat-Regular',
-                  color: '#150E00',
-                  fontSize: 16,
-                  marginLeft: 10,
-                }}>
-                {bookmark.post_title.substring(0, 30) + '...'}
-              </Text>
-            </TouchableOpacity>
-          );
-        }
-      })}
-      {/* {Array.from({length: 7}).map((_, index) => {
-        return (
-          <View
-            style={{
-              marginTop: 4,
-              width: width - 40,
-              height: 44,
-              borderRadius: 5,
-              backgroundColor: '#F2F2F280',
-              alignSelf: 'center',
-              paddingLeft: 16,
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}>
-            <FileIcon />
-            <Text
-              style={{
-                fontFamily: 'Montserrat-Regular',
-                color: '#150E00',
-                fontSize: 16,
-                marginLeft: 10,
-              }}>
-              PDF Title...
-            </Text>
-          </View>
-        );
-      })} */}
-      <View style={{ height: 16 }} />
-      {/* {Array.from({length: 3}).map((_, index) => {
-        return (
-          <View
-            style={{
-              marginTop: 4,
-              width: width - 40,
-              height: 44,
-              borderRadius: 5,
-              backgroundColor: '#F2F2F280',
-              alignSelf: 'center',
-              paddingLeft: 16,
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}>
-            <LinkIcon />
-            <Text
-              style={{
-                fontFamily: 'Montserrat-Regular',
-                color: '#150E00',
-                fontSize: 16,
-                marginLeft: 10,
-              }}>
-              01/02/1234 - 12:34
-            </Text>
-          </View>
-        );
-      })} */}
+                  marginTop: 4,
+                  width: width - 40,
+                  height: 44,
+                  borderRadius: 5,
+                  backgroundColor: '#F2F2F280',
+                  alignSelf: 'center',
+                  paddingLeft: 16,
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                }}
+                onPress={() => handleNavigation(bookmark.post_id, bookmark.type)}
+              >
+                {bookmark.type == "videos" ? handlePodcastOrVideo(bookmark) : <FileIcon />}
+                <Text
+                  style={{
+                    fontFamily: 'Montserrat-Regular',
+                    color: '#150E00',
+                    fontSize: 16,
+                    marginLeft: 10,
+                  }}>
+                  {bookmark.post_title.substring(0, 30) + '...'}
+                </Text>
+              </TouchableOpacity>
+            );
+          }
+        })}
+      </ScrollView>
     </SafeAreaView>
   );
 }

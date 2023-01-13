@@ -158,10 +158,7 @@ export default function PersonalDetails() {
                 alignItems: 'center',
                 marginRight: 16,
               }}>
-              <Image
-                source={placeholderImage}
-                style={{height: 50, width: 50}}
-              />
+              <Text style={{ fontWeight: "bold", fontSize: 32, color: "white" }}>{name[0]+""+last[0]}</Text>
             </View>
             <Text
               style={{
