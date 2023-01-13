@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-
+import pause from "../../images/Pause.png";
 // Images
 import Bookmark from '../../images/svg/Bookmark';
 import BookmarkMarked from '../../images/svg/BookmarkMarked';
@@ -24,9 +24,22 @@ export default function VideoListItem({
   video,
   liveTalk,
   bookmarked,
-  onPressBookmark
+  onPressBookmark,
+  imageSmall
 }: any) {
   const navigation = useNavigation();
+  const [imagePl, setImagePL] = useState<string | undefined>("");
+
+  useEffect(() => {
+    (async() => {
+      const request = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/videos/${imageSmall}`);
+      const response = await request.json();
+
+      if(typeof response.acf.image == "object") {
+        setImagePL(response.acf.image.url);
+      }
+    })();
+  }, []);
 
   return (
     <TouchableOpacity
@@ -40,13 +53,14 @@ export default function VideoListItem({
           video: video,
           featuredMedia: video.featured_media,
           description: description,
-          bookmarked: bookmarked
+          bookmarked: bookmarked,
+          imageSmall: imagePl
         })
       }>
       <View style={{flexDirection: 'row'}}>
         <View style={styles.imageContainer}>
           <Image
-            source={liveTalk ? image : image[0].href}
+            source={imagePl ? { uri: encodeURI(imagePl) } : pause}
             style={styles.image}
           />
         </View>
@@ -114,4 +128,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  image: {
+    width: "100%",
+    height: "100%"
+  }
 });

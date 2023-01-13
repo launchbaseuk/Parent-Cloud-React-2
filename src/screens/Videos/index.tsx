@@ -207,6 +207,7 @@ export default function Videos({navigation, route}: any) {
                   vimeoLink={extractString(toExtract)}
                   details={details}
                   video={video}
+                  imageSmall={video.id}
                   bookmarked={bookmarked}
                   onPressBookmark={() => {
                     if(bookmarked) {

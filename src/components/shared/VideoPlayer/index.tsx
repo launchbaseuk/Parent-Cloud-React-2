@@ -17,13 +17,9 @@ const VideoPlayerShared = ({route}: any) => {
     video: '',
   });
   const navigation = useNavigation();
-  const [paused, setPaused] = useState<boolean>(true);
   const [image, setImage] = useState<string>("");
 
   console.log('aaa', route.params.videoId);
-  const handlePause = () => {
-    setPaused(!paused);
-  }
 
   useEffect(() => {
     const VIMEO_ID = '775794041';
@@ -44,7 +40,6 @@ const VideoPlayerShared = ({route}: any) => {
     console.log(route.params.poster)
   }, [route.params.poster]);
 
-  if(!paused) {
     return (
       <VideoPlayer
         // ref={ref => {
@@ -54,22 +49,8 @@ const VideoPlayerShared = ({route}: any) => {
         navigator={navigation}
         fullscreen={false}
         resizeMode={'contain'}
-        paused={paused}
       />
     )
-  } else {
-    return (
-      <SafeAreaView>
-        <BackButton text="Video Details" />
-        <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", marginTop: 25 }} onPress={handlePause}>
-          <View style={{ position: "absolute", zIndex: 1000 }}>
-            <PlayIconBig />
-          </View>
-          <FastImage key={route.params.poster} source={{ uri: route.params.poster, priority: FastImage.priority.high }} style={{ width: width - 20, height: height / 1.4, alignSelf: "center", borderRadius: 20, backgroundColor: "#f3f3f3" }} />
-        </TouchableOpacity>
-      </SafeAreaView>
-    )
-  }
 };
 
 export default VideoPlayerShared;

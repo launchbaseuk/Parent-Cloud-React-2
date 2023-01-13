@@ -183,7 +183,7 @@ async function getPodcasts() {
   for (let i = 0; i < data.length; i++) {
     if (
       data[i].status === 'publish' &&
-      !data[i].content.rendered.includes('wp-block-embed')
+      data[i].content.rendered.includes('.mp3')
     ) {
       podcasts.push(data[i]);
     }

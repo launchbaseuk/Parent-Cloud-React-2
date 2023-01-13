@@ -13,8 +13,6 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import BackButton from '../../components/BackButton';
 
 // Images
-import headphones from '../../icons/headphones.png';
-import placeholderImage from '../../images/PlaceholderImage.png';
 import Replay from '../../icons/svg/Replay';
 import Backwards from '../../icons/svg/Backwards';
 import Forwards from '../../icons/svg/Forwards';
@@ -23,10 +21,11 @@ import Queue from '../../icons/svg/Queue';
 import {useFocusEffect} from '@react-navigation/native';
 import {getNarratorDetails} from '../../functions/requests';
 import Loader from '../../components/Loader';
+import FastImage from 'react-native-fast-image';
 
 const {width, height} = Dimensions.get('window');
 export default function VideoDetails({navigation, route}: any) {
-  const {title, details, vimeoLink, video, description, featuredMedia} = route.params;
+  const {title, details, vimeoLink, video, description, featuredMedia, imageSmall} = route.params;
   // const videoId = vimeoLink.replace(/\&.*$/, '');
   // remove all spaces at the start of the videoId string
   // let videoIdTrimmed = videoId.replace(/^\s+/, '');
@@ -75,7 +74,7 @@ export default function VideoDetails({navigation, route}: any) {
   
         <View style={styles.container}>
           <View style={styles.imageContainer}>
-            <Image source={headphones} />
+          <Image source={{ uri: imageSmall }} style={{ width: "100%", height: "100%" }} />
           </View>
   
           <View style={{width: 230, marginLeft: 8}}>
@@ -101,23 +100,8 @@ export default function VideoDetails({navigation, route}: any) {
           </View>
         </View>
   
-        <View
-          style={{
-            flexDirection: 'row',
-            marginTop: 32,
-            // backgroundColor: '#f2f2f280',
-            alignSelf: 'center',
-            width: width - 40,
-            height: 100,
-            borderRadius: 5,
-            paddingLeft: 20,
-            paddingRight: 20,
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          {/* <Replay /> */}
           <TouchableOpacity
-            style={{width: '100%'}}
+            style={{ marginTop: 30, width: '100%', justifyContent: "center", alignItems: "center" }}
             onPress={() =>
               navigation.navigate('VideoPlayer', {
                 videoId: vimeoLink,
@@ -136,17 +120,14 @@ export default function VideoDetails({navigation, route}: any) {
                 paddingTop: 10,
                 paddingBottom: 10,
               }}>
-              {/* <Backwards /> */}
   
-              <PlayIconBig />
-  
-              <Text style={styles.playText}>Play Video</Text>
-              {/* <Forwards /> */}
+              <FastImage key={image} source={{ uri: image, priority: FastImage.priority.high }} style={{ width: width - 20, height: height - height / 2, alignSelf: "center", borderRadius: 20, backgroundColor: "#f3f3f3" }} />
+              <View style={{ position: "absolute" }}>
+                <PlayIconBig />
+              </View>
             </View>
           </TouchableOpacity>
   
-          {/* <Queue /> */}
-        </View>
       </SafeAreaView>
     );
   }
