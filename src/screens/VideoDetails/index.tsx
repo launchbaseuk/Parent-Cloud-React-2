@@ -121,7 +121,7 @@ export default function VideoDetails({navigation, route}: any) {
                 paddingBottom: 10,
               }}>
   
-              <FastImage key={image} source={{ uri: image, priority: FastImage.priority.high }} style={{ width: width - 20, height: height - height / 2, alignSelf: "center", borderRadius: 20, backgroundColor: "#f3f3f3" }} />
+              <FastImage key={image} source={{ uri: image, priority: FastImage.priority.high }} style={{ width: width - 40, height: height - height / 2, alignSelf: "center", borderRadius: 20, backgroundColor: "#f3f3f3" }} />
               <View style={{ position: "absolute" }}>
                 <PlayIconBig />
               </View>
