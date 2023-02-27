@@ -35,7 +35,7 @@ export default function CardViewer({ navigation, route }: any) {
               paddingLeft: 16,
               paddingRight: 16,
               paddingTop: 16,
-              paddingBottom: 50,
+              paddingBottom: 100,
             }}
           >
             <RenderHtml
@@ -45,7 +45,7 @@ export default function CardViewer({ navigation, route }: any) {
                 color: "#150E00",
                 fontSize: 16,
                 lineHeight: "24px",
-                paddingBottom: 40,
+                paddingBottom: 100,
               }}
             />
           </ScrollView>
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
   },
   pdf: {
-    // flex: 1,
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
   },

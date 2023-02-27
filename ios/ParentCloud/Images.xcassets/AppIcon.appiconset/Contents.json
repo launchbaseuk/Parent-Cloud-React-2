@@ -1,49 +1,49 @@
 {
   "images" : [
     {
-      "filename" : "PC_logo_squared.png",
+      "filename" : "ic_launcher-4.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
-      "filename" : "PC_logo_squared 1.png",
+      "filename" : "ic_launcher-5.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
     },
     {
-      "filename" : "PC_logo_squared 2.png",
+      "filename" : "ic_launcher-7.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "PC_logo_squared 3.png",
+      "filename" : "ic_launcher-8.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
-      "filename" : "PC_logo_squared 4.png",
+      "filename" : "ic_launcher-9.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
-      "filename" : "PC_logo_squared 5.png",
+      "filename" : "ic_launcher-10.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
-      "filename" : "PC_logo_squared 6.png",
+      "filename" : "ic_launcher-10 1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "PC_logo_squared 7.png",
+      "filename" : "ic_launcher-11.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"

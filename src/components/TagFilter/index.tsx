@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 import Chip from '../shared/Chip';
+import { decode } from 'html-entities';
 
 export default function TagFilter({selected, setSelected, categories}: any) {
   const [options, setOptions] = useState<any>([{key: 'all', text: 'All'}]);
@@ -25,7 +26,7 @@ export default function TagFilter({selected, setSelected, categories}: any) {
             <Chip
               selected={selected}
               setSelected={setSelected}
-              text={option.text}
+              text={decode(option.text)}
               itemKey={option.key}
               key={index}
             />

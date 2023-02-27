@@ -75,7 +75,6 @@ const AuthProvider = (props: any) => {
 					});
 					responseUserInfo = await responseUserInfo.json();
 					// const display = responseUserInfo[0].first_name + " " + responseUserInfo[0].last_name;
-					console.log(responseUserInfo[0])
 					const display = responseUserInfo[0].first_name;
 
 					await AsyncStorage.setItem("token", response.token);

@@ -10,8 +10,8 @@ import {
 
 import BackButton from "../../components/BackButton";
 import { DropDown } from "../../components/DropDown";
-import { AreaChart, Grid, LineChart, YAxis } from 'react-native-svg-charts';
-import * as shape from 'd3-shape';
+import { AreaChart, Grid, LineChart, YAxis } from "react-native-svg-charts";
+import * as shape from "d3-shape";
 // import { LineChart } from "react-native-chart-kit";
 import StaticSelection from "../../components/shared/StaticSelection";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -44,13 +44,13 @@ const ReviewSection = ({ navigation, route }: any) => {
         const response = await request.json();
         // console.log('response', response);
         Object.values(response).forEach((value: any) => {
-          console.log(value)
-          setGraph((prev) => [...prev, value]);
+          console.log(value);
+          setGraph((prev) => [...prev, value.mood]);
         });
         setValues([]);
         Object.keys(response).forEach((month: any) => {
-          const mm = moment(month.split("-")[1], 'M').format('MMMM');
-          setValues(prev => [...prev, mm])
+          const mm = moment(month.split("-")[1], "M").format("MMMM");
+          setValues((prev) => [...prev, mm]);
         });
       })();
     }, [])
@@ -141,32 +141,64 @@ const ReviewSection = ({ navigation, route }: any) => {
           </Text>
           <View style={{}}>
             {graph.length > 0 && (
-                <>
-                <View style={{ height: 200, flexDirection: "row", width: width, justifyContent: "center" }}>
-                  <View style={{ flexDirection: "column", height: 200, justifyContent: "space-between", paddingVertical: 15, marginRight: 5 }}>
+              <>
+                <View
+                  style={{
+                    height: 200,
+                    flexDirection: "row",
+                    width: width,
+                    justifyContent: "center",
+                  }}
+                >
+                  <View
+                    style={{
+                      flexDirection: "column",
+                      height: 200,
+                      justifyContent: "space-between",
+                      paddingVertical: 15,
+                      marginRight: 5,
+                    }}
+                  >
                     {["🙁", "😔", "🙂", "😃"].reverse().map((item) => {
-                      return (
-                        <Text>{item}</Text>
-                      )
+                      return <Text>{item}</Text>;
                     })}
                   </View>
                   <LineChart
-                    style={{ height: 200, width: width - 40, alignSelf: "center" }}
-                    data={[0, 0, 0, 50, 58]}
+                    style={{
+                      height: 200,
+                      width: width - 40,
+                      alignSelf: "center",
+                    }}
+                    data={graph}
                     contentInset={{ top: 10, bottom: 10 }}
                     curve={shape.curveBasis}
-                    style={{ borderWidth: 1, borderColor: "#333", height: 200, width: width - 40, padding: 10, borderRadius: 10, alignSelf: "center" }}
-                    svg={{ stroke: '#27AE604D', strokeWidth: 4 }}
+                    style={{
+                      borderWidth: 1,
+                      borderColor: "#333",
+                      height: 200,
+                      width: width - 40,
+                      padding: 10,
+                      borderRadius: 10,
+                      alignSelf: "center",
+                    }}
+                    svg={{ stroke: "#27AE604D", strokeWidth: 4 }}
                   />
                 </View>
-                <View style={{ flexDirection: "row", alignSelf: "flex-end", paddingTop: 15, justifyContent: "space-between", marginRight: 5, width: width - 40 }}>
+                {/* <View
+                  style={{
+                    flexDirection: "row",
+                    alignSelf: "flex-end",
+                    paddingTop: 15,
+                    justifyContent: "space-between",
+                    marginRight: 5,
+                    width: width - 40,
+                  }}
+                >
                   {values.map((item) => {
-                    return (
-                      <Text style={{ fontSize: 10 }}>{item}</Text>
-                    )
+                    return <Text style={{ fontSize: 10 }}>{item}</Text>;
                   })}
-                </View>
-                </>
+                </View> */}
+              </>
               // <LineChart
               //   data={{
               //     labels: ["🙁", "😔", "🙂", "😃"],
@@ -236,8 +268,10 @@ const ReviewSection = ({ navigation, route }: any) => {
             ];
             const dayName = dayNames[day];
             const formattedDate = `${
-              date.getDate() + 1 < 10 ? ("0" + date.getDate()) : date.getDate()
-            }/${date.getMonth() + 1 < 10 ? ("0" + date.getMonth()) : date.getMonth()}/${date.getFullYear()}`;
+              date.getDate() + 1 < 10 ? "0" + date.getDate() : date.getDate()
+            }/${
+              date.getMonth() + 1 < 10 ? "0" + date.getMonth() : date.getMonth()
+            }/${date.getFullYear()}`;
 
             return (
               <StaticSelection

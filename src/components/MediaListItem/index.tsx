@@ -13,6 +13,8 @@ import { useNavigation } from "@react-navigation/native";
 import headphones from "../../icons/headphones.png";
 import PlayIconSmall from "../../icons/svg/PlayIconSmall";
 import Loader from "../Loader";
+import RenderHTML from "react-native-render-html";
+import { decode } from "html-entities";
 
 const { width, height } = Dimensions.get("window");
 export default function MediaListItem({
@@ -84,6 +86,11 @@ export default function MediaListItem({
     if (image) setImagePL(image);
   }, []);
 
+  console.log(
+    "col33",
+    decode(item.excerpt.rendered.replace("<p>", "")).replace("</p>", "")
+  );
+
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row" }}>
@@ -125,9 +132,36 @@ export default function MediaListItem({
             numberOfLines={2}
           >
             {/* {content.toString().substring(0, 50)} */}
-            {content ? content : "No description."}
-            {/* Lorem ipsum dolor sit amet... */}
+            {/* {content ? content : "No description."} */}
+            {decode(item.excerpt.rendered.replace("<p>", "")).replace(
+              "</p>",
+              ""
+            )}
           </Text>
+          {/* <View
+            style={{
+              width: "50%",
+              // fontFamily: "Montserrat-Regular",
+              // color: "#150E00",
+              // fontSize: 11,
+            }}
+          > */}
+          {/* <RenderHTML
+              source={{
+                html: item.excerpt.rendered,
+              }}
+              baseStyle={{
+                fontFamily: "Montserrat-Regular",
+                color: "#150E00",
+                fontSize: 10,
+                lineHeight: 15,
+                // marginTop: 10,
+                // marginBottom: 10,
+              }}
+            /> */}
+          {/* Lorem ipsum dolor sit amet... */}
+          {/* </Text> */}
+          {/* </View> */}
         </View>
       </View>
 

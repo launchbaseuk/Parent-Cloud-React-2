@@ -38,7 +38,7 @@ export default function GuidedMeditation({ navigation }: any) {
         setItems(response);
 
         let responseTags: any = await fetch(
-          "https://hub.parent-cloud.com/wp-json/wp/v2/categories?per_page=100",
+          "https://hub.parent-cloud.com/wp-json/wp/v2/tags?taxonomy=post_tag&post_type=guided_meditation",
           {
             headers: {
               Authorization: `Bearer ${await AsyncStorage.getItem("token")}`,
@@ -82,7 +82,7 @@ export default function GuidedMeditation({ navigation }: any) {
         setItems([]);
         setLoading(true);
         let responseTags: any = await fetch(
-          `https://hub.parent-cloud.com/wp-json/wp/v2/guided_meditation?categories=${selected}`,
+          `https://hub.parent-cloud.com/wp-json/wp/v2/guided_meditation?tags=${selected}`,
           {
             headers: {
               Authorization: `Bearer ${await AsyncStorage.getItem("token")}`,

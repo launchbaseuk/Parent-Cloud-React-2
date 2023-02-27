@@ -62,7 +62,7 @@ export default function LiveTalkItem({
             <Text
               style={{
                 fontFamily: "Montserrat-Bold",
-                color: "#11535C",
+                color: "#150E00",
                 fontSize: 14,
                 width: width - 135,
               }}
