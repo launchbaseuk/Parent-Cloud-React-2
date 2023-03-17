@@ -62,11 +62,11 @@ export default function LiveTalkItem({
             <Text
               style={{
                 fontFamily: "Montserrat-Bold",
-                color: "#150E00",
+                color: "#11535C",
                 fontSize: 14,
-                width: width - 135,
+                width: width - 145,
               }}
-              numberOfLines={2}
+              // numberOfLines={2}
             >
               {title}
             </Text>

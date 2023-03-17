@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import BackButton from "../../components/BackButton";
@@ -15,6 +15,7 @@ import learnimage from "../../icons/Learn.png";
 import gratitudeimage from "../../icons/Gratitude.png";
 import moodtrackerimage from "../../icons/MoodTracker.png";
 
+const { width, height } = Dimensions.get("window");
 export default function PocketCBT() {
   return (
     <SafeAreaView>
@@ -40,6 +41,7 @@ export default function PocketCBT() {
           route="MoodTracker"
         />
       </View>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

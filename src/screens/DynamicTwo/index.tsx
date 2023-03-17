@@ -1,13 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, SafeAreaView, ScrollView} from 'react-native';
+import {View, StyleSheet, Text, SafeAreaView, ScrollView, Image, Dimensions} from 'react-native';
 import BackButton from '../../components/BackButton';
 import latestItems from '../../functions/latestItems';
 
 // Components
 import DynamicContentContainer from '../../components/DynamicContentContainer';
 
+const { width, height } = Dimensions.get("window");
 export default function DynamicTwo() {
   const [guides, setGuides] = useState<any>([]);
   const [videos, setVideos] = useState<any>([]);
@@ -49,6 +50,7 @@ export default function DynamicTwo() {
           {/* MAP VIDEOS */}
         </View>
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

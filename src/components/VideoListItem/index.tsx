@@ -6,6 +6,7 @@ import {
   Image,
   Text,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import pause from "../../images/Pause.png";
@@ -13,6 +14,7 @@ import pause from "../../images/Pause.png";
 // Images
 import Bookmark from "../../images/svg/Bookmark";
 import BookmarkMarked from "../../images/svg/BookmarkMarked";
+import FastImage from "react-native-fast-image";
 
 const { width, height } = Dimensions.get("window");
 export default function VideoListItem({
@@ -29,17 +31,18 @@ export default function VideoListItem({
   imageSmall,
 }: any) {
   const navigation = useNavigation();
-  const [imagePl, setImagePL] = useState<string | undefined>("");
+  const [imagePl, setImagePL] = useState<string>("");
 
   useEffect(() => {
     (async () => {
       const request = await fetch(
-        `https://hub.parent-cloud.com/wp-json/wp/v2/videos/${imageSmall}`
+        image[0].href
       );
       const response = await request.json();
 
-      if (typeof response.acf.image == "object") {
-        setImagePL(response.acf.image.url);
+      // console.log(response.guid.rendered)
+      if (response.guid.rendered) {
+        setImagePL(response.guid.rendered);
       }
     })();
   }, []);
@@ -63,10 +66,14 @@ export default function VideoListItem({
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={styles.imageContainer}>
-          <Image
-            source={imagePl ? { uri: encodeURI(imagePl) } : pause}
-            style={styles.image}
-          />
+        {imagePl ? (
+            <FastImage
+              source={{ uri: imagePl, priority: FastImage.priority.high }}
+              style={styles.image}
+            />
+          ) : (
+            <ActivityIndicator size="large" color="#fff" style={{ width: 85, height: 85 }} />
+          )}
         </View>
 
         <View style={styles.textContainer}>

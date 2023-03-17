@@ -258,6 +258,7 @@ export default function Activities({navigation, route}: any) {
           disabled={selected != '' ? false : true}
         />
       </View>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

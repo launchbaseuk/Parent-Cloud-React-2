@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Dimensions} from 'react-native';
+import {View, Image, Dimensions, ActivityIndicator} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 
@@ -14,7 +14,8 @@ const Loader = () => {
         // justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Image source={loader} style={{width: 100, height: 100}} />
+      {/* <Image source={loader} style={{width: 100, height: 100}} /> */}
+      <ActivityIndicator size="large" color="#336A75" style={{ width: 100, height: 100 }} />
     </View>
   );
 };

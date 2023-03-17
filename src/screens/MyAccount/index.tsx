@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   TouchableOpacity,
-  Text,
+  Image,
   StyleSheet,
   Dimensions,
 } from 'react-native';
@@ -53,6 +53,7 @@ export default function MyAccount() {
           );
         })}
       </View>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

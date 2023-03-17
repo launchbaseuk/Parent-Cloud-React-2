@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Dimensions, Text, ScrollView} from 'react-native';
+import {View, StyleSheet, Dimensions, Text, ScrollView, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import BackButton from '../../components/BackButton';
 import FeelingsCard from '../../components/FeelingsCard';
@@ -235,6 +235,7 @@ export default function ReviewDetails({navigation, route}: any) {
           )}
         </View>
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, SafeAreaView} from 'react-native';
+import {View, StyleSheet, Image, Dimensions, SafeAreaView} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 
 // Components
@@ -13,12 +13,13 @@ import AntenatalCoursesImage from '../../images/svg/AntenatalCoursesImage';
 import BabyClassesImage from '../../images/svg/BabyClassesImage';
 import FertilityImage from '../../images/svg/FertilityImage';
 
+const { width, height } = Dimensions.get("window");
 export default function Support() {
   const constantOptions = [
     {text: 'One-to-One Sessions', image: <OneToOneImage />, screen: 'OneToOne'},
     {text: 'Live Talks', image: <LiveTalksImage />, screen: 'LiveTalks'},
     {
-      text: 'Antenatal Classes',
+      text: 'Parent Cloud Classes',
       image: <AntenatalCoursesImage />,
       screen: 'Antenatal',
     },
@@ -40,6 +41,7 @@ export default function Support() {
           />
         );
       })}
+      <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} />
     </SafeAreaView>
   );
 }

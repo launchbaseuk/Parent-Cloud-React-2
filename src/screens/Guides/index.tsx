@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Image, Text, ScrollView} from 'react-native';
+import {View, StyleSheet, Image, Text, ScrollView, Dimensions} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 // Components
@@ -8,6 +8,7 @@ import {GuideCardBig} from '../../components/GuideCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 
+const { width, height } = Dimensions.get("window");
 export default function Guides({navigation, route}: any) {
   const {items} = route.params;
   // console.log(items.map(item => console.log(item.excerpt)));
@@ -114,6 +115,7 @@ export default function Guides({navigation, route}: any) {
           }
         })}
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

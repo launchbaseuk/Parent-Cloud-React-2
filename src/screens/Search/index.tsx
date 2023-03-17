@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   Dimensions,
-  TouchableOpacity,
+  Image,
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -125,6 +125,7 @@ const SearchScreen = () => {
           </View>
         )}
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 };

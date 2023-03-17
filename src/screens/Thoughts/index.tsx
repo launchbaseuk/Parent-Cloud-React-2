@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
 
 // Components
 import Selection from '../../components/shared/Selection';
@@ -69,6 +69,7 @@ export default function Thoughts({navigation, route}: any) {
           </View>
         </>
       )}
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </View>
   );
 }

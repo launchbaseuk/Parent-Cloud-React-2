@@ -30,7 +30,7 @@ const Login = () => {
   return (
     <View style={styles.wrapper}>
       <AuthSharedScreen
-        middleText={"New to Wellness Cloud?"}
+        middleText={"New to Parent Cloud?"}
         buttonTextTop={"Login"}
         buttonTextBottom={"Register"}
         routeTop={"ForgotPassword"}
@@ -47,7 +47,7 @@ const Login = () => {
           <View>
             <Text style={styles.title}>Login</Text>
             <Text style={styles.content}>
-              Login to your Wellness Cloud account
+              Login to your Parent Cloud account
             </Text>
           </View>
           <View

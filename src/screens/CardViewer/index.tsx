@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Dimensions, ScrollView, StyleSheet } from "react-native";
+import { View, Text, Dimensions, ScrollView, StyleSheet, Image } from "react-native";
 import RenderHtml from "react-native-render-html";
 import Pdf from "react-native-pdf";
 
@@ -69,6 +69,7 @@ export default function CardViewer({ navigation, route }: any) {
           />
         )}
       </View>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
   StyleSheet,
+  Image
 } from "react-native";
 
 import BackButton from "../../components/BackButton";
@@ -248,7 +249,7 @@ const ReviewSection = ({ navigation, route }: any) => {
               marginBottom: 16,
             }}
           >
-            Last Week
+            Latest Entries
           </Text>
           {/* <StaticSelection text="Monday" route="ReviewDetails" />
           <StaticSelection text="Tuesday" route="ReviewDetails" />
@@ -331,6 +332,7 @@ const ReviewSection = ({ navigation, route }: any) => {
             })}
           </View>
         </ScrollView>
+        {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
       </SafeAreaView>
     );
   }

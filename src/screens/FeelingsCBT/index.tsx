@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   Dimensions,
+  Image
 } from 'react-native';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
@@ -129,6 +130,7 @@ export default function FeelingsCBT() {
           disabled={selected != '' ? false : true}
         />
       </View>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </View>
   );
 }

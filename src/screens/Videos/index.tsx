@@ -21,6 +21,7 @@ import TagFilter from "../../components/TagFilter";
 import VideoListItem from "../../components/VideoListItem";
 import Loader from "../../components/Loader";
 
+const { width, height } = Dimensions.get("window");
 export default function Videos({ navigation, route }: any) {
   const [videos, setVideos] = useState<any>([]);
   const [selected, setSelected] = useState<any>("all");
@@ -105,13 +106,7 @@ export default function Videos({ navigation, route }: any) {
 
           setVideos(
             responseTags.map((tags: any) => {
-              return {
-                post_title: tags.title.rendered,
-                post_content: tags.content.rendered,
-                ID: tags.id,
-                post_excerpt: tags.excerpt.rendered,
-                _links: tags._links,
-              };
+              return tags;
             })
           );
 
@@ -218,6 +213,7 @@ export default function Videos({ navigation, route }: any) {
           </View>
         )}
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ScrollView, StyleSheet, View, Dimensions} from 'react-native';
+import {ScrollView, StyleSheet, View, Dimensions, Image} from 'react-native';
 import {getPodcasts} from '../../functions/requests';
 
 // Components
@@ -12,6 +12,7 @@ import Loader from '../../components/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { decode } from 'html-entities';
 
+const { width, height } = Dimensions.get("window");
 export default function Podcasts({navigation}: any) {
   const [podcasts, setPodcasts] = useState<any>([]);
   const [categories, setCategories] = useState<any>([]);
@@ -127,6 +128,7 @@ export default function Podcasts({navigation}: any) {
           </View>
         )}
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

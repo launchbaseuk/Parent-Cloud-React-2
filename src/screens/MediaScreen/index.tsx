@@ -4,7 +4,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
+  Image,
   View,
   Dimensions,
 } from 'react-native';
@@ -27,6 +27,8 @@ export default function MediaScreen({navigation, route}: any) {
       <ContentCard image={<GuidesImage />} text="Guides" route="GuidesMedia" />
       <ContentCard image={<VideosImage />} text="Videos" route="Videos" />
       <ContentCard image={<PodcastsImage />} text="Podcasts" route="Podcasts" />
+
+      <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} />
     </SafeAreaView>
   );
 }

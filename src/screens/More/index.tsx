@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {
   View,
-  TouchableOpacity,
-  Text,
+  Dimensions,
+  Image,
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
@@ -15,6 +15,7 @@ import More from '../../components/shared/ScreenHeaders/More';
 import MyAccountImage from '../../images/svg/MyAccountImage';
 import HRManagerImage from '../../images/svg/HRManagerImage';
 
+const { width, height } = Dimensions.get("window");
 export default function MoreScreen() {
   return (
     <SafeAreaView>
@@ -33,6 +34,8 @@ export default function MoreScreen() {
           route="HRManagement"
         /> */}
       </View>
+
+      <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} />
     </SafeAreaView>
   );
 }
@@ -40,6 +43,6 @@ export default function MoreScreen() {
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#ffffff',
-    height: '100%',
+
   },
 });

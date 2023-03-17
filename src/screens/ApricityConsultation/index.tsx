@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Dimensions } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Dimensions, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 // Components
@@ -27,6 +27,7 @@ export default function ApricityConsultation() {
                 <View style={{ height: 8 }} />
                 <SecondaryButton text="Learn More" />
             </View>
+            {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
         </View>
     );
 };

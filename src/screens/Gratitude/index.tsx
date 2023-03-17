@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Dimensions, Text, TextInput} from 'react-native';
+import {View, StyleSheet, Dimensions, Text, TextInput, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 // Components
@@ -88,6 +88,7 @@ export default function Gratitude({navigation}) {
           disabled={selected != '' ? false : true}
         />
       </View>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

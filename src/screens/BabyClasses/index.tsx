@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, ScrollView} from 'react-native';
+import {View, StyleSheet, Text, ScrollView, Image, Dimensions} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import BackButton from '../../components/BackButton';
 import ListItem from '../../components/ListItem';
@@ -11,6 +11,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import getContentPresenters from '../../functions/getContentPresenters';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const { width, height } = Dimensions.get("window");
 export default function BabyClasses() {
   const [presenters, setPresenters] = useState<any>([]);
 
@@ -42,6 +43,7 @@ export default function BabyClasses() {
           );
         })}
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

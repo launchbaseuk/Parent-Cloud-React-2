@@ -12,7 +12,7 @@ const Signup = () => {
       buttonText={'Contact Support'}
       buttonTextSecond={'Cancel'}
       route={'Success'}
-      action={() => Linking.openURL("mailto:info@the-wellness-cloud.com")}
+      action={() => Linking.openURL("mailto:info@parent-cloud.com")}
     />
   );
 };

@@ -69,6 +69,7 @@ export default function SuccessApricity({navigation, route}: any) {
           onPress={() => navigation.navigate('Home')}
         />
       </View>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

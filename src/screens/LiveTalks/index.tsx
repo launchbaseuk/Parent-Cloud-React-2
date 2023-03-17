@@ -1,6 +1,6 @@
 import {useFocusEffect} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, ScrollView, Dimensions} from 'react-native';
+import {View, StyleSheet, Image, ScrollView, Dimensions} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { decode } from 'html-entities';
 import BackButton from '../../components/BackButton';
@@ -28,11 +28,62 @@ export default function LiveTalks() {
       (async () => {
         setLoading(true);
         let response = await fetch(
-          'https://hub.parent-cloud.com/wp-json/wp/v2/livelearning',
+          'https://hub.parent-cloud.com/wp-json/wp/v2/livelearning?per_page=100',
         );
         response = await response.json();
+        
+        response = response.filter((talk: any) => {
+          const date = talk.acf.ll_call_date.split('-');
+          const year = date[0];
+          const month = date[1];
+          const day = date[2];
 
-        setLiveTalks(response);
+          const monthNow = moment().format('MM');
+          const dayNow = moment().format('DD');
+          const yearNow = moment().format('YYYY');
+
+          const time = talk.acf.ll_call_time.split(':');
+          const hour = time[0];
+          const minute = time[1];
+
+          const hourNow = moment().format('HH');
+          const minuteNow = moment().format('mm');
+
+          if(year >= yearNow) {
+            if(month > monthNow) {
+              return true;
+            }
+            if(month == monthNow) {
+              if(day >= dayNow) {
+                if(day == dayNow && month == monthNow && year == yearNow) {
+                  if(hour >= hourNow) {
+                    return true;
+                  }
+                } else {
+                  return true;
+                }
+              }
+            }
+          }
+        });
+
+        let sortedResponses = response.sort((a, b) => {
+          if (a.acf.ll_call_date < b.acf.ll_call_date) {
+            return -1;
+          }
+          if (a.acf.ll_call_date > b.acf.ll_call_date) {
+            return 1;
+          }
+          if (a.acf.ll_call_time < b.acf.ll_call_time) {
+            return -1;
+          }
+          if (a.acf.ll_call_time > b.acf.ll_call_time) {
+            return 1;
+          }
+          return 0;
+        });
+
+        setLiveTalks(sortedResponses);
         setLoading(false);
       })();
     }, []),
@@ -71,6 +122,7 @@ export default function LiveTalks() {
           <PrimaryButton text="Go back" onPress={() => navigation.goBack()} />
         </View> */}
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

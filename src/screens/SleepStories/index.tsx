@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Dimensions, ScrollView} from 'react-native';
+import {View, StyleSheet, Dimensions, ScrollView, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {useFocusEffect} from '@react-navigation/native';
@@ -15,6 +15,7 @@ import Loader from '../../components/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { decode } from 'html-entities';
 
+const { width, height } = Dimensions.get("window");
 export default function SleepStories({navigation}: any) {
   const [items, setItems] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -136,6 +137,7 @@ export default function SleepStories({navigation}: any) {
           </View>
         )}
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

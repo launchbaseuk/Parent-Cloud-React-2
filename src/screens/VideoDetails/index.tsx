@@ -44,6 +44,7 @@ export default function VideoDetails({ navigation, route }: any) {
   // videoIdTrimmed = videoIdTrimmed[videoIdTrimmed.length - 1];
 
   const [author, setAuthor] = useState<any>();
+  // const [imageSmall, setImageSmall] = useState("");
   // const [description, setDescription] = useState<string>('');
 
   // useFocusEffect(
@@ -63,25 +64,26 @@ export default function VideoDetails({ navigation, route }: any) {
   console.log("media", featuredMedia);
   console.log("link", vimeoLink);
   const [image, setImage] = useState<string>("");
-  const [loadingImage, setLoadingImage] = useState<boolean>(true);
+  const [loadingImage, setLoadingImage] = useState<boolean>(false);
 
-  useEffect(() => {
-    (async () => {
-      setLoadingImage(true);
-      const request = await fetch(
-        `https://hub.parent-cloud.com/wp-json/wp/v2/media/${featuredMedia}`,
-        {
-          headers: {
-            Authorization: `Bearer ${await AsyncStorage.getItem("token")}`,
-          },
-        }
-      );
-      const response = await request.json();
+  // useEffect(() => {
+  //   (async () => {
+  //     setLoadingImage(true);
+  //     const request = await fetch(
+  //       `https://hub.the-wellness-cloud.com/wp-json/wp/v2/media/${featuredMedia}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${await AsyncStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     );
+  //     const response = await request.json();
 
-      setImage(response.guid.rendered);
-      setLoadingImage(false);
-    })();
-  }, [featuredMedia]);
+  //     setImage(response.guid.rendered);
+  //     setImageSmall(response.guid.rendered);
+  //     setLoadingImage(false);
+  //   })();
+  // }, [featuredMedia]);
 
   if (loadingImage) {
     return (
@@ -98,8 +100,9 @@ export default function VideoDetails({ navigation, route }: any) {
 
           <View style={styles.container}>
             <View style={styles.imageContainer}>
-              <Image
-                source={{ uri: imageSmall }}
+              <FastImage
+                key={imageSmall}
+                source={{ uri: imageSmall, priority: FastImage.priority.high }}
                 style={{ width: "100%", height: "100%" }}
               />
             </View>
@@ -144,8 +147,8 @@ export default function VideoDetails({ navigation, route }: any) {
             }
           >
             <FastImage
-              key={image}
-              source={{ uri: image, priority: FastImage.priority.high }}
+              key={imageSmall}
+              source={{ uri: imageSmall, priority: FastImage.priority.high }}
               style={{
                 width: width - 40,
                 height: height - height / 2,

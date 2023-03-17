@@ -165,12 +165,14 @@ export default function PodcastDetails({ navigation, route }) {
           />
           <View style={{ height: 102 }} />
         </ScrollView>
+        {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
       </SafeAreaView>
     );
   } else {
     return (
       <SafeAreaView>
         <Loader />
+        {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
       </SafeAreaView>
     );
   }

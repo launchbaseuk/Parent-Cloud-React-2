@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Dimensions, ScrollView, Text } from "react-native";
+import { View, StyleSheet, Dimensions, ScrollView, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -12,6 +12,7 @@ import Loader from "../../components/Loader";
 import TagFilter from "../../components/TagFilter";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const { width, height } = Dimensions.get("window");
 export default function GuidedMeditation({ navigation }: any) {
   const [items, setItems] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -155,6 +156,7 @@ export default function GuidedMeditation({ navigation }: any) {
           </View>
         )}
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

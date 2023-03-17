@@ -95,6 +95,7 @@ export default function PodcastDetails({ navigation, route }) {
           <MusicPlayer title={item.title.rendered} audioFile={audio} />
           <View style={{ height: 102 }} />
         </ScrollView>
+        {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
       </SafeAreaView>
     );
   } else {

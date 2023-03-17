@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, Dimensions, SafeAreaView} from 'react-native';
+import {View, StyleSheet, Image, Dimensions, SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Components
@@ -39,6 +39,8 @@ export default function MindHubScreen() {
         text="Pocket CBT"
         route="PocketCBT"
       />
+
+      <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} />
     </SafeAreaView>
   );
 }

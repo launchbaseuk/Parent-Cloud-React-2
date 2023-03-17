@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 // Components
@@ -91,8 +91,8 @@ export default function Membership() {
                   fontFamily: 'SofiaProBlack',
                   color: '#11535C',
                   fontSize: 16,
-                  marginLeft: 26,
-                  width: "45%"
+                  marginLeft: 20,
+                  width: "43%"
                 }}>
                 {subscription?.membership?.title}
               </Text>
@@ -114,7 +114,7 @@ export default function Membership() {
                   fontFamily: 'SofiaProBlack',
                   color: '#11535C',
                   fontSize: 16,
-                  marginLeft: 26,
+                  marginLeft: 20,
                 }}>
                 Sub Account
               </Text>
@@ -136,7 +136,7 @@ export default function Membership() {
                   fontFamily: 'SofiaProBlack',
                   color: '#11535C',
                   fontSize: 16,
-                  marginLeft: 26,
+                  marginLeft: 20,
                 }}>
                 {status}
               </Text>
@@ -158,7 +158,7 @@ export default function Membership() {
                   fontFamily: 'SofiaProBlack',
                   color: '#11535C',
                   fontSize: 16,
-                  marginLeft: 26,
+                  marginLeft: 20,
                 }}>
                 {subscription?.membership?.date.split('-')[1] +
                   '/' +
@@ -170,6 +170,7 @@ export default function Membership() {
       ) : (
         <Loader />
       )}
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

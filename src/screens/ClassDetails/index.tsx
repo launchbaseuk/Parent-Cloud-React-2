@@ -57,7 +57,8 @@ export default function ClassDetails() {
           />
         </View>
       </ScrollView>
-      <WarnModal modalVisible={modalVisible} setModalVisible={setModalVisible} /> 
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
+      <WarnModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </SafeAreaView>
   );
 }

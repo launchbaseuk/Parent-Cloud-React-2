@@ -6,7 +6,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
+  Image,
   View,
   Dimensions,
   TouchableOpacity,
@@ -106,6 +106,7 @@ export default function GuidesMedia({navigation, route}: any) {
           ))
         )}
       </ScrollView>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
@@ -56,7 +57,8 @@ export default function SupportSettings() {
           paddingLeft: 16,
           borderRadius: 5,
           alignSelf: 'center',
-        }}>
+        }}
+        onPress={() => Linking.openURL("info@parent-cloud.com")}>
         <MailIcon />
         <Text
           style={{
@@ -65,7 +67,7 @@ export default function SupportSettings() {
             fontSize: 16,
             marginLeft: 8,
           }}>
-          info@the-wellness-cloud.com
+          info@parent-cloud.com
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -79,7 +81,8 @@ export default function SupportSettings() {
           borderRadius: 5,
           marginTop: 16,
           alignSelf: 'center',
-        }}>
+        }}
+        onPress={() => Linking.openURL("tel:02089367621")}>
         <PhoneIcon />
         <Text
           style={{
@@ -88,9 +91,10 @@ export default function SupportSettings() {
             fontSize: 16,
             marginLeft: 8,
           }}>
-          +44 (0) 1234 / 567 890
+          +44 020 8936 7621
         </Text>
       </TouchableOpacity>
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

@@ -48,13 +48,13 @@ export default function MediaListItem({
         );
         const response = await request.json();
 
-        if (
-          typeof response.acf.image == "object" &&
-          response.acf.image != null
-        ) {
-          console.log("image url", response.acf.image.url);
-          setImagePL(response.acf.image.url);
+        const requestimage = await fetch(`https://hub.the-wellness-cloud.com/wp-json/wp/v2/media/${response.featured_media}`);
+        const responseimage = await requestimage.json();
+        if (typeof responseimage.guid.rendered == "string" && responseimage.guid.rendered != null) {
+          console.log("image url", responseimage.guid.rendered);
+          setImagePL(responseimage.guid.rendered);
         }
+
         setLoading(false);
       }
       if (idSleep) {
@@ -68,6 +68,7 @@ export default function MediaListItem({
           `https://hub.parent-cloud.com/wp-json/wp/v2/media/${response.featured_media}`
         );
         const imageResponse = await imageRequest.json();
+        console.log(imageResponse)
         if (
           typeof imageResponse.guid.rendered == "string" &&
           imageResponse.guid.rendered != null
@@ -85,11 +86,6 @@ export default function MediaListItem({
     console.log(image);
     if (image) setImagePL(image);
   }, []);
-
-  console.log(
-    "col33",
-    decode(item.excerpt.rendered.replace("<p>", "")).replace("</p>", "")
-  );
 
   return (
     <View style={styles.container}>

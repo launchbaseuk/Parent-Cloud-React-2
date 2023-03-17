@@ -267,6 +267,7 @@ export default function PersonalDetails() {
           )}
         </>
       )}
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </SafeAreaView>
   );
 }

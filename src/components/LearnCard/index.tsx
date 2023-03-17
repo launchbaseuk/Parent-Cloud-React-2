@@ -1,14 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Dimensions, Text } from "react-native";
+import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from "react-native";
 import PrimaryButton from "../shared/PrimaryButton";
 
 const { width, height } = Dimensions.get("window");
-export default function LearnCard({ image, title, excerpt, content }: any) {
+export default function LearnCard({ image, title, excerpt, content, index, style }: any) {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.guidecardbigContainer}>
+    <View style={style ? [styles.guidecardbigContainer, { position: "relative", zIndex: 1000 }] : styles.guidecardbigContainer}>
       <View style={{ width: 312, height: 120 }}>{image}</View>
 
       <View
@@ -44,13 +44,9 @@ export default function LearnCard({ image, title, excerpt, content }: any) {
         </View>
 
         <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
-          <PrimaryButton
-            size="mini"
-            text="Learn"
-            onPress={() =>
-              navigation.navigate("CardViewer", { text: content, title: title })
-            }
-          />
+          <TouchableOpacity style={[styles.primaryBtnContainer, {width: 104, height: 44}]} onPress={() => navigation.navigate("CardViewer", { text: content, title: title })}>
+            <Text style={[styles.primaryText, {fontSize: 16}]}>Learn</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -64,8 +60,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#F2F2F280",
     alignItems: "center",
     alignSelf: "center",
-    marginTop: 10,
     paddingTop: 8,
     paddingBottom: 10,
+    marginTop: 15
   },
+  primaryBtnContainer: {
+    backgroundColor: "#11535C",
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  primaryText: {
+    color: "#FFFAC5",
+    fontFamily: "SofiaProBlack",
+    fontSize: 20
+  }
 });

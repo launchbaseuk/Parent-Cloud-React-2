@@ -14,7 +14,7 @@ export default function Home() {
 
     return (
         <View style={styles.screenHeaderContainer}>
-            <Text style={styles.screenHeaderText}>Hi {username}!</Text>
+            <Text style={styles.screenHeaderText}>Hi {username}</Text>
             <Svg
                 width={356}
                 height={380}

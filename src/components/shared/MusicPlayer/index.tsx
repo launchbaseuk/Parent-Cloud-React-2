@@ -50,11 +50,27 @@ const track = {
 TrackPlayer.updateOptions({
   stopWithApp: false,
   appKilledPlaybackBehavior: AppKilledPlaybackBehavior.ContinuePlayback,
-  capabilities: [TrackPlayer.CAPABILITY_PLAY, TrackPlayer.CAPABILITY_PAUSE],
-  compactCapabilities: [
+  capabilities: [
     TrackPlayer.CAPABILITY_PLAY,
     TrackPlayer.CAPABILITY_PAUSE,
+    TrackPlayer.CAPABILITY_SEEK_TO,
+    TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
+    TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS
   ],
+  compactCapabilities: [
+      TrackPlayer.CAPABILITY_PLAY,
+      TrackPlayer.CAPABILITY_PAUSE,
+      TrackPlayer.CAPABILITY_SEEK_TO,
+      TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
+      TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS
+  ],
+  notificationCapabilities: [
+      TrackPlayer.CAPABILITY_PLAY,
+      TrackPlayer.CAPABILITY_PAUSE,
+      TrackPlayer.CAPABILITY_SEEK_TO,
+      TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
+      TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS
+  ]
 });
 
 const MusicPlayer = ({

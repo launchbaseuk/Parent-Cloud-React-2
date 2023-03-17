@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Dimensions, Linking} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Linking, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useAuth} from '../../contexts/auth-context';
 
@@ -32,11 +32,13 @@ export default function NoSubscription() {
       <PrimaryButton
         text="Contact Us"
         onPress={async () =>
-          await Linking.openURL('mailto: info@the-wellness-cloud.com')
+          await Linking.openURL('mailto: info@parent-cloud.com')
         }
       />
       <View style={{height: 8}} />
       <SecondaryButton text="Cancel" onPress={logout} />
+
+      {/* <Image source={require("../../images/Clouds.png")} style={{ position: "absolute", zIndex: -1, width: width, backgroundColor: "transparent" }} /> */}
     </View>
   );
 }
